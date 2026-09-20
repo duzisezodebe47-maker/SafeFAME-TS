@@ -1,0 +1,17 @@
+SafeFAME-TS v2 支撑材料清单
+
+1. README.md：项目范围、最终结论与复现入口。
+2. requirements.txt：Python 依赖。
+3. src：数据审计、时点文本索引、数值模型、文本候选、冻结选择、汇总、制图与一致性检查代码。
+4. docs：课程要求、数据审计、协议冻结、文献核验、来源清单与最终检查报告。
+5. outputs/safefame_v2：18 项任务的协议、指标与路径选择审计。
+6. outputs/tables/v2：报告关键计数、候选结果与选择结果。
+7. outputs/reviewer_sensitivity：999 次循环移位置换、匹配容量纯数值残差对照与功效审计。
+8. outputs/tables/final：ETT 外部基准与输入扰动结果。
+9. outputs/figures：报告使用的 PNG 图表。
+10. data_processed：文本索引审计和语义缓存清单，不重复分发大型句向量与原始数据。
+11. prototype/dist：本地交互式结果看板。
+12. paper/final：第 4 周、第 10 周和最终报告的 DOCX、PDF 与无障碍审计。
+13. manifest.tsv 与 SHA256SUMS.txt：包内文件清单和哈希。
+
+原始 Time-MMD、ETDataset 与外部参考仓库不重复打包；获取地址、固定提交和许可边界见 docs/15_数据与代码来源清单.md。

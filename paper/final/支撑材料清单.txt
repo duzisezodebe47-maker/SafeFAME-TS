@@ -1,0 +1,16 @@
+SafeFAME-TS 支撑材料清单
+生成日期：2026-09-16
+
+1. README.md：项目定位、成果说明与复现入口
+2. requirements.txt：Python 依赖
+3. src/：数据审计、基线、文本特征、SafeFAME-TS、ETT 基准、稳健性、汇总绘图与最终核验代码
+4. docs/：课程要求、论文审计、技术方案、实验协议、阶段结论、参考文献核验与最终检查报告
+5. data_processed/：文本索引、冻结语义向量及建模中间数据
+6. outputs/：训练日志、模型输出、预测结果、最终表格、PNG/PDF 图
+7. prototype/：私有结果看板源文件、部署清单与源码归档
+8. paper/final/a11y_report.json：DOCX 无障碍审计结果
+
+快速核验命令：
+.\.venv\Scripts\python.exe .\src\verify_project.py
+
+不包含：本地 Python 虚拟环境、临时文件、报告构建缓存、外部论文 PDF 与课程截图。

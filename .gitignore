@@ -1,0 +1,32 @@
+# ---- Python ----
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# ---- 大体积可复现产物 ----
+outputs/
+data_processed/
+tmp/
+
+# ---- 第三方克隆仓库 ----
+references/external/
+
+# ---- 打包文件 ----
+*.zip
+*.tar.gz
+
+# ---- 报告的多轮 QA 渲染中间件 ----
+paper/qa_*/
+paper/__pycache__/
+
+# ---- 独立发布的原型看板（自带 git remote，另行托管）----
+prototype/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+~$*.docx
