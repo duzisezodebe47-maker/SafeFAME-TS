@@ -78,3 +78,14 @@ reference_2026.md
 .DS_Store
 Thumbs.db
 ~$*.docx
+
+# ---- 归档格式防误传（追加节，不改动上面的既有规则）----
+# 注意：.gitignore 只对「未跟踪」的文件生效。已被跟踪的文件必须 git rm --cached
+# 才会移除，且其对象仍留在历史中——改 .gitignore 无法追溯清除已上传的内容。
+# 上面两个 LFS 归档由 ! 规则显式放行，不受本节影响。
+*.7z
+*.rar
+*.tgz
+*.bz2
+*.xz
+*.tar
