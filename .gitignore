@@ -5,26 +5,74 @@ __pycache__/
 *.pyo
 .ipynb_checkpoints/
 
-# ---- 大体积可复现产物 ----
-outputs/
+# ---- Large reproducible artifacts ----
+outputs/**
 data_processed/
 tmp/
 
-# ---- 第三方克隆仓库 ----
-references/external/
+# Keep compact, human-readable evidence in Git. Full predictions, weights,
+# permutation distributions and logs remain in the LFS support archive.
+!outputs/safefame_v2/
+!outputs/safefame_v2/*.csv
+!outputs/safefame_v2/*.json
+!outputs/reviewer_sensitivity/
+!outputs/reviewer_sensitivity/*.csv
+!outputs/reviewer_sensitivity/*.json
+!outputs/reviewer_sensitivity/*.png
+!outputs/revision_comparison/
+!outputs/revision_comparison/*.csv
+!outputs/revision_comparison/*.json
+!outputs/revision_comparison/*.png
+!outputs/safefame_v4/
+!outputs/safefame_v4/*.csv
+!outputs/safefame_v4/*.json
+!outputs/attribution_audit_v4/
+!outputs/attribution_audit_v4/*.csv
+!outputs/attribution_audit_v4/*.json
+!outputs/attribution_audit_v4/*.png
+!outputs/ett_benchmark/
+!outputs/ett_benchmark/ett_metrics_by_seed.csv
+!outputs/ett_benchmark/ett_metrics_summary.csv
+!outputs/ett_benchmark/ett_run.json
+!outputs/robustness/
+!outputs/robustness/*.csv
+!outputs/robustness/*.json
+!outputs/audit/
+!outputs/audit/*.csv
+!outputs/audit/*.json
+!outputs/audit/*.txt
+!outputs/tables/
+!outputs/tables/**/
+!outputs/tables/**/*.csv
+!outputs/tables/**/*.json
+!outputs/figures/
+!outputs/figures/**/
+!outputs/figures/**/*.png
 
-# ---- 打包文件 ----
+# ---- Third-party repositories and local literature ----
+references/external/
+references/*.pdf
+
+# ---- Release archives ----
 *.zip
 *.tar.gz
+!SafeFAME-TS_v2_支撑材料.zip
+!paper/final/SafeFAME-TS_v2_支撑材料.zip
 
-# ---- 报告的多轮 QA 渲染中间件 ----
+# ---- Report archives and QA renders ----
+paper/archive/
 paper/qa_*/
 paper/__pycache__/
 
-# ---- 独立发布的原型看板（自带 git remote，另行托管）----
+# ---- Independently deployed prototype ----
 prototype/
 
-# ---- 编辑器 / 系统 ----
+# ---- Course screenshots and local source notes ----
+c617ef1044b89fe0b45d90979f580ebb.png
+ffdeae2ca8978dd9ac0f0beeb9120f96.png
+reference_2026.md
+
+# ---- Editor / system ----
 .vscode/
 .idea/
 .DS_Store

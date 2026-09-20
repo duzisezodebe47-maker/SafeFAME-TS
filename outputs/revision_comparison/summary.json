@@ -1,0 +1,113 @@
+{
+  "v2": {
+    "tasks": 18,
+    "text_selected": 0,
+    "calibration_windows": 648,
+    "decision_windows": 655,
+    "test_windows": 2764,
+    "semantic_residual": {
+      "point_positive": 13,
+      "ci_positive": 3,
+      "ci_negative": 4,
+      "row_permutation_pass": 0
+    },
+    "frequency_residual": {
+      "point_positive": 8,
+      "ci_positive": 2,
+      "ci_negative": 3,
+      "row_permutation_pass": 0
+    }
+  },
+  "v3": {
+    "tasks": 18,
+    "text_selected": 0,
+    "calibration_windows": 571,
+    "decision_windows": 586,
+    "test_windows": 2764,
+    "semantic_residual": {
+      "point_positive": 12,
+      "ci_positive": 3,
+      "ci_negative": 2,
+      "row_permutation_pass": 2
+    },
+    "frequency_residual": {
+      "point_positive": 8,
+      "ci_positive": 3,
+      "ci_negative": 3,
+      "row_permutation_pass": 0
+    },
+    "removed_crossing_windows": 146,
+    "insufficient_segment_tasks": 2
+  },
+  "reviewer_sensitivity": {
+    "tasks": 18,
+    "pathways": 36,
+    "circular_shift_permutations": 999,
+    "circular_shift_alpha_policy": "fixed at the value selected on aligned calibration data",
+    "aligned_solver": "lsqr",
+    "shifted_solver": "cholesky",
+    "audit_caveat": "Historical mixed-solver analysis with overlapping calibration/decision targets; not an alignment-only counterfactual. Corrected evidence is saved separately.",
+    "analysis_role": "post-review sensitivity only; not the 99-row-permutation frozen gate",
+    "bootstrap_repeats": 5000,
+    "bootstrap_role": "test paired-loss interval diagnostics only; no model selection",
+    "circular_shift_passes_at_0_025": 0,
+    "matched_control_test_ci_positive": 2,
+    "matched_control_test_ci_negative": 9,
+    "power_audit_unavailable_lt3_blocks": 32,
+    "note": "Sensitivity analyses are diagnostic and do not change the frozen v2 routing decisions."
+  },
+  "reviewer_sensitivity_corrected": {
+    "tasks": 18,
+    "pathways": 36,
+    "circular_shift_permutations": 999,
+    "circular_shift_alpha_policy": "fixed at the value selected on aligned calibration data",
+    "aligned_solver": "cholesky",
+    "shifted_solver": "cholesky",
+    "validation_boundary": "historical origin halves with overlapping targets",
+    "analysis_role": "post-review sensitivity only; not the 99-row-permutation frozen gate",
+    "bootstrap_repeats": 5000,
+    "bootstrap_role": "test paired-loss interval diagnostics only; no model selection",
+    "circular_shift_passes_at_0_025": 0,
+    "matched_control_test_ci_positive": 2,
+    "matched_control_test_ci_negative": 9,
+    "power_audit_unavailable_lt3_blocks": 32,
+    "note": "Sensitivity analyses are diagnostic and do not change the frozen v2 routing decisions."
+  },
+  "reviewer_sensitivity_v3": {
+    "tasks": 18,
+    "pathways": 36,
+    "circular_shift_permutations": 999,
+    "circular_shift_alpha_policy": "fixed at the value selected on aligned calibration data",
+    "aligned_solver": "cholesky",
+    "shifted_solver": "cholesky",
+    "validation_boundary": "target-disjoint",
+    "analysis_role": "post-review sensitivity only; not the 99-row-permutation frozen gate",
+    "bootstrap_repeats": 5000,
+    "bootstrap_role": "test paired-loss interval diagnostics only; no model selection",
+    "circular_shift_passes_at_0_025": 1,
+    "matched_control_test_ci_positive": 2,
+    "matched_control_test_ci_negative": 8,
+    "power_audit_unavailable_lt3_blocks": 34,
+    "note": "Sensitivity analyses are diagnostic and do not change the frozen v2 routing decisions."
+  },
+  "fallback_changes": [
+    {
+      "domain": "Climate",
+      "horizon": 24,
+      "numeric_fallback_v2": "DLinear-M",
+      "numeric_fallback_v3": "AR-Ridge"
+    },
+    {
+      "domain": "Economy",
+      "horizon": 6,
+      "numeric_fallback_v2": "AR-Ridge",
+      "numeric_fallback_v3": "PatchTST"
+    },
+    {
+      "domain": "Security",
+      "horizon": 3,
+      "numeric_fallback_v2": "PatchTST",
+      "numeric_fallback_v3": "AR-Ridge"
+    }
+  ]
+}

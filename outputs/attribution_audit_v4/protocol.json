@@ -1,0 +1,18 @@
+{
+  "scope": "ten routes enabled by the frozen v4 gate",
+  "route_effect": "original frozen Last-anchored candidate versus frozen numerical fallback",
+  "legacy_control_name": "pure numerical residual ablation; not capacity matched",
+  "factorial_controls": [
+    "numeric_only",
+    "quality_only",
+    "semantic_only",
+    "full",
+    "dimension_matched_numeric"
+  ],
+  "fallback_anchored_training": "fit on calibration, select Ridge alpha on decision, refit on calibration+decision, evaluate once on test",
+  "dimension_control": "standardized numerical history/frequency plus fixed random Fourier features to exactly match the full design width",
+  "permutation_correction": "refit frequency interaction scaler within every selected-route row or circular permutation",
+  "multiplicity": "Holm FWER and BH FDR across all 240 saved main-gate candidate p-values; descriptive only",
+  "bootstrap": "5000 moving-block resamples; diagnostic only",
+  "routing_effect": "none"
+}

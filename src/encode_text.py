@@ -10,11 +10,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
-from huggingface_hub import model_info
 from sentence_transformers import SentenceTransformer
 
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+MODEL_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 
 
 def corpus_digest(corpus: pd.DataFrame) -> str:
@@ -27,13 +27,12 @@ def corpus_digest(corpus: pd.DataFrame) -> str:
     return digest.hexdigest()
 
 
-def run(corpus_path: Path, output: Path, model_name: str, batch_size: int, device: str) -> np.ndarray:
+def run(corpus_path: Path, output: Path, model_name: str, batch_size: int, device: str,
+        revision: str = MODEL_REVISION, local_files_only: bool = False) -> np.ndarray:
     corpus = pd.read_csv(corpus_path)
     if corpus["text_id"].duplicated().any() or corpus["fact"].isna().any():
         raise ValueError("Corpus must have unique text_id values and non-empty facts")
-    info = model_info(model_name)
-    revision = info.sha
-    model = SentenceTransformer(model_name, revision=revision, device=device)
+    model = SentenceTransformer(model_name, revision=revision, device=device, local_files_only=local_files_only)
     model.eval()
     embeddings = model.encode(
         corpus["fact"].tolist(),
@@ -54,7 +53,7 @@ def run(corpus_path: Path, output: Path, model_name: str, batch_size: int, devic
     metadata = {
         "model": model_name,
         "revision": revision,
-        "license": getattr(info.card_data, "license", None) if info.card_data else None,
+        "license": "apache-2.0" if model_name == MODEL_NAME else "check upstream model card",
         "device": device,
         "torch": torch.__version__,
         "shape": list(embeddings.shape),
@@ -79,6 +78,12 @@ def verify(output: Path) -> None:
     assert embeddings.shape[1] == metadata["shape"][1]
     assert index["row"].tolist() == list(range(len(index)))
     assert not index["text_id"].duplicated().any()
+    corpus_path = Path(metadata['corpus_path'])
+    if not corpus_path.exists():
+        corpus_path = Path('data_processed/text/fact_corpus.csv')
+    corpus = pd.read_csv(corpus_path)
+    assert corpus_digest(corpus) == metadata['corpus_sha256'], 'Corpus differs from encoded source'
+    assert index.text_id.tolist() == corpus.text_id.tolist(), 'Embedding index differs from corpus order'
     print(f"verified embeddings shape={embeddings.shape} revision={metadata['revision']}")
 
 
@@ -87,6 +92,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--corpus", type=Path, default=Path("data_processed/text/fact_corpus.csv"))
     parser.add_argument("--output", type=Path, default=Path("data_processed/embeddings/all_minilm_l6_v2"))
     parser.add_argument("--model", default=MODEL_NAME)
+    parser.add_argument("--revision", default=MODEL_REVISION)
+    parser.add_argument("--local-files-only", action="store_true")
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--verify-only", action="store_true")
@@ -96,6 +103,7 @@ def parse_args() -> argparse.Namespace:
 if __name__ == "__main__":
     args = parse_args()
     if not args.verify_only:
-        result = run(args.corpus, args.output, args.model, args.batch_size, args.device)
+        result = run(args.corpus, args.output, args.model, args.batch_size, args.device,
+                     args.revision, args.local_files_only)
         print(f"encoded {result.shape[0]} facts into {result.shape[1]} dimensions")
     verify(args.output)

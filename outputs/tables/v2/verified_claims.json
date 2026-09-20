@@ -1,0 +1,16 @@
+{
+  "tasks": 18,
+  "selected_text_tasks": 0,
+  "semantic_point_improvement_tasks": 13,
+  "semantic_significant_improvement_tasks": 3,
+  "semantic_significant_harm_tasks": 4,
+  "frequency_point_improvement_tasks": 8,
+  "frequency_significant_improvement_tasks": 2,
+  "frequency_significant_harm_tasks": 3,
+  "permutation_passes_at_0_025": 0,
+  "segment_stability_passes": 6,
+  "total_candidate_pathways": 36,
+  "test_windows": 2764,
+  "calibration_windows": 648,
+  "decision_windows": 655
+}

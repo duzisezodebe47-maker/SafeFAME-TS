@@ -1,0 +1,41 @@
+{
+  "split": {
+    "train": 0.7,
+    "validation": 0.1,
+    "test": 0.2,
+    "validation_use": "historical origin-index halves; calibration and decision targets overlap by H-1 timestamps, not untouched targets"
+  },
+  "audit_caveat": "2026-09-19: historical numeric results preserved; target-disjoint correction is safefame_v3. Within-run freezing does not certify globally unseen tests across iterative development.",
+  "numeric_experts": [
+    "Last",
+    "SeasonalNaive",
+    "AR-Ridge",
+    "DLinear-M",
+    "PatchTST"
+  ],
+  "text_candidates": [
+    "semantic_residual",
+    "frequency_residual"
+  ],
+  "permutations": 99,
+  "permutation_p_threshold": 0.025,
+  "permutation_role": "frozen eligibility gate; within-split joint row permutation of text and quality; alpha reselected on calibration for each permutation",
+  "sensitivity_role": "999 circular shifts are post-review diagnostics only; frozen routing is unchanged",
+  "bootstrap_role": "5000 moving-block repeats for test paired-loss intervals only; never model or route selection",
+  "selection": "candidate must beat the validation-selected numerical fallback on both decision halves and beat 97.5% of text permutations",
+  "test_interval": "5000-repeat moving-block bootstrap of paired origin losses",
+  "seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "training": {
+    "batch_size": 64,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "max_epochs": 60,
+    "patience": 8,
+    "min_delta": 1e-06
+  },
+  "device": "cuda"
+}

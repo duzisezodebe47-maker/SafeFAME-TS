@@ -1,0 +1,108 @@
+{
+  "analysis_role": "post-review attribution diagnostics; no change to frozen v4 routing",
+  "selected_routes": 10,
+  "selected_semantic_routes": 9,
+  "selected_frequency_routes": 1,
+  "original_selected_point_positive": 8,
+  "original_selected_point_negative": 2,
+  "original_selected_ci_positive": 5,
+  "original_selected_ci_negative": 0,
+  "selected_circular_pass_after_frequency_correction": 4,
+  "legacy_numeric_ablation_selected_ci_positive": 3,
+  "legacy_numeric_ablation_selected_ci_negative": 0,
+  "joint_posthoc_supported_routes": 1,
+  "joint_posthoc_supported_list": [
+    "Agriculture H6 F1 semantic_residual"
+  ],
+  "original_selected_mean_gain_pct": 9.211111320134057,
+  "original_selected_median_gain_pct": 2.0284754943379504,
+  "all_120_mean_gain_pct": 0.7675926100111714,
+  "all_120_median_gain_pct": 0.0,
+  "all_120_mean_without_largest_gain_pct": 0.32911975258455495,
+  "largest_route_share_of_total_net_gain_pct": 57.4804285863391,
+  "largest_route_share_of_positive_gain_pct": 55.615372462833335,
+  "fallback_anchored_full_point_positive": 6,
+  "fallback_anchored_full_ci_positive": 6,
+  "fallback_anchored_full_ci_negative": 1,
+  "full_vs_dimension_matched_point_positive": 9,
+  "full_vs_dimension_matched_ci_positive": 6,
+  "full_vs_dimension_matched_ci_negative": 0,
+  "exploratory_cross_fold_replicated_families": 2,
+  "exploratory_cross_fold_replicated_list": [
+    "Climate H24 semantic_residual",
+    "Environment H1 semantic_residual"
+  ],
+  "multiplicity": {
+    "candidate_paths": 240,
+    "raw_p_le_0_025": 38,
+    "holm_p_le_0_05": 0,
+    "bh_q_le_0_05": 22,
+    "role": "post-hoc family-level description; not part of the frozen gate"
+  },
+  "comparisons": {
+    "full_vs_dimension_matched_numeric": {
+      "routes": 10,
+      "point_positive": 9,
+      "ci_positive": 6,
+      "ci_negative": 0,
+      "median_gain_pct": 0.7234879395796645
+    },
+    "full_vs_quality_only": {
+      "routes": 10,
+      "point_positive": 7,
+      "ci_positive": 4,
+      "ci_negative": 0,
+      "median_gain_pct": 0.0020952953151798237
+    },
+    "full_vs_semantic_only": {
+      "routes": 10,
+      "point_positive": 9,
+      "ci_positive": 3,
+      "ci_negative": 0,
+      "median_gain_pct": 0.5213999035179051
+    },
+    "quality_only_vs_numeric": {
+      "routes": 10,
+      "point_positive": 9,
+      "ci_positive": 4,
+      "ci_negative": 0,
+      "median_gain_pct": 0.5235812150984731
+    },
+    "semantic_only_vs_numeric": {
+      "routes": 10,
+      "point_positive": 7,
+      "ci_positive": 4,
+      "ci_negative": 0,
+      "median_gain_pct": 0.0022193479058796317
+    }
+  },
+  "corrected_frequency_permutation": [
+    {
+      "domain": "Agriculture",
+      "horizon": 12,
+      "fold": 1,
+      "variant": "frequency_residual",
+      "permutations": 999,
+      "aligned_decision_mse": 0.16744064723311478,
+      "legacy_row_p": 0.021,
+      "corrected_row_p": 0.085,
+      "legacy_circular_p": 0.06,
+      "corrected_circular_p": 0.068,
+      "role": "post-hoc sensitivity; frozen routing unchanged"
+    }
+  ],
+  "bootstrap_repeats": 5000,
+  "random_fourier_control": "fixed task-specific seed; same design dimension as the full candidate; pure numerical inputs",
+  "limitations": [
+    "All analyses are post-hoc and use the already inspected historical v4 test blocks.",
+    "The fallback-anchored head trains on calibration and decision residuals because train-segment predictions from every frozen fallback were not saved.",
+    "Equal input dimension does not imply identical effective rank or inductive bias.",
+    "The frequency permutation correction is limited to the one frequency route actually enabled by frozen v4."
+  ],
+  "sha256": {
+    "script": "6432677d1e65a3a6fbb506e12561608537ebccf1e96e8c4975a96ab94650e9be",
+    "v4_summary": "3935182fc723836507419efdeb709523ae4089a0cb3545daab2e385479e757f0",
+    "v4_tasks": "a54891ff8f72376ba5a0da4afa578bb3374f97302a9f2ac88482100c0403ce21",
+    "v4_candidates": "be8f219c2ff66786674ef98d9609590e97d4e315692d3dc13e9ee9e42133c385"
+  }
+}

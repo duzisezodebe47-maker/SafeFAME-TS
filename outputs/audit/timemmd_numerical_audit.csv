@@ -1,0 +1,11 @@
+domain,rows,columns,numeric_columns,start,end,invalid_dates,duplicate_dates,original_time_order,rows_moved_by_stable_sort,duplicate_start_dates,modal_step_days,ot_missing,all_missing_cells
+Agriculture,532,7,3,1980-01-01,2024-04-01,0,0,ascending,0,0,31.0,0,248
+Climate,1272,14,8,2000-01-04,2024-05-14,0,0,descending,1272,0,7.0,0,0
+Economy,447,7,3,1987-01-01,2024-03-01,0,0,unsorted,447,0,31.0,0,0
+Energy,1622,12,9,1993-04-05,2024-04-29,0,0,ascending,0,0,7.0,0,0
+Environment,15979,10,3,1980-01-01,2023-09-30,0,0,ascending,0,0,1.0,0,0
+Health_AFR,1461,4,1,1996-01-01,2024-04-29,0,0,ascending,0,0,7.0,3,3
+Health_US,1389,19,10,1997-09-29,2024-05-06,0,5,ascending,0,5,7.0,0,0
+Security,309,4,1,1998-09-01,2024-05-01,0,0,ascending,0,0,31.0,0,0
+SocialGood,924,4,1,1948-01-01,2024-12-01,0,0,ascending,0,0,31.0,8,8
+Traffic,651,5,1,1970-01-01,2024-03-01,0,0,ascending,0,0,31.0,0,0

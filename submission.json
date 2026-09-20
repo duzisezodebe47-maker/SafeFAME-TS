@@ -1,0 +1,36 @@
+{
+  "revision": "2026-09-20",
+  "stage": "docx_revision",
+  "authority": "root SafeFAME-TS_01/02/03 DOCX; paper/final DOCX mirrors",
+  "pdf_required": false,
+  "pdf_status": "deferred until an explicit user instruction after DOCX finalization",
+  "reports": [
+    {
+      "role": "week4",
+      "docx": "SafeFAME-TS_01_选题与初步技术方案（第4周）.docx",
+      "pdf": "SafeFAME-TS_01_选题与初步技术方案（第4周）.pdf",
+      "mirror": "paper/final/SafeFAME-TS_01_选题与初步技术方案（第4周）.docx",
+      "mirror_pdf": "paper/final/SafeFAME-TS_01_选题与初步技术方案（第4周）.pdf",
+      "rendered_docx_pages": 10
+    },
+    {
+      "role": "week10",
+      "docx": "SafeFAME-TS_02_书面中期进展报告（第10周）.docx",
+      "pdf": "SafeFAME-TS_02_书面中期进展报告（第10周）.pdf",
+      "mirror": "paper/final/SafeFAME-TS_02_书面中期进展报告（第10周）.docx",
+      "mirror_pdf": "paper/final/SafeFAME-TS_02_书面中期进展报告（第10周）.pdf",
+      "rendered_docx_pages": 12
+    },
+    {
+      "role": "final",
+      "docx": "SafeFAME-TS_03_课程设计最终报告.docx",
+      "pdf": "SafeFAME-TS_03_课程设计最终报告.pdf",
+      "mirror": "paper/final/SafeFAME-TS_03_课程设计最终报告.docx",
+      "mirror_pdf": "paper/final/SafeFAME-TS_03_课程设计最终报告.pdf",
+      "rendered_docx_pages": 30
+    }
+  ],
+  "archive": "SafeFAME-TS_v2_支撑材料.zip",
+  "sha256": "SafeFAME-TS_v2_支撑材料.sha256",
+  "inventory": "支撑材料清单_v2.txt"
+}

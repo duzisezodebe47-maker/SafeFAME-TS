@@ -1,0 +1,31 @@
+{
+  "datasets": [
+    "ETTh1",
+    "ETTh2"
+  ],
+  "horizons": [
+    96,
+    336,
+    720
+  ],
+  "input_len": 96,
+  "corruptions": [
+    "clean",
+    "gaussian_0.10",
+    "random_missing_0.10",
+    "tail_missing_12",
+    "spikes_0.02"
+  ],
+  "corruption_seeds": [
+    31,
+    37,
+    43
+  ],
+  "model_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "missing_value_policy": "within-window forward fill; zero only if the first step is missing",
+  "metric": "MSE and relative degradation against the same model on clean inputs"
+}

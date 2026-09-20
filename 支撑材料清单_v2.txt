@@ -1,17 +1,41 @@
-SafeFAME-TS v2 支撑材料清单
+SafeFAME-TS 支撑材料清单（归档文件名沿用v2，内容包含历史v2、审查后v3、扩展v4及归因审计）
+
+正式修订：2026-09-20。个人课程设计，无需PPT、无需课堂汇报。
+唯一版本索引为submission.json；根目录与paper/final同名文件哈希一致。
+正式报告：
+SafeFAME-TS_01_选题与初步技术方案（第4周）.docx
+SafeFAME-TS_02_书面中期进展报告（第10周）.docx
+SafeFAME-TS_03_课程设计最终报告.docx（本轮最终修订版）
+PDF在DOCX定稿并收到用户明确指令后生成，当前不属于正式版本。
+归档：SafeFAME-TS_v2_支撑材料.zip；侧文件SafeFAME-TS_v2_支撑材料.sha256。
 
 1. README.md：项目范围、最终结论与复现入口。
 2. requirements.txt：Python 依赖。
 3. src：数据审计、时点文本索引、数值模型、文本候选、冻结选择、汇总、制图与一致性检查代码。
-4. docs：课程要求、数据审计、协议冻结、文献核验、来源清单与最终检查报告。
+4. docs：课程要求、数据审计、协议冻结、文献核验、来源清单、完整实验过程与论文来源映射、最终检查报告。
 5. outputs/safefame_v2：18 项任务的协议、指标与路径选择审计。
 6. outputs/tables/v2：报告关键计数、候选结果与选择结果。
-7. outputs/reviewer_sensitivity：999 次循环移位置换、匹配容量纯数值残差对照与功效审计。
+7. outputs/reviewer_sensitivity：历史999次循环移位置换、纯数值残差消融与功效审计；输入维数不同，不是匹配容量对照。
 8. outputs/tables/final：ETT 外部基准与输入扰动结果。
 9. outputs/figures：报告使用的 PNG 图表。
 10. data_processed：文本索引审计和语义缓存清单，不重复分发大型句向量与原始数据。
 11. prototype/dist：本地交互式结果看板。
-12. paper/final：第 4 周、第 10 周和最终报告的 DOCX、PDF 与无障碍审计。
+12. paper/final：第4周、第10周和最终报告的当前DOCX镜像；本轮PDF暂缓，旧PDF不纳入当前包。
 13. manifest.tsv 与 SHA256SUMS.txt：包内文件清单和哈希。
+14. outputs/safefame_v3：目标不重叠的18任务修订结果、逐起点预测、99次零分布、选择记录、训练日志、权重及复核记录。
+15. outputs/reviewer_sensitivity_corrected、reviewer_sensitivity_v3：统一求解器的旧划分与目标不重叠划分两套999次诊断，含预测和零分布。
+16. outputs/revision_comparison：历史与修订结果对照表和图。
+17. outputs/tables及小型开发阶段指标：重绘所需CSV、JSON；清单自身同时包含根目录与paper/final镜像。
+18. configs/safefame_v4.json：9领域10序列、40任务、3滚动折、5种子及各项重复次数。
+19. outputs/safefame_v4：120个任务—折完整证据、240条候选、逐种子权重和日志、逐起点预测、999次逐行与999次循环零分布、核验记录、汇总表和图。
+20. data_processed/v4的审计与编码元数据：处理规则、样本量、原始文件哈希和固定模型版本；不包含全部原始数据与缓存。
+21. outputs/attribution_audit_v4：10条实际启用路线的五组回退锚定对照、等维数值对照、块长敏感性、跨折描述、修正频率置换、逐起点证据与核验摘要。
 
 原始 Time-MMD、ETDataset 与外部参考仓库不重复打包；获取地址、固定提交和许可边界见 docs/15_数据与代码来源清单.md。
+
+补充包含开发阶段深度基线及表征探针指标，供报告辅助结果核对。
+docs/submission_qa.json记录报告哈希、页数、文本一致性与实际页面检查。
+历史v2/v3的99次逐行置换用于主门控；v4扩大为999次逐行置换，不能改写旧版本协议。另做999次循环移位仅作敏感性；各版本5000次移动块Bootstrap只作测试期区间诊断。旧版与v3的检验通过数量不同，均没有路径满足完整启用门槛；v4另列结果，不沿用旧版全回退结论。修订与扩展均使用已有历史数据，不能宣称新增未来确认。
+排除reference_2026.md、local_private、paper/archive、.venv、__pycache__、旧论文及嵌套ZIP。
+ZIP实际逐文件目录和哈希以包内manifest.tsv及SHA256SUMS.txt为准；本文件说明类别。
+精简包不是包含全部原始数据和权重的离线训练环境。解压核验、重绘和完整训练命令见README。

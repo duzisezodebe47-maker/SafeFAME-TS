@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from plot_style import configure_fonts, finish_fonts
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,13 +19,14 @@ FIGURES = ROOT / "outputs" / "figures" / "v2"
 
 
 def save_figure(fig: plt.Figure, name: str) -> None:
+    finish_fonts(fig)
     FIGURES.mkdir(parents=True, exist_ok=True)
     fig.savefig(FIGURES / f"{name}.png", dpi=300, bbox_inches="tight", facecolor="white")
     fig.savefig(FIGURES / f"{name}.pdf", bbox_inches="tight", facecolor="white")
     plt.close(fig)
 
 
-def main() -> None:
+def main(figures_only: bool = False) -> None:
     TABLES.mkdir(parents=True, exist_ok=True)
     metrics = pd.read_csv(INPUT / "safefame_v2_metrics.csv")
     audit = pd.read_csv(INPUT / "safefame_v2_selection_audit.csv")
@@ -35,7 +38,8 @@ def main() -> None:
         [candidates.block_ci_low > 0, candidates.block_ci_high < 0],
         ["显著优于回退", "显著劣于回退"], default="区间跨零",
     )
-    candidates.to_csv(TABLES / "candidate_test_results.csv", index=False)
+    if not figures_only:
+        candidates.to_csv(TABLES / "candidate_test_results.csv", index=False)
 
     summary = audit[[
         "domain", "horizon", "numeric_fallback", "calibration_windows",
@@ -44,7 +48,8 @@ def main() -> None:
         "semantic_residual_segment_wins", "frequency_residual_decision_mse",
         "frequency_residual_permutation_p_value", "frequency_residual_segment_wins",
     ]].copy()
-    summary.to_csv(TABLES / "selection_results.csv", index=False)
+    if not figures_only:
+        summary.to_csv(TABLES / "selection_results.csv", index=False)
 
     semantic = candidates[candidates.model.eq("semantic_residual")]
     frequency = candidates[candidates.model.eq("frequency_residual")]
@@ -70,11 +75,13 @@ def main() -> None:
         "calibration_windows": int(audit.calibration_windows.sum()),
         "decision_windows": int(audit.decision_windows.sum()),
     }
-    (TABLES / "verified_claims.json").write_text(
-        json.dumps(claims, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    if not figures_only:
+        (TABLES / "verified_claims.json").write_text(
+            json.dumps(claims, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
 
     plt.rcParams.update({"font.sans-serif": ["Microsoft YaHei", "SimHei"], "axes.unicode_minus": False})
+    configure_fonts()
     palette = {"semantic_residual": "#2F6690", "frequency_residual": "#D97706"}
 
     fig, ax = plt.subplots(figsize=(10.5, 6.2))
@@ -149,4 +156,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--figures-only', action='store_true')
+    main(parser.parse_args().figures_only)

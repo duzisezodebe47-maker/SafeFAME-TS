@@ -1,0 +1,2 @@
+domain,horizon,fold,variant,permutations,aligned_decision_mse,legacy_row_p,corrected_row_p,legacy_circular_p,corrected_circular_p,role
+Agriculture,12,1,frequency_residual,999,0.16744064723311478,0.021,0.085,0.06,0.068,post-hoc sensitivity; frozen routing unchanged

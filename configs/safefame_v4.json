@@ -1,0 +1,26 @@
+{
+  "version": "v4_expanded_rolling_backtest",
+  "data_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+  "role": "expanded historical rolling backtest; not prospective unseen confirmation",
+  "seeds": [2026, 2027, 2028, 2029, 2030],
+  "threads": 1,
+  "row_permutations": 999,
+  "circular_shifts": 999,
+  "bootstrap_repeats": 5000,
+  "p_threshold": 0.025,
+  "folds": [[0.4, 0.5, 0.7, 0.8], [0.5, 0.6, 0.8, 0.9], [0.6, 0.7, 0.9, 1.0]],
+  "fold_columns": ["train_end", "calibration_end", "decision_end", "test_end"],
+  "training": {"batch_size": 64, "learning_rate": 0.0003, "weight_decay": 0.0001, "max_epochs": 60, "patience": 8, "min_delta": 0.000001},
+  "domains": {
+    "Agriculture": {"input_len": 24, "horizons": [1, 3, 6, 12], "seasonal_period": 12, "frequency": "monthly"},
+    "Climate": {"input_len": 52, "horizons": [1, 4, 12, 24], "seasonal_period": 52, "frequency": "weekly"},
+    "Economy": {"input_len": 24, "horizons": [1, 3, 6, 12], "seasonal_period": 12, "frequency": "monthly"},
+    "Energy": {"input_len": 52, "horizons": [1, 4, 12, 24], "seasonal_period": 52, "frequency": "weekly"},
+    "Environment": {"input_len": 56, "horizons": [1, 7, 14, 28], "seasonal_period": 7, "frequency": "daily"},
+    "Health_AFR": {"input_len": 52, "horizons": [1, 4, 12, 24], "seasonal_period": 52, "frequency": "weekly"},
+    "Health_US": {"input_len": 52, "horizons": [1, 4, 12, 24], "seasonal_period": 52, "frequency": "weekly"},
+    "Security": {"input_len": 24, "horizons": [1, 3, 6, 12], "seasonal_period": 12, "frequency": "monthly"},
+    "SocialGood": {"input_len": 24, "horizons": [1, 3, 6, 12], "seasonal_period": 12, "frequency": "monthly"},
+    "Traffic": {"input_len": 24, "horizons": [1, 3, 6, 12], "seasonal_period": 12, "frequency": "monthly"}
+  }
+}

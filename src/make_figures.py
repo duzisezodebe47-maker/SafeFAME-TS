@@ -12,6 +12,7 @@ import pandas as pd
 import seaborn as sns
 
 from data_utils import load_time_ordered_frame
+from plot_style import configure_fonts, finish_fonts
 
 
 COLORS = {
@@ -38,9 +39,11 @@ def configure() -> None:
             "legend.fontsize": 9,
         }
     )
+    configure_fonts()
 
 
 def save(fig: plt.Figure, output: Path, name: str) -> None:
+    finish_fonts(fig)
     fig.savefig(output / f"{name}.png", bbox_inches="tight", facecolor="white")
     fig.savefig(output / f"{name}.pdf", bbox_inches="tight", facecolor="white")
     plt.close(fig)

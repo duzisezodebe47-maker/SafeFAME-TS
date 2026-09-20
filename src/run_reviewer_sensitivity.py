@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import hashlib
+from datetime import datetime, timezone
 from pathlib import Path
 from statistics import NormalDist
 
@@ -30,6 +32,8 @@ from run_safefame_v2 import (
     moving_block_interval,
     refit_residual,
 )
+from validation_boundaries import validation_masks
+from plot_style import configure_fonts, finish_fonts
 
 
 DEFAULT_SHIFTS = 999
@@ -147,6 +151,7 @@ def make_figures(frame: pd.DataFrame, output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "DejaVu Sans"]
     plt.rcParams["axes.unicode_minus"] = False
+    configure_fonts()
     colors = {"semantic_residual": "#2878B5", "frequency_residual": "#D95F02"}
 
     domain_order = list(ALL_CONFIGS)
@@ -170,6 +175,7 @@ def make_figures(frame: pd.DataFrame, output: Path) -> None:
         ax.set_title(titles[variant])
         ax.grid(axis="x", alpha=0.2)
     fig.suptitle("封存测试期的文本增量归因检查", fontsize=15)
+    finish_fonts(fig)
     fig.tight_layout()
     fig.savefig(output / "fig_v3_matched_control_ci.png", dpi=220)
     fig.savefig(output / "fig_v3_matched_control_ci.pdf")
@@ -186,15 +192,25 @@ def make_figures(frame: pd.DataFrame, output: Path) -> None:
     ax.set_ylabel("循环移位置换检验p值")
     ax.set_title("保留时间结构的999次循环移位置换敏感性")
     ax.legend(frameon=False, ncol=3)
+    finish_fonts(fig)
     fig.tight_layout()
     fig.savefig(output / "fig_v3_circular_shift_gate.png", dpi=220)
     fig.savefig(output / "fig_v3_circular_shift_gate.pdf")
     plt.close(fig)
 
 
-def run(root: Path, semantic_root: Path, output: Path, shifts: int) -> pd.DataFrame:
+def run(root: Path, semantic_root: Path, output: Path, shifts: int,
+        corrected_solver: bool = False, purged: bool = False) -> pd.DataFrame:
     output.mkdir(parents=True, exist_ok=True)
     rows = []
+    solver = 'cholesky' if corrected_solver else 'lsqr'
+    if corrected_solver:
+        (output/'run_manifest.json').write_text(json.dumps({
+            'started_utc': datetime.now(timezone.utc).isoformat(), 'solver': solver,
+            'purged': purged, 'role': 'post-audit diagnostic; no routing changes',
+            'sha256': {p.as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                       for p in Path(__file__).resolve().parent.glob('*.py')},
+        }, ensure_ascii=False, indent=2), encoding='utf-8')
     for domain, config in ALL_CONFIGS.items():
         ordered, _ = load_time_ordered_frame(root / "numerical" / domain / f"{domain}.csv")
         raw = pd.to_numeric(ordered["OT"], errors="coerce").to_numpy(float)
@@ -202,7 +218,7 @@ def run(root: Path, semantic_root: Path, output: Path, shifts: int) -> pd.DataFr
         target = (raw - raw[:train_end].mean()) / raw[:train_end].std(ddof=0)
         cache = np.load(semantic_root / f"{domain}.npz")
         for horizon in config.horizons:
-            arrays = {}
+            arrays, origin_sets = {}, {}
             for split, origin_range in {
                 "train": range(config.input_len, train_end - horizon + 1),
                 "validation": range(train_end, validation_end - horizon + 1),
@@ -211,14 +227,19 @@ def run(root: Path, semantic_root: Path, output: Path, shifts: int) -> pd.DataFr
                 x, y, origins = make_windows(target, config.input_len, horizon, origin_range)
                 embedding, quality = semantic_rows(cache, origins)
                 arrays[split] = (x, embedding, quality, y)
+                origin_sets[split] = origins
             midpoint = len(arrays["validation"][0]) // 2
             calibration = tuple(value[:midpoint] for value in arrays["validation"])
             decision = tuple(value[midpoint:] for value in arrays["validation"])
+            if purged:
+                cal_mask, dec_mask, _ = validation_masks(origin_sets['validation'], horizon, train_end, validation_end)
+                calibration = tuple(value[cal_mask] for value in arrays['validation'])
+                decision = tuple(value[dec_mask] for value in arrays['validation'])
             fit_data = tuple(np.concatenate([arrays["train"][i], arrays["validation"][i]]) for i in range(4))
             block_length = max(horizon, min(config.seasonal_period, 24))
 
             for variant_index, variant in enumerate(VARIANTS):
-                builder, model, alpha, _ = fit_residual(variant, arrays["train"], calibration)
+                builder, model, alpha, _ = fit_residual(variant, arrays["train"], calibration, solver=solver)
                 decision_prediction = decision[0][:, -1, None] + model.predict(
                     builder.transform(decision[0], decision[1], decision[2])
                 )
@@ -236,7 +257,7 @@ def run(root: Path, semantic_root: Path, output: Path, shifts: int) -> pd.DataFr
                 aligned_mse = metrics(decision[3], decision_prediction)["mse"]
                 p_value = (1 + sum(value <= aligned_mse for value in shifted)) / (shifts + 1)
 
-                test_candidate = refit_residual(variant, alpha, fit_data, arrays["test"])
+                test_candidate = refit_residual(variant, alpha, fit_data, arrays["test"], solver=solver)
                 test_control = refit_control(variant, control_alpha, fit_data, arrays["test"])
                 delta, low, high = moving_block_interval(
                     arrays["test"][3], test_control, test_candidate, block_length,
@@ -246,6 +267,15 @@ def run(root: Path, semantic_root: Path, output: Path, shifts: int) -> pd.DataFr
                 block_count, mde, mde_pct = block_power_audit(
                     decision[3], decision_control, decision_prediction, block_length
                 )
+                if corrected_solver:
+                    evidence = output/'evidence'
+                    evidence.mkdir(exist_ok=True)
+                    np.savez_compressed(evidence/f'{domain}_h{horizon}_{variant}.npz',
+                        shifted_mse=np.asarray(shifted), aligned_decision=decision_prediction,
+                        decision_actual=decision[3], decision_control=decision_control,
+                        test_candidate=test_candidate, test_control=test_control, test_actual=arrays['test'][3],
+                        alpha=alpha, control_alpha=control_alpha,
+                        test_origins=origin_sets['test'], bootstrap_seed=4100+100*list(ALL_CONFIGS).index(domain)+10*horizon+variant_index)
                 rows.append({
                     "domain": domain,
                     "horizon": horizon,
@@ -275,6 +305,12 @@ def run(root: Path, semantic_root: Path, output: Path, shifts: int) -> pd.DataFr
         "pathways": int(len(frame)),
         "circular_shift_permutations": shifts,
         "circular_shift_alpha_policy": "fixed at the value selected on aligned calibration data",
+        "aligned_solver": solver,
+        "shifted_solver": "cholesky",
+        "validation_boundary": "target-disjoint" if purged else "historical origin halves with overlapping targets",
+        "analysis_role": "post-review sensitivity only; not the 99-row-permutation frozen gate",
+        "bootstrap_repeats": 5000,
+        "bootstrap_role": "test paired-loss interval diagnostics only; no model selection",
         "circular_shift_passes_at_0_025": int((frame.circular_shift_p_value <= 0.025).sum()),
         "matched_control_test_ci_positive": int((frame.test_gain_ci_low_pct > 0).sum()),
         "matched_control_test_ci_negative": int((frame.test_gain_ci_high_pct < 0).sum()),
@@ -308,9 +344,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("references/external/Time-MMD"))
     parser.add_argument("--semantic-root", type=Path, default=Path("data_processed/semantic_features"))
-    parser.add_argument("--output", type=Path, default=Path("outputs/reviewer_sensitivity"))
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--corrected-solver", action="store_true")
+    parser.add_argument("--purged", action="store_true")
     parser.add_argument("--shifts", type=int, default=DEFAULT_SHIFTS)
     parser.add_argument("--self-check", action="store_true")
+    parser.add_argument("--figures-only", action="store_true", help="Render saved sensitivity CSV without training or overwriting results")
+    parser.add_argument("--results", type=Path, default=Path("outputs/reviewer_sensitivity/reviewer_sensitivity_results.csv"))
     return parser.parse_args()
 
 
@@ -318,5 +358,17 @@ if __name__ == "__main__":
     args = parse_args()
     if args.self_check:
         self_check()
+    elif args.figures_only:
+        make_figures(pd.read_csv(args.results), args.output or Path('outputs/reviewer_sensitivity'))
     else:
-        run(args.root, args.semantic_root, args.output, args.shifts)
+        corrected = args.corrected_solver or args.purged
+        output = args.output or Path('outputs/reviewer_sensitivity_v3' if args.purged else
+                                    'outputs/reviewer_sensitivity_corrected' if corrected else 'outputs/reviewer_sensitivity')
+        if corrected and output.resolve() == Path('outputs/reviewer_sensitivity').resolve():
+            raise ValueError('Corrected analysis must not overwrite historical sensitivity results')
+        if corrected:
+            from threadpoolctl import threadpool_limits
+            with threadpool_limits(1):
+                run(args.root, args.semantic_root, output, args.shifts, True, args.purged)
+        else:
+            run(args.root, args.semantic_root, output, args.shifts)

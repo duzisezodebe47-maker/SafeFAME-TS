@@ -1,0 +1,210 @@
+{
+  "signature": "885c56ca7c543204d140b701dbdc2f0caa21190a8d04b3dfdb7dd5e183714a78",
+  "config": {
+    "version": "v4_expanded_rolling_backtest",
+    "data_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+    "role": "expanded historical rolling backtest; not prospective unseen confirmation",
+    "seeds": [
+      2026,
+      2027,
+      2028,
+      2029,
+      2030
+    ],
+    "threads": 1,
+    "row_permutations": 999,
+    "circular_shifts": 999,
+    "bootstrap_repeats": 5000,
+    "p_threshold": 0.025,
+    "folds": [
+      [
+        0.4,
+        0.5,
+        0.7,
+        0.8
+      ],
+      [
+        0.5,
+        0.6,
+        0.8,
+        0.9
+      ],
+      [
+        0.6,
+        0.7,
+        0.9,
+        1.0
+      ]
+    ],
+    "fold_columns": [
+      "train_end",
+      "calibration_end",
+      "decision_end",
+      "test_end"
+    ],
+    "training": {
+      "batch_size": 64,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0001,
+      "max_epochs": 60,
+      "patience": 8,
+      "min_delta": 1e-06
+    },
+    "domains": {
+      "Agriculture": {
+        "input_len": 24,
+        "horizons": [
+          1,
+          3,
+          6,
+          12
+        ],
+        "seasonal_period": 12,
+        "frequency": "monthly"
+      },
+      "Climate": {
+        "input_len": 52,
+        "horizons": [
+          1,
+          4,
+          12,
+          24
+        ],
+        "seasonal_period": 52,
+        "frequency": "weekly"
+      },
+      "Economy": {
+        "input_len": 24,
+        "horizons": [
+          1,
+          3,
+          6,
+          12
+        ],
+        "seasonal_period": 12,
+        "frequency": "monthly"
+      },
+      "Energy": {
+        "input_len": 52,
+        "horizons": [
+          1,
+          4,
+          12,
+          24
+        ],
+        "seasonal_period": 52,
+        "frequency": "weekly"
+      },
+      "Environment": {
+        "input_len": 56,
+        "horizons": [
+          1,
+          7,
+          14,
+          28
+        ],
+        "seasonal_period": 7,
+        "frequency": "daily"
+      },
+      "Health_AFR": {
+        "input_len": 52,
+        "horizons": [
+          1,
+          4,
+          12,
+          24
+        ],
+        "seasonal_period": 52,
+        "frequency": "weekly"
+      },
+      "Health_US": {
+        "input_len": 52,
+        "horizons": [
+          1,
+          4,
+          12,
+          24
+        ],
+        "seasonal_period": 52,
+        "frequency": "weekly"
+      },
+      "Security": {
+        "input_len": 24,
+        "horizons": [
+          1,
+          3,
+          6,
+          12
+        ],
+        "seasonal_period": 12,
+        "frequency": "monthly"
+      },
+      "SocialGood": {
+        "input_len": 24,
+        "horizons": [
+          1,
+          3,
+          6,
+          12
+        ],
+        "seasonal_period": 12,
+        "frequency": "monthly"
+      },
+      "Traffic": {
+        "input_len": 24,
+        "horizons": [
+          1,
+          3,
+          6,
+          12
+        ],
+        "seasonal_period": 12,
+        "frequency": "monthly"
+      }
+    }
+  },
+  "hashes": {
+    "configs/safefame_v4.json": "78726805bec98ebdc4f0aefe430bd20f2112cb525cd7fb61625965914c2a9683",
+    "data_processed/v4/embeddings/fact_embedding_index.csv": "a7169c9a5d95ce4a06393a3100aad540686df593d8102d52f5c4a7682faa046e",
+    "data_processed/v4/embeddings/fact_embeddings.npy": "8cea45d2e5b59a7b2437ab22145d97541c31998919cd8c04e1e2ac54e19cc150",
+    "data_processed/v4/Health_US_ambiguous_raw_rows.csv": "756665c3be81f9fe6be004de6cb2d16dbe84c6a112a2e24f67f0d44dd7e7ae35",
+    "data_processed/v4/numerical/Agriculture/Agriculture.csv": "6bd1da270cc0bebf8048526f4e1481195286c3b7f60e1c70688405bacb1bf185",
+    "data_processed/v4/numerical/Climate/Climate.csv": "62c54cb8e6429798287f8f5b19d209523f5c6514b21d1a275e71d5975857ecc0",
+    "data_processed/v4/numerical/Economy/Economy.csv": "d3dccfd8b759c9687b3045eeeff3109e268b25518a32eebdfba3ba801587793f",
+    "data_processed/v4/numerical/Energy/Energy.csv": "20473a717e709608a154f0cf5aab41f9c3681150b0deaddae8f8c80498dc2a16",
+    "data_processed/v4/numerical/Environment/Environment.csv": "44152150448228d83f53496ffc030837b95182c5f11574307ee32bfef110045f",
+    "data_processed/v4/numerical/Health_AFR/Health_AFR.csv": "e2b9a80a4d504146ff9b1d7d3e93e148deab348815c2e9c785431b9edfda31aa",
+    "data_processed/v4/numerical/Health_US/Health_US.csv": "c0c1919a1e1171d42420383547ec8b2227b537d9d87205e385dcfacc94c4bdaf",
+    "data_processed/v4/numerical/Security/Security.csv": "bb625f2876daa4b1abd3289d49ff1a1d618004282556799f0b6cdc78fc799dec",
+    "data_processed/v4/numerical/SocialGood/SocialGood.csv": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+    "data_processed/v4/numerical/Traffic/Traffic.csv": "d6b27e637d7486ac4f116f889283d64bb35215422d3d0c1377460e85afbd1f45",
+    "data_processed/v4/numerical_audit.csv": "0811147d84cb1bc1e29fcfabee4b185ec6eb39ebb168056b113dfec082a94164",
+    "data_processed/v4/semantic_features/Agriculture.npz": "46efcaa07c59dc7495da95628c0f5a02dc1b9068442488d3234e20d5595d21c4",
+    "data_processed/v4/semantic_features/Climate.npz": "63e4fb53973f10fae8ea95d0c2ad97757a3ae773b10924749088d60a9d6fc01c",
+    "data_processed/v4/semantic_features/Economy.npz": "f4c9cd76dcbdb723e8dc625337b00f7fa6db15f2ce948ef9a9003a701ba5d7c2",
+    "data_processed/v4/semantic_features/Energy.npz": "ad35593fc6f392750d9c1a6713df80f2d8d1f3bc97087c3f346247e14c5b952f",
+    "data_processed/v4/semantic_features/Environment.npz": "aa81cb30416934da198f060c9471ed5ecbf77df8e3576fae1b8f40933edad29d",
+    "data_processed/v4/semantic_features/Health_AFR.npz": "8e48ff917075d2628ee5011677ef6f846e18a4ab5fc430f5302454854425ad1c",
+    "data_processed/v4/semantic_features/Health_US.npz": "c07aeaa08ae99b7ae05f19318c2984cb3dc9bd2e53267ae850f52d8e6428bb5f",
+    "data_processed/v4/semantic_features/Security.npz": "f34f9e88500a800b384e7dec4122389ff704fcbbc20883bafe4096e7a64f5b02",
+    "data_processed/v4/semantic_features/SocialGood.npz": "4afd9ff1380fcd4df839bc9c5e373a9fa5a97bce8a60ff43a5d772811dc00f77",
+    "data_processed/v4/semantic_features/Traffic.npz": "e8590d973165dd0a37605655461b68c31dfcc3c025d49407ca384fbcd261e1b1",
+    "data_processed/v4/text/fact_corpus.csv": "c07126f36c05278486b1379a7c4c9be2e1c2a890214802bfccca7b517e7d7ffb",
+    "data_processed/v4/text/sample_text_index.csv": "245bb79c717ff9aad5abcd4be8deacde8c628abda6c36970bda9c12445a0ee28",
+    "src/data_utils.py": "1dd2e0087df7497dc5bc8cdf109c7b9c062c598fb3a538fcf1ac2830dbc2c93c",
+    "src/prepare_v4.py": "2ad024605952e4c465753e2baee653862300d502cb0860827842ddf60fc842e1",
+    "src/run_baselines.py": "a00efd01ffb329b578eaa7cb6746457e60e92a29e114562a1e8eec9d2edf0024",
+    "src/run_famets_selective.py": "253fb765100fd21b6e60a083f6f64fc844198e38b36d36d997c2752dda2d30e1",
+    "src/run_reviewer_sensitivity.py": "cad1abfc4a19e4cb5759e9a30016d22f92fbb9bd9b804422d4cd451687689398",
+    "src/run_safefame_v2.py": "d903444c6a4826a3ee8171f7ab371f0fadd6a9d22ef5bce99b2d7fe2b3cf5d6e",
+    "src/run_safefame_v4.py": "3156904f50fc5b33e3bcfce4abd9fe6a9612ffd7eeacb072da4edc628cf65bb1",
+    "src/train_dlinear.py": "e9fe7f88153919326adfa72578212fcd6d77e9a9227f720535daed43121a0199",
+    "src/train_patchtst.py": "e6ee3ef75a2604c294f05b071a243eba37d3918344099daaf919ecc7a1480e9c",
+    "src/validation_boundaries.py": "3104dc0a7383239f1b1f3ee118da021d41f81dc504512b4212391764483ae8de"
+  },
+  "started_utc": "2026-09-19T13:44:31.248754+00:00",
+  "python": "3.12.10",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU"
+}

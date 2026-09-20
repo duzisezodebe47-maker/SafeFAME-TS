@@ -1,0 +1,17 @@
+{
+  "development_tasks": 12,
+  "development_aligned_beats_shuffled": 3,
+  "development_semantic_beats_best_numeric": 2,
+  "confirmation_tasks": 6,
+  "confirmation_semantic_routes_selected": 0,
+  "confirmation_harmful_routes_rejected": 6,
+  "confirmation_mean_avoided_semantic_loss_pct": 21.968033712118267,
+  "ett_tasks": 6,
+  "ett_patchtst_wins": 6,
+  "ett_mean_patchtst_gain_pct": 12.688343496137989,
+  "robustness_tasks": 6,
+  "robustness_patchtst_gaussian_mean_degradation_pct": 3.3106712856690894,
+  "robustness_patchtst_random_missing_mean_degradation_pct": 1.6769516301060525,
+  "robustness_patchtst_tail_missing_mean_degradation_pct": 24.588294673208722,
+  "robustness_patchtst_spikes_mean_degradation_pct": 84.3789494403839
+}
