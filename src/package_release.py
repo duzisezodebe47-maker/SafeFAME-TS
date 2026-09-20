@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ARCHIVE = ROOT / "paper" / "final" / "SafeFAME-TS_v2_支撑材料.zip"
+ARCHIVE = ROOT / "SafeFAME-TS_v2_支撑材料.zip"
 
 
 FILES = [
@@ -112,14 +112,13 @@ def main() -> None:
             if path.is_file():
                 archive.write(path, path.relative_to(stage).as_posix())
     archive_hash = digest(ARCHIVE)
-    (ROOT / "paper" / "final" / "SafeFAME-TS_v2_支撑材料.sha256").write_text(
+    ARCHIVE.with_suffix(".sha256").write_text(
         f"{archive_hash}  {ARCHIVE.name}\n", encoding="utf-8"
     )
-    shutil.copy2(ARCHIVE, ROOT/ARCHIVE.name)
-    shutil.copy2(ARCHIVE.with_suffix('.sha256'), ROOT/ARCHIVE.with_suffix('.sha256').name)
     config=json.loads((ROOT/'submission.json').read_text(encoding='utf-8'))
     shutil.copy2(ROOT/config['inventory'],ROOT/'paper/final'/config['inventory'])
     print(f"{ARCHIVE} ({ARCHIVE.stat().st_size} bytes, {len(records) + 2} files)")
+    shutil.rmtree(stage)
 
 
 if __name__ == "__main__":

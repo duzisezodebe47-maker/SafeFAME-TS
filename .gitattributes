@@ -1,2 +1,17 @@
-SafeFAME-TS_v2_支撑材料.zip filter=lfs diff=lfs merge=lfs -text
-paper/final/SafeFAME-TS_v2_支撑材料.zip filter=lfs diff=lfs merge=lfs -text
+# Preserve the line endings used when each class of evidence was recorded.
+*.csv text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.txt text eol=lf
+*.tsv text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+requirements.txt text eol=lf
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+# Python-generated compact outputs were recorded with Windows CRLF bytes.
+outputs/**/*.csv text eol=crlf
+outputs/**/*.json text eol=crlf
+outputs/**/*.txt text eol=crlf

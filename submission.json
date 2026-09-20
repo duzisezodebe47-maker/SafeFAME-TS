@@ -32,5 +32,6 @@
   ],
   "archive": "SafeFAME-TS_v2_支撑材料.zip",
   "sha256": "SafeFAME-TS_v2_支撑材料.sha256",
+  "archive_policy": "local_only_generated_on_demand_not_tracked_by_git",
   "inventory": "支撑材料清单_v2.txt"
 }

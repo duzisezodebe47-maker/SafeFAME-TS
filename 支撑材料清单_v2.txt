@@ -7,7 +7,7 @@ SafeFAME-TS_01_选题与初步技术方案（第4周）.docx
 SafeFAME-TS_02_书面中期进展报告（第10周）.docx
 SafeFAME-TS_03_课程设计最终报告.docx（本轮最终修订版）
 PDF在DOCX定稿并收到用户明确指令后生成，当前不属于正式版本。
-归档：SafeFAME-TS_v2_支撑材料.zip；侧文件SafeFAME-TS_v2_支撑材料.sha256。
+本地归档：SafeFAME-TS_v2_支撑材料.zip；侧文件SafeFAME-TS_v2_支撑材料.sha256。二者按需生成，不上传Git，也不在paper/final保留重复副本。
 
 1. README.md：项目范围、最终结论与复现入口。
 2. requirements.txt：Python 依赖。

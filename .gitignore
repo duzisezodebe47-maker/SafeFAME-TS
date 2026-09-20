@@ -89,3 +89,9 @@ Thumbs.db
 *.bz2
 *.xz
 *.tar
+
+# ---- Local release artifacts (generated on demand; never commit) ----
+SafeFAME-TS_v2_支撑材料.zip
+SafeFAME-TS_v2_支撑材料.sha256
+paper/final/SafeFAME-TS_v2_支撑材料.zip
+paper/final/SafeFAME-TS_v2_支撑材料.sha256

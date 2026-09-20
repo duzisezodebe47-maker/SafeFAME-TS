@@ -20,6 +20,19 @@ V2 = ROOT / "outputs" / "tables" / "v2"
 FINAL = ROOT / "outputs" / "tables" / "final"
 SENSITIVITY = ROOT / "outputs" / "reviewer_sensitivity"
 ATTRIBUTION = ROOT / "outputs" / "attribution_audit_v4"
+SKIPPED: list[str] = []
+
+
+def skip(label: str) -> None:
+    if label not in SKIPPED:
+        SKIPPED.append(label)
+        print(f"SKIP: {label}", file=sys.stderr)
+
+
+def is_lfs_pointer(path: Path) -> bool:
+    return path.is_file() and path.read_bytes().startswith(
+        b"version https://git-lfs.github.com/spec/"
+    )
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -138,6 +151,8 @@ def check_crossrefs(tree: ET.Element) -> None:
 
 def check_v4() -> dict:
     folder=ROOT/'outputs/safefame_v4'
+    data_root=ROOT/'data_processed'
+    task_root=folder/'tasks'
     manifest=json.loads((folder/'run_manifest.json').read_text(encoding='utf-8'))
     cfg=manifest['config']
     assert hashlib.sha256(json.dumps(dict(config=cfg,hashes=manifest['hashes']),sort_keys=True).encode()).hexdigest()==manifest['signature']
@@ -145,35 +160,56 @@ def check_v4() -> dict:
     assert (cfg['row_permutations'],cfg['circular_shifts'],cfg['bootstrap_repeats'])==(999,999,5000)
     assert cfg['seeds']==[2026,2027,2028,2029,2030] and cfg['p_threshold']==.025
     for name,sha in manifest['hashes'].items():
-        if (ROOT/name).is_file():assert digest(ROOT/name)==sha,('v4 source changed',name)
+        path=ROOT/name
+        if path.is_file():
+            assert digest(path)==sha,('v4 source changed',name)
+        elif name.startswith('data_processed/'):
+            assert not data_root.is_dir(),('missing v4 input in existing data tree',name)
+            skip('v4 full input hashes (data_processed is not tracked)')
+        else:
+            raise AssertionError(('missing tracked v4 source',name))
     record=json.loads((folder/'verification.json').read_text(encoding='utf-8'))
     assert record['status']=='PASS' and record['replay_models'] is True
     assert (record['task_folds'],record['candidate_paths'])==(120,240)
-    for name,sha in record['sha256'].items():assert digest(ROOT/name)==sha,('v4 evidence changed',name)
+    for name,sha in record['sha256'].items():
+        path=ROOT/name
+        if path.is_file():
+            assert digest(path)==sha,('v4 evidence changed',name)
+        elif name.startswith('outputs/safefame_v4/tasks/'):
+            assert not task_root.is_dir(),('missing v4 evidence in existing task tree',name)
+            skip('v4 task-level hashes and model replay (tasks is not tracked)')
+        else:
+            raise AssertionError(('missing tracked v4 evidence',name))
     summary=json.loads((folder/'summary.json').read_text(encoding='utf-8'))
     candidates=rows(folder/'candidate_results.csv');tasks=rows(folder/'task_results.csv')
     assert len(candidates)==240 and len(tasks)==120
     expected={(d,str(h),str(f)) for d,s in cfg['domains'].items() for h in s['horizons'] for f in (1,2,3)}
     assert {(t['domain'],t['horizon'],t['fold']) for t in tasks}==expected
-    for t in tasks:
-        task=folder/'tasks'/f"{t['domain']}_h{t['horizon']}_f{t['fold']}"
-        audit=json.loads((task/'audit.json').read_text(encoding='utf-8'))
-        frozen=json.loads((task/'frozen_selection.json').read_text(encoding='utf-8'))
-        for key,segment in [('train_text_coverage_pct','train'),('text_coverage_pct','test')]:close(float(t[key]),record['text_coverage_pct'][task.name][segment],'v4 text coverage')
-        assert (t['fallback'],t['selected'])==(frozen['fallback'],frozen['selected'])
-        close(float(t['selected_mse']),audit['selected_metrics']['mse'],'v4 selected mse')
-        close(float(t['fallback_mse']),audit['fallback_metrics']['mse'],'v4 fallback mse')
-        close(float(t['selected_gain_pct']),100*(1-float(t['selected_mse'])/float(t['fallback_mse'])),'v4 gain')
-        for key,value in zip(('selected_delta','selected_ci_low','selected_ci_high'),audit['selected_delta']):close(float(t[key]),value,key)
-        for key,segment in [('cal_windows','cal'),('decision_windows','dec'),('test_windows','test')]:assert int(t[key])==audit['windows'][segment]
-        originals=rows(task/'metrics.csv')
-        matches=[r for r in candidates if (r['domain'],r['horizon'],r['fold'])==(t['domain'],t['horizon'],t['fold'])]
-        assert len(matches)==2
-        for original in originals:
-            r=next(x for x in matches if x['variant']==original['variant'])
-            for key,value in original.items():
-                if key in ('domain','variant','fallback','selected_path','segment_wins','eligible') or value=='':assert r[key]==value
-                else:close(float(r[key]),float(value),'v4 aggregate '+key)
+    if task_root.is_dir():
+        expected_dirs={f'{d}_h{h}_f{f}' for d,h,f in expected}
+        actual_dirs={p.name for p in task_root.iterdir() if p.is_dir()}
+        assert actual_dirs==expected_dirs,('incomplete v4 task tree',sorted(expected_dirs-actual_dirs))
+        for t in tasks:
+            task=task_root/f"{t['domain']}_h{t['horizon']}_f{t['fold']}"
+            audit=json.loads((task/'audit.json').read_text(encoding='utf-8'))
+            frozen=json.loads((task/'frozen_selection.json').read_text(encoding='utf-8'))
+            for key,segment in [('train_text_coverage_pct','train'),('text_coverage_pct','test')]:close(float(t[key]),record['text_coverage_pct'][task.name][segment],'v4 text coverage')
+            assert (t['fallback'],t['selected'])==(frozen['fallback'],frozen['selected'])
+            close(float(t['selected_mse']),audit['selected_metrics']['mse'],'v4 selected mse')
+            close(float(t['fallback_mse']),audit['fallback_metrics']['mse'],'v4 fallback mse')
+            close(float(t['selected_gain_pct']),100*(1-float(t['selected_mse'])/float(t['fallback_mse'])),'v4 gain')
+            for key,value in zip(('selected_delta','selected_ci_low','selected_ci_high'),audit['selected_delta']):close(float(t[key]),value,key)
+            for key,segment in [('cal_windows','cal'),('decision_windows','dec'),('test_windows','test')]:assert int(t[key])==audit['windows'][segment]
+            originals=rows(task/'metrics.csv')
+            matches=[r for r in candidates if (r['domain'],r['horizon'],r['fold'])==(t['domain'],t['horizon'],t['fold'])]
+            assert len(matches)==2
+            for original in originals:
+                r=next(x for x in matches if x['variant']==original['variant'])
+                for key,value in original.items():
+                    if key in ('domain','variant','fallback','selected_path','segment_wins','eligible') or value=='':assert r[key]==value
+                    else:close(float(r[key]),float(value),'v4 aggregate '+key)
+    else:
+        skip('v4 task CSV/audit/frozen-route cross-checks (tasks is not tracked)')
     assert (summary['series'],summary['domains'],summary['task_families'],summary['task_folds'],summary['candidate_paths'])==(10,9,40,120,240)
     for v in ('semantic_residual','frequency_residual'):
         group=[r for r in candidates if r['variant']==v]
@@ -192,7 +228,10 @@ def check_v4() -> dict:
     close(summary['selected_mean_gain_pct'],statistics.mean(float(t['selected_gain_pct']) for t in tasks),'v4 mean gain')
     close(summary['selected_median_gain_pct'],statistics.median(float(t['selected_gain_pct']) for t in tasks),'v4 median gain')
     for key,col in [('calibration_windows','cal_windows'),('decision_windows','decision_windows'),('test_windows','test_windows')]:assert summary[key]==sum(int(t[col]) for t in tasks)
-    assert summary['calibration_checkpoints']==len(list((folder/'tasks').glob('*/models/*_cal_s*.pt')))==1200
+    if task_root.is_dir():
+        assert summary['calibration_checkpoints']==len(list(task_root.glob('*/models/*_cal_s*.pt')))==1200
+    else:
+        skip('v4 calibration checkpoint count (tasks is not tracked)')
     assert summary['refit_checkpoints']==record['replayed_refit_checkpoints']
     assert sorted(summary['zero_train_text_tasks'])==sorted(name for name,coverage in record['text_coverage_pct'].items() if coverage['train']==0)
     return summary
@@ -228,17 +267,30 @@ def check_attribution_audit() -> dict:
               'corrected_frequency_permutation.csv','cross_fold_replication.csv','fig_selected_route_attribution.png',
               'protocol.json','summary.json'}
     assert expected.issubset({p.name for p in ATTRIBUTION.iterdir() if p.is_file()})
-    assert len(list((ATTRIBUTION/'evidence').glob('*.npz')))==11
+    evidence=ATTRIBUTION/'evidence'
+    if evidence.is_dir():
+        assert len(list(evidence.glob('*.npz')))==11
+    else:
+        skip('attribution NPZ evidence (evidence is not tracked)')
     return summary
 
 
 def check_archive(config: dict) -> None:
     path=ROOT/config['archive']
-    sha=(ROOT/config['sha256']).read_text(encoding='utf-8').strip().split(maxsplit=1)
+    sha_path=ROOT/config['sha256']
+    inventory=ROOT/config['inventory']
+    inventory_mirror=ROOT/'paper/final'/config['inventory']
+    assert inventory.is_file() and inventory_mirror.is_file(), 'Missing support inventory or mirror'
+    assert digest(inventory)==digest(inventory_mirror), 'inventory mirrors differ'
+    assert path.is_file()==sha_path.is_file(), 'Support ZIP and SHA256 side file must coexist'
+    if not path.is_file():
+        skip('local support ZIP, object SHA256, and manifest (generated on demand, not tracked by Git)')
+        return
+    if is_lfs_pointer(path):
+        skip('support ZIP contents, object SHA256, and manifest (legacy Git LFS object not downloaded)')
+        return
+    sha=sha_path.read_text(encoding='utf-8').strip().split(maxsplit=1)
     assert sha == [digest(path), path.name], 'Archive SHA256 mismatch'
-    assert digest(path)==digest(ROOT/'paper/final'/path.name), 'ZIP mirrors differ'
-    for key in ('sha256','inventory'):
-        assert digest(ROOT/config[key])==digest(ROOT/'paper/final'/config[key]), f'{key} mirrors differ'
     with zipfile.ZipFile(path) as z:
         assert z.testzip() is None
         names=z.namelist()
@@ -271,26 +323,38 @@ def check_archive(config: dict) -> None:
 
 
 def main() -> int:
+    SKIPPED.clear()
     v4=check_v4()
     attribution=check_attribution_audit()
-    record=json.loads((ROOT/'outputs/safefame_v3/verification.json').read_text(encoding='utf-8'))
-    assert record['status']=='PASS' and record['checkpoint_replay'] is True
-    assert (record['v3_tasks'],record['v3_metrics'],record['sensitivity_paths'])==(18,72,72)
-    for name, expected_hash in record['sha256'].items():
-        assert digest(ROOT/name)==expected_hash, f'Revision evidence changed since replay: {name}'
-    new_audit=rows(ROOT/'outputs/safefame_v3/safefame_v3_selection_audit.csv')
-    assert len(new_audit)==18 and all(r['selected_path']=='numeric_fallback' for r in new_audit)
-    assert sum(int(r['calibration_windows']) for r in new_audit)==571
-    assert sum(int(r['decision_windows']) for r in new_audit)==586
-    assert sum(float(r[f'{v}_permutation_p_value'])<=.025 for r in new_audit for v in ('semantic_residual','frequency_residual'))==2
-    new_protocol=json.loads((ROOT/'outputs/safefame_v3/safefame_v3_protocol.json').read_text(encoding='utf-8'))
-    assert new_protocol['permutations']==99 and new_protocol['solver']=='cholesky'
-    assert 'target-disjoint' in new_protocol['split']['validation_use']
+    v3=ROOT/'outputs/safefame_v3'
+    if v3.is_dir():
+        assert (v3/'verification.json').is_file(), 'Incomplete v3 evidence tree'
+        record=json.loads((v3/'verification.json').read_text(encoding='utf-8'))
+        assert record['status']=='PASS' and record['checkpoint_replay'] is True
+        assert (record['v3_tasks'],record['v3_metrics'],record['sensitivity_paths'])==(18,72,72)
+        for name, expected_hash in record['sha256'].items():
+            assert digest(ROOT/name)==expected_hash, f'Revision evidence changed since replay: {name}'
+        new_audit=rows(v3/'safefame_v3_selection_audit.csv')
+        assert len(new_audit)==18 and all(r['selected_path']=='numeric_fallback' for r in new_audit)
+        assert sum(int(r['calibration_windows']) for r in new_audit)==571
+        assert sum(int(r['decision_windows']) for r in new_audit)==586
+        assert sum(float(r[f'{variant}_permutation_p_value'])<=.025 for r in new_audit for variant in ('semantic_residual','frequency_residual'))==2
+        new_protocol=json.loads((v3/'safefame_v3_protocol.json').read_text(encoding='utf-8'))
+        assert new_protocol['permutations']==99 and new_protocol['solver']=='cholesky'
+        assert 'target-disjoint' in new_protocol['split']['validation_use']
+    else:
+        skip('v3 task evidence, checkpoint replay, and hashes (safefame_v3 is not tracked)')
     for folder,expected_pass in [('reviewer_sensitivity_corrected',0),('reviewer_sensitivity_v3',1)]:
-        summary=json.loads((ROOT/'outputs'/folder/'reviewer_sensitivity_summary.json').read_text(encoding='utf-8'))
-        assert summary['circular_shift_permutations']==999 and summary['bootstrap_repeats']==5000
-        assert summary['aligned_solver']==summary['shifted_solver']=='cholesky'
-        assert summary['circular_shift_passes_at_0_025']==expected_pass
+        evidence_folder=ROOT/'outputs'/folder
+        path=evidence_folder/'reviewer_sensitivity_summary.json'
+        if evidence_folder.is_dir():
+            assert path.is_file(), f'Incomplete sensitivity evidence: {folder}'
+            summary=json.loads(path.read_text(encoding='utf-8'))
+            assert summary['circular_shift_permutations']==999 and summary['bootstrap_repeats']==5000
+            assert summary['aligned_solver']==summary['shifted_solver']=='cholesky'
+            assert summary['circular_shift_passes_at_0_025']==expected_pass
+        else:
+            skip(f'{folder} full sensitivity evidence (directory is not tracked)')
     claims = json.loads((V2 / "verified_claims.json").read_text(encoding="utf-8"))
     metrics = rows(ROOT / "outputs" / "safefame_v2" / "safefame_v2_metrics.csv")
     audit = rows(ROOT / "outputs" / "safefame_v2" / "safefame_v2_selection_audit.csv")
@@ -425,7 +489,12 @@ def main() -> int:
     check_archive(config)
 
     artifact_mode='DOCX/PDF' if config.get('pdf_required', False) else 'DOCX-only'
-    print(f"PASS: historical v2/v3, expanded v4 (120 task-folds), attribution audit, sensitivity, ETT, protocols, report tables, {artifact_mode} mirrors and ZIP hashes are consistent. This check is not retraining or proof of unseen test data.")
+    if SKIPPED:
+        print(f"PARTIAL PASS: repository-resident compact evidence, protocols, report tables, and {artifact_mode} mirrors are consistent.")
+        print('SKIPPED: '+'; '.join(SKIPPED))
+        print('This is not a full evidence replay and does not validate the skipped items.')
+    else:
+        print(f"PASS: historical v2/v3, expanded v4 (120 task-folds), attribution audit, sensitivity, ETT, protocols, report tables, {artifact_mode} mirrors and ZIP hashes are consistent. This check is not retraining or proof of unseen test data.")
     return 0
 
 
