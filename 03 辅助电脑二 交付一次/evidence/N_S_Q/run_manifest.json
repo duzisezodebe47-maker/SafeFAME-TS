@@ -36,7 +36,7 @@
     "Q": 2
   },
   "resources": {
-    "wall_seconds": 0.108,
+    "wall_seconds": 0.111,
     "device": "cpu"
   }
 }

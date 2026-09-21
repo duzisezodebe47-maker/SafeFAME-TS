@@ -138,8 +138,11 @@ class PredictionSet:
     def write(self, path: Path) -> int:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
+        # lineterminator="\n"：csv 模块默认写 CRLF，但仓库 .gitattributes 对 *.csv
+        # 声明 eol=lf。若不指定，提交的字节与产出的字节不一致 —— 正是本项目此前
+        # 哈希对不上的同类成因。此处让产出即提交。
         with path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=CONTRACT_FIELDS)
+            writer = csv.DictWriter(handle, fieldnames=CONTRACT_FIELDS, lineterminator="\n")
             writer.writeheader()
             for record in self.records:
                 writer.writerow(asdict(record))

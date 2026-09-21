@@ -32,7 +32,7 @@
     "S": 0
   },
   "resources": {
-    "wall_seconds": 0.104,
+    "wall_seconds": 0.105,
     "device": "cpu"
   }
 }

@@ -28,7 +28,7 @@
     "N": 0
   },
   "resources": {
-    "wall_seconds": 0.005,
+    "wall_seconds": 0.004,
     "device": "cpu"
   }
 }

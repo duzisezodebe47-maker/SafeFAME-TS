@@ -86,7 +86,8 @@ def run_one(candidate: str, domain: str, horizon: int, input_len: int,
         "resources": {"wall_seconds": round(elapsed, 3), "device": "cpu"},
     }
     (candidate_dir / "run_manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+        json.dumps(manifest, ensure_ascii=False, indent=2),
+        encoding="utf-8", newline="\n")   # 固定 LF
 
     mse = float(np.mean((predictions - y_test) ** 2))
     last_mse = float(np.mean((test.x[:, -1, None] - y_test) ** 2))
@@ -141,14 +142,14 @@ def main() -> int:
 
     if rows:
         with (out / "ablation_summary.csv").open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+            writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
             writer.writeheader()
             writer.writerows(rows)
 
     (out / "ablation_manifest.json").write_text(
         json.dumps({"base_config": base_config, "candidates": list(CANDIDATES),
                     "completed": len(rows), "failures": failures}, ensure_ascii=False, indent=2),
-        encoding="utf-8")
+        encoding="utf-8", newline="\n")
 
     print(f"\n完成 {len(rows)}/{len(CANDIDATES)} 个候选，失败 {len(failures)} 个")
     return 0 if not failures else 1

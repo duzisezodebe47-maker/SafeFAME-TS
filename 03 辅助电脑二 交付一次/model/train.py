@@ -199,7 +199,8 @@ def main() -> int:
         manifest = {"config": config, "config_hash": config_hash, "status": "failed",
                     "utc": utc(), "failures": failures}
         (out / "run_manifest.json").write_text(
-            json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+            json.dumps(manifest, ensure_ascii=False, indent=2),
+            encoding="utf-8", newline="\n")   # 固定 LF，使产出字节 == 提交字节
         print(f"FAILED: {exc}", file=sys.stderr)
         return 1
 
