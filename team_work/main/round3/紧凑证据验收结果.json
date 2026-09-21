@@ -1,0 +1,117 @@
+{
+  "status": "PARTIAL_ENGINEERING_DELIVERY_WITH_BLOCKERS",
+  "scope": "read-only Git compact evidence and source syntax",
+  "data_commit": "81e3f2e90ea8c7bbd9358cafcbc5724dff821b9a",
+  "model_commit": "84e665be9d2e7fa1f6fe946764482e476c7096e9",
+  "checks": [
+    {
+      "check": "data_compact_and_code_hashes",
+      "status": "PASS",
+      "detail": {
+        "checked_files": 10,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "data_preview_manifest_signature",
+      "status": "PASS",
+      "detail": {
+        "signature": "42c323a4db5bd35f0fddd8012921a930c8b2fe20e1a8201be25e0810b9614c06",
+        "file_inventory": 88
+      }
+    },
+    {
+      "check": "data_preview_manifest_file_count",
+      "status": "PASS",
+      "detail": {
+        "recorded": 88,
+        "claimed": 88
+      }
+    },
+    {
+      "check": "task_registry_matches_master_draft",
+      "status": "PASS",
+      "detail": {
+        "tasks": [
+          "Agriculture_h12_f1",
+          "Climate_h4_f2",
+          "SocialGood_h3_f1",
+          "Environment_h7_f2"
+        ],
+        "mismatches": []
+      }
+    },
+    {
+      "check": "registry_retained_total",
+      "status": "PASS",
+      "detail": {
+        "retained": 16438,
+        "reported_contract_rows": 16438
+      }
+    },
+    {
+      "check": "coverage_scenarios_consistent",
+      "status": "PASS",
+      "detail": {
+        "rows": 48,
+        "task_segments": 16
+      }
+    },
+    {
+      "check": "sample_summary_matches_coverage",
+      "status": "PASS",
+      "detail": {
+        "summary_rows": 32
+      }
+    },
+    {
+      "check": "recorded_data_tests",
+      "status": "PASS",
+      "detail": {
+        "claimed": 15,
+        "independently_rerun": false
+      }
+    },
+    {
+      "check": "model_protocol_byte_identity",
+      "status": "PASS",
+      "detail": {
+        "split_spec_v2.json": true,
+        "prediction_contract_v2.json": true
+      }
+    },
+    {
+      "check": "python_source_syntax",
+      "status": "PASS",
+      "detail": {
+        "parsed_files": 13
+      }
+    },
+    {
+      "check": "cross_branch_bundle_schema_compatible",
+      "status": "FAIL",
+      "detail": {
+        "conflict": "data writes targets_raw.npy and FROZEN; model/master require targets.npy and frozen"
+      }
+    },
+    {
+      "check": "formal_large_bundle_available_in_git",
+      "status": "FAIL",
+      "detail": {
+        "reason": "only manifest and compact evidence committed; 88 Bundle files are absent"
+      }
+    },
+    {
+      "check": "real_model_predictions_available_in_git",
+      "status": "FAIL",
+      "detail": {
+        "reason": "model delivery contains source and synthetic tests, no real predictions or null CSV"
+      }
+    }
+  ],
+  "limitations": [
+    "large Bundle bytes unavailable",
+    "Python 3.12 scientific dependencies unavailable on master audit host",
+    "no real model predictions or 999-refit nulls"
+  ]
+}
