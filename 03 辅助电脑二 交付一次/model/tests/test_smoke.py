@@ -19,9 +19,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[3]          # 仓库根
+MODEL = Path(__file__).resolve().parents[1]          # 本模块所在目录
 sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(ROOT / "team_work" / "model"))
+sys.path.insert(0, str(MODEL))
 
 from data_utils import load_time_ordered_frame  # noqa: E402
 
@@ -147,6 +148,38 @@ def run(domain: str, input_len: int, horizon: int) -> None:
     except AssertionError:
         rejected = True
     check(f"{tag} 非有限输入被拒绝", rejected)
+
+    # 5b. 错位 / 重复起点 ID 被拒绝（任务书 §5 要求"不静默丢弃"）
+    from predict_io import validate_alignment
+
+    rejected_shift = False
+    try:
+        validate_alignment(test.origins + 1, test.origins, "shifted")
+    except AssertionError:
+        rejected_shift = True
+    check(f"{tag} 错位起点 ID 被拒绝", rejected_shift)
+
+    duplicate = test.origins.copy()
+    duplicate[1] = duplicate[0]
+    rejected_dup = False
+    try:
+        validate_alignment(duplicate, duplicate, "duplicate")
+    except AssertionError:
+        rejected_dup = True
+    check(f"{tag} 重复起点 ID 被拒绝", rejected_dup)
+
+    # 5c. 预测矩阵形状被拒绝（H=1 压成一维是历史缺陷的入口）
+    from predict_io import PredictionSet
+
+    ps = PredictionSet()
+    rejected_1d = False
+    try:
+        ps.extend_grid(test.origins, before_f[:, 0], task_id="t", fold_id=0,
+                       candidate_id="x", seed=0, config_hash="c",
+                       feature_hash="f", commit="k")
+    except ValueError:
+        rejected_1d = True
+    check(f"{tag} 一维预测被拒绝（H=1 广播防护）", rejected_1d)
 
     # 6. 确定性
     m1 = fit_candidate(("N", "S", "Q"), train, y_train, cal, y_cal).predict(test)

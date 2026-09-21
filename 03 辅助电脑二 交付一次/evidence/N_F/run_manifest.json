@@ -1,0 +1,38 @@
+{
+  "config": {
+    "domain": "Climate",
+    "horizon": 4,
+    "input_len": 52,
+    "fold": 0,
+    "seed": 2026,
+    "data_source": "v2smoke",
+    "split_source": "v2 frozen 70/10/20 (docs/10) — 主控协议未冻结前的临时取值",
+    "note": "工程冒烟级对照，单一领域单跨度，不作为科研结论",
+    "candidate": "N+F",
+    "branches": [
+      "N",
+      "F"
+    ]
+  },
+  "config_hash": "4e63d0b84cd7266982bddd1882a7219cab63faf765b98d22890307b931848381",
+  "feature_hash": "cd9df2ade1ca21431041edcb14d5f17dd4911475861cec41755502771901127f",
+  "status": "completed",
+  "rows_written": 1008,
+  "n_parameters": 248,
+  "alpha_by_group": {
+    "N": 1000.0,
+    "F": 10000.0
+  },
+  "branch_widths": {
+    "N": 52,
+    "F": 10
+  },
+  "dropped_zero_variance": {
+    "N": 0,
+    "F": 0
+  },
+  "resources": {
+    "wall_seconds": 0.01,
+    "device": "cpu"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "base_config": {
+    "domain": "Climate",
+    "horizon": 4,
+    "input_len": 52,
+    "fold": 0,
+    "seed": 2026,
+    "data_source": "v2smoke",
+    "split_source": "v2 frozen 70/10/20 (docs/10) — 主控协议未冻结前的临时取值",
+    "note": "工程冒烟级对照，单一领域单跨度，不作为科研结论"
+  },
+  "candidates": [
+    "N",
+    "N+Q",
+    "N+S",
+    "N+S+Q",
+    "N+S+Q+F",
+    "N+F"
+  ],
+  "completed": 6,
+  "failures": []
+}
