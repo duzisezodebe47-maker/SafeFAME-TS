@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "command": ".venv/Scripts/python.exe 辅助电脑02交付01次/test_pipeline.py",
+  "tests": 19,
+  "sample_count": 388,
+  "signature": "20975e2d028cd22adde9dd9945fd7497e3044b4396136d75389825f460166cfc",
+  "run_date": "2026-09-21",
+  "note": "Actually rerun after round-two changes; elapsed time is omitted because it is machine-load dependent."
+}

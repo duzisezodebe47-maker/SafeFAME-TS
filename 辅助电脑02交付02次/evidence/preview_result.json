@@ -1,0 +1,9 @@
+{
+  "status": "ENGINEERING_PREVIEW_AWAITING_MASTER_HASH_FREEZE",
+  "bundle_path": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round2-preview-42c323a4db5bd35f0fdd",
+  "bundle_signature": "42c323a4db5bd35f0fddd8012921a930c8b2fe20e1a8201be25e0810b9614c06",
+  "files": 88,
+  "elapsed_seconds": 22.921596600004705,
+  "master_protocol_commit": "bcbbf5d8b780d937e30fb635165e63a8c9c5520a",
+  "warning": "Not a formal frozen Bundle; master has not approved task hashes."
+}

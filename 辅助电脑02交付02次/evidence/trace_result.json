@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "examples": 12,
+  "available_examples": 9,
+  "local_full_trace_root": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round2_traces\\round2-preview-42c323a4db5bd35f0fdd",
+  "limitation": "Git stores compact examples and hashes; full raw-row traces stay in ignored D-drive evidence."
+}

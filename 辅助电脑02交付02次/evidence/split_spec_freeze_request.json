@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "engineering_preview",
+  "approved_by": null,
+  "target_boundary": "disjoint_half_open",
+  "fit_policy": "train_only",
+  "numeric_features": [
+    "OT"
+  ],
+  "complete_source_rule": "original_url_and_valid_interval",
+  "max_per_source": 32,
+  "tasks": [
+    {
+      "domain": "Agriculture",
+      "fold_id": 1,
+      "input_len": 24,
+      "horizon": 12,
+      "lag_days": 31,
+      "bounds": [
+        212,
+        266,
+        372,
+        425
+      ],
+      "numerical_sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38"
+    },
+    {
+      "domain": "Climate",
+      "fold_id": 2,
+      "input_len": 52,
+      "horizon": 4,
+      "lag_days": 7,
+      "bounds": [
+        636,
+        763,
+        1017,
+        1144
+      ],
+      "numerical_sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4"
+    },
+    {
+      "domain": "SocialGood",
+      "fold_id": 1,
+      "input_len": 24,
+      "horizon": 3,
+      "lag_days": 31,
+      "bounds": [
+        366,
+        458,
+        641,
+        732
+      ],
+      "numerical_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d"
+    },
+    {
+      "domain": "Environment",
+      "fold_id": 2,
+      "input_len": 56,
+      "horizon": 7,
+      "lag_days": 1,
+      "bounds": [
+        7989,
+        9587,
+        12783,
+        14381
+      ],
+      "numerical_sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3"
+    }
+  ],
+  "protocol_version": "team-eval-1.0",
+  "master_protocol_commit": "bcbbf5d8b780d937e30fb635165e63a8c9c5520a",
+  "master_split_spec_sha256": "c022f4088dae0ea6e5a69cebfd28e33ef122144d3c67a9697e7d6390fa8d2d93",
+  "baseline_commit": "c63793236d532d2ffdcccd4c7cb0c8e194f96eab",
+  "warning": "Freeze request only. Master must confirm all hashes and change status/approved_by before formal build."
+}

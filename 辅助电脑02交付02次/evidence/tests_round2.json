@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "count": 15,
+  "tests": [
+    {
+      "test": "full_bundle_hash_inventory",
+      "status": "PASS",
+      "files": 88
+    },
+    {
+      "test": "contract_identity_and_targets",
+      "status": "PASS",
+      "rows": 16438
+    },
+    {
+      "test": "misaligned_origin_id",
+      "status": "PASS",
+      "rejection": "Misaligned origin ID"
+    },
+    {
+      "test": "late_text",
+      "status": "PASS",
+      "rejection": "Future or same-origin text included"
+    },
+    {
+      "test": "target_crossing",
+      "status": "PASS",
+      "rejection": "Target window crosses split boundary"
+    },
+    {
+      "test": "training_outside_fit",
+      "status": "PASS",
+      "rejection": "Fit rows extend beyond or omit training segment"
+    },
+    {
+      "test": "unknown_target",
+      "status": "PASS",
+      "rejection": "Nonfinite target entered bundle"
+    },
+    {
+      "test": "stale_bundle_signature",
+      "status": "PASS",
+      "rejection": "Bundle signature mismatch"
+    },
+    {
+      "test": "conservative_coverage_nonincrease",
+      "status": "PASS"
+    },
+    {
+      "test": "complete_source_audit_only",
+      "status": "PASS"
+    },
+    {
+      "test": "Agriculture_h12_f1_scenario_shared_numeric_targets",
+      "status": "PASS",
+      "rows": 357
+    },
+    {
+      "test": "Climate_h4_f2_scenario_shared_numeric_targets",
+      "status": "PASS",
+      "rows": 1080
+    },
+    {
+      "test": "Environment_h7_f2_scenario_shared_numeric_targets",
+      "status": "PASS",
+      "rows": 14301
+    },
+    {
+      "test": "SocialGood_h3_f1_scenario_shared_numeric_targets",
+      "status": "PASS",
+      "rows": 700
+    },
+    {
+      "test": "socialgood_train_safe_no_text_signal",
+      "status": "PASS",
+      "train_rows": 340
+    }
+  ],
+  "bundle_signature": "42c323a4db5bd35f0fddd8012921a930c8b2fe20e1a8201be25e0810b9614c06",
+  "elapsed_seconds": 0.3957704000058584,
+  "limitation": "Engineering preview checks only; task hashes still await master freeze."
+}
