@@ -1,0 +1,20 @@
+{
+  "protocol_version": "team-eval-1.0",
+  "status": "FROZEN_FOR_INTERFACE; new experiment not yet run",
+  "basis": "configs/safefame_v4.json at c63793236d532d2ffdcccd4c7cb0c8e194f96eab",
+  "data_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+  "scope": "historical rolling backtest, not prospective confirmation",
+  "fold_boundaries": [[0.4, 0.5, 0.7, 0.8], [0.5, 0.6, 0.8, 0.9], [0.6, 0.7, 0.9, 1.0]],
+  "boundary_rule": "integer floor of n_rows times each fraction; half-open target intervals",
+  "segments": ["train", "cal", "dec", "test"],
+  "origin_rule": "origin_id is zero-based target start index; only include if all H target indices lie inside its segment and target values are known",
+  "decision_halves": "split decision target interval at floor((cal_end+dec_end)/2); discard crossing windows",
+  "preprocessing": "fit statistics on train targets only; refit after route freeze may use train+cal+dec only",
+  "seed": 2026,
+  "candidate_variants": ["semantic_residual", "frequency_residual"],
+  "numeric_candidates": ["Last", "SeasonalNaive", "AR-Ridge", "DLinear-M", "PatchTST"],
+  "selection": {"calibration": "minimum MSE numeric fallback and candidate hyperparameters", "decision": "candidate decision MSE strictly less than fallback; both target-disjoint halves strictly improve; row-null empirical p <= 0.025", "tie_break": "lowest decision MSE then lexical candidate ID", "row_null_draws": 999, "p_threshold": 0.025, "test": "evaluate once after frozen route is written"},
+  "metrics": ["mse", "mae", "gain_pct", "paired_loss_delta"],
+  "uncertainty": {"method": "moving block bootstrap on paired per-origin mean loss difference", "draws": 5000, "seed": 2026, "ci": [0.025, 0.975], "block_length": "max(horizon,min(seasonal_period,24))"},
+  "evidence_requirement": "snapshot SHA256, feature manifest SHA256, prediction manifest SHA256, origin list and frozen route per task; missing full evidence yields PARTIAL only"
+}

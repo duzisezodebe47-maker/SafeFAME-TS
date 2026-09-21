@@ -1,0 +1,23 @@
+{
+  "status": "PARTIAL_PASS",
+  "reason": "tracked aggregate CSV only; no task predictions, frozen-route files, or model replay in fresh clone",
+  "source_commit": "c63793236d532d2ffdcccd4c7cb0c8e194f96eab",
+  "task_rows": 120,
+  "candidate_rows": 240,
+  "numeric_fallback": 110,
+  "text_selected": 10,
+  "mean_task_fold_gain_pct": 0.7675926100111715,
+  "median_task_fold_gain_pct": 0.0,
+  "largest_family": {
+    "domain": "Agriculture",
+    "horizon": "12",
+    "mean_gain_pct": 17.648620881259514
+  },
+  "mean_gain_excluding_largest_family_pct": 0.334745731261214,
+  "task_family_count": 40,
+  "sha256": {
+    "task_results.csv": "a54891ff8f72376ba5a0da4afa578bb3374f97302a9f2ac88482100c0403ce21",
+    "candidate_results.csv": "be8f219c2ff66786674ef98d9609590e97d4e315692d3dc13e9ee9e42133c385",
+    "summary.json": "3935182fc723836507419efdeb709523ae4089a0cb3545daab2e385479e757f0"
+  }
+}

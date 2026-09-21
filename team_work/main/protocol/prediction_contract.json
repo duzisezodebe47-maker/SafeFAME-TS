@@ -1,0 +1,10 @@
+{
+  "contract_version": "team-eval-1.0",
+  "format": "UTF-8 JSON Lines; one row per origin and segment in samples.jsonl, one row per origin/candidate/seed in predictions.jsonl",
+  "samples_required": ["task_id", "fold_id", "origin_id", "segment", "horizon", "target", "cutoff_index", "target_start_index", "snapshot_sha256", "feature_manifest_sha256", "preprocessing_fit_end"],
+  "predictions_required": ["task_id", "fold_id", "origin_id", "segment", "candidate_id", "seed", "prediction", "config_sha256", "feature_manifest_sha256"],
+  "row_null_required": ["task_id", "fold_id", "candidate_id", "decision_null_mse", "method", "seed", "source_sha256"],
+  "semantics": {"origin_id": "stable zero-based target start index within an individual time series", "target": "length H array of finite numeric truth in common target-standardized scale", "prediction": "length H array in same scale as target", "cutoff_index": "last observed numeric index, strictly less than origin_id", "preprocessing_fit_end": "exclusive final target index used for fit statistics; must not exceed train_end", "seed": "single integer for numeric candidate or one of protocol seeds for an ensemble member", "feature_manifest_sha256": "SHA256 digest of assistant-one feature manifest; identical across sample/prediction rows", "config_sha256": "SHA256 digest of assistant-two model config; constant per candidate and task"},
+  "task_manifest_required": ["task_id", "fold_id", "domain", "horizon", "n_rows", "train_end", "cal_end", "dec_end", "test_end", "seasonal_period", "snapshot_sha256", "feature_manifest_sha256"],
+  "rejection": "missing/duplicate IDs, mixed hashes or versions, missing target/prediction, nonfinite or wrong-length arrays, out-of-segment target window, future preprocessing, or missing row-null evidence causes explicit failure"
+}
