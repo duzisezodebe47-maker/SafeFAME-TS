@@ -35,7 +35,7 @@ def main():
         else:
             task = json.loads(Path(args.task).read_text(encoding="utf-8"))
             spec = json.loads(Path(args.spec).read_text(encoding="utf-8"))
-            samples, predictions, _ = validate(task, jsonl(args.samples), jsonl(args.predictions), require_test=args.command == "score")
+            samples, predictions, _ = validate(task, jsonl(args.samples), jsonl(args.predictions), require_test=args.command == "score", spec=spec)
             if args.command == "freeze":
                 if any(k[0] == "test" for k in samples):
                     raise EvidenceError("freeze must receive cal/dec samples only; no test evidence")

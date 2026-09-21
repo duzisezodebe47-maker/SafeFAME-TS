@@ -39,16 +39,24 @@ def finite_vector(values, horizon, label):
         raise EvidenceError(f"{label}: expected {horizon} finite numbers")
 
 
-def boundaries(task):
-    need(task, ["task_id", "fold_id", "horizon", "n_rows", "train_end", "cal_end", "dec_end", "test_end", "snapshot_sha256", "feature_manifest_sha256", "seasonal_period"], "task")
+def boundaries(task, spec=None):
+    need(task, ["task_id", "fold_id", "horizon", "input_len", "n_rows", "train_end", "cal_end", "dec_end", "test_end", "snapshot_sha256", "feature_manifest_sha256", "seasonal_period"], "task")
     n, tr, ca, de, te = (int(task[x]) for x in ("n_rows", "train_end", "cal_end", "dec_end", "test_end"))
-    if not 0 < tr < ca < de < te <= n or int(task["horizon"]) < 1:
+    if not 0 < tr < ca < de < te <= n or int(task["horizon"]) < 1 or int(task["input_len"]) < 1:
         raise EvidenceError("task: invalid ordered boundaries")
+    if spec is not None and "fold_boundaries" in spec:
+        fold = int(task["fold_id"])
+        try:
+            expected = [int(n * fraction) for fraction in spec["fold_boundaries"][fold - 1]]
+        except (IndexError, TypeError, ValueError) as exc:
+            raise EvidenceError("task: unknown fold") from exc
+        if fold < 1 or [tr, ca, de, te] != expected:
+            raise EvidenceError(f"task: split differs from frozen fold {fold}: {[tr, ca, de, te]} != {expected}")
     return {"train": (0, tr), "cal": (tr, ca), "dec": (ca, de), "test": (de, te)}, tr
 
 
-def validate(task, samples, predictions, require_test=False):
-    spans, train_end = boundaries(task)
+def validate(task, samples, predictions, require_test=False, spec=None):
+    spans, train_end = boundaries(task, spec)
     h = int(task["horizon"])
     by_sample = {}
     for row in samples:

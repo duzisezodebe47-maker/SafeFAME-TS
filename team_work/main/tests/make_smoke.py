@@ -5,12 +5,12 @@ from pathlib import Path
 
 base = Path(sys.argv[1])
 base.mkdir(parents=True, exist_ok=True)
-task = dict(task_id="SMOKE_H1", fold_id=1, domain="synthetic", horizon=1, n_rows=50,
-            train_end=20, cal_end=28, dec_end=40, test_end=50, seasonal_period=2,
+task = dict(task_id="SMOKE_H1", fold_id=1, domain="synthetic", horizon=1, input_len=4, n_rows=50,
+            train_end=20, cal_end=25, dec_end=35, test_end=40, seasonal_period=2,
             snapshot_sha256="a"*64, feature_manifest_sha256="b"*64)
 (base / "task.json").write_text(json.dumps(task), encoding="utf-8")
-for name, series in (("selection", (("cal", [20, 21]), ("dec", [28, 29, 35, 36]))),
-                     ("test", (("test", [40, 41, 42, 43]),))):
+for name, series in (("selection", (("cal", [20, 21]), ("dec", [25, 26, 30, 31]))),
+                     ("test", (("test", [35, 36, 37, 38]),))):
     samples, predictions = [], []
     for segment, origins in series:
         for origin in origins:

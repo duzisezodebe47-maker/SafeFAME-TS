@@ -9,7 +9,7 @@ from team_eval.core import EvidenceError, freeze_route, moving_block_ci, validat
 
 class ContractTests(unittest.TestCase):
     def setUp(self):
-        self.task = dict(task_id="demo-H1", fold_id=1, horizon=1, n_rows=50, train_end=20,
+        self.task = dict(task_id="demo-H1", fold_id=1, horizon=1, input_len=4, n_rows=50, train_end=20,
                          cal_end=28, dec_end=40, test_end=50, seasonal_period=2,
                          snapshot_sha256="a" * 64, feature_manifest_sha256="b" * 64)
         self.spec = {"numeric_candidates": ["Last"], "candidate_variants": ["semantic_residual"],
@@ -78,6 +78,13 @@ class ContractTests(unittest.TestCase):
         predictions[0]["prediction"] = [0.0, 0.0]
         with self.assertRaises(EvidenceError):
             validate(self.task, self.samples, predictions)
+
+    def test_changed_frozen_fold_rejected(self):
+        bad = copy.deepcopy(self.task)
+        bad["cal_end"] = 29
+        spec = {"fold_boundaries": [[.4, .56, .8, 1.0]]}
+        with self.assertRaises(EvidenceError):
+            validate(bad, self.samples, self.predictions, spec=spec)
 
 
 if __name__ == "__main__":
