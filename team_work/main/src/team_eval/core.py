@@ -222,9 +222,12 @@ def evaluate_test(task, samples, predictions, route, spec):
     delta = [a - b for a, b in zip(base_losses, selected_losses)]
     block = max(int(task["horizon"]), min(int(task["seasonal_period"]), 24))
     baseline_mse, selected_mse = sum(base_losses) / len(base_losses), sum(selected_losses) / len(selected_losses)
+    interval_available = len(delta) >= block
     return {"task_id": task["task_id"], "fold_id": task["fold_id"], "selected": route["selected"],
             "fallback": route["fallback"], "test_windows": len(origins), "test_origin_ids": origins,
             "fallback_mse": baseline_mse, "selected_mse": selected_mse, "selected_mae": mae(truth, selected),
             "gain_pct": 100 * (1 - selected_mse / baseline_mse) if baseline_mse else None,
             "paired_loss_delta": sum(delta) / len(delta), "block_length": block,
-            "delta_ci95": moving_block_ci(delta, block, spec["uncertainty"]["draws"], spec["uncertainty"]["seed"])}
+            "delta_ci95": moving_block_ci(delta, block, spec["uncertainty"]["draws"], spec["uncertainty"]["seed"])
+            if interval_available else None,
+            "interval_status": "ESTIMATED" if interval_available else "NOT_ESTIMABLE_TOO_FEW_ORIGINS"}
