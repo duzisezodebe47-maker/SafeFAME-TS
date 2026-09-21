@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "examples": 4,
+  "agriculture_origins": 3,
+  "socialgood_no_text_controls": 1,
+  "trace_sha256": "9ed674cf61cb5ee5256d48eaca89158109695848bea17717ca226e10d71bf066",
+  "bundle_kind": "engineering_preview",
+  "limitation": "Traces verify lineage and feature construction; they are not formal training evidence."
+}

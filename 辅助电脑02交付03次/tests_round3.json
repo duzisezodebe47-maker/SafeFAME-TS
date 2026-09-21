@@ -1,0 +1,121 @@
+{
+  "status": "PASS_WITH_FORMAL_BUILD_BLOCKED",
+  "data_status": "DATA_FORMAL_PENDING",
+  "count": 13,
+  "tests": [
+    {
+      "test": "regression_19",
+      "status": "PASS",
+      "exit_code": 0,
+      "checks": 19,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付01次\\test_pipeline.py"
+    },
+    {
+      "test": "regression_15",
+      "status": "PASS",
+      "exit_code": 0,
+      "checks": 15,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付02次\\test_round2.py D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round2-preview-42c323a4db5bd35f0fdd"
+    },
+    {
+      "test": "four_reader_interoperability",
+      "status": "PASS",
+      "exit_code": 0,
+      "readers": [
+        "round3_data",
+        "round1_data",
+        "master_v2",
+        "model_round2"
+      ],
+      "task_id": "Agriculture_h12_f1",
+      "scenario": "proxy",
+      "rows": 357
+    },
+    {
+      "test": "targets_alias_byte_identical",
+      "status": "PASS",
+      "exit_code": 0,
+      "sha256": "249f0912ce0d2f19055aa0c36838cda1b44659aef7962f27097ef20c1e2ce55c"
+    },
+    {
+      "test": "status_case_mismatch",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py data-read --bundle D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_test_fixture_split_spec.json --signature a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9 --task Agriculture_h12_f1 --scenario proxy",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 36, in main\n    reader.read_task(args.bundle, args.spec, args.signature, args.task, args.scenario)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\bundle_read_example.py\", line 52, in read_task\n    require(schema.get(\"status\") == \"frozen\", \"schema status must be exact lowercase frozen\")\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\bundle_read_example.py\", line 23, in require\n    raise ValueError(message)\nValueError: schema status must be exact lowercase frozen"
+    },
+    {
+      "test": "missing_targets_npy",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py master-read --master-reader D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py --bundle D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_test_fixture_split_spec.json --signature a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9 --task Agriculture_h12_f1 --scenario proxy",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 43, in main\n    master.load_bundle(args.bundle, args.signature, args.spec, args.task, args.scenario)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py\", line 101, in load_bundle\n    manifest = verify_bundle(folder, expected_signature, spec_path)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py\", line 72, in verify_bundle\n    raise EvidenceError(f\"Bundle inventory mismatch: missing={sorted(set(files)-actual)}, extra={sorted(actual-set(files))}\")\nteam_eval.core.EvidenceError: Bundle inventory mismatch: missing=['Agriculture_h12_f1/targets.npy'], extra=[]"
+    },
+    {
+      "test": "split_spec_byte_change",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py master-verify --master-reader D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py --bundle D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_test_fixture_split_spec_changed.json --signature a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 41, in main\n    master.verify_bundle(args.bundle, args.signature, args.spec)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py\", line 64, in verify_bundle\n    raise EvidenceError(\"Bundle was built from another split spec or preview mode\")\nteam_eval.core.EvidenceError: Bundle was built from another split spec or preview mode"
+    },
+    {
+      "test": "manifest_extra_file",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py master-verify --master-reader D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py --bundle D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_test_fixture_split_spec.json --signature a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9 --task Agriculture_h12_f1 --scenario proxy",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 41, in main\n    master.verify_bundle(args.bundle, args.signature, args.spec)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py\", line 72, in verify_bundle\n    raise EvidenceError(f\"Bundle inventory mismatch: missing={sorted(set(files)-actual)}, extra={sorted(actual-set(files))}\")\nteam_eval.core.EvidenceError: Bundle inventory mismatch: missing=[], extra=['rogue.tmp']"
+    },
+    {
+      "test": "manifest_missing_entry",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py master-verify --master-reader D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py --bundle D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_test_fixture_split_spec.json --signature a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9 --task Agriculture_h12_f1 --scenario proxy",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 41, in main\n    master.verify_bundle(args.bundle, args.signature, args.spec)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py\", line 72, in verify_bundle\n    raise EvidenceError(f\"Bundle inventory mismatch: missing={sorted(set(files)-actual)}, extra={sorted(actual-set(files))}\")\nteam_eval.core.EvidenceError: Bundle inventory mismatch: missing=[], extra=['schema.json']"
+    },
+    {
+      "test": "origin_order_swap",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py master-read --master-reader D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py --bundle D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_test_fixture_split_spec.json --signature a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9 --task Agriculture_h12_f1 --scenario proxy",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 43, in main\n    master.load_bundle(args.bundle, args.signature, args.spec, args.task, args.scenario)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py\", line 141, in load_bundle\n    raise EvidenceError(f\"sample {i}: origin identity or array order mismatch\")\nteam_eval.core.EvidenceError: sample 0: origin identity or array order mismatch"
+    },
+    {
+      "test": "bad_target_standardization",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py master-read --master-reader D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py --bundle D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_test_fixture_split_spec.json --signature a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9 --task Agriculture_h12_f1 --scenario proxy",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 43, in main\n    master.load_bundle(args.bundle, args.signature, args.spec, args.task, args.scenario)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\data_processed\\team_worktrees\\master-c608a77\\team_work\\main\\src\\team_eval\\v2.py\", line 129, in load_bundle\n    raise EvidenceError(\"raw and standardized targets disagree\")\nteam_eval.core.EvidenceError: raw and standardized targets disagree"
+    },
+    {
+      "test": "transfer_single_byte_corruption",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\contract_probe.py transfer-verify --source D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-test-fixture-a0bffccd436a7c6a9a6e --destination D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3-transfer-test-swlt80ak\\received",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 51, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\contract_probe.py\", line 46, in main\n    transfer.verify_transfer(args.source, args.destination)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\transfer_bundle.py\", line 34, in verify_transfer\n    raise ValueError(f\"Destination inventory or SHA256 differs from source: \"\nValueError: Destination inventory or SHA256 differs from source: missing=[], extra=[], changed=['schema.json']"
+    },
+    {
+      "test": "master_freeze_gate",
+      "status": "PASS",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "command": "D:\\AAA个人资料\\桌面\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\AAA个人资料\\桌面\\人工智能大作业\\辅助电脑02交付03次\\round3_pipeline.py build --split-spec D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\round3_current_master_split_spec.json",
+      "error": "Traceback (most recent call last):\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\round3_pipeline.py\", line 301, in <module>\n    main()\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\round3_pipeline.py\", line 288, in main\n    bundle, manifest = promote(latest_preview(), args.split_spec,\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\round3_pipeline.py\", line 229, in promote\n    spec, spec_sha = validate_spec_file(spec_path, registry, test_only=test_only)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����03��\\round3_pipeline.py\", line 206, in validate_spec_file\n    validate_frozen_spec(spec, registry)\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����02��\\round2_pipeline.py\", line 183, in validate_frozen_spec\n    require(spec.get('status') == 'frozen' and bool(spec.get('approved_by')),\n  File \"D:\\AAA��������\\����\\�˹����ܴ���ҵ\\��������02����01��\\audit.py\", line 37, in require\n    raise ValueError(message)\nValueError: Formal build requires master status=frozen and approved_by",
+      "observed_status": "draft_not_for_training",
+      "approved_by": null,
+      "split_spec_sha256": "36c44036091bd51ea61003ae4729842797b37325d61fd49db89f3bbdca97dc68",
+      "master_commit": "c608a776336703f8eddeadbd82cb7fe22ce23d8c"
+    }
+  ],
+  "test_fixture_only": true,
+  "stale_test_fixtures_removed": 2,
+  "fixture_bundle_signature": "a0bffccd436a7c6a9a6e947ec2dea015890b70431f5be046d64333fc51a706b9",
+  "limitation": "Contract fixture is not a master-approved formal Bundle and was deleted after testing."
+}

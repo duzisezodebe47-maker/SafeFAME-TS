@@ -1,0 +1,26 @@
+{
+  "status": "DATA_FORMAL_PENDING",
+  "receiver_status": "MASTER_ACK_PENDING",
+  "clean_snapshots": {
+    "status": "COPIED_AND_BYTE_VERIFIED_ON_SHARED_D",
+    "target": "data_processed/team_transfer/辅助电脑02交付03次/clean_snapshots",
+    "files": 4,
+    "bytes": 531057
+  },
+  "formal_bundle": {
+    "status": "NOT_BUILT_OR_TRANSFERRED_WAITING_FOR_MASTER_FREEZE",
+    "bundle_signature": null,
+    "files": 0,
+    "bytes": 0,
+    "target": null
+  },
+  "source_commit": "81e3f2e90ea8c7bbd9358cafcbc5724dff821b9a",
+  "master_commit": "c608a776336703f8eddeadbd82cb7fe22ce23d8c",
+  "split_spec_sha256": "36c44036091bd51ea61003ae4729842797b37325d61fd49db89f3bbdca97dc68",
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.2"
+  }
+}
