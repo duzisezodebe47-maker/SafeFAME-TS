@@ -266,8 +266,127 @@ def main() -> int:
     obs, _ = observed_loss("N+S+Q", null_train, null_cal, null_dec)
     check("无信号情景能算出观测损失", np.isfinite(obs))
 
+    # ---------- Bundle 读取器的安全校验 ----------
+    # 这部分**不依赖真实 Bundle** —— 用合成文件构造 Bundle 目录结构即可。
+    # 读取层的拒绝逻辑是主控契约的核心防线，必须被测到。
+    print("\n--- Bundle 读取器校验（合成目录）---")
+    import json as _json
+    import tempfile
+
+    from bundle_reader import BundleUnavailable, assert_grid, read_frozen_bundle, sha256_file
+    import pandas as pd
+
+    def make_fake_bundle(root: Path, *, status="frozen", n=12, horizon=3, tamper=None):
+        root.mkdir(parents=True, exist_ok=True)
+        task = root / "Agriculture_h3_f1"
+        task.mkdir(exist_ok=True)
+        rng = np.random.default_rng(5)
+        # 共享数组放任务目录；情景专属数组放 <task>/<scenario>/（与 bundle.py 的写出布局一致）
+        shared = {
+            "numeric_history": rng.normal(size=(n, 6)).astype(np.float32),
+            "origin_index": np.arange(100, 100 + n, dtype=np.int64),
+            "targets": rng.normal(size=(n, horizon)).astype(np.float32),
+            "targets_standardized": rng.normal(size=(n, horizon)).astype(np.float32),
+        }
+        for key, value in shared.items():
+            np.save(task / f"{key}.npy", value, allow_pickle=False)
+
+        scenario_dir = task / "proxy"
+        scenario_dir.mkdir(exist_ok=True)
+        per_scenario = {
+            "semantic": rng.normal(size=(n, 16)).astype(np.float32),
+            "quality": rng.normal(size=(n, 3)).astype(np.float32),
+            "text_available": (rng.random(n) < 0.7),
+        }
+        for key, value in per_scenario.items():
+            np.save(scenario_dir / f"{key}.npy", value, allow_pickle=False)
+        arrays = shared | per_scenario
+        rows = []
+        for i, idx in enumerate(arrays["origin_index"]):
+            rows.append({
+                "task_id": "Agriculture_h3_f1", "fold_id": 1,
+                "origin_id": f"Agriculture:h3:f1:o{idx}",
+                "origin_index": int(idx),
+                "segment": ("train" if i < n // 2 else "decision"),
+            })
+        pd.DataFrame(rows).to_csv(task / "samples.csv", index=False,
+                                  lineterminator="\n")
+        files = {}
+        for p in sorted(root.rglob("*")):
+            if p.is_file() and p.name != "manifest.json":
+                files[p.relative_to(root).as_posix()] = sha256_file(p)
+        (root / "schema.json").write_text(_json.dumps({"status": status}), encoding="utf-8")
+        (root / "manifest.json").write_text(
+            _json.dumps({"signature": "SIG-TEST", "files": files}), encoding="utf-8")
+        if tamper:
+            tamper(root)
+        return root
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_root = Path(tmp)
+        good = make_fake_bundle(tmp_root / "good")
+        bundle = read_frozen_bundle(good, "Agriculture_h3_f1", "proxy", "SIG-TEST")
+        check("冻结 Bundle 可读取", bundle.task_id == "Agriculture_h3_f1")
+        check("origin_index 顺序与 samples 一致",
+              np.array_equal(bundle.origin_index, bundle.samples["origin_index"].to_numpy()))
+        assert_grid(bundle, "decision")
+        check("合法起点网格通过校验", True)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        bad = make_fake_bundle(Path(tmp) / "wrongsig")
+        rejected = False
+        try:
+            read_frozen_bundle(bad, "Agriculture_h3_f1", "proxy", "SIG-BAD")
+        except BundleUnavailable:
+            rejected = True
+        check("签名不符被拒绝", rejected)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        draft = make_fake_bundle(Path(tmp) / "draft", status="DRAFT_PENDING_FROZEN_BUNDLE")
+        rejected = False
+        try:
+            read_frozen_bundle(draft, "Agriculture_h3_f1", "proxy", "SIG-TEST")
+        except BundleUnavailable as exc:
+            rejected = "未冻结" in str(exc)
+        check("未冻结 Bundle（status!=frozen）被拒绝", rejected)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        def corrupt(root):
+            target = root / "Agriculture_h3_f1" / "proxy" / "quality.npy"
+            arr = np.load(target)
+            np.save(target, arr * 2.0, allow_pickle=False)
+        tampered = make_fake_bundle(Path(tmp) / "tampered", tamper=corrupt)
+        rejected = False
+        try:
+            read_frozen_bundle(tampered, "Agriculture_h3_f1", "proxy", "SIG-TEST")
+        except BundleUnavailable as exc:
+            rejected = "哈希不符" in str(exc) or "校验失败" in str(exc)
+        check("文件被篡改（哈希不符）被检出", rejected)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        dup = make_fake_bundle(Path(tmp) / "dup")
+        b = read_frozen_bundle(dup, "Agriculture_h3_f1", "proxy", "SIG-TEST")
+        b.samples.loc[b.samples.index[1], "origin_id"] = b.samples.loc[b.samples.index[0], "origin_id"]
+        rejected = False
+        try:
+            assert_grid(b, "train")
+        except AssertionError:
+            rejected = True
+        check("重复 origin_id 被拒绝", rejected)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        shift = make_fake_bundle(Path(tmp) / "shift")
+        b = read_frozen_bundle(shift, "Agriculture_h3_f1", "proxy", "SIG-TEST")
+        b.arrays["origin_index"] = b.arrays["origin_index"] + 1
+        rejected = False
+        try:
+            assert_grid(b, "train")
+        except AssertionError as exc:
+            rejected = "错位" in str(exc)
+        check("origin_id 与 origin_index 错位被拒绝", rejected)
+
     print(f"\n全部通过（{len(PASSED)} 项检查）")
-    print("未覆盖项（需真实 Bundle）：冻结签名复算、真实 999 次置换与 p 值")
+    print("未覆盖项（需真实 Bundle）：冻结签名下的真实训练、真实 999 次置换与 p 值")
     return 0
 
 

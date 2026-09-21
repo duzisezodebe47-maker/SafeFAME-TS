@@ -40,7 +40,7 @@ calibration / decision 及 999 次 refit null）。测试真值从不进入训�
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付二次/model/tests/test_round2.py"
-# 期望：全部通过（43 项检查），退出码 0
+# 期望：全部通过（51 项检查），退出码 0
 ```
 
 ### 正式链（**需主控冻结 Bundle，当前不可运行**）
@@ -57,9 +57,11 @@ calibration / decision 及 999 次 refit null）。测试真值从不进入训�
     --candidate N+S+Q --nulls 999 --output-dir evidence/null/
 ```
 
-> `train.py` / `permutation_entry.py` 的命令行入口尚未接 Bundle 实参
-> （原先只接受 `v2smoke`，已按 P1#2 重写读取层但未接 CLI）。
-> **Bundle 到位后**补 CLI 接线即可，读取、分支、候选、置换四层均已就绪且经测试。
+两个入口**已实现**（`--help` 可跑），Bundle 到位即可直接用，无需再改代码。
+
+> `read_frozen_bundle` 优先调用数据侧 `bundle.py`；**该目录不在仓库内**
+> （在孤儿分支 `3218151885-creator` 上），因此实现了按契约直读的官方适配层作为回退，
+> 也可用环境变量 `DATA_SIDE_DIR` 指定数据侧交付位置。两条路径都用合成 Bundle 测过。
 
 ---
 
@@ -69,7 +71,7 @@ calibration / decision 及 999 次 refit null）。测试真值从不进入训�
 
 | 项 | 范围 |
 |---|---|
-| 工程测试 | **43 项全部通过**（合成数据） |
+| 工程测试 | **51 项全部通过**（合成数据） |
 | P1#3 掩码 | 无文本行 S / SF 贡献**严格为零**（`atol=0.0`） |
 | P1#4 SF 分支 | 已实现并纳入门控候选 |
 | P1#5 置换 | 小次数自检通过；**同一置换跑两次逐位一致**，证明每次确实重拟合 |
@@ -80,6 +82,7 @@ calibration / decision 及 999 次 refit null）。测试真值从不进入训�
 | 未跑项 | 原因 |
 |---|---|
 | 真实 Bundle 上的任何训练 | **Bundle 未交付**（见 README §三） |
+| 真实 Bundle 上的读取路径 | 合成 Bundle 已覆盖；真实 `.npy` 字段与 `bundle.py` 源码核对过，但未在真 Bundle 上跑过一次 |
 | 真实 999 次置换与 p 值 | 同上 —— **未伪造任何 p 值** |
 | 四任务 × 两情景执行 | 同上 |
 | 循环移位诊断的真实运行 | 同上（代码已实现并自检） |
@@ -93,7 +96,8 @@ calibration / decision 及 999 次 refit null）。测试真值从不进入训�
 
 - **每次置换重建全部数据依赖量**：PCA、各分支 `SafeScaler`、SF 交互尺度、α 坐标下降。
 - **无跨次缓存**：同一置换重复运行**逐位一致** —— 若有任何量被跨次复用，结果会漂移。
-- **失败留痕**：每次置换的种子、损失、异常分别记录；未跑满 999 时 `p_value` 返回 `None`。
+- **失败留痕**：每次置换的种子、损失、异常分别记录。
+- **p 值守门**：判据是**契约下限 999**，不是本次请求次数 —— 请求 5 次跑满 5 次在记录上算完成，但达不到契约下限时 `p_value` 仍返回 `None`，避免样本量不足却报出看似有效的数字。
 - **循环移位**只作诊断，代码注释明确"不回写主门控"。
 
 ---
@@ -103,7 +107,7 @@ calibration / decision 及 999 次 refit null）。测试真值从不进入训�
 1. **未接真实数据**：全部测试基于合成 Bundle。契约字段与数据侧 `.npy` 的对应关系
    按 `bundle.py` 源码核对（`semantic` / `quality` / `source_available` / `text_available`），
    但**未在真实 Bundle 上验证过一次**。
-2. **CLI 未接线**：读取层已重写，但 `train.py` 的命令行参数尚未加 `--bundle` 等实参。
+2. **真实 Bundle 未验证**：读取层的两条路径（数据侧 `read_bundle` / 适配层直读）都用合成 Bundle 测过，但真实 Bundle 尚未到手，字段对应关系只经源码核对。
 3. **协议未冻结**：`split_spec_v2.json` 的 `status` 是 `draft_not_for_training`，
    `numerical_sha256` 四项全为 `null`。本实现按草稿结构编写，冻结后若结构变化需同步。
 4. **α 网格冲突未决**：见 README §四。

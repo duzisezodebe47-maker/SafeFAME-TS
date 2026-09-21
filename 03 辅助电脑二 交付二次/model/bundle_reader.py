@@ -22,6 +22,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import re
 import sys
 from dataclasses import dataclass
@@ -133,12 +134,67 @@ def assert_grid(bundle: FrozenBundle, segment: str, expected_count: int | None =
             f"{bundle.task_id}/{segment}: 起点数 {len(index)} != 协议期望 {expected_count}")
 
 
+def _data_side_dir() -> Path:
+    # parents[2] = 仓库根（本文件在 <repo>/03 辅助电脑二 交付二次/model/ 下）。
+    # 数据侧交付目录**不在本仓库内**（它在孤儿分支 3218151885-creator 上），
+    # 因此除下列位置外，还允许通过 DATA_SIDE_DIR 环境变量指定。
+    return Path(os.environ.get(
+        "DATA_SIDE_DIR",
+        Path(__file__).resolve().parents[2] / "辅助电脑02交付01次",
+    ))
+
+
+def _load_direct(bundle_folder: Path, task_id: str, scenario: str):
+    """官方适配层：按 `prediction_contract_v2.json` 的 `data_bundle_required` 直接读文件。
+
+    数据侧 `bundle.py` 在孤儿分支上、不一定随仓库分发，所以必须有这条不依赖它的路径。
+    字段缺失一律硬失败 —— 不代填、不静默跳过。
+    """
+    folder = Path(bundle_folder)
+    task_dir = folder / task_id
+    scenario_dir = task_dir / scenario
+    if not task_dir.is_dir():
+        raise BundleUnavailable(f"找不到任务目录: {task_dir}")
+    if not scenario_dir.is_dir():
+        raise BundleUnavailable(f"找不到情景目录: {scenario_dir}")
+
+    shared = ("numeric_history", "origin_index", "targets", "targets_standardized")
+    per_scenario = ("semantic", "quality", "text_available")
+    arrays: dict[str, np.ndarray] = {}
+    missing: list[str] = []
+    for key in shared:
+        path = task_dir / f"{key}.npy"
+        if not path.is_file():
+            missing.append(f"{task_id}/{key}.npy")
+        else:
+            arrays[key] = np.load(path, allow_pickle=False)
+    for key in per_scenario:
+        path = scenario_dir / f"{key}.npy"
+        if not path.is_file():
+            missing.append(f"{task_id}/{scenario}/{key}.npy")
+        else:
+            arrays[key] = np.load(path, allow_pickle=False)
+    if missing:
+        raise BundleUnavailable("Bundle 缺少契约要求的字段: " + ", ".join(missing))
+
+    samples_path = task_dir / "samples.csv"
+    if not samples_path.is_file():
+        raise BundleUnavailable(f"找不到 {task_id}/samples.csv")
+    samples = pd.read_csv(samples_path)
+    for column in ("task_id", "fold_id", "origin_id", "origin_index", "segment"):
+        if column not in samples.columns:
+            raise BundleUnavailable(f"samples.csv 缺少契约列: {column}")
+
+    manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
+    return samples, arrays, manifest
+
+
 def _load_via_data_side(bundle_folder: Path, task_id: str, scenario: str, signature: str):
-    """优先调用数据侧交付目录里的 `read_bundle`。"""
-    data_side = Path(__file__).resolve().parents[3] / "辅助电脑02交付01次"
-    module_path = data_side / "bundle.py"
+    """优先调用数据侧交付目录里的 `read_bundle`；不可用时回退到官方适配层。"""
+    module_path = _data_side_dir() / "bundle.py"
     if not module_path.is_file():
-        raise BundleUnavailable(f"数据侧读取器不在位: {module_path}")
+        return _load_direct(bundle_folder, task_id, scenario)
+    data_side = module_path.parent
     if str(data_side) not in sys.path:
         sys.path.insert(0, str(data_side))
     spec = importlib.util.spec_from_file_location("data_side_bundle", module_path)

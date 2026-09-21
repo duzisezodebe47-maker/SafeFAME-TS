@@ -50,13 +50,19 @@ class NullResult:
     seeds: list[int]
     failures: list[dict]
     wall_seconds: float
+    requested: int = ROW_PERMUTATIONS   # 实际请求次数，**不写死常量**
 
     @property
     def observed_count(self) -> int:
         return len(self.losses)
 
     def p_value(self, observed_loss: float) -> float | None:
-        """单侧经验 p。**置换未跑满时返回 None，绝不外推。**"""
+        """单侧经验 p。**未达契约下限时返回 None，绝不外推。**
+
+        注意判据用的是**契约要求的 999**，不是本次实际请求的 `requested`：
+        请求 5 次跑满 5 次在记录上算"完成"，但达不到契约下限，
+        据此报 p 值会制造一个样本量不足却看起来有效的数字。
+        """
         if self.observed_count < ROW_PERMUTATIONS:
             return None
         arr = np.asarray(self.losses, dtype=float)
@@ -154,7 +160,8 @@ def row_permutation_null(
             print(f"    {name}: {k + 1}/{count}  (失败 {len(failures)})", file=sys.stderr)
 
     return NullResult(candidate=name, segment="decision", losses=losses, seeds=seeds,
-                      failures=failures, wall_seconds=round(time.perf_counter() - started, 2))
+                      failures=failures, requested=count,
+                      wall_seconds=round(time.perf_counter() - started, 2))
 
 
 def circular_shift_null(
@@ -204,7 +211,7 @@ def circular_shift_null(
                              "error": f"{type(exc).__name__}: {exc}"})
 
     return NullResult(candidate=name, segment="decision-circular", losses=losses,
-                      seeds=seeds, failures=failures,
+                      seeds=seeds, failures=failures, requested=count,
                       wall_seconds=round(time.perf_counter() - started, 2))
 
 
@@ -222,14 +229,15 @@ def write_null(path: Path, result: NullResult, observed: float) -> None:
     summary = {
         "candidate": result.candidate,
         "segment": result.segment,
-        "requested": ROW_PERMUTATIONS,
+        "requested": result.requested,
         "completed": result.observed_count,
         "failures": len(result.failures),
         "observed_loss": observed,
         # 未跑满时 p 为 null —— 任务书要求"不伪填 p 值"
         "p_value": result.p_value(observed),
-        "p_value_note": ("置换未跑满，p 值不可用" if result.observed_count < ROW_PERMUTATIONS
-                         else "经验单侧 p"),
+        "p_value_note": ("未达契约下限 999 次，p 值不可用"
+                         if result.observed_count < ROW_PERMUTATIONS else "经验单侧 p"),
+        "contract_minimum": ROW_PERMUTATIONS,
         "wall_seconds": result.wall_seconds,
         "failure_detail": result.failures[:10],
     }
