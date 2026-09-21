@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "draft_not_for_training",
+  "approved_by": null,
+  "basis_config": "configs/safefame_v4.json",
+  "target_boundary": "disjoint_half_open",
+  "fit_policy": "train_only",
+  "numeric_features": ["OT"],
+  "complete_source_rule": "original_url_and_valid_interval",
+  "max_per_source": 32,
+  "scenarios": ["proxy", "conservative_lag", "complete_source"],
+  "primary_scenario": "proxy",
+  "seed": 2026,
+  "alpha_grid": [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0],
+  "row_permutations": 999,
+  "p_threshold": 0.025,
+  "gate_candidates": ["N+S+Q", "N+S+Q+SF"],
+  "numeric_fallback_candidates": ["Last", "SeasonalNaive", "AR-Ridge", "N"],
+  "seasonal_periods": {"Agriculture": 12, "Climate": 52, "SocialGood": 12, "Environment": 7},
+  "notes": "DRAFT: numerical_sha256 is absent for all four cleaned snapshots. Do not change status to frozen until the data-side files, counts and hashes are independently verified. The second gate candidate also requires an implemented semantic-frequency interaction and valid refit permutation evidence.",
+  "tasks": [
+    {"domain": "Agriculture", "fold_id": 1, "input_len": 24, "horizon": 12, "lag_days": 31, "n_rows_expected": 532, "bounds": [212, 266, 372, 425], "numerical_sha256": null},
+    {"domain": "Climate", "fold_id": 2, "input_len": 52, "horizon": 4, "lag_days": 7, "n_rows_expected": 1272, "bounds": [636, 763, 1017, 1144], "numerical_sha256": null},
+    {"domain": "SocialGood", "fold_id": 1, "input_len": 24, "horizon": 3, "lag_days": 31, "n_rows_expected": 916, "bounds": [366, 458, 641, 732], "numerical_sha256": null},
+    {"domain": "Environment", "fold_id": 2, "input_len": 56, "horizon": 7, "lag_days": 1, "n_rows_expected": 15979, "bounds": [7989, 9587, 12783, 14381], "numerical_sha256": null}
+  ]
+}
