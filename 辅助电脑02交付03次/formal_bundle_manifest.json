@@ -6,6 +6,6 @@
   "approved_by": null,
   "observed_split_spec_sha256": "36c44036091bd51ea61003ae4729842797b37325d61fd49db89f3bbdca97dc68",
   "master_commit": "c608a776336703f8eddeadbd82cb7fe22ce23d8c",
-  "preview_bundle_signature": "42c323a4db5bd35f0fddd8012921a930c8b2fe20e1a8201be25e0810b9614c06",
+  "preview_bundle_signature": "84aa6aa9f8a525b969571b06560bc78806bd98c1e5282e604271ee6af400f934",
   "warning": "This file is a truthful pending record, not a formal Bundle manifest."
 }
