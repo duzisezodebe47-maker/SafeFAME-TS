@@ -164,7 +164,10 @@ def check_v4() -> dict:
         if path.is_file():
             assert digest(path)==sha,('v4 source changed',name)
         elif name.startswith('data_processed/'):
-            assert not data_root.is_dir(),('missing v4 input in existing data tree',name)
+            # 判据用 data_processed/v4，而不是 data_processed：
+            # 后者可能只是上一代（v2）遗留的数据树，此时 v4 输入本就缺失，应当跳过。
+            # 若 v4 子树存在却不完整，下面仍会硬报错，原意不变。
+            assert not (data_root/'v4').is_dir(),('missing v4 input in existing v4 data tree',name)
             skip('v4 full input hashes (data_processed is not tracked)')
         else:
             raise AssertionError(('missing tracked v4 source',name))
