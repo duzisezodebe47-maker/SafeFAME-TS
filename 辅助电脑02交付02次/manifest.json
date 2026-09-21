@@ -1,0 +1,75 @@
+{
+  "manifest_version": "data-round2-pre-freeze-1.0",
+  "status": "ENGINEERING_PREVIEW_AWAITING_MASTER_HASH_FREEZE",
+  "branch": "3218151885-creator",
+  "pipeline_git_commit": "744dd11f5e73b5eb60a63d6e9d60f5b982f16cdf",
+  "delivery_tag": "辅助电脑02交付02次-冻结前",
+  "full_repository_baseline_commit": "c63793236d532d2ffdcccd4c7cb0c8e194f96eab",
+  "master_protocol_commit": "bcbbf5d8b780d937e30fb635165e63a8c9c5520a",
+  "protocol_version": "team-eval-1.0",
+  "tasks": [
+    "Agriculture_h12_f1",
+    "Climate_h4_f2",
+    "SocialGood_h3_f1",
+    "Environment_h7_f2"
+  ],
+  "input_snapshots": {
+    "Agriculture_h12_f1": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38",
+    "Climate_h4_f2": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+    "SocialGood_h3_f1": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+    "Environment_h7_f2": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3"
+  },
+  "bundle": {
+    "relative_path_after_rebuild": "data_processed/team_data/round2-preview-42c323a4db5bd35f0fdd",
+    "bundle_signature": "42c323a4db5bd35f0fddd8012921a930c8b2fe20e1a8201be25e0810b9614c06",
+    "files": 88,
+    "bundle_manifest_sha256": "46526df87ac3dcc76257e40f576749f0959bd21e4ab48d729ab517d4f9448b81",
+    "elapsed_seconds": 22.921596600004705,
+    "large_files_committed_to_git": false,
+    "transfer_method": "transfer_bundle.py copies the directory and verifies every SHA256; no ZIP"
+  },
+  "compact_evidence_sha256": {
+    "evidence/task_registry.csv": "296ff02b8ef9449dd1dfb847267d836f65654227a04bf022fc051f96be13a18e",
+    "evidence/coverage.csv": "2be90d62254d8ba2fda7cd9260779e5480d9b310557939bf96dac0c36eb52715",
+    "evidence/tests_round2.json": "c8bdcb1b3e8202eafadd1ecd2710419f8af234a54093f400c2035fecddbe5547",
+    "evidence/trace_examples.jsonl": "c6f6a0de73a7d20dab461df936b421cdace64111e406497799be48220c831ea9",
+    "evidence/split_spec_freeze_request.json": "ea805f01beea4405f24e076a1079b34589e862fa27f4efc115fd3dd89541e30d"
+  },
+  "pipeline_code_sha256": {
+    "round2_pipeline.py": "baa13d41f6e7ee23138f423b8caec701940b5cc8bbec2e71930d5d837a4ac1ad",
+    "bundle_read_example.py": "8d5836daf47542dc38923ca091292a311846cf599af64ce8b460c72b20fabdfe",
+    "transfer_bundle.py": "477b4ae745a96eaac94b40da9eb8980482566ce914bc0028b4b0c41fa27477ea",
+    "test_round2.py": "9778a478b8946e06bdfc9fad59f6f8bab27b321a415265588e740c23c516a155",
+    "make_trace_examples.py": "69bb7f95e51eba1b88b0c98d4a8c7b28b32aadfa33f46bc79eaefa5ba8d3d1d1"
+  },
+  "commands": [
+    ".venv/Scripts/python.exe 辅助电脑02交付02次/round2_pipeline.py prepare",
+    ".venv/Scripts/python.exe 辅助电脑02交付02次/round2_pipeline.py preview",
+    ".venv/Scripts/python.exe 辅助电脑02交付02次/test_round2.py <bundle>",
+    ".venv/Scripts/python.exe 辅助电脑02交付02次/make_trace_examples.py <bundle> <audit>",
+    ".venv/Scripts/python.exe 辅助电脑02交付02次/bundle_read_example.py <bundle> <task_id> --allow-preview"
+  ],
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.12.10",
+    "numpy": "2.2.6",
+    "pandas": "2.3.2",
+    "scikit_learn": "1.7.1",
+    "threadpoolctl": "3.6.0",
+    "gpu": "not used",
+    "seed": 2026
+  },
+  "tests": {
+    "first_round_regression": "19/19 PASS",
+    "round2": "15/15 PASS",
+    "contract_rows": 16438,
+    "transfer_copy_and_reverify": "PASS",
+    "trace_classes": "12 requested, 9 available; three no-text classes do not exist and are explicitly recorded"
+  },
+  "failed_or_pending": [
+    "Formal Bundle was not generated because the master has not yet approved the four cleaned snapshot hashes.",
+    "Original per-record publication timestamps and URLs remain unavailable.",
+    "Large raw data, embeddings, arrays and full raw-row traces are intentionally absent from Git."
+  ],
+  "integrity_note": "The pipeline commit is recorded directly. The final delivery commit cannot self-hash; the immutable delivery identity is the pushed annotated tag."
+}
