@@ -1,0 +1,11 @@
+domain,origins,covered_origins,coverage_pct
+Agriculture,508,508,100.0
+Climate,1220,1220,100.0
+Economy,423,423,100.0
+Energy,1570,1570,100.0
+Environment,15923,15923,100.0
+Health_AFR,1406,1406,100.0
+Health_US,1332,1332,100.0
+Security,285,285,100.0
+SocialGood,892,531,59.52914798206278
+Traffic,627,530,84.52950558213716

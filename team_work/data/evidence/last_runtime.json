@@ -1,0 +1,22 @@
+{
+  "command": "trace",
+  "elapsed_seconds": 0.41695159999653697,
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.2",
+      "scikit-learn": "1.7.1",
+      "threadpoolctl": "3.6.0"
+    },
+    "seed": 2026,
+    "encoding": "reuse existing pinned vectors; no model download or training"
+  },
+  "memory": {
+    "measured": true,
+    "peak_working_set_bytes": 202321920,
+    "scope": "whole Python process, including imports and native arrays; Windows GetProcessMemoryInfo"
+  },
+  "gpu": "not used"
+}
