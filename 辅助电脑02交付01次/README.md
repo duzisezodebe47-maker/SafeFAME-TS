@@ -1,4 +1,4 @@
-# 数据时点审计与 FeatureBundle 对接
+# 辅助电脑02交付01次：数据时点审计与 FeatureBundle 对接
 
 本目录执行《辅助电脑一任务书：数据时点审计与特征工程》。项目性质仍为个人课程设计；这里的辅助电脑分工不改变课程要求。本轮不训练候选模型、不改评测路由、不修改三份课程报告，不生成 PDF、PPT 或上传压缩包。
 
@@ -9,9 +9,9 @@
 `split_spec.template.json` 是待确认的接口样例，不能直接用来训练。
 工程测试使用真实 Agriculture 数据及明确标注的测试划分，不将它作为正式研究方案。
 
-新增文件均位于 `team_work/data`，工作分支 `codex/data-time-audit`。
+本次交付统一放在仓库根目录 `辅助电脑02交付01次/`，由原 `team_work/data/` 整体迁入，工作分支 `codex/data-time-audit`。目录按用户指定的电脑编号命名，负责的工作仍为任务书中的数据时点审计与特征工程。
 大型原始行追踪、数组和缓存只写 `data_processed/team_data`，该目录在 D 盘且由现有 Git 规则忽略。
-`evidence` 保存可入库的小型审计表和实际测试输出；本轮没有推送远端。
+`evidence` 保存可入库的小型审计表和实际测试输出。主控请先读 [交付与待对接事项](交付与待对接事项.md)，再查本说明中的接口和运行方法。交付分支供审阅与接收，不直接修改主控的 main 分支。
 
 ## 已有实现与本轮新增
 
@@ -44,8 +44,8 @@
 在项目根目录打开 PowerShell，使用既有 Python 3.12 环境：
 
 ```powershell
-.\.venv\Scripts\python.exe .\team_work\data\run.py audit
-.\.venv\Scripts\python.exe .\team_work\data\test_pipeline.py
+.\.venv\Scripts\python.exe .\辅助电脑02交付01次\run.py audit
+.\.venv\Scripts\python.exe .\辅助电脑02交付01次\test_pipeline.py
 ```
 
 第一条执行十序列全量数据审计并校验固定语义缓存；输出路径写在 `evidence/audit_summary.json`。
@@ -57,8 +57,8 @@
 正式协议到位后，由主控填写四个分段末端、原始频率对应的日历滞后、清洗序列 SHA256，并确认 `approved_by` 和 `status=frozen`。不要只把模板的状态改为 frozen。然后运行：
 
 ```powershell
-$auditInfo = Get-Content .\team_work\data\evidence\audit_summary.json -Raw | ConvertFrom-Json
-.\.venv\Scripts\python.exe .\team_work\data\run.py build --audit-folder $auditInfo.output --split-spec .\split_spec.json
+$auditInfo = Get-Content .\辅助电脑02交付01次\evidence\audit_summary.json -Raw | ConvertFrom-Json
+.\.venv\Scripts\python.exe .\辅助电脑02交付01次\run.py build --audit-folder $auditInfo.output --split-spec .\split_spec.json
 ```
 
 `bounds=[a,b,c,d]` 对应按当前清洗后序列 **0 起算** 的半开区间：训练 `[0,a)`、校准 `[a,b)`、决策 `[b,c)`、测试 `[c,d)`。
@@ -71,8 +71,8 @@ $auditInfo = Get-Content .\team_work\data\evidence\audit_summary.json -Raw | Con
 工程样例可以直接检查最后一个起点：
 
 ```powershell
-$check = Get-Content .\team_work\data\evidence\tests.json -Raw | ConvertFrom-Json
-.\.venv\Scripts\python.exe .\team_work\data\run.py trace --audit-folder $check.audit_folder --bundle-folder $check.preview_folder --task-id Agriculture_h3_fsmoke --origin-id Agriculture:h3:fsmoke:o417 --scenario proxy
+$check = Get-Content .\辅助电脑02交付01次\evidence\tests.json -Raw | ConvertFrom-Json
+.\.venv\Scripts\python.exe .\辅助电脑02交付01次\run.py trace --audit-folder $check.audit_folder --bundle-folder $check.preview_folder --task-id Agriculture_h3_fsmoke --origin-id Agriculture:h3:fsmoke:o417 --scenario proxy
 ```
 
 终端给出数值窗口、目标索引和截止时间；展开后的 CSV 在 D 盘 `data_processed/team_data/traces`。
@@ -124,7 +124,7 @@ $check = Get-Content .\team_work\data\evidence\tests.json -Raw | ConvertFrom-Jso
 ```python
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path('team_work/data').resolve()))
+sys.path.insert(0, str(Path('辅助电脑02交付01次').resolve()))
 from bundle import read_bundle
 
 samples, arrays, manifest = read_bundle(

@@ -1,6 +1,6 @@
 {
   "command": "trace",
-  "elapsed_seconds": 0.41695159999653697,
+  "elapsed_seconds": 0.41529559998889454,
   "environment": {
     "python": "3.12.10",
     "platform": "Windows-11-10.0.26200-SP0",
@@ -15,7 +15,7 @@
   },
   "memory": {
     "measured": true,
-    "peak_working_set_bytes": 202321920,
+    "peak_working_set_bytes": 202772480,
     "scope": "whole Python process, including imports and native arrays; Windows GetProcessMemoryInfo"
   },
   "gpu": "not used"

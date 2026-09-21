@@ -69,7 +69,7 @@
     {
       "test": "real_data_repeat_thread_1_vs_2",
       "status": "PASS",
-      "signature": "655afd768c49330a6feeb15effd6d4d4ef46062313a0bb7908a254f91218f295",
+      "signature": "20975e2d028cd22adde9dd9945fd7497e3044b4396136d75389825f460166cfc",
       "files": 29
     },
     {
@@ -96,12 +96,12 @@
     }
   ],
   "count": 19,
-  "audit_folder": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\audit-ad63f08a5640ab007554",
-  "preview_folder": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\preview-655afd768c49330a6fee",
-  "independent_repeat_folder": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\preview-655afd768c49330a6fee-threads2",
+  "audit_folder": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\audit-6266b0a931bd32bb166a",
+  "preview_folder": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\preview-20975e2d028cd22adde9",
+  "independent_repeat_folder": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\preview-20975e2d028cd22adde9-threads2",
   "sample_count": 388,
   "cross_boundary_excluded": 8,
-  "preview_signature": "655afd768c49330a6feeb15effd6d4d4ef46062313a0bb7908a254f91218f295",
+  "preview_signature": "20975e2d028cd22adde9dd9945fd7497e3044b4396136d75389825f460166cfc",
   "coverage": [
     {
       "task_id": "Agriculture_h3_fsmoke",
@@ -296,10 +296,10 @@
     "seed": 2026,
     "encoding": "reuse existing pinned vectors; no model download or training"
   },
-  "elapsed_seconds": 24.516486400010763,
+  "elapsed_seconds": 27.1268336000212,
   "memory": {
     "measured": true,
-    "peak_working_set_bytes": 286023680,
+    "peak_working_set_bytes": 284131328,
     "scope": "whole Python process, including imports and native arrays; Windows GetProcessMemoryInfo"
   },
   "limitation": "Real smoke is Agriculture only; no master-frozen bundle or model performance evaluation"
