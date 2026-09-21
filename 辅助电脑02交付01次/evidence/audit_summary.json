@@ -1,0 +1,31 @@
+{
+  "output": "D:\\AAA个人资料\\桌面\\人工智能大作业\\data_processed\\team_data\\audit-6266b0a931bd32bb166a",
+  "status": "AUDIT_COMPLETE_PROTOCOL_PENDING",
+  "series": 10,
+  "domains": 9,
+  "raw_numerical_rows": 24586,
+  "clean_numerical_rows": 24570,
+  "canonical_facts": 25613,
+  "raw_text_rows": 48140,
+  "legacy_proxy_origins_checked": 24186,
+  "original_url_rows": 0,
+  "unknown_target_rows": 8,
+  "v4_target_compatible": true,
+  "timemmd_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+  "expected_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+  "encoder_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "embedding_cache_valid": true,
+  "ett_files": 2,
+  "sources": {
+    "TimeMMD": "https://github.com/AdityaLab/Time-MMD",
+    "ETT": "https://github.com/zhouhaoyi/ETDataset"
+  },
+  "license_status": "Time-MMD: ODC-By stated in prior project literature audit; no local LICENSE. ETT: upstream terms; no new license verification.",
+  "missing": [
+    "master-frozen split_spec.json",
+    "master-approved lag schedule and completeness rule",
+    "verified per-record publication times and original URLs",
+    "joint FeatureBundle schema approval"
+  ],
+  "caveat": "end_date is a proxy; source labels do not establish publication reliability"
+}
