@@ -1,0 +1,16 @@
+{
+  "contract_version": "team-eval-2.0-draft",
+  "status": "DRAFT_PENDING_FROZEN_BUNDLE",
+  "task_id_pattern": "Domain_hH_fF",
+  "origin_id_pattern": "Domain:hH:fF:o<origin_index>",
+  "segments": ["train", "calibration", "decision", "test"],
+  "target_scale": "train_only_standardized_OT",
+  "data_bundle_required": ["manifest.json", "schema.json", "<task_id>/samples.csv", "<task_id>/origin_index.npy", "<task_id>/numeric_history.npy", "<task_id>/targets.npy", "<task_id>/targets_standardized.npy", "<task_id>/numeric_fit.json"],
+  "prediction_csv_required": ["task_id", "fold_id", "origin_id", "origin_index", "segment", "scenario", "candidate_id", "seed", "step", "y_pred", "target_scale", "bundle_signature", "config_sha256", "code_commit"],
+  "prediction_key": ["task_id", "fold_id", "segment", "origin_id", "step", "candidate_id", "seed"],
+  "prediction_step": "1-based, every step from 1 through H must appear exactly once for every candidate/seed and every supplied bundle origin",
+  "required_before_freeze": "only calibration and decision samples/predictions, plus 999 refit row-null losses per registered gate candidate; no test file or test truth path",
+  "required_before_score": "frozen route hash, test samples and predictions with the identical task/spec/bundle signatures",
+  "candidate_policy": "Only registered gate candidates with complete refit null evidence may enter the gate. Diagnostics and the older N+S+Q+F are not gate candidates.",
+  "rejection": "Reject duplicate, missing, extra, shifted or reordered origin grids; mixed task/fold/scenario/signature/config/scale; nonfinite prediction; short horizon; unverified or preview bundle. Never silently inner-join."
+}

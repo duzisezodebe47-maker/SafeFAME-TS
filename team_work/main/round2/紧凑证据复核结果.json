@@ -1,0 +1,25 @@
+{
+  "data": {
+    "status": "COMPACT_EVIDENCE_CONSISTENT",
+    "numeric_series": 10,
+    "text_files": 20,
+    "raw_numeric_rows": 24586,
+    "clean_numeric_rows": 24570,
+    "raw_text_rows": 48140,
+    "canonical_facts": 25613,
+    "recorded_tests": 19,
+    "smoke_samples": 388,
+    "full_raw_replay": false
+  },
+  "model": {
+    "status": "COMPACT_EVIDENCE_CONSISTENT",
+    "candidates": 6,
+    "prediction_rows": 6048,
+    "unique_origin_step_grid": 1008,
+    "feature_hash": "cd9df2ade1ca21431041edcb14d5f17dd4911475861cec41755502771901127f",
+    "recorded_prediction_commit": "0eb4df990f6753bfc9e9029bf76f169c28456414",
+    "truth_replay": false,
+    "readme_claimed_tests": 87,
+    "tests_independently_rerun": false
+  }
+}
