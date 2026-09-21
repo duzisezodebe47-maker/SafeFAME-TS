@@ -7,7 +7,7 @@
 | 主控四任务协议 | DRAFT | 四个边界按旧配置和第一轮审计行数取整；缺清洗 CSV 的实际 SHA256 和主控批准标识。 |
 | 数据侧第二轮 | WAITING | 远端 `3218151885-creator` 仍为 `1cb8ca1e8743ce9ffdc70cb9b75dce9cebe26fd3`，尚无第二次交付。 |
 | 模型侧第二轮 | WAITING | 远端 `SHY` 仍为 `887aed4c68b976d021be1d12d386e9ae7cd681c3`，尚无第二次交付。 |
-| 主控 v2 接口 | TESTED_SYNTHETIC | 24 项测试通过；覆盖哈希、起点、顺序、缺步、目标尺度、阶段包及数值基线。 |
+| 主控 v2 接口 | TESTED_SYNTHETIC | 24 项测试在 D 盘 Python 3.14.6 通过；覆盖哈希、起点、顺序、缺步、目标尺度、阶段包及数值基线。原项目所需 Python 3.12 与真实 Bundle 尚未复核。 |
 | Agriculture H12 F1 真实路由 | NOT_RUN | 缺冻结 Bundle、v2 逐步预测和可审计零分布。 |
 | 其余三项真实任务 | NOT_RUN | 同上；不得替换预注册任务以追求收益。 |
 | `main` 整合 | NOT_STARTED | 三方第二轮验收通过后单独处理。 |
