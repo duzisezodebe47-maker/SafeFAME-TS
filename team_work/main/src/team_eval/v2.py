@@ -346,7 +346,8 @@ def write_stage_inputs(folder: Path, bundle: dict, grid: dict, split_spec: dict,
         (folder / name).write_text("".join(json.dumps(row, ensure_ascii=False, allow_nan=False) + "\n"
                                            for row in rows), encoding="utf-8")
     manifest = dict(status="READY_FOR_FREEZE" if segments[0] == "calibration" else "READY_FOR_SCORE",
-        segments=list(segments), task_id=bundle["task_id"], bundle_signature=bundle["signature"],
+        segments=list(segments), task_id=bundle["task_id"], scenario=bundle["scenario"],
+        bundle_signature=bundle["signature"],
         bundle_manifest_sha256=bundle["manifest_sha256"],
         split_spec_sha256=bundle["spec_sha256"], prediction_files_sha256=grid["file_sha256"],
         sample_rows=len(sample_rows), prediction_rows=len(prediction_rows),

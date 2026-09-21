@@ -182,6 +182,7 @@ class V2BridgeTests(unittest.TestCase):
         folder = self.root / "selection"
         manifest = write_stage_inputs(folder, bundle, grid, policy, ("calibration", "decision"))
         self.assertEqual(manifest["status"], "READY_FOR_FREEZE")
+        self.assertEqual(manifest["scenario"], "proxy")
         self.assertNotIn('"segment": "test"', (folder / "samples.jsonl").read_text(encoding="utf-8"))
         task = json.loads((folder / "task.json").read_text(encoding="utf-8"))
         spec = json.loads((folder / "spec.json").read_text(encoding="utf-8"))
