@@ -7,8 +7,9 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from team_eval.core import EvidenceError, sha256
+from team_eval.core import EvidenceError, freeze_route, jsonl, sha256, validate
 from team_eval.null_bridge import convert_nulls, write_conversion
+from team_eval.route_seal import seal_route
 from team_eval.snapshot_audit import audit_one
 
 
@@ -20,12 +21,16 @@ class IntakeTests(unittest.TestCase):
         self.stage = self.root / "selection"
         self.stage.mkdir()
         self.candidates = ["N+S+Q", "N+S+Q+SF"]
+        self.frozen_spec = self.root / "frozen_split.json"
+        self.frozen_spec.write_text(json.dumps({"status": "frozen", "approved_by": "main:test"}), encoding="utf-8")
+        frozen_sha = sha256(self.frozen_spec)
         task = dict(task_id="Demo_h1_f1", fold_id=1, horizon=1, input_len=2, n_rows=20,
                     train_end=8, cal_end=10, dec_end=14, test_end=18,
                     snapshot_sha256="a" * 64, feature_manifest_sha256="b" * 64,
                     seasonal_period=2)
-        spec = dict(status="FROZEN", original_split_spec_sha256="f" * 64,
-                    candidate_variants=self.candidates, selection=dict(row_null_draws=999))
+        spec = dict(status="FROZEN", original_split_spec_sha256=frozen_sha,
+                    numeric_candidates=["Last"], candidate_variants=self.candidates,
+                    selection=dict(row_null_draws=999, p_threshold=0.025))
         samples = []
         predictions = []
         for segment, origins in (("cal", (8, 9)), ("dec", (10, 11))):
@@ -35,7 +40,7 @@ class IntakeTests(unittest.TestCase):
                                     target_start_index=origin, snapshot_sha256=task["snapshot_sha256"],
                                     feature_manifest_sha256=task["feature_manifest_sha256"],
                                     preprocessing_fit_end=8))
-                for candidate in self.candidates:
+                for candidate in ["Last", *self.candidates]:
                     predictions.append(dict(task_id=task["task_id"], fold_id=1, origin_id=origin,
                                             segment=segment, candidate_id=candidate, seed=2026,
                                             prediction=[0.0], config_sha256="c" * 64,
@@ -46,7 +51,7 @@ class IntakeTests(unittest.TestCase):
             (self.stage / name).write_text("".join(json.dumps(v) + "\n" for v in value), encoding="utf-8")
         manifest = dict(status="READY_FOR_FREEZE", segments=["calibration", "decision"],
                         scenario="proxy", bundle_signature="b" * 64,
-                        split_spec_sha256="f" * 64, sample_rows=len(samples),
+                        split_spec_sha256=frozen_sha, sample_rows=len(samples),
                         prediction_rows=len(predictions),
                         files_sha256={p.name: sha256(p) for p in self.stage.iterdir()})
         (self.stage / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
@@ -127,6 +132,55 @@ class IntakeTests(unittest.TestCase):
         path.write_text(json.dumps(summary), encoding="utf-8")
         with self.assertRaisesRegex(EvidenceError, "observed MSE"):
             convert_nulls(self.stage, self.null_dirs)
+
+    def _route_inputs(self):
+        null_rows, _ = convert_nulls(self.stage, self.null_dirs)
+        null_path = self.root / "nulls.jsonl"
+        null_path.write_text("".join(json.dumps(row) + "\n" for row in null_rows), encoding="utf-8")
+        task = json.loads((self.stage / "task.json").read_text(encoding="utf-8"))
+        spec = json.loads((self.stage / "spec.json").read_text(encoding="utf-8"))
+        samples, predictions, _ = validate(task, jsonl(self.stage / "samples.jsonl"),
+                                            jsonl(self.stage / "predictions.jsonl"), spec=spec)
+        route = freeze_route(task, samples, predictions, null_rows, spec)
+        route["inputs_sha256"] = {key: sha256(path) for key, path in {
+            "task": self.stage / "task.json", "spec": self.stage / "spec.json",
+            "samples": self.stage / "samples.jsonl", "predictions": self.stage / "predictions.jsonl",
+            "nulls": null_path}.items()}
+        route_path = self.root / "raw_route.json"
+        route_path.write_text(json.dumps(route), encoding="utf-8")
+        review_path = self.root / "review.json"
+        review_path.write_text(json.dumps({"status": "REFIT_PROVENANCE_VERIFIED",
+            "null_jsonl_sha256": sha256(null_path), "model_code_commits": ["d" * 40],
+            "reviewer": "main:test"}), encoding="utf-8")
+        return null_path, route_path, review_path
+
+    def test_seals_route_with_external_hash_and_refit_review(self):
+        null_path, route_path, review_path = self._route_inputs()
+        out = self.root / "sealed.json"
+        result = seal_route(self.stage, null_path, route_path, self.frozen_spec, review_path, out)
+        sealed = json.loads(out.read_text(encoding="utf-8"))
+        self.assertEqual(result["sha256"], sha256(out))
+        self.assertEqual(sealed["bundle_signature"], "b" * 64)
+        self.assertEqual(sealed["split_spec_sha256"], sha256(self.frozen_spec))
+        self.assertEqual(sealed["selection_data_segments"], ["cal", "dec"])
+        self.assertNotIn("route_sha256", sealed)
+        with self.assertRaises(EvidenceError):
+            seal_route(self.stage, null_path, route_path, self.frozen_spec, review_path, out)
+
+    def test_seal_rejects_missing_refit_review_or_test_artifact(self):
+        null_path, route_path, review_path = self._route_inputs()
+        review = json.loads(review_path.read_text(encoding="utf-8"))
+        review["status"] = "PENDING"
+        review_path.write_text(json.dumps(review), encoding="utf-8")
+        with self.assertRaisesRegex(EvidenceError, "refit provenance"):
+            seal_route(self.stage, null_path, route_path, self.frozen_spec, review_path,
+                       self.root / "sealed.json")
+        review["status"] = "REFIT_PROVENANCE_VERIFIED"
+        review_path.write_text(json.dumps(review), encoding="utf-8")
+        (self.stage / "test_truth.json").write_text("{}", encoding="utf-8")
+        with self.assertRaisesRegex(EvidenceError, "extra/missing"):
+            seal_route(self.stage, null_path, route_path, self.frozen_spec, review_path,
+                       self.root / "sealed.json")
 
     def test_snapshot_checks_bytes_rows_and_dates(self):
         path = self.root / "Demo_numerical.csv"
