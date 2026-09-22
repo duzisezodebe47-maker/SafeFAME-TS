@@ -1,17 +1,17 @@
 {
   "files": {
-    "model/audit_tables.py": "7e23961ce6bbe9f55d37670c37ea3fa6ab3e8a2d029e25c4c5e559f505c04f9d",
+    "model/audit_tables.py": "dce9095de5d25d5eb7786288010c0c9cbb86b87d0907c0c149349f3d06f14a0a",
     "model/branches.py": "b4a632f4bc002db6e4d2321fff68826cba5aeb813898a0d96cbd9afc1a9948ad",
     "model/bundle_reader.py": "10d743c685efc3f542ec9d677b8f5ac6d2d5b46caea7cdacffc324fc786df837",
     "model/candidates.py": "5b7be2c04ad8b2bdd219a0305d83813b8f7e4df243149a62133597cd42043927",
     "model/numeric_fallbacks.py": "ad346fc84091d901b7beb49113197e76d180197acc9e777d05d0dfeaaaae96be",
     "model/permutation.py": "e83aa1b833e7fef45aa9dcff037e95ee7a1b3e578da1ec73a8890001d705678e",
-    "model/permutation_entry.py": "1ef06e69623dfb54e2225f4c2d83ecac47867fc3a5ca60a04c78fe21090c4778",
+    "model/permutation_entry.py": "1769509fba687e3ddeeb2664811561e40ec437dd27bb461d504210b03f509fb3",
     "model/predict_io.py": "5c7bd985edaba370dca48bf72d6e46e48a46a357b22b6338c115fe430ce71894",
-    "model/predict_test.py": "e952cde9c5b339d72058dd3d6857f283eda280c0e212470a0899b46c80533ddc",
-    "model/tests/test_round4.py": "4f4a0ac037ed49e9242cf35219eb58110feb66d899e2b8865d3c13ffc4c12c89",
-    "model/train.py": "e2ef75fbe5a77e1b9a4b44f97542bac848d091575af26a945395e0ce9b24292a"
+    "model/predict_test.py": "d58bca861754873b2f7790ecbfa8904a48e2354b4a9ffac81f8970d806903fb0",
+    "model/tests/test_round4.py": "697548a2f4655ab352c5061a43dfafd27fa1deff97cfb1efd840cf46a0b21218",
+    "model/train.py": "9097b95a9e3a04b747d765b8f7bc2e5af6b469e7afb6353f31a2557e56caee9b"
   },
-  "combined_sha256": "8ceba321fa4fc60876087533bb69b4e7c3e4334f485eb5274e7dbe42a07f379a",
+  "combined_sha256": "666e3194dc9e5efb967a1c48273ae7ec45ac139d4404884654b1fd0ef6b65018",
   "note": "combined_sha256 覆盖 model/ 下全部文件（按路径排序拼接的 SHA256）"
 }

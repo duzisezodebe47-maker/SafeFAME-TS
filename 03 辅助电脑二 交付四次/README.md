@@ -5,7 +5,7 @@
 **状态**：`MODEL_REAL_EVIDENCE_PENDING`
 
 > 本轮 = 任务书 **A 部分**（代码返修 + 故障测试）。**B 部分（真实运行）仍阻塞** —— 正式 Bundle 未交付。
-> 未跑项一律标 `NOT_RUN`，不用合成 31 项测试冒充真实结果。
+> 未跑项一律标 `NOT_RUN`，不用合成 38 项测试冒充真实结果。
 
 ---
 
@@ -19,6 +19,14 @@
 | A.4 | 从冻结 spec 读四段边界传入 `assert_grid`；跨段窗口拒绝 | ✅ | `segment_bounds` + `assert_grid(..., bounds, horizon)` |
 | A.5 | 半段规则与主控 `core.py` 一致 | ✅ | `bundle_reader.decision_halves` |
 | A.6 | 更新 README/RUNBOOK/TEAM_SYNC | ✅ | 本目录 |
+
+### 复核任务书时补的三处遗漏
+
+| 任务书原文 | 缺口 | 修复 |
+|---|---|---|
+| A.1 核对"**冻结 spec/Bundle 锚**" | 只核对了任务/折/段/selected，未核对锚 | `check_route` 现接受 `bundle_signature`/`split_spec_sha256`：路由**带锚则强制核对**；不带则**记录为缺口**（`_anchors_missing`），不假装核对过。主控当前 `freeze_route` 不产出锚字段，故走缺口路径 |
+| A.2 记录"**两个训练样本集合**、行数、**输入 SHA256** 和**模型配置**" | 只按**段**记了输入哈希，未按**训练集合**记；模型配置不完整 | 新增 `bundle_input_sha256()` 覆盖整个集合的全部输入；manifest 增 `selection_input_sha256` / `extended_input_sha256` / `model_config`（候选、分支、α 网格、冻结 α、求解器、目标尺度） |
+| A.4 新增"**正式入口**拒绝测试" | 测试**直接调 `assert_grid`**，没走正式入口 —— 正是主控批评过的"边界测试通过 ≠ 正式入口执行了检查" | 测试改为**调用四个入口的 `main()`** 并断言非零退出；同时给四个入口加网格守卫，把 `AssertionError` 转成 `GridRejected` + 退出码 5（明确报错，不抛 traceback） |
 
 ### 主控在第三次验收抓到的 5 个问题
 
@@ -34,11 +42,11 @@
 
 ---
 
-## 二、测试：31 项全部通过（合成数据）
+## 二、测试：38 项全部通过（合成数据）
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付四次/model/tests/test_round4.py"
-# 全部通过（31 项检查）
+# 全部通过（38 项检查）
 # 退出码 0
 ```
 
@@ -108,7 +116,7 @@
     ├── permutation_entry.py   置换入口
     ├── predict_test.py        测试段入口（路由字节锚 + 两阶段重拟合）
     ├── audit_tables.py        无文本 + 半段审计表
-    └── tests/test_round4.py   31 项检查
+    └── tests/test_round4.py   38 项检查
 ```
 
 前三轮目录完整保留，未改动。

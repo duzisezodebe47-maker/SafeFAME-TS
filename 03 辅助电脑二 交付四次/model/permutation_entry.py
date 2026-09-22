@@ -74,8 +74,12 @@ def main() -> int:
         return 3
 
     horizon = int(args.task.split("_h")[1].split("_")[0])
-    grid_stats = {s: assert_grid(bundle, s, bounds[s], horizon)
-                  for s in ("train", "calibration", "decision")}
+    try:
+        grid_stats = {s: assert_grid(bundle, s, bounds[s], horizon)
+                      for s in ("train", "calibration", "decision")}
+    except AssertionError as exc:
+        print(f"GridRejected: {exc}", file=sys.stderr)
+        return 5
 
     train = to_feature_bundle(bundle.segment("train"))
     cal = to_feature_bundle(bundle.segment("calibration"))

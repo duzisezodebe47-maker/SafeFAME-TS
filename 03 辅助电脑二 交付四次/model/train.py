@@ -104,8 +104,12 @@ def main() -> int:
 
     # 各段网格必须先通过契约校验 —— **边界与 H 从冻结 spec 读取并传入**（P1-4）
     horizon = int(args.task.split("_h")[1].split("_")[0])
-    grid_stats = {s: assert_grid(bundle, s, bounds[s], horizon)
-                  for s in ("train", "calibration", "decision")}
+    try:
+        grid_stats = {s: assert_grid(bundle, s, bounds[s], horizon)
+                      for s in ("train", "calibration", "decision")}
+    except AssertionError as exc:
+        print(f"GridRejected: {exc}", file=sys.stderr)
+        return 5
 
     train_part = to_feature_bundle(bundle.segment("train"))
     cal_part = to_feature_bundle(bundle.segment("calibration")) if len(bundle.segment("calibration")["origin_id"]) else None

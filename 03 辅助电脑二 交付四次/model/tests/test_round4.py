@@ -375,6 +375,116 @@ def main() -> int:
         r = True
     check("未实现的回退模型明确报错（不静默换模型）", r)
 
+    # ---------------- A.4 正式入口拒绝测试（不绕过入口）----------------
+    # 任务书要求的是"**正式入口**拒绝测试"。直接调 assert_grid 不算 ——
+    # 第三轮的教训恰恰是"边界测试通过 ≠ 正式入口执行了检查"。
+    print("\n--- A.4 正式入口拒绝（跨段窗口）---")
+    import contextlib
+    import io
+
+    def rewrite_manifest(root: Path, spec_path: Path) -> str:
+        """改了 Bundle 内容后重算 manifest，使签名重新自洽。"""
+        s = json.loads(Path(spec_path).read_text(encoding="utf-8"))
+        inputs = {"mode": "frozen", "split_spec_sha256": sha256_file(spec_path), "split_spec": s}
+        files = {p.relative_to(root).as_posix(): sha256_file(p)
+                 for p in sorted(root.rglob("*")) if p.is_file() and p.name != "manifest.json"}
+        m = {"inputs": inputs, "signature": signature(inputs), "files": files}
+        (root / "manifest.json").write_text(json.dumps(m), encoding="utf-8")
+        return m["signature"]
+
+    def inject_spanning(root: Path, spec_path: Path) -> str:
+        """在 train 段塞入一个目标窗口跨段的起点（origin=19, h=3 → 19+3>20）。"""
+        task = root / "Agriculture_h3_f1"
+
+        def append_first(arr):
+            # concatenate(axis=0) 对 1-D（text_available）与 2-D 都成立
+            return np.concatenate([arr, arr[:1]], axis=0)
+
+        for key in ("numeric_history", "targets", "targets_standardized"):
+            arr = np.load(task / f"{key}.npy")
+            np.save(task / f"{key}.npy", append_first(arr), allow_pickle=False)
+        for key in ("semantic", "quality", "text_available"):
+            arr = np.load(task / "proxy" / f"{key}.npy")
+            np.save(task / "proxy" / f"{key}.npy", append_first(arr), allow_pickle=False)
+        oi = np.load(task / "origin_index.npy")
+        np.save(task / "origin_index.npy", np.append(oi, 19), allow_pickle=False)
+        s = pd.read_csv(task / "samples.csv")
+        s.loc[len(s)] = {"task_id": "Agriculture_h3_f1", "fold_id": 1,
+                         "origin_id": "Agriculture:h3:f1:o19", "origin_index": 19,
+                         "segment": "train"}
+        s.to_csv(task / "samples.csv", index=False, lineterminator="\n")
+        return rewrite_manifest(root, spec_path)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        bdir = make_bundle(tmp / "span", spec)
+        sig = inject_spanning(bdir, spec)
+
+        import train as train_entry
+
+        def run_entry(module, argv) -> int:
+            old = sys.argv
+            sys.argv = argv
+            try:
+                with contextlib.redirect_stderr(io.StringIO()) as err:
+                    code = module.main()
+                return code, err.getvalue()
+            except SystemExit as exc:
+                return int(exc.code or 1), ""
+            finally:
+                sys.argv = old
+
+        code, _ = run_entry(train_entry, [
+            "train.py", "--bundle", str(bdir), "--task", "Agriculture_h3_f1",
+            "--scenario", "proxy", "--signature", sig, "--split-spec", str(spec),
+            "--segments", "calibration", "decision", "--candidate", "N+S+Q",
+            "--output-dir", str(tmp / "out_train"),
+        ])
+        check("正式入口 train.py 拒绝跨段目标窗口（退出码非 0）", code != 0)
+
+        import permutation_entry as perm_entry
+        code, _ = run_entry(perm_entry, [
+            "permutation_entry.py", "--bundle", str(bdir), "--task", "Agriculture_h3_f1",
+            "--scenario", "proxy", "--signature", sig, "--split-spec", str(spec),
+            "--candidate", "N+S+Q", "--nulls", "2",
+            "--output-dir", str(tmp / "out_perm"),
+        ])
+        check("正式入口 permutation_entry.py 拒绝跨段目标窗口", code != 0)
+
+        import audit_tables as audit_entry
+        code, _ = run_entry(audit_entry, [
+            "audit_tables.py", "--bundle", str(bdir), "--task", "Agriculture_h3_f1",
+            "--scenario", "proxy", "--signature", sig, "--split-spec", str(spec),
+            "--candidate", "N+S+Q", "--output-dir", str(tmp / "out_audit"),
+        ])
+        check("正式入口 audit_tables.py 拒绝跨段目标窗口", code != 0)
+
+    # ---------------- A.1 路由的 spec/Bundle 锚 ----------------
+    print("\n--- A.1 路由 spec/Bundle 锚 ---")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        p = route_file(tmp / "anchored.json", split_spec_sha256="c" * 64)
+        route = load_route(p, sha256_file(p))
+        r = False
+        try:
+            check_route(route, "Agriculture_h3_f1", 1, "N+S+Q", split_spec_sha256="d" * 64)
+        except RouteRejected as exc:
+            r = "split_spec_sha256" in str(exc)
+        check("路由携带 spec 锚且不符时被拒绝", r)
+
+        p2 = route_file(tmp / "ok.json", split_spec_sha256="c" * 64)
+        route2 = load_route(p2, sha256_file(p2))
+        name = check_route(route2, "Agriculture_h3_f1", 1, "N+S+Q", split_spec_sha256="c" * 64)
+        check("路由锚相符时通过", name == "N+S+Q")
+        check("已核对的锚被记录", route2["_anchors_checked"] == ["split_spec_sha256"])
+
+        p3 = route_file(tmp / "bare.json")
+        route3 = load_route(p3, sha256_file(p3))
+        check_route(route3, "Agriculture_h3_f1", 1, "N+S+Q")
+        check("路由无锚时记录为缺口（不假装核对过）",
+              set(route3["_anchors_missing"]) == {"split_spec_sha256", "bundle_signature"})
+
     print(f"\n全部通过（{len(PASSED)} 项检查）")
     print("未跑（需正式 Bundle）：真实 Agriculture 训练、999 次置换、测试段预测")
     return 0

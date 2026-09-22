@@ -45,7 +45,7 @@ from branches import FeatureBundle  # noqa: E402
 from bundle_reader import (  # noqa: E402
     BundleUnavailable, assert_grid, read_frozen_bundle, segment_bounds, sha256_file,
 )
-from candidates import GATE_CANDIDATES, BranchResidualCandidate  # noqa: E402
+from candidates import GATE_CANDIDATES, PROTOCOL_ALPHAS, BranchResidualCandidate  # noqa: E402
 from numeric_fallbacks import numeric_fallback_predict  # noqa: E402
 from predict_io import PredictionWriter, code_commit, weight_hash  # noqa: E402
 from train import RUNNABLE_SCENARIOS, merge_bundles, to_feature_bundle  # noqa: E402
@@ -75,8 +75,16 @@ def load_route(path: Path, expected_file_sha256: str) -> dict:
     return route
 
 
-def check_route(route: dict, task_id: str, fold_id: int, candidate: str) -> str:
-    """核对路由锚与选择结果，返回**实际要跑的模型名**。"""
+def check_route(
+    route: dict, task_id: str, fold_id: int, candidate: str,
+    *, bundle_signature: str | None = None, split_spec_sha256: str | None = None,
+) -> str:
+    """核对路由锚与选择结果，返回**实际要跑的模型名**。
+
+    第四轮 A.1 要求核对"路由任务/折、**冻结 spec/Bundle 锚**、`selection_data_segments`
+    与 `route.selected`"。主控当前 `freeze_route` 的输出里**没有** spec/Bundle 锚字段，
+    因此：路由若带锚则强制核对，不带则**明确记录为缺口**（不假装核对过）。
+    """
     for key in ("task_id", "fold_id", "selected", "fallback", "selection_data_segments"):
         if key not in route:
             raise RouteRejected(f"路由缺少字段: {key}")
@@ -87,6 +95,26 @@ def check_route(route: dict, task_id: str, fold_id: int, candidate: str) -> str:
     if list(route["selection_data_segments"]) != ["cal", "dec"]:
         raise RouteRejected(
             f"路由的选择数据段不是 [cal, dec]: {route['selection_data_segments']}")
+
+    # 冻结 spec / Bundle 锚：有则必核，无则记录缺口
+    anchors_checked: list[str] = []
+    for field, expected in (("split_spec_sha256", split_spec_sha256),
+                            ("bundle_signature", bundle_signature)):
+        if field not in route:
+            continue
+        if expected is None:
+            continue
+        if str(route[field]) != str(expected):
+            raise RouteRejected(
+                f"路由的 {field} 与本轮不符: {route[field]} vs {expected}")
+        anchors_checked.append(field)
+    missing = [f for f in ("split_spec_sha256", "bundle_signature") if f not in route]
+    if missing:
+        print(f"NOTE: 路由文件未携带 {'/'.join(missing)} 锚 —— "
+              f"无法从路由本身确认它与本轮 Bundle/spec 同源；"
+              f"本轮只能核对 task_id/fold_id/segments/selected。", file=sys.stderr)
+    route["_anchors_checked"] = anchors_checked
+    route["_anchors_missing"] = missing
 
     selected = str(route["selected"])
     if selected == "numeric_fallback":
@@ -104,6 +132,23 @@ def check_route(route: dict, task_id: str, fold_id: int, candidate: str) -> str:
             f"路由选中 {selected!r}，但 --candidate={candidate!r} —— "
             f"不得用未中选候选生成测试预测")
     return selected
+
+
+def bundle_input_sha256(bundle: FeatureBundle) -> str:
+    """一个训练**集合**的输入哈希：覆盖全部进入模型的特征与目标。
+
+    与按段记录的 `input_sha256` 不同 —— 后者只散列数值窗口，
+    这里散列整个训练集合的完整输入，用于 A.2 的"两个训练样本集合"留痕。
+    """
+    import hashlib
+    digest = hashlib.sha256()
+    for name in ("numeric_history", "semantic", "quality", "text_available",
+                 "origin_index", "targets_standardized"):
+        array = np.ascontiguousarray(getattr(bundle, name))
+        digest.update(name.encode("ascii"))
+        digest.update(str(array.shape).encode("ascii"))
+        digest.update(array.tobytes())
+    return digest.hexdigest()
 
 
 def _fit(model: BranchResidualCandidate, fit: FeatureBundle) -> np.ndarray:
@@ -140,7 +185,10 @@ def main() -> int:
     # ---- 1) 路由：文件字节锚 + 强制执行选择结果 ----
     try:
         route = load_route(args.route, args.route_sha256)
-        model_name = check_route(route, args.task, fold_id, args.candidate)
+        model_name = check_route(
+            route, args.task, fold_id, args.candidate,
+            bundle_signature=args.signature,
+            split_spec_sha256=sha256_file(args.split_spec) if args.split_spec.is_file() else None)
     except RouteRejected as exc:
         print(f"RouteRejected: {exc}", file=sys.stderr)
         return 3
@@ -171,16 +219,32 @@ def main() -> int:
         return 3
 
     # 正式入口**必须**传入边界与 H（P1-4）
-    grid_stats = {s: assert_grid(bundle, s, bounds[s], task_match_h)
-                  for s in ("train", "calibration", "decision", "test")}
+    try:
+        grid_stats = {s: assert_grid(bundle, s, bounds[s], task_match_h)
+                      for s in ("train", "calibration", "decision", "test")}
+    except AssertionError as exc:
+        print(f"GridRejected: {exc}", file=sys.stderr)
+        return 5
 
     parts = {s: to_feature_bundle(bundle.segment(s)) for s in
              ("train", "calibration", "decision", "test")}
     input_sha = {s: weight_hash(p.numeric_history) for s, p in parts.items()}
 
     # ---- 4) 两阶段：先重演核对选择期哈希，再扩展 ----
+    # A.2 要求记录"两个训练样本集合、行数、输入 SHA256 和模型配置" —— 三者都进 report
+    model_config = {
+        "candidate": model_name,
+        "branches": list(getattr(BranchResidualCandidate(model_name), "branch_names", ())),
+        "alpha_grid": list(PROTOCOL_ALPHAS),
+        "frozen_alpha_by_group": frozen_alphas,
+        "solver": "group-penalized ridge, cholesky, float64 normal equations",
+        "target_scale": "train_only_standardized_OT",
+    }
     report: dict = {"model_run": model_name, "grid": grid_stats,
-                    "input_sha256": input_sha,
+                    "input_sha256": input_sha, "model_config": model_config,
+                    "route_anchors_checked": route.get("_anchors_checked", []),
+                    "route_anchors_missing": route.get("_anchors_missing", []),
+                    "selection_input_sha256": None, "extended_input_sha256": None,
                     "selection_rows": 0, "extended_rows": 0}
 
     if model_name in ("Last", "SeasonalNaive", "AR-Ridge"):
@@ -204,6 +268,7 @@ def main() -> int:
         weights_replay = _fit(model, selection_fit)
         replay_hash = weight_hash(weights_replay)
         report["selection_rows"] = int(len(selection_fit.numeric_history))
+        report["selection_input_sha256"] = bundle_input_sha256(selection_fit)
         if expected_weight_hash and replay_hash != expected_weight_hash:
             print(f"选择期权重重演不符: 期望 {expected_weight_hash[:16]}…，"
                   f"实得 {replay_hash[:16]}…（→ Bundle 或配置与选择期不一致）", file=sys.stderr)
@@ -213,6 +278,7 @@ def main() -> int:
         extended_fit = merge_bundles(parts["train"], parts["calibration"], parts["decision"])
         weights_extended = _fit(model, extended_fit)
         report["extended_rows"] = int(len(extended_fit.numeric_history))
+        report["extended_input_sha256"] = bundle_input_sha256(extended_fit)
         report["weight_hash"] = replay_hash
         report["test_fit_weight_hash"] = weight_hash(weights_extended)
         predictions = model.predict(parts["test"])
