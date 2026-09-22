@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "scope": "stage1_github_blob_snapshot_only",
+  "verified_at_utc": "2026-09-22T09:57:48.409110+00:00",
+  "fixed_snapshot_commit": "2d530ec7ab22fce591767baf1af81f8fe9c6a11d",
+  "branch": "3218151885-creator",
+  "comparison_sources": {
+    "round3_manifest": "辅助电脑02交付03次/clean_snapshot_manifest.csv",
+    "round2_task_registry": "辅助电脑02交付02次/evidence/task_registry.csv"
+  },
+  "files": [
+    {
+      "domain": "Agriculture",
+      "git_path": "辅助电脑02交付04次/clean_snapshots/Agriculture_numerical.csv",
+      "git_blob_oid": "a428353fb650ef0c7ee8cfe055d6b2ad41df3411",
+      "sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38",
+      "bytes": 18602,
+      "rows": 532,
+      "columns": [
+        "start_date",
+        "end_date",
+        "OT"
+      ],
+      "checks": {
+        "sha256_matches_round3": true,
+        "bytes_matches_round3": true,
+        "rows_matches_round3": true,
+        "columns_match_round3": true,
+        "sha256_matches_round2": true,
+        "rows_match_round2": true
+      },
+      "status": "PASS"
+    },
+    {
+      "domain": "Climate",
+      "git_path": "辅助电脑02交付04次/clean_snapshots/Climate_numerical.csv",
+      "git_blob_oid": "b225f45c6121a9d2336f9599ece030a8ff7b85a5",
+      "sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+      "bytes": 36793,
+      "rows": 1272,
+      "columns": [
+        "start_date",
+        "end_date",
+        "OT"
+      ],
+      "checks": {
+        "sha256_matches_round3": true,
+        "bytes_matches_round3": true,
+        "rows_matches_round3": true,
+        "columns_match_round3": true,
+        "sha256_matches_round2": true,
+        "rows_match_round2": true
+      },
+      "status": "PASS"
+    },
+    {
+      "domain": "SocialGood",
+      "git_path": "辅助电脑02交付04次/clean_snapshots/SocialGood_numerical.csv",
+      "git_blob_oid": "6710e299847d00495473afcf70b0a1f42de62ed3",
+      "sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+      "bytes": 24770,
+      "rows": 916,
+      "columns": [
+        "start_date",
+        "end_date",
+        "OT"
+      ],
+      "checks": {
+        "sha256_matches_round3": true,
+        "bytes_matches_round3": true,
+        "rows_matches_round3": true,
+        "columns_match_round3": true,
+        "sha256_matches_round2": true,
+        "rows_match_round2": true
+      },
+      "status": "PASS"
+    },
+    {
+      "domain": "Environment",
+      "git_path": "辅助电脑02交付04次/clean_snapshots/Environment_numerical.csv",
+      "git_blob_oid": "a3582600627a8c35f4023bfdd53945a718776456",
+      "sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3",
+      "bytes": 450892,
+      "rows": 15979,
+      "columns": [
+        "start_date",
+        "end_date",
+        "OT"
+      ],
+      "checks": {
+        "sha256_matches_round3": true,
+        "bytes_matches_round3": true,
+        "rows_matches_round3": true,
+        "columns_match_round3": true,
+        "sha256_matches_round2": true,
+        "rows_match_round2": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "file_count": 4,
+  "total_bytes": 531057,
+  "commands": {
+    "extract_one": "git show <fixed_snapshot_commit>:<git_path> > <destination>",
+    "verify": ".venv/Scripts/python.exe \"辅助电脑02交付04次/verify_github_snapshots.py\" --commit <fixed_snapshot_commit> --output \"辅助电脑02交付04次/github_snapshot_receipt.json\""
+  },
+  "claim_boundary": "Confirms bytes stored in the fixed Git commit and agreement with prior registries. It does not confirm master download, protocol freeze, formal Bundle construction, or cross-reader acceptance."
+}
