@@ -22,7 +22,7 @@
     "origin_detail_sha256": "79419a50472dfef55524cae3cbd9b98c530b9f163d099d0f0dd4ae36205b46f9",
     "origin_detail_bytes": 58443773,
     "fact_catalog_sha256": "e48b93939d812e29111c4fd834cdd445aa9a419fcee50a9525a1343563975319",
-    "source_clean_reaudit_sha256": "cf6e97109019ee682e0d30707352efc888f6f52067959cae800a4e85c5b4d0db",
+    "source_clean_reaudit_sha256": "3f68033889c015f0d577e8e851600aca49c11f0d702e8c0fa0bbb40a28fe9fcc",
     "negative_cases": "PASS",
     "all_retained_origins_checked": true,
     "quality_max_abs_error": 0.0,
