@@ -2,7 +2,7 @@
   "status": "UPLOADED",
   "receiver_status": "MASTER_RECEIVED_AND_VERIFIED",
   "delivery_branch": "3218151885-creator",
-  "delivery_evidence_commit": "PENDING_FINAL_COMMIT",
+  "delivery_evidence_commit": "c5b3bb37e9bb903c391952f8996425b3a7c39f47",
   "prior_receipt": {
     "path": "辅助电脑02交付05次/transfer_receipt.json",
     "sha256": "10846585f0c1109841f5440c794df8096553777812ff420aa0f4af89f5664576",
@@ -30,7 +30,10 @@
     "source_url_rows": 0,
     "publication_time_status": "end_date_proxy_unverified"
   },
-  "audit_release_url": null,
-  "audit_release_asset_sha256": null,
+  "audit_release_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/tag/source-time-boundary-audit-20260923",
+  "audit_release_asset_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/source-time-boundary-audit-20260923/SafeFAME-TS_source_time_audit_06.zip",
+  "audit_release_asset_name": "SafeFAME-TS_source_time_audit_06.zip",
+  "audit_release_asset_size": 3178540,
+  "audit_release_asset_sha256": "a2c3b7f6f8fe2ca8a8dde934b746f94d277af358cf20e744f9d94071923fd060",
   "claim_boundary": "The audit verifies the frozen Bundle's implemented rules and arrays. It does not convert end_date into a verified publication timestamp or establish causality."
 }

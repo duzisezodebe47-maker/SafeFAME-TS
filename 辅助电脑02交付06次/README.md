@@ -35,3 +35,5 @@
 `source_clean_reaudit.json` 记录了原始 Time-MMD 审计和固定清洗缓存核验。四份冻结数值 CSV 的实际字节 SHA256 全部与冻结值一致；固定链使用已验证缓存复核，没有把已有文件复制后冒充新的原始清洗结果。
 
 大体量的逐起点 JSONL 不进入 Git 分支，随第六轮 GitHub Release 附件提供，并在分支回执中记录固定下载地址和 SHA256。
+
+下载：<https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/source-time-boundary-audit-20260923/SafeFAME-TS_source_time_audit_06.zip>
