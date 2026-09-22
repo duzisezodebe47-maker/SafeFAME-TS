@@ -1,0 +1,92 @@
+NOTE: 数据侧读取器不在位（D:\aaa2026人工智能课程报告\主控接收数据\SafeFAME_TS_第5轮模型_SHY_828e7b4\audit_detached_worktree\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+NOTE: 数据侧读取器不在位（D:\aaa2026人工智能课程报告\主控接收数据\SafeFAME_TS_第5轮模型_SHY_828e7b4\audit_detached_worktree\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+NOTE: 数据侧读取器不在位（D:\aaa2026人工智能课程报告\主控接收数据\SafeFAME_TS_第5轮模型_SHY_828e7b4\audit_detached_worktree\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+NOTE: 数据侧读取器不在位（D:\aaa2026人工智能课程报告\主控接收数据\SafeFAME_TS_第5轮模型_SHY_828e7b4\audit_detached_worktree\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+NOTE: 数据侧读取器不在位（D:\aaa2026人工智能课程报告\主控接收数据\SafeFAME_TS_第5轮模型_SHY_828e7b4\audit_detached_worktree\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+NOTE: 数据侧读取器不在位（D:\aaa2026人工智能课程报告\主控接收数据\SafeFAME_TS_第5轮模型_SHY_828e7b4\audit_detached_worktree\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+第五轮测试（合成数据；正式 Bundle 未交付）
+
+--- A.2 数值基线与主控实现等价 ---
+  ok  A.2 α 选择与主控一致
+  ok  A.2 校准 MSE 与主控一致（容差内）
+  ok  A.2 fit_rows / calibration_rows 与主控一致
+  ok  A.2 [calibration] Last 逐起点逐步输出与主控一致（8 起点）
+  ok  A.2 [calibration] SeasonalNaive 逐起点逐步输出与主控一致（8 起点）
+  ok  A.2 [calibration] AR-Ridge 逐起点逐步输出与主控一致（8 起点）
+  ok  A.2 [decision] Last 逐起点逐步输出与主控一致（13 起点）
+  ok  A.2 [decision] SeasonalNaive 逐起点逐步输出与主控一致（13 起点）
+  ok  A.2 [decision] AR-Ridge 逐起点逐步输出与主控一致（13 起点）
+  ok  A.2 [test] Last 逐起点逐步输出与主控一致（13 起点）
+  ok  A.2 [test] SeasonalNaive 逐起点逐步输出与主控一致（13 起点）
+  ok  A.2 [test] AR-Ridge 逐起点逐步输出与主控一致（13 起点）
+  ok  A.2 [all] Last 全量逐点一致
+  ok  A.2 [all] SeasonalNaive 全量逐点一致
+  ok  A.2 [all] AR-Ridge 全量逐点一致
+  ok  A.2 行序与 Bundle 一致
+
+--- A.1 numeric_fallback 旁路 ---
+  ok  A.1 请求门控候选 N+S+Q 但路由选数值回退 → 拒绝且无预测文件
+  ok  A.1 请求门控候选 N+S+Q+SF 但路由选数值回退 → 拒绝且无预测文件
+  ok  A.1 请求值严格等于 route.fallback 时通过
+  ok  A.3 主控基线（AR-Ridge）无 selection manifest 也能跑
+  ok  A.3 回退路径标记为主控基线且无权重哈希
+  ok  A.3 记录了主控基线的 α 与拟合行数
+
+--- A.4 路由两锚必填 ---
+  ok  A.4 缺 split_spec_sha256 锚被拒绝
+  ok  A.4 缺 bundle_signature 锚被拒绝
+  ok  A.4 bundle_signature 不符被拒绝
+  ok  A.4 两锚齐备且一致时通过
+  ok  A.4 selected 不在 spec 的 gate_candidates 中 → 拒绝
+  ok  A.4 fallback 不在 spec 的 numeric_fallback_candidates 中 → 拒绝
+  ok  A.4 spec 未声明 gate_candidates → 拒绝
+  ok  A.4 spec 未声明 numeric_fallback_candidates → 拒绝
+
+--- A.5 测试真值不进入预测 -------------
+  ok  A.5 推理视图不含 targets
+  ok  A.5 推理视图不含 targets_standardized
+  ok  A.5 推理视图特征完整
+  ok  A.5 改动测试真值（并重新签名）后预测逐位不变
+  ok  A.5 重新选路后 α 完全一致
+  ok  A.5 重新拟合后权重逐位一致
+  ok  A.5 测试真值缺失时仍能预测且结果不变
+
+--- A.3 `N` 作为数值回退的独立路径 ---
+  ok  A.3 `N` 作为数值回退走清单路径，端到端成功
+  ok  A.3 `N` 标为模型候选型回退（既非门控候选也非主控基线）
+  ok  A.3 `N` 路径记录了选择期与扩展期权重哈希
+  ok  A.3 `N` 缺选择期清单时被拒绝（区别于主控基线）
+
+--- 导出按 Bundle 行序（交错段序）---
+  ok  交错段序下 samples_order_view 保持原行序
+  ok  导出的段序不是简单的 cal-then-dec
+  ok  origin_id 与 origin_index 逐行对齐
+
+--- 沿用：签名 / 边界 / 半段 ---
+  ok  四段边界与 spec 一致
+  ok  各段网格与 H 窗口通过
+  ok  middle = (cal_end+dec_end)//2 = 37
+  ok  前段 == origin+h<=middle
+  ok  后段 == origin>=middle
+  ok  半段不重叠
+  ok  签名 == signature(inputs)
+
+--- 三个入口完整路径端到端 ---
+  ok  train.py 完整路径端到端成功
+  ok  train.py 产出预测 CSV 与 manifest
+  ok  CSV 列 == 主控 PREDICTION_COLUMNS
+  ok  target_scale 全部为主控 SCALE
+  ok  code_commit 全部为 40 位 hex（主控要求）
+  ok  config_sha256 全部为 64 位 hex（主控要求）
+  ok  每起点每步恰一行
+  ok  段只含 calibration/decision（不含 train/test）
+  ok  permutation_entry.py 完整路径端到端成功
+  ok  置换产出逐次 CSV 与两份 summary
+  ok  未满 999 次时 p 为 null（不伪填）
+  ok  逐次日志一行一次迭代
+  ok  audit_tables.py 完整路径端到端成功
+  ok  审计表产出两张 CSV
+  ok  半段表含保留与剔除数
+
+全部通过（66 项检查）
+未跑（需正式 Bundle）：真实 Agriculture 训练、999 次置换、测试段预测

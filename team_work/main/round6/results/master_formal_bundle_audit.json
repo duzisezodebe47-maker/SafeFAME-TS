@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "inventory_files": 93,
+  "tasks": [
+    {
+      "task_id": "Agriculture_h12_f1",
+      "origins": 357,
+      "scenarios": [
+        "proxy",
+        "conservative_lag"
+      ],
+      "source_target_max_abs_error": 0.0,
+      "source_history_max_abs_error": 0.0,
+      "text_available_proxy": 357,
+      "text_available_conservative_lag": 357
+    },
+    {
+      "task_id": "Climate_h4_f2",
+      "origins": 1080,
+      "scenarios": [
+        "proxy",
+        "conservative_lag"
+      ],
+      "source_target_max_abs_error": 0.0,
+      "source_history_max_abs_error": 0.0,
+      "text_available_proxy": 1080,
+      "text_available_conservative_lag": 1080
+    },
+    {
+      "task_id": "SocialGood_h3_f1",
+      "origins": 700,
+      "scenarios": [
+        "proxy",
+        "conservative_lag"
+      ],
+      "source_target_max_abs_error": 0.0,
+      "source_history_max_abs_error": 0.0,
+      "text_available_proxy": 341,
+      "text_available_conservative_lag": 340
+    },
+    {
+      "task_id": "Environment_h7_f2",
+      "origins": 14301,
+      "scenarios": [
+        "proxy",
+        "conservative_lag"
+      ],
+      "source_target_max_abs_error": 0.0,
+      "source_history_max_abs_error": 0.0,
+      "text_available_proxy": 14301,
+      "text_available_conservative_lag": 14301
+    }
+  ]
+}

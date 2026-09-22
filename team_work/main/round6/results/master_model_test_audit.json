@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "scope": "SHY round-five synthetic integration tests only",
+  "model_commit": "828e7b4d4363ed37bf44cc1f89d15ba4d524cf44",
+  "test_path": "03 辅助电脑二 交付五次/model/tests/test_round5.py",
+  "execution_host": "master D-drive detached Git worktree",
+  "python_version": "3.14.6",
+  "exit_code": 0,
+  "passed_checks": 66,
+  "log_sha256": "2c73d75463652fb88cef0b9bac527727cdb02d938df20a2ab241bfbfd89696d0",
+  "real_bundle_999_permutation_tested": false,
+  "note": "The model team's 3.12 environment was not reproduced exactly; master independently reran this suite on D-drive Python 3.14 with isolated SciPy/scikit-learn dependencies."
+}

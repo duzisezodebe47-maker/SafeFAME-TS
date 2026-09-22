@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "selection_origins": 138,
+  "horizon": 12,
+  "candidates": [
+    [
+      "N+S+Q",
+      2026
+    ],
+    [
+      "N+S+Q+SF",
+      2026
+    ]
+  ],
+  "csv_sha256": {
+    "N_S_Q_proxy_predictions.csv": "a13b35aeb713fb55ee0d8beafcdab538b873549210f62251c32aa0bbd697fe06",
+    "N_S_Q_SF_proxy_predictions.csv": "5f37b80a16dab5672b42fa4a27725439cbca4b7505aca0e0ed3b3f9acb8a8ed2"
+  }
+}

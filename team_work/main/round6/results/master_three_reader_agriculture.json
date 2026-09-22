@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "scope": "Agriculture_h12_f1/proxy",
+  "rows": [
+    0,
+    178,
+    356
+  ],
+  "readers_evaluated_in_this_run": [
+    "main/v2.py",
+    "data/bundle_read_example.py"
+  ],
+  "model_reader_independently_compared_in": "master_model_reader_compare.json",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "data_reader_git_ref": "origin/3218151885-creator"
+}

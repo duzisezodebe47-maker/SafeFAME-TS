@@ -1,0 +1,44 @@
+{
+  "status": "SELECTION_BASELINES_READY",
+  "task_id": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "segments": [
+    "calibration",
+    "decision"
+  ],
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "baseline_implementation_commit": "c7da1dbed454785aa8442448a8c424635e8fc33f",
+  "baseline_implementation": "team_work/main/src/team_eval/v2.py::numeric_baselines",
+  "csv_sha256": "3acfd6d29a3980a4bbd192fa49c789b9de6de4ea8de8b90144d8aa86a037bef8",
+  "prediction_rows": 4968,
+  "origin_count": 138,
+  "horizon": 12,
+  "seed": 2026,
+  "candidates": [
+    "Last",
+    "SeasonalNaive",
+    "AR-Ridge"
+  ],
+  "config_sha256": {
+    "Last": "91a777fc119d2c9b10cf6899bdf5e064f7ed0bca148d932b01909d2fffc402b3",
+    "SeasonalNaive": "6b7ecc1c3e6da516d9d1863c2c98271e17186941f190053d39d2d6332386abbb",
+    "AR-Ridge": "6c97aaff9373a517c54d41f09143b2be0754e272fb4315e7ea9e7ba301b7a274"
+  },
+  "ridge_alpha": 10.0,
+  "ridge_calibration_mse": 0.017618668697762695,
+  "fit_rows": 177,
+  "calibration_rows": 43,
+  "alpha_grid": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0,
+    10000.0
+  ],
+  "seasonal_period": 12,
+  "test_evidence_used": false
+}

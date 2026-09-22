@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "scope": "train_calibration_decision_only",
+  "test_truth_loaded_into_fitting_objects": false,
+  "master_alpha": 10.0,
+  "model_alpha": 10.0,
+  "candidate_max_abs_error": {
+    "Last": 0.0,
+    "SeasonalNaive": 0.0,
+    "AR-Ridge": 0.0
+  }
+}

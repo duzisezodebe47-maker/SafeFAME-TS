@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "model_delivery_manifest_files": 11,
+  "reader_comparison": [
+    {
+      "task_id": "Agriculture_h12_f1",
+      "scenario": "proxy",
+      "origin_count": 357,
+      "compared_rows": [
+        0,
+        178,
+        356
+      ],
+      "exact": true
+    },
+    {
+      "task_id": "Agriculture_h12_f1",
+      "scenario": "conservative_lag",
+      "origin_count": 357,
+      "compared_rows": [
+        0,
+        178,
+        356
+      ],
+      "exact": true
+    },
+    {
+      "task_id": "Climate_h4_f2",
+      "scenario": "proxy",
+      "origin_count": 1080,
+      "compared_rows": [
+        0,
+        540,
+        1079
+      ],
+      "exact": true
+    },
+    {
+      "task_id": "Climate_h4_f2",
+      "scenario": "conservative_lag",
+      "origin_count": 1080,
+      "compared_rows": [
+        0,
+        540,
+        1079
+      ],
+      "exact": true
+    },
+    {
+      "task_id": "SocialGood_h3_f1",
+      "scenario": "proxy",
+      "origin_count": 700,
+      "compared_rows": [
+        0,
+        350,
+        699
+      ],
+      "exact": true
+    },
+    {
+      "task_id": "SocialGood_h3_f1",
+      "scenario": "conservative_lag",
+      "origin_count": 700,
+      "compared_rows": [
+        0,
+        350,
+        699
+      ],
+      "exact": true
+    },
+    {
+      "task_id": "Environment_h7_f2",
+      "scenario": "proxy",
+      "origin_count": 14301,
+      "compared_rows": [
+        0,
+        7150,
+        14300
+      ],
+      "exact": true
+    },
+    {
+      "task_id": "Environment_h7_f2",
+      "scenario": "conservative_lag",
+      "origin_count": 14301,
+      "compared_rows": [
+        0,
+        7150,
+        14300
+      ],
+      "exact": true
+    }
+  ]
+}
