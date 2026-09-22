@@ -122,7 +122,8 @@ class PredictionWriter:
             for step in range(predictions.shape[1]):
                 self.records.append(PredictionRecord(
                     task_id=task_id, fold_id=int(fold_id), origin_id=str(origin_id[row]),
-                    origin_index=int(origin_index[row]), segment=segment, scenario=scenario,
+                    origin_index=int(origin_index[row]), segment=segments_per_row[row],
+                    scenario=scenario,
                     candidate_id=candidate_id, seed=int(seed), step=step + 1,
                     y_pred=float(predictions[row, step]), target_scale=TARGET_SCALE,
                     bundle_signature=bundle_signature, config_sha256=config_sha256_value,

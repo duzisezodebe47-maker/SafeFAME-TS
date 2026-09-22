@@ -7,7 +7,7 @@
 
 ## 一、状态
 
-**A 部分五项修复完成，51 项合成测试通过；B 部分仍阻塞于正式 Bundle 未交付。**
+**A 部分五项修复完成，66 项合成测试通过；B 部分仍阻塞于正式 Bundle 未交付。**
 
 主控的 `Freeze four audited numerical snapshots` 已完成 —— 解锁链推进了一步，
 模型侧已记下冻结 spec 基准 `a0947a5b…f0031`，Bundle 到位后立即用它核对。
@@ -103,13 +103,25 @@ if candidate != fallback:
 现改为按 Bundle 行序导出。**这一点建议主控确认**：数据侧产出的
 `samples.csv` 是否按 train/cal/dec/test 连续排列。
 
+### 最终检查：选择期首次导出此前**从未被真正执行过**
+
+三个入口此前只跑过 `--help` 与拒绝分支。补上完整路径端到端后，立刻抓到一个
+**会让真实链路卡死的 bug**：`predictions.csv` 的 `segment` 列装的是整个数组
+转成的字符串，而不是逐行段名 —— 主控 `load_prediction_grid` 会整表拒绝。
+
+根因是一次**静默失败的字符串替换**（搜索串带了行首空格，实际不在行首），
+`str.replace` 没匹配到就返回原串，脚本也没加断言。
+
+现已修复并加入 15 项长期端到端检查。**请主控在收到选择期预测时，先用
+`run_bridge.py validate-predictions` 单独验一次列与段名** —— 这条路径是刚被打通的。
+
 ---
 
-## 三、测试：51 项全部通过
+## 三、测试：66 项全部通过
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
-# 全部通过（51 项检查），退出码 0
+# 全部通过（66 项检查），退出码 0
 ```
 
 ---

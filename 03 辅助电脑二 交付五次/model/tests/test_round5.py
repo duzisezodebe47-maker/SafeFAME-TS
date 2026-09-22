@@ -33,6 +33,14 @@ sys.path.insert(0, str(MODEL))
 from branches import FeatureBundle  # noqa: E402
 from candidates import GATE_CANDIDATES  # noqa: E402
 
+# 主控 team_eval/v2.py 的 PREDICTION_COLUMNS —— 逐字抄录，供 CSV 契约核对
+MASTER_PREDICTION_COLUMNS = frozenset({
+    "task_id", "fold_id", "origin_id", "origin_index", "segment", "scenario",
+    "candidate_id", "seed", "step", "y_pred", "target_scale",
+    "bundle_signature", "config_sha256", "code_commit",
+})
+MASTER_SCALE = "train_only_standardized_OT"
+
 PASSED: list[str] = []
 
 
@@ -594,6 +602,88 @@ def main() -> int:
         m = json.loads((bdir / "manifest.json").read_text())
         check("签名 == signature(inputs)",
               m["signature"] == signature(m["inputs"]))
+
+    # ---------------- 三个入口的完整路径端到端 ----------------
+    # 此前只跑过 --help 与拒绝分支；完整路径没被执行过。
+    # 上一轮 predict_test 的崩溃就是靠这类端到端跑出来的。
+    print("\n--- 三个入口完整路径端到端 ---")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        bdir = make_bundle(tmp / "e2e", spec)
+        sig = json.loads((bdir / "manifest.json").read_text())["signature"]
+        common = ["--bundle", str(bdir), "--task", "Agriculture_h3_f1",
+                  "--scenario", "proxy", "--signature", sig, "--split-spec", str(spec)]
+
+        def run_entry(module, argv):
+            old = sys.argv; sys.argv = argv
+            try:
+                with contextlib.redirect_stdout(io.StringIO()), \
+                        contextlib.redirect_stderr(io.StringIO()):
+                    code = module.main()
+                return code
+            except SystemExit as exc:
+                return int(exc.code or 1)
+            except Exception:
+                return -1
+            finally:
+                sys.argv = old
+
+        import train as train_entry
+        out_t = tmp / "t"
+        code = run_entry(train_entry, ["train.py", *common, "--segments", "calibration",
+                                       "decision", "--candidate", "N+S+Q",
+                                       "--output-dir", str(out_t)])
+        check("train.py 完整路径端到端成功", code == 0)
+        csvs = list(out_t.glob("*_predictions.csv"))
+        check("train.py 产出预测 CSV 与 manifest",
+              len(csvs) == 1 and (out_t / "N_S_Q_run_manifest.json").is_file())
+        import csv as _csv
+        with csvs[0].open(encoding="utf-8-sig", newline="") as fh:
+            rows = list(_csv.DictReader(fh))
+        # 主控 v2.load_prediction_grid 的逐条格式门槛
+        check("CSV 列 == 主控 PREDICTION_COLUMNS",
+              set(rows[0]) == set(MASTER_PREDICTION_COLUMNS))
+        check("target_scale 全部为主控 SCALE",
+              all(r["target_scale"] == MASTER_SCALE for r in rows))
+        import re as _re
+        check("code_commit 全部为 40 位 hex（主控要求）",
+              all(_re.fullmatch(r"[0-9a-f]{40}", r["code_commit"]) for r in rows))
+        check("config_sha256 全部为 64 位 hex（主控要求）",
+              all(_re.fullmatch(r"[0-9a-f]{64}", r["config_sha256"]) for r in rows))
+        n_origins = len({r["origin_id"] for r in rows})
+        check("每起点每步恰一行",
+              len(rows) == n_origins * 3
+              and len({(r["origin_id"], r["step"]) for r in rows}) == len(rows))
+        check("段只含 calibration/decision（不含 train/test）",
+              {r["segment"] for r in rows} == {"calibration", "decision"})
+
+        import permutation_entry as perm_entry
+        out_p = tmp / "p"
+        code = run_entry(perm_entry, ["permutation_entry.py", *common,
+                                      "--candidate", "N+S+Q", "--nulls", "3",
+                                      "--output-dir", str(out_p)])
+        check("permutation_entry.py 完整路径端到端成功", code == 0)
+        check("置换产出逐次 CSV 与两份 summary",
+              (out_p / "null_scores.csv").is_file()
+              and (out_p / "null_scores_summary.json").is_file()
+              and (out_p / "permutation_summary.json").is_file())
+        psum = json.loads((out_p / "permutation_summary.json").read_text(encoding="utf-8"))
+        check("未满 999 次时 p 为 null（不伪填）",
+              psum["p_value"] is None and psum["successful"] == 3)
+        nrows = len(pd.read_csv(out_p / "null_scores.csv"))
+        check("逐次日志一行一次迭代", nrows == 3)
+
+        import audit_tables as audit_entry
+        out_a = tmp / "a"
+        code = run_entry(audit_entry, ["audit_tables.py", *common,
+                                       "--candidate", "N+S+Q", "--output-dir", str(out_a)])
+        check("audit_tables.py 完整路径端到端成功", code == 0)
+        check("审计表产出两张 CSV",
+              (out_a / "text_availability_audit.csv").is_file()
+              and (out_a / "decision_halves_audit.csv").is_file())
+        halves = pd.read_csv(out_a / "decision_halves_audit.csv")
+        check("半段表含保留与剔除数", set(halves.columns) >= {"half", "n_origins", "mean_loss"})
 
     print(f"\n全部通过（{len(PASSED)} 项检查）")
     print("未跑（需正式 Bundle）：真实 Agriculture 训练、999 次置换、测试段预测")

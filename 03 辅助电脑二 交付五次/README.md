@@ -74,11 +74,11 @@ return fallback          # ← 请求门控候选时条件为假 → 不报错 �
 
 ---
 
-## 二、测试：51 项全部通过（合成数据）
+## 二、测试：66 项全部通过（合成数据）
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
-# 全部通过（51 项检查）
+# 全部通过（66 项检查）
 # 退出码 0
 ```
 
@@ -143,6 +143,33 @@ if grid != expected_grid:      # ← 列表相等，顺序也必须一致
 `PredictionWriter` 的 `segment` 参数改为支持**逐行段名数组**。
 新增测试用**交错段序**的 Bundle 验证（段序正常时测不到这个 bug）。
 
+### 最终检查：跑入口完整路径，抓到一个**致命 bug**
+
+此前三个入口只跑过 `--help` 与拒绝分支，**完整导出路径从未被执行过**。
+补上端到端后立刻暴露：
+
+```
+CSV 的 segment 列 = "['calibration' 'calibration' ... 'decision' ...]"
+```
+
+**全部行的 `segment` 列装的是整个数组转成的字符串**，不是逐行段名。
+主控 `load_prediction_grid` 把 `segment` 作为预测键的一部分 ——
+拿到这串东西会**整表拒绝**，且这是**选择期第一次导出**就炸，会直接卡住真实链路。
+
+**根因**：改 `predict_io.py` 时那次字符串替换的搜索串带了行首空格，
+而实际代码里 `segment=segment` 不在行首（前面还有 `origin_index=...,`）。
+`str.replace` **一个都没匹配到，静默返回原串**，脚本也没加断言。
+
+**为什么 51 项测试没发现**：没有任何一项真的跑过 `train.py` 的完整导出路径。
+
+新增长期覆盖（15 项）：
+
+| 入口 | 检查 |
+|---|---|
+| `train.py` | CSV 列 == 主控 `PREDICTION_COLUMNS`、`target_scale`、`code_commit`(40hex)、`config_sha256`(64hex)、每起点每步恰一行、段只含 cal/dec |
+| `permutation_entry.py` | 逐次日志一行一次迭代、未满 999 时 `p_value=null` |
+| `audit_tables.py` | 两张审计表、半段表含保留与剔除数 |
+
 ### 补测过程中又抓到两个自己的 bug
 
 1. **A.5 的故障注入写错了段**：我用 `rng.normal(size=arr.shape)` 替换了**整个数组**，
@@ -201,7 +228,7 @@ a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031
     ├── permutation_entry.py   置换入口
     ├── predict_test.py        ★ A.1/A.3/A.4 修复
     ├── audit_tables.py        无文本 + 半段审计表
-    └── tests/test_round5.py   51 项检查
+    └── tests/test_round5.py   66 项检查
 ```
 
 前四轮目录完整保留，未改动。

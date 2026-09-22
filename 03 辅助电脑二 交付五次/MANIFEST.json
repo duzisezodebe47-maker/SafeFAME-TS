@@ -7,11 +7,11 @@
     "model/numeric_fallbacks.py": "c59f23e281b821b35707e92b892ef5c60be365e43409e3ac6a76202e50d0346a",
     "model/permutation.py": "e83aa1b833e7fef45aa9dcff037e95ee7a1b3e578da1ec73a8890001d705678e",
     "model/permutation_entry.py": "1769509fba687e3ddeeb2664811561e40ec437dd27bb461d504210b03f509fb3",
-    "model/predict_io.py": "f2ec13f39d286be34843560872a0c83615949070abd8cb35f2d10af1ec47e0ad",
+    "model/predict_io.py": "477ad04446a588418b9d8b30e13582eb6663f010e50127a0542b7251a96358f2",
     "model/predict_test.py": "37df25fe54743f0c4023b4a0a3cc3da08bfd2d6ed560306119307a2ed4da3328",
-    "model/tests/test_round5.py": "c4f3b4304e13983734d003fa642c25695f5bfc3d7126d53a6870bbc7495924ee",
+    "model/tests/test_round5.py": "0a925bb835b9b84ef2bbadbc8ef297099fc675521e556ba974e4b32af5cbb90a",
     "model/train.py": "48e01b727e9a458272393aaaf1f7edda063e9787f6490e939dbeb22b0e3223ea"
   },
-  "combined_sha256": "a3c8333603e766b157974dbe917fb150710e793a745b9276eac3b51a86dcd82c",
+  "combined_sha256": "68dafcdd615e986c61eb7bd69751dd0cfe25c478a8020e71761b4633cbb4e627",
   "note": "combined_sha256 覆盖 model/ 下全部文件（按路径排序拼接的 SHA256）"
 }
