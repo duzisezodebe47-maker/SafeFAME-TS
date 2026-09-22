@@ -142,6 +142,11 @@ def main() -> int:
                     and all(e["ok"] for e in results.values()) else "FAIL"),
         "code_provenance": warn_if_dirty(REPO_ROOT, HERE),
         "runtime": script_entry_snapshot(started, cpu_started),
+        # 本模块真正的计算在两个 train.py **子进程**里，父进程只做编排与比对 ——
+        # `time.process_time()` 取不到子进程的 CPU。所以这里的 cpu_seconds 会很小，
+        # 别读成"这次重演只花了 0.03 s CPU"；有意义的是 wall_seconds。
+        "runtime_note": "cpu_seconds / peak_rss_bytes 只覆盖本编排进程；"
+                        "train.py 子进程的 CPU 与内存见各自的 run_manifest.json::runtime",
         "note": "每个候选跑两次 train.py：两次逐字节相同，且与已交付的 CSV/manifest 一致",
     }
     (out / "replay_check.json").write_text(
