@@ -232,12 +232,20 @@ def main() -> int:
 
     # ---- 4) 两阶段：先重演核对选择期哈希，再扩展 ----
     # A.2 要求记录"两个训练样本集合、行数、输入 SHA256 和模型配置" —— 三者都进 report
+    # 分支组成只在门控候选上取。**不能对回退模型构造 BranchResidualCandidate** ——
+    # 它在构造时就会对未知候选抛 ValueError，端到端测试抓到过这个崩溃。
+    if model_name in GATE_CANDIDATES:
+        branches = list(BranchResidualCandidate(model_name).branch_names)
+        solver = "group-penalized ridge, cholesky, float64 normal equations"
+    else:
+        branches = []
+        solver = f"numeric fallback: {model_name}"
     model_config = {
         "candidate": model_name,
-        "branches": list(getattr(BranchResidualCandidate(model_name), "branch_names", ())),
+        "branches": branches,
         "alpha_grid": list(PROTOCOL_ALPHAS),
-        "frozen_alpha_by_group": frozen_alphas,
-        "solver": "group-penalized ridge, cholesky, float64 normal equations",
+        "frozen_alpha_by_group": frozen_alphas if model_name in GATE_CANDIDATES else None,
+        "solver": solver,
         "target_scale": "train_only_standardized_OT",
     }
     report: dict = {"model_run": model_name, "grid": grid_stats,
@@ -298,7 +306,8 @@ def main() -> int:
         candidate_id=model_name, seed=args.seed, bundle_signature=args.signature,
         config_sha256_value=selection.get("config_sha256", ""), commit=code_commit(REPO_ROOT),
     )
-    n_rows = writer.write(out / f"{model_name.replace('+', '_')}_test_predictions.csv")
+    safe_name = model_name.replace("+", "_").replace("-", "_")
+    n_rows = writer.write(out / f"{safe_name}_test_predictions.csv")
 
     manifest = {
         "task": args.task, "scenario": args.scenario, "candidate": model_name,
@@ -314,7 +323,7 @@ def main() -> int:
                  "最终指标由主控独立计分。"),
         **report,
     }
-    (out / f"{model_name.replace('+', '_')}_test_manifest.json").write_text(
+    (out / f"{safe_name}_test_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
 
     print(json.dumps({"status": "completed", "model": model_name, "rows": n_rows,

@@ -485,6 +485,97 @@ def main() -> int:
         check("路由无锚时记录为缺口（不假装核对过）",
               set(route3["_anchors_missing"]) == {"split_spec_sha256", "bundle_signature"})
 
+    # ---------------- predict_test 端到端（此前从未被执行过）----------------
+    # 前面的测试只覆盖 load_route / check_route 等辅助函数；入口 main() 本身没跑过。
+    # 这里把 gate_candidate 与 numeric_fallback 两条路径都真跑一遍。
+    print("\n--- predict_test 端到端 ---")
+    from bundle_reader import read_frozen_bundle as _rfb
+    from predict_io import weight_hash as _wh
+    from predict_test import main as _pt_main
+    from train import merge_bundles as _mb, to_feature_bundle as _tfb
+
+    def run_predict_test(tmp: Path, spec: Path, route: dict, selection: dict,
+                         candidate: str) -> tuple[int, Path, str]:
+        bdir = make_bundle(tmp / "b", spec)
+        sig = json.loads((bdir / "manifest.json").read_text())["signature"]
+        # 占位符 @SIG@ 换成真实签名 —— 否则选择期清单的签名核对会（正确地）失败
+        selection = {k: (sig if v == "@SIG@" else v) for k, v in selection.items()}
+        rp = tmp / "route.json"
+        rp.write_text(json.dumps(route), encoding="utf-8")
+        sp = tmp / "selection.json"
+        sp.write_text(json.dumps(selection), encoding="utf-8")
+        out = tmp / "out"
+        old = sys.argv
+        sys.argv = ["predict_test.py", "--bundle", str(bdir), "--task", "Agriculture_h3_f1",
+                    "--scenario", "proxy", "--signature", sig, "--split-spec", str(spec),
+                    "--route", str(rp), "--route-sha256", sha256_file(rp),
+                    "--selection-manifest", str(sp), "--candidate", candidate,
+                    "--output-dir", str(out)]
+        try:
+            with contextlib.redirect_stdout(io.StringIO()), \
+                    contextlib.redirect_stderr(io.StringIO()):
+                code = _pt_main()
+        except SystemExit as exc:
+            code = int(exc.code or 1)
+        finally:
+            sys.argv = old
+        return code, out, sig
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        probe = make_bundle(tmp / "probe", spec)
+        psig = json.loads((probe / "manifest.json").read_text())["signature"]
+        b = _rfb(probe, "Agriculture_h3_f1", "proxy", psig, spec)
+        prts = {s: _tfb(b.segment(s)) for s in ("train", "calibration", "decision", "test")}
+        mm = BranchResidualCandidate("N+S+Q")
+        mm.fit_design(prts["train"])
+        mm.select_alphas(prts["train"], prts["calibration"])
+        mm.refit(_mb(prts["train"], prts["calibration"]))
+        selection = {"candidate": "N+S+Q", "bundle_signature": psig,
+                     "alpha_by_group": mm.alpha_by_group,
+                     "weight_hash": _wh(mm.weights), "config_sha256": "cfg"}
+        route = {"task_id": "Agriculture_h3_f1", "fold_id": 1, "selected": "N+S+Q",
+                 "fallback": "AR-Ridge", "selection_data_segments": ["cal", "dec"]}
+        code, out, _ = run_predict_test(tmp, spec, route, selection, "N+S+Q")
+        check("gate_candidate 路径端到端成功（退出码 0）", code == 0)
+        mpath = out / "N_S_Q_test_manifest.json"
+        check("产出测试预测与清单", (out / "N_S_Q_test_predictions.csv").is_file() and mpath.is_file())
+        man = json.loads(mpath.read_text(encoding="utf-8"))
+        check("两个训练集合行数不同且都记录",
+              man["selection_rows"] == 26 and man["extended_rows"] == 39)
+        check("选择期与扩展期权重哈希不同（P0-1 的核心）",
+              man["weight_hash"] != man["test_fit_weight_hash"]
+              and man["weight_hash"] == _wh(mm.weights))
+        check("两个训练集合的输入 SHA256 分别记录且不同",
+              man["selection_input_sha256"] != man["extended_input_sha256"])
+        check("模型配置完整记录",
+              man["model_config"]["branches"] == ["N", "S", "Q"]
+              and len(man["model_config"]["alpha_grid"]) == 7)
+        check("路由无锚时记为缺口",
+              set(man["route_anchors_missing"]) == {"split_spec_sha256", "bundle_signature"})
+        check("预测行数 = 测试起点 × 跨度", man["n_rows"] == man["n_test_origins"] * 3)
+
+        # 未中选候选必须被拒绝（走入口，不绕过）
+        code2, _, _ = run_predict_test(tmp, spec, route, selection, "N+S+Q+SF")
+        check("入口拒绝未中选候选（退出码非 0）", code2 != 0)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        route_fb = {"task_id": "Agriculture_h3_f1", "fold_id": 1,
+                    "selected": "numeric_fallback", "fallback": "AR-Ridge",
+                    "selection_data_segments": ["cal", "dec"]}
+        code, out, _ = run_predict_test(tmp, spec, route_fb,
+                                        {"candidate": "AR-Ridge",
+                                         "bundle_signature": "@SIG@",
+                                         "alpha_by_group": {}, "weight_hash": None}, "AR-Ridge")
+        check("numeric_fallback 路径端到端成功（退出码 0）", code == 0)
+        man = json.loads((out / "AR_Ridge_test_manifest.json").read_text(encoding="utf-8"))
+        check("回退路径如实标记且无权重哈希",
+              man["path"] == "numeric_fallback" and man["weight_hash"] is None)
+        check("回退路径预测行数正确", man["n_rows"] == man["n_test_origins"] * 3)
+
     print(f"\n全部通过（{len(PASSED)} 项检查）")
     print("未跑（需正式 Bundle）：真实 Agriculture 训练、999 次置换、测试段预测")
     return 0

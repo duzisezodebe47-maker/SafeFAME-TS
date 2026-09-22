@@ -10,7 +10,7 @@
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付四次/model/tests/test_round4.py"
-# 期望输出：全部通过（38 项检查）
+# 期望输出：全部通过（50 项检查）
 # 期望退出码：0
 ```
 
@@ -97,7 +97,7 @@ step, y_pred, target_scale, bundle_signature, config_sha256, code_commit`
 | 项 | 状态 |
 |---|---|
 | A 部分六项返修 | ✅ `COMPLETE` |
-| 负例测试 38 项 | ✅ `COMPLETE` |
+| 负例测试 50 项 | ✅ `COMPLETE` |
 | 单次资源实测 | ✅ `PARTIAL`（见 `runtime_profile.json`） |
 | 真实 Agriculture 训练 | `NOT_RUN` — 无正式 Bundle |
 | 999 次置换 | `NOT_RUN` — 无正式 Bundle |

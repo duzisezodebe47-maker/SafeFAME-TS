@@ -5,7 +5,7 @@
 **状态**：`MODEL_REAL_EVIDENCE_PENDING`
 
 > 本轮 = 任务书 **A 部分**（代码返修 + 故障测试）。**B 部分（真实运行）仍阻塞** —— 正式 Bundle 未交付。
-> 未跑项一律标 `NOT_RUN`，不用合成 38 项测试冒充真实结果。
+> 未跑项一律标 `NOT_RUN`，不用合成 50 项测试冒充真实结果。
 
 ---
 
@@ -42,11 +42,11 @@
 
 ---
 
-## 二、测试：38 项全部通过（合成数据）
+## 二、测试：50 项全部通过（合成数据）
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付四次/model/tests/test_round4.py"
-# 全部通过（38 项检查）
+# 全部通过（50 项检查）
 # 退出码 0
 ```
 
@@ -64,6 +64,27 @@
 
 另覆盖：四段边界与 spec 一致、`middle = (cal_end+dec_end)//2`、半段掩码逐位等于
 `origin+h<=middle` / `origin>=middle`、半段不重叠、未实现回退模型明确报错。
+
+### `predict_test` 端到端测试（本轮补，抓到一个真 bug）
+
+`predict_test.main()` 此前**从未被执行过** —— 测试只覆盖了它的辅助函数
+（`load_route` / `check_route`）。补端到端测试后立刻暴露：
+
+```
+ValueError: 未知候选: AR-Ridge
+```
+
+`model_config` 用 `getattr(BranchResidualCandidate(model_name), "branch_names", ())`
+取分支组成，但回退模型名不在候选表里、**构造时就抛异常**，`getattr` 的默认值救不了。
+**数值回退路径在真实运行时会直接崩溃。**
+
+现已覆盖两条路径的端到端运行：
+
+| 路径 | 验证 |
+|---|---|
+| `gate_candidate` | 退出码 0；产出预测与清单；两个训练集合行数不同；**两个权重哈希不同**；输入 SHA256 分别记录；模型配置完整 |
+| `numeric_fallback` | 退出码 0；`path=="numeric_fallback"`；无权重哈希；预测行数正确 |
+| 未中选候选 | 入口拒绝，退出码非 0 |
 
 ---
 
@@ -116,7 +137,7 @@
     ├── permutation_entry.py   置换入口
     ├── predict_test.py        测试段入口（路由字节锚 + 两阶段重拟合）
     ├── audit_tables.py        无文本 + 半段审计表
-    └── tests/test_round4.py   38 项检查
+    └── tests/test_round4.py   50 项检查
 ```
 
 前三轮目录完整保留，未改动。
