@@ -1,0 +1,17 @@
+{
+  "status": "VERIFIED",
+  "source_branch": "team/main-eval-20260921",
+  "source_commit": "6c05bd60661386c39121cbf079298fa1873d97df",
+  "source_path": "team_work/main/round2/split_spec_v2.json",
+  "sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "bytes": 2418,
+  "protocol_status": "frozen",
+  "approved_by": "team/main-eval-20260921:independent-snapshot-audit-2026-09-22",
+  "snapshot_source_commit": "2d530ec7ab22fce591767baf1af81f8fe9c6a11d",
+  "tasks": 4,
+  "numerical_sha256_values": 4,
+  "alpha_grid_values": 7,
+  "task_order": ["Agriculture", "Climate", "SocialGood", "Environment"],
+  "export_method": "git cat-file blob <commit>:<path> > D:\\...\\split_spec_v2.json",
+  "manual_retyping": false
+}

@@ -1,0 +1,19 @@
+{
+  "status": "COMPLETE_WITH_TWO_CORRECTED_COMMAND_ERRORS",
+  "steps": [
+    {"step": "fetch_master_and_auxiliary_branches", "exit_code": 0},
+    {"step": "export_frozen_spec_first_attempt_cmd_unicode_path", "exit_code": 1, "result": "NO_FILE_CREATED"},
+    {"step": "export_frozen_spec_exact_blob_with_native_redirection", "exit_code": 0},
+    {"step": "verify_frozen_spec_sha256_and_fields", "exit_code": 0},
+    {"step": "round3_pipeline_build_formal_bundle", "exit_code": 0},
+    {"step": "round3_pipeline_verify_source_bundle", "exit_code": 0},
+    {"step": "audit_formal_bundle_all_tasks", "exit_code": 0},
+    {"step": "compare_formal_readers_agriculture", "exit_code": 0},
+    {"step": "create_release_archive_first_attempt_powershell_property", "exit_code": 1, "result": "NO_ARCHIVE_CREATED"},
+    {"step": "create_release_archive_with_explicit_parent_and_name", "exit_code": 0},
+    {"step": "extract_archive_on_d_drive_and_verify_bundle", "exit_code": 0},
+    {"step": "create_github_prerelease", "exit_code": 0},
+    {"step": "upload_release_asset", "exit_code": 0},
+    {"step": "redownload_public_asset_to_d_drive_and_hash", "exit_code": 0}
+  ]
+}

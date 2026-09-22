@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "manifest_signature_recomputed": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "files_excluding_manifest": 93,
+  "bytes_including_manifest": 162342003,
+  "tasks": [
+    {
+      "task_id": "Agriculture_h12_f1",
+      "snapshot_sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38",
+      "snapshot_rows": 532,
+      "retained_origins": 357,
+      "candidate_origins": 401,
+      "excluded_origins": 44,
+      "targets_alias_byte_identical": true,
+      "standardization_max_abs_error": 1.1765288654430606e-07,
+      "status": "PASS"
+    },
+    {
+      "task_id": "Climate_h4_f2",
+      "snapshot_sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+      "snapshot_rows": 1272,
+      "retained_origins": 1080,
+      "candidate_origins": 1092,
+      "excluded_origins": 12,
+      "targets_alias_byte_identical": true,
+      "standardization_max_abs_error": 1.1784181852547704e-07,
+      "status": "PASS"
+    },
+    {
+      "task_id": "SocialGood_h3_f1",
+      "snapshot_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+      "snapshot_rows": 916,
+      "retained_origins": 700,
+      "candidate_origins": 708,
+      "excluded_origins": 8,
+      "targets_alias_byte_identical": true,
+      "standardization_max_abs_error": 1.1110876174669215e-07,
+      "status": "PASS"
+    },
+    {
+      "task_id": "Environment_h7_f2",
+      "snapshot_sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3",
+      "snapshot_rows": 15979,
+      "retained_origins": 14301,
+      "candidate_origins": 14325,
+      "excluded_origins": 24,
+      "targets_alias_byte_identical": true,
+      "standardization_max_abs_error": 1.8851153082977135e-07,
+      "status": "PASS"
+    }
+  ],
+  "checks": [
+    "manifest signature(inputs)",
+    "frozen spec bytes and embedded object",
+    "exact inventory and every file SHA256",
+    "snapshot hashes and row counts",
+    "raw history and targets against source OT",
+    "train-only standardization",
+    "origin identity/order and disjoint half-open boundaries",
+    "two scenario shapes, text coverage and trace row counts",
+    "complete_source audit-only rule"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "approved_by": "team/main-eval-20260921:independent-snapshot-audit-2026-09-22",
+  "frozen_at_utc": "2026-09-22T10:11:55Z",
+  "snapshot_source_commit": "2d530ec7ab22fce591767baf1af81f8fe9c6a11d",
+  "snapshot_audit_sha256": "6af133662c434f41453d2a9578d65e4615233ff3ec0f6508fb263e7692cc526a",
+  "basis_config": "configs/safefame_v4.json",
+  "target_boundary": "disjoint_half_open",
+  "fit_policy": "train_only",
+  "numeric_features": ["OT"],
+  "complete_source_rule": "original_url_and_valid_interval",
+  "max_per_source": 32,
+  "scenarios": ["proxy", "conservative_lag", "complete_source"],
+  "primary_scenario": "proxy",
+  "seed": 2026,
+  "alpha_grid": [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0],
+  "row_permutations": 999,
+  "p_threshold": 0.025,
+  "gate_candidates": ["N+S+Q", "N+S+Q+SF"],
+  "numeric_fallback_candidates": ["Last", "SeasonalNaive", "AR-Ridge", "N"],
+  "seasonal_periods": {"Agriculture": 12, "Climate": 52, "SocialGood": 12, "Environment": 7},
+  "notes": "Frozen numerical snapshots only: four Git blobs were independently extracted and checked for SHA256, row count, date order, finite OT and fold boundaries. This does not approve a formal Bundle, prediction, null result or model gate. Source Time-MMD cleaning was not independently rerun on this host. The second gate candidate still requires implemented semantic-frequency interaction and valid refit permutation evidence.",
+  "tasks": [
+    {"domain": "Agriculture", "fold_id": 1, "input_len": 24, "horizon": 12, "lag_days": 31, "n_rows_expected": 532, "bounds": [212, 266, 372, 425], "numerical_sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38"},
+    {"domain": "Climate", "fold_id": 2, "input_len": 52, "horizon": 4, "lag_days": 7, "n_rows_expected": 1272, "bounds": [636, 763, 1017, 1144], "numerical_sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4"},
+    {"domain": "SocialGood", "fold_id": 1, "input_len": 24, "horizon": 3, "lag_days": 31, "n_rows_expected": 916, "bounds": [366, 458, 641, 732], "numerical_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d"},
+    {"domain": "Environment", "fold_id": 2, "input_len": 56, "horizon": 7, "lag_days": 1, "n_rows_expected": 15979, "bounds": [7989, 9587, 12783, 14381], "numerical_sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3"}
+  ]
+}

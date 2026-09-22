@@ -1,0 +1,20 @@
+{
+  "status": "UPLOADED_AND_PUBLISHER_REDOWNLOAD_VERIFIED",
+  "release_tag": "data-bundle-a69821be115445265cde",
+  "release_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/tag/data-bundle-a69821be115445265cde",
+  "asset_id": 581326431,
+  "asset_name": "SafeFAME-TS_formal_bundle_a69821be115445265cde.zip",
+  "asset_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/data-bundle-a69821be115445265cde/SafeFAME-TS_formal_bundle_a69821be115445265cde.zip",
+  "asset_bytes": 17854011,
+  "asset_sha256": "8abde5043f7399c96d269b5adbbc35dcbcada0e8760114a41b603031c01f0e06",
+  "archive_root": "round3-bundle-a69821be115445265cde/",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "bundle_files_including_manifest": 94,
+  "bundle_bytes": 162342003,
+  "publisher_redownload": {
+    "destination_drive": "D:",
+    "bytes": 17854011,
+    "sha256": "8abde5043f7399c96d269b5adbbc35dcbcada0e8760114a41b603031c01f0e06",
+    "match": true
+  }
+}

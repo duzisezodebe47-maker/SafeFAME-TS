@@ -1,0 +1,18 @@
+{
+  "status": "UPLOADED",
+  "receiver_status": "MASTER_ACK_PENDING",
+  "delivery_branch": "3218151885-creator",
+  "delivery_evidence_commit": null,
+  "release_tag": "data-bundle-a69821be115445265cde",
+  "release_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/tag/data-bundle-a69821be115445265cde",
+  "asset_name": "SafeFAME-TS_formal_bundle_a69821be115445265cde.zip",
+  "asset_sha256": "8abde5043f7399c96d269b5adbbc35dcbcada0e8760114a41b603031c01f0e06",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "publisher_upload_state": "uploaded",
+  "publisher_redownload_sha256_match": true,
+  "master_downloaded_to_d_drive": false,
+  "master_verified_manifest_and_files": false,
+  "master_reader_verified_agriculture": false,
+  "claim_boundary": "Publisher upload and public redownload are verified. RECEIVED is forbidden until the master host downloads to D: and independently verifies the Bundle."
+}

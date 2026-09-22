@@ -1,0 +1,26 @@
+{
+  "status": "RESOLVED_COMMAND_ERRORS; MASTER_ACK_PENDING",
+  "events": [
+    {
+      "stage": "frozen_spec_export",
+      "severity": "NON_DATA_COMMAND_ERROR",
+      "error": "cmd.exe rejected the quoted Unicode destination path",
+      "effect": "No output file was created; build did not start.",
+      "resolution": "Used PowerShell 7 native binary redirection from git cat-file and verified exact byte SHA256."
+    },
+    {
+      "stage": "release_archive_create",
+      "severity": "NON_DATA_COMMAND_ERROR",
+      "error": "PowerShell passed the literal suffix .Parent to tar -C",
+      "effect": "No archive was created.",
+      "resolution": "Resolved parent path and leaf name into explicit variables; archive was created and extraction-tested."
+    },
+    {
+      "stage": "master_receive",
+      "severity": "OPEN_EXTERNAL_ACK",
+      "error": null,
+      "effect": "Receiver status remains MASTER_ACK_PENDING.",
+      "resolution": "Master host must download the Release asset to D:, verify SHA256 and Bundle inventory, and run its Agriculture reader."
+    }
+  ]
+}
