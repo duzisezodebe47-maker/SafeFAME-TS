@@ -7,7 +7,7 @@
 
 ## 一、状态
 
-**A 部分五项修复完成，48 项合成测试通过；B 部分仍阻塞于正式 Bundle 未交付。**
+**A 部分五项修复完成，51 项合成测试通过；B 部分仍阻塞于正式 Bundle 未交付。**
 
 主控的 `Freeze four audited numerical snapshots` 已完成 —— 解锁链推进了一步，
 模型侧已记下冻结 spec 基准 `a0947a5b…f0031`，Bundle 到位后立即用它核对。
@@ -87,13 +87,29 @@ if candidate != fallback:
 另核对了 A.2 参考实现的**抄录忠实度**（与主控源码逐行比对），确认无误 ——
 否则测试只是"自洽"，两边都错也看不出来。
 
+### 读主控代码后确认的交接链路与一处修复
+
+链路：`模型 predictions.csv` → `run_bridge.py export-stage` → `stage 目录(JSONL)`
+→ `seal_route.py` → 封存路由。
+
+兼容性核对**全部通过**：`PREDICTION_COLUMNS`（14 列）、`SCALE`、
+`SEGMENTS`（全名）、`config_sha256`（64 hex）、`code_commit`（40 hex）
+都与本侧一致。
+
+**但发现并修复了一处**：`load_prediction_grid` 的最终校验是
+`grid != expected_grid` —— **列表相等，顺序也必须一致**，
+而 `expected_grid` 按 Bundle `samples` 的**原始行序**生成。
+本侧原先按**段名顺序**拼接，若 samples 里段序不同会被判 `order_bad`。
+现改为按 Bundle 行序导出。**这一点建议主控确认**：数据侧产出的
+`samples.csv` 是否按 train/cal/dec/test 连续排列。
+
 ---
 
-## 三、测试：48 项全部通过
+## 三、测试：51 项全部通过
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
-# 全部通过（48 项检查），退出码 0
+# 全部通过（51 项检查），退出码 0
 ```
 
 ---

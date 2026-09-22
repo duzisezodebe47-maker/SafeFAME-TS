@@ -160,6 +160,7 @@ def main() -> int:
     from candidates import BranchResidualCandidate
     from numeric_fallbacks import numeric_baselines
     from predict_io import weight_hash
+    from bundle_reader import samples_order_view
     from train import merge_bundles, to_feature_bundle, to_inference_bundle
 
     # ---------------- A.2 与主控实现的逐行等价 ----------------
@@ -509,6 +510,54 @@ def main() -> int:
         finally:
             sys.argv = old
         check("A.3 `N` 缺选择期清单时被拒绝（区别于主控基线）", code2 != 0)
+
+    # ---------------- 导出必须按 Bundle 行序（主控的 grid 是有序比较）----------------
+    # 主控 v2.load_prediction_grid 的最终校验是 `grid != expected_grid` —— 逐元素有序比较，
+    # 而 expected_grid 按 bundle["samples"] 的原始行序生成。若按"段名顺序"拼接，
+    # 段序不一致时会被判 order_bad。用**交错段序**的 Bundle 才测得到这一点。
+    print("\n--- 导出按 Bundle 行序（交错段序）---")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        bdir = make_bundle(tmp / "order", spec)
+        sig = json.loads((bdir / "manifest.json").read_text())["signature"]
+
+        # 把 samples.csv 与各数组按"dec 在前、cal 在后"重排，并重新签名
+        from bundle_reader import sha256_file, signature as _sig
+        task = bdir / "Agriculture_h3_f1"
+        s = pd.read_csv(task / "samples.csv")
+        order = np.argsort((s["segment"] == "calibration").to_numpy(), kind="stable")
+        s2 = s.iloc[order].reset_index(drop=True)
+        s2.to_csv(task / "samples.csv", index=False, lineterminator="\n")
+        for key in ("numeric_history", "targets", "targets_standardized"):
+            arr = np.load(task / f"{key}.npy")
+            np.save(task / f"{key}.npy", arr[order], allow_pickle=False)
+        np.save(task / "origin_index.npy",
+                np.load(task / "origin_index.npy")[order], allow_pickle=False)
+        for key in ("semantic", "quality", "text_available"):
+            arr = np.load(task / "proxy" / f"{key}.npy")
+            np.save(task / "proxy" / f"{key}.npy", arr[order], allow_pickle=False)
+        sjson = json.loads(spec.read_text(encoding="utf-8"))
+        inputs = {"mode": "frozen", "split_spec_sha256": sha256_file(spec), "split_spec": sjson}
+        files = {p.relative_to(bdir).as_posix(): sha256_file(p)
+                 for p in sorted(bdir.rglob("*"))
+                 if p.is_file() and p.name != "manifest.json"}
+        (bdir / "manifest.json").write_text(
+            json.dumps({"inputs": inputs, "signature": _sig(inputs), "files": files}),
+            encoding="utf-8")
+        sig2 = _sig(inputs)
+
+        b2 = read_frozen_bundle(bdir, "Agriculture_h3_f1", "proxy", sig2, spec)
+        view = samples_order_view(b2, ["calibration", "decision"])
+        segments_seen = list(view["segment"])
+        wanted_order = [x for x in s2["segment"] if x in ("calibration", "decision")]
+        check("交错段序下 samples_order_view 保持原行序",
+              segments_seen == wanted_order)
+        check("导出的段序不是简单的 cal-then-dec",
+              segments_seen.index("decision") < segments_seen.index("calibration"))
+        check("origin_id 与 origin_index 逐行对齐",
+              all(str(o).endswith(f":o{int(i)}")
+                  for o, i in zip(view["origin_id"], view["origin_index"])))
 
     # ---------------- 沿用：契约 / 边界 / 半段 ----------------
     print("\n--- 沿用：签名 / 边界 / 半段 ---")

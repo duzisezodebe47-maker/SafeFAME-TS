@@ -185,6 +185,28 @@ class FrozenBundle:
                 if key in self.arrays} | {"origin_id": self.samples["origin_id"].to_numpy()[mask]}
 
 
+def samples_order_view(bundle: FrozenBundle, segments) -> dict[str, np.ndarray]:
+    """按 **Bundle 的 samples 行序**（而非段名顺序）导出多个段的合并视图。
+
+    为什么必须这样：主控 `v2.load_prediction_grid` 的最终校验是
+    ``grid != expected_grid`` —— 逐元素**有序**比较，而 `expected_grid` 是按
+    `bundle["samples"]` 的原始行序生成的。若我按"段名顺序"（cal 再 dec）拼接，
+    而 samples.csv 里两段的行序不同（例如交错或 test 在前），
+    即使内容完全正确也会被判 ``order_bad=True`` 而拒绝。
+
+    按行序导出后，无论数据侧怎么排列段，都与主控的期望序列一致。
+    """
+    wanted = list(segments)
+    mask = bundle.samples["segment"].isin(wanted).to_numpy()
+    view = {key: np.asarray(bundle.arrays[key])[mask]
+            for key in ("numeric_history", "semantic", "quality", "text_available",
+                        "origin_index", "targets", "targets_standardized")
+            if key in bundle.arrays}
+    view["origin_id"] = bundle.samples["origin_id"].to_numpy()[mask]
+    view["segment"] = bundle.samples["segment"].to_numpy()[mask]
+    return view
+
+
 def assert_grid(
     bundle: FrozenBundle, segment: str, bounds: tuple[int, int],
     horizon: int, expected_count: int | None = None,

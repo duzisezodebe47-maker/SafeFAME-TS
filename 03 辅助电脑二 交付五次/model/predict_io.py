@@ -108,6 +108,16 @@ class PredictionWriter:
         if not np.isfinite(predictions).all():
             raise AssertionError("预测含非有限值，拒绝写出")
 
+        # `segment` 可以是单个字符串，也可以是**逐行**的段名数组 ——
+        # 后者用于按 Bundle 行序导出多个段（主控的 grid 校验是**有序**比较）
+        if isinstance(segment, str):
+            segments_per_row = [segment] * predictions.shape[0]
+        else:
+            segments_per_row = [str(x) for x in segment]
+        if len(segments_per_row) != predictions.shape[0]:
+            raise ValueError(
+                f"segment 数组长度 {len(segments_per_row)} != 预测行数 {predictions.shape[0]}")
+
         for row in range(predictions.shape[0]):
             for step in range(predictions.shape[1]):
                 self.records.append(PredictionRecord(

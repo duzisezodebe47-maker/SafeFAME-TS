@@ -29,7 +29,8 @@ if str(HERE) not in sys.path:
 
 from branches import FeatureBundle  # noqa: E402
 from bundle_reader import (  # noqa: E402
-    BundleUnavailable, assert_grid, read_frozen_bundle, segment_bounds, sha256_file,
+    BundleUnavailable, assert_grid, read_frozen_bundle, samples_order_view,
+    segment_bounds, sha256_file,
 )
 from candidates import ALL_CANDIDATES, BranchResidualCandidate  # noqa: E402
 from predict_io import (  # noqa: E402
@@ -125,21 +126,26 @@ def main() -> int:
     fit_bundle = merge_bundles(train_part, cal_part)
     model.refit(fit_bundle)
 
+    # **按 Bundle 的 samples 行序**（而非段名顺序）导出一张表 ——
+    # 主控 v2.load_prediction_grid 用有序列表比较，段名顺序可能被判 order_bad。
+    view = samples_order_view(bundle, args.segments)
+    part = to_feature_bundle(view)
+    predictions = model.predict(part)
+    writer.extend(
+        predictions, origin_id=view["origin_id"], origin_index=view["origin_index"],
+        task_id=args.task, fold_id=fold_id, segment=view["segment"],
+        scenario=args.scenario, candidate_id=args.candidate,
+        seed=args.seed, bundle_signature=args.signature,
+        config_sha256_value=cfg_hash, commit=commit,
+    )
+    contrib = model.contributions(part)
     for segment in args.segments:
-        part = to_feature_bundle(bundle.segment(segment))
-        predictions = model.predict(part)
-        writer.extend(
-            predictions, origin_id=np.asarray(bundle.segment(segment)["origin_id"]),
-            origin_index=part.origin_index, task_id=args.task, fold_id=fold_id,
-            segment=segment, scenario=args.scenario, candidate_id=args.candidate,
-            seed=args.seed, bundle_signature=args.signature,
-            config_sha256_value=cfg_hash, commit=commit,
-        )
-        contrib = model.contributions(part)
+        mask = view["segment"] == segment
         manifests[segment] = {
-            "n_origins": int(len(part.origin_index)),
-            "n_text_available": int(part.text_available.sum()),
-            "contribution_abs_mean": {k: float(np.abs(v).mean()) for k, v in contrib.items()},
+            "n_origins": int(mask.sum()),
+            "n_text_available": int(part.text_available[mask].sum()),
+            "contribution_abs_mean": {k: float(np.abs(v[mask]).mean())
+                                      for k, v in contrib.items()},
         }
 
     n_rows = writer.write(out / f"{args.candidate.replace('+', '_')}_{args.scenario}_predictions.csv")

@@ -74,11 +74,11 @@ return fallback          # ← 请求门控候选时条件为假 → 不报错 �
 
 ---
 
-## 二、测试：48 项全部通过（合成数据）
+## 二、测试：51 项全部通过（合成数据）
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
-# 全部通过（48 项检查）
+# 全部通过（51 项检查）
 # 退出码 0
 ```
 
@@ -107,6 +107,41 @@ return fallback          # ← 请求门控候选时条件为假 → 不报错 �
 
 顺带核对了 A.2 参考实现的**抄录忠实度** —— 与主控源码逐行比对（`seasonal` 公式、
 `np.linalg.solve`、`(loss, alpha)` 平局规则），确认无误。否则测试会"自洽但都不对"。
+
+### 读队友代码：接口兼容性核对 + 一个真风险
+
+读了主控 `team_work/main/src/team_eval/`（`v2.py` / `route_seal.py` / `null_bridge.py`）
+与 `round5/seal_route.py`，确认了实际交接链路：
+
+```
+我的 predictions.csv  →  run_bridge.py export-stage --predictions <CSV>
+                     →  stage 目录（JSONL）  →  seal_route.py  →  封存路由
+```
+
+**兼容性逐条核对通过**：
+
+| 主控常量 | 值 | 与我的对比 |
+|---|---|---|
+| `PREDICTION_COLUMNS` | 14 列 | ✅ 与我的 `CONTRACT_FIELDS` 完全一致 |
+| `SCALE` | `train_only_standardized_OT` | ✅ 与我的 `TARGET_SCALE` 一致 |
+| `SEGMENTS` | `("train","calibration","decision","test")` | ✅ 全名，与我的段名一致 |
+| `config_sha256` 格式 | `[0-9a-f]{64}` | ✅ |
+| `code_commit` 格式 | `[0-9a-f]{40}` | ✅ |
+
+**但发现一个真风险**：`load_prediction_grid` 的最终校验是
+
+```python
+if grid != expected_grid:      # ← 列表相等，顺序也必须一致
+    raise EvidenceError(f"... order_bad={not missing and not extra}")
+```
+
+`expected_grid` 按 **Bundle `samples` 的原始行序**生成。而我原先**按段名顺序**（cal 再 dec）拼接 ——
+若 `samples.csv` 里段的排列不是这个顺序（交错、或 test 在前），
+**内容完全正确也会被判 `order_bad` 而拒绝**。
+
+**修复**：新增 `bundle_reader.samples_order_view`，按 Bundle 行序导出；
+`PredictionWriter` 的 `segment` 参数改为支持**逐行段名数组**。
+新增测试用**交错段序**的 Bundle 验证（段序正常时测不到这个 bug）。
 
 ### 补测过程中又抓到两个自己的 bug
 
@@ -166,7 +201,7 @@ a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031
     ├── permutation_entry.py   置换入口
     ├── predict_test.py        ★ A.1/A.3/A.4 修复
     ├── audit_tables.py        无文本 + 半段审计表
-    └── tests/test_round5.py   48 项检查
+    └── tests/test_round5.py   51 项检查
 ```
 
 前四轮目录完整保留，未改动。
