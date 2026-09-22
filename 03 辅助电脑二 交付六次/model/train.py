@@ -34,8 +34,9 @@ from bundle_reader import (  # noqa: E402
 )
 from candidates import ALL_CANDIDATES, BranchResidualCandidate  # noqa: E402
 from predict_io import (  # noqa: E402
-    PredictionWriter, code_commit, config_sha256, weight_hash,
+    PredictionWriter, code_commit, config_sha256, warn_if_dirty, weight_hash,
 )
+from runtime_profile import cpu_seconds, script_entry_snapshot  # noqa: E402
 
 REPO_ROOT = HERE.parents[1]
 
@@ -80,6 +81,7 @@ def main() -> int:
     out = Path(args.output_dir).resolve()
     out.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
+    cpu_started = cpu_seconds()
 
     try:
         bundle = read_frozen_bundle(args.bundle, args.task, args.scenario,
@@ -100,6 +102,9 @@ def main() -> int:
     }
     cfg_hash = config_sha256(config)
     commit = code_commit(REPO_ROOT)
+    # 第六轮补：把「工作区是否干净」记进 manifest —— 只写 HEAD 会在改动未提交时
+    # 把 provenance 记成另一个提交（第五→第六次之间就是这么发生的）。
+    provenance = warn_if_dirty(REPO_ROOT, HERE)
     writer = PredictionWriter()
     manifests: dict[str, dict] = {}
 
@@ -163,6 +168,8 @@ def main() -> int:
                                   for b in model.branches if hasattr(b, "scaler")},
         "segments": manifests, "rows_written": n_rows,
         "wall_seconds": round(time.perf_counter() - started, 3),
+        "code_provenance": provenance,
+        "runtime": script_entry_snapshot(started, cpu_started),
         "split_spec_sha256": sha256_file(args.split_spec),
         "grid": grid_stats,
         "note": "只含 calibration/decision；测试预测待主控冻结路由后另行生成",

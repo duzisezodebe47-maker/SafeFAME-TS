@@ -54,7 +54,8 @@ def numeric_baselines(
     segments: np.ndarray,
     fit_targets: np.ndarray,
     alpha_grid: tuple[float, ...] = PROTOCOL_ALPHAS,
-    seasonal_period: int = 12,
+    *,
+    seasonal_period: int,
 ) -> dict:
     """主控 `team_eval/v2.numeric_baselines` 的逐行等价实现（第六轮修复 2）。
 
@@ -66,6 +67,11 @@ def numeric_baselines(
     这样测试段的真值**根本传不进本函数**，而不是靠"我们不读它"的约定。
     算法本身与主控逐行一致：全部历史窗口作输入、训练段去中心化拟合、
     校准段选 7 档 α、`(loss, alpha)` 平局规则、逐 H 直接输出标准化尺度。
+
+    `seasonal_period` **无默认值**（第六轮修复 3 的收紧）：`SeasonalNaive`
+    对 Climate 应为 52、Environment 应为 7，留一个 `=12` 的默认值等于给这两个
+    任务留了一条静默出错的路。调用方必须显式传 `task_seasonal_period(spec, task)`
+    的返回值。
     """
     if features.targets is not None or features.targets_standardized is not None:
         raise BaselineError(
@@ -142,10 +148,11 @@ def fit_targets_with_nan(bundle: FrozenBundleLike, segments: np.ndarray) -> np.n
 
 def numeric_fallback_predict(
     name: str, features: FeatureBundle, segments: np.ndarray, fit_targets: np.ndarray,
-    *, seasonal_period: int = 12, alpha_grid: tuple[float, ...] = PROTOCOL_ALPHAS,
+    *, seasonal_period: int, alpha_grid: tuple[float, ...] = PROTOCOL_ALPHAS,
 ) -> np.ndarray:
     """按名字取主控基线的预测。不支持的模型**明确报错**，不静默换模型。"""
-    result = numeric_baselines(features, segments, fit_targets, alpha_grid, seasonal_period)
+    result = numeric_baselines(features, segments, fit_targets, alpha_grid,
+                               seasonal_period=seasonal_period)
     if name not in result["predictions"]:
         raise NotImplementedError(
             f"数值回退模型 {name!r} 未实现。已实现: {SUPPORTED} 与 candidates.py 的 'N'。")

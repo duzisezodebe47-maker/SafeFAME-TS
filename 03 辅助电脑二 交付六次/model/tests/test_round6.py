@@ -36,6 +36,11 @@ MASTER_PREDICTION_COLUMNS = frozenset({
 })
 MASTER_SCALE = "train_only_standardized_OT"
 
+# 合成 spec 的登记值：历史窗口长度。真实 Bundle 的 train 段起点从 `input_len`
+# 起步（Agriculture 是 24），合成夹具必须同样建模，否则四段边界审计验证的是
+# 一个比契约宽松的假数据。
+INPUT_LEN = 6
+
 PASSED: list[str] = []
 
 
@@ -55,7 +60,7 @@ def make_spec(path: Path, *, seasonal: dict | None = None, n_rows: int = 60) -> 
         "gate_candidates": ["N+S+Q", "N+S+Q+SF"],
         "numeric_fallback_candidates": ["Last", "SeasonalNaive", "AR-Ridge", "N"],
         "seasonal_periods": seasonal if seasonal is not None else {"Agriculture": 3},
-        "tasks": [{"domain": "Agriculture", "fold_id": 1, "input_len": 6, "horizon": 3,
+        "tasks": [{"domain": "Agriculture", "fold_id": 1, "input_len": INPUT_LEN, "horizon": 3,
                    "n_rows_expected": n_rows, "bounds": [20, 30, 45, 60],
                    "numerical_sha256": "a" * 64}],
     }
@@ -78,7 +83,9 @@ def make_bundle(root: Path, spec_path: Path, *, n=60, horizon=3, semantic_dim=16
     keep = []
     for o in range(n):
         for nm, lo, hi in seg_bounds:
-            if lo <= o < hi and o + horizon <= hi:
+            # 同真实 Bundle：历史窗口（o >= input_len）与目标窗口（o + h <= hi）
+            # 两个约束都要满足，缺一都不该出现在样本里
+            if o >= INPUT_LEN and lo <= o < hi and o + horizon <= hi:
                 keep.append((o, nm))
                 break
     origins = np.array([o for o, _ in keep], dtype=np.int64)
@@ -201,7 +208,9 @@ def main() -> int:
             targets=np.zeros((len(segments), 3)), targets_standardized=np.zeros((len(segments), 3)))
         r = False
         try:
-            numeric_baselines(with_truth, segments, np.zeros((len(segments), 3)))
+            # 真值对象先被拒（季节周期无默认值，这里显式给出，确保拒绝理由就是真值）
+            numeric_baselines(with_truth, segments, np.zeros((len(segments), 3)),
+                              seasonal_period=12)
         except BaselineError as exc:
             r = "推理视图" in str(exc)
         check("传入含真值对象 → 拒绝", r)
@@ -211,6 +220,15 @@ def main() -> int:
         for s in ("train", "calibration"):
             fit_t[segments == s] = np.asarray(parts[s]["targets_standardized"], dtype=float)
         period = task_seasonal_period(spec, "Agriculture_h3_f1")
+
+        # 修复 3 收紧：季节周期**没有默认值** —— 漏传必须直接报错，
+        # 而不是悄悄按 12 跑（Climate/Environment 会因此静默出错）
+        r = False
+        try:
+            numeric_baselines(feats, segments, fit_t)
+        except TypeError as exc:
+            r = "seasonal_period" in str(exc)
+        check("省略 seasonal_period → TypeError（无默认值，不回落 12）", r)
         res = numeric_baselines(feats, segments, fit_t, seasonal_period=period)
         check("合法调用可运行且 α 来自 7 档",
               res["ridge_alpha"] in (0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0))
@@ -356,8 +374,75 @@ def main() -> int:
                                       "--output-dir", str(out_p)])
         check("permutation_entry.py 端到端成功", code == 0)
         psum = json.loads((out_p / "permutation_summary.json").read_text(encoding="utf-8"))
-        check("未满 999 时 p=null 且记录了 seasonal/网格来源",
-              psum["p_value"] is None and psum["successful"] == 3)
+        check("未满 999 时 p=null 且 successful 计数正确",
+              psum["p_value"] is None and psum["successful"] == 3
+              and psum["contract_minimum"] == 999)
+        # 第六轮补：置换产物要能自证「在哪份代码、哪份协议上跑的」
+        check("置换摘要含季节周期与置换协议",
+              psum["seasonal_period"]["value"] == 3
+              and psum["seasonal_period"]["source"].endswith("seasonal_periods")
+              and psum["permutation_config"]["refit_each_iteration"] is True
+              and psum["permutation_config"]["seed_rule"]
+              == "local_seed = seed_base * 1000 + iteration")
+        # 交付要求「CPU/内存实测」—— 缺失时不许写 0 充数
+        check("置换摘要含 CPU/内存实测",
+              psum["runtime"]["cpu_seconds"] is not None
+              and psum["runtime"]["peak_rss_bytes"] is not None
+              and psum["runtime"]["peak_rss_bytes"] > 0)
+        check("置换摘要含代码出处（HEAD + 工作区是否干净）",
+              len(psum["code_provenance"]["code_commit"]) == 40
+              and psum["code_provenance"]["worktree_dirty"] is not None)
+
+        # null_scores.csv 的列由主控 null_bridge.convert_nulls 逐字校验：
+        # 多一列就硬失败，所以这里锁死列序
+        with (out_p / "null_scores.csv").open(encoding="utf-8-sig", newline="") as fh:
+            null_reader = _csv.reader(fh)
+            check("null_scores.csv 列 == 主控期望（多一列即失败）",
+                  next(null_reader) == ["iteration", "seed", "status", "loss", "error"])
+
+        import audit_boundaries as boundary_entry
+        out_b = tmp / "b"
+        code = run_entry(boundary_entry,
+                         ["audit_boundaries.py", *common, "--output-dir", str(out_b)])
+        check("audit_boundaries.py 端到端成功", code == 0)
+        bres = json.loads((out_b / "four_segment_audit.json").read_text(encoding="utf-8"))
+        check("四段全部通过边界检查",
+              bres["verdict"] == "PASS"
+              and all(s["ok"] for s in bres["segments"])
+              and len(bres["segments"]) == 4)
+        excl = bres["excluded_origins"]
+        check("四段审计记录了被排除的起点（head = input_len，段间 = horizon-1）",
+              excl["head"]["count"] == bres["input_len"]
+              and len([k for k in excl if k != "head"]) == 3
+              and all(v["count"] == bres["horizon"] - 1
+                      for k, v in excl.items() if k != "head"))
+        check("四段审计记录了 CPU/内存实测",
+              bres["runtime"]["peak_rss_bytes"] is not None)
+
+        # audit_baselines：主控 CSV 与清单哈希不符时必须 FAIL（防「拿错基线也能过」）
+        import audit_baselines as baseline_entry
+        out_c = tmp / "c"
+        master_csv = tmp / "m.csv"
+        master_csv.write_text("candidate_id,segment,origin_id,step,y_pred\n"
+                              "Last,calibration,Agriculture:h3:f1:o20,1,0.0\n",
+                              encoding="utf-8")
+        master_manifest = tmp / "m.json"
+        master_manifest.write_text(json.dumps({"csv_sha256": "0" * 64}), encoding="utf-8")
+        old_argv = sys.argv
+        try:
+            sys.argv = ["audit_baselines.py", *common,
+                        "--master-csv", str(master_csv),
+                        "--master-manifest", str(master_manifest),
+                        "--output-dir", str(out_c)]
+            with contextlib.redirect_stdout(io.StringIO()), \
+                    contextlib.redirect_stderr(io.StringIO()):
+                bcode = baseline_entry.main()
+        finally:
+            sys.argv = old_argv
+        crep = json.loads((out_c / "baseline_crosscheck.json").read_text(encoding="utf-8"))
+        check("主控 CSV 哈希与清单不符 → FAIL",
+              bcode != 0 and crep["verdict"] == "FAIL"
+              and crep["checks"]["master_csv_hash_matches_manifest"] is False)
 
         import audit_tables as audit_entry
         out_a = tmp / "a"

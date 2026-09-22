@@ -67,6 +67,67 @@ def code_commit(repo_root: Path) -> str:
         return "unknown"
 
 
+def code_provenance(repo_root: Path, scope: Path | None = None) -> dict:
+    """代码出处：HEAD 提交 **加上工作区是否干净**（第六轮补）。
+
+    为什么单靠 `code_commit()` 不够：它只取 `rev-parse HEAD`。若跑证据时改动
+    尚未提交，记录下来的提交号**并不包含实际运行的代码** —— 事后拿那个提交号
+    复现，会得到另一份代码。第五→第六次交付之间正好发生了这件事：跑证据用的
+    是三处未提交的修复，而 manifest 里写的是上一轮的 `828e7b4`。
+
+    本函数把未提交改动一并记录（`scope` 限定到本交付目录，忽略检出目录外的
+    无关改动），使「模型代码提交」这一项**可核对**而不是一句声明。
+
+    返回::
+
+        {"code_commit": <40位>, "worktree_dirty": bool,
+         "dirty_files": [...], "scope": <相对路径或 None>}
+    """
+    commit = code_commit(repo_root)
+    result = {"code_commit": commit, "worktree_dirty": None,
+              "dirty_files": [], "scope": None}
+    # 本仓库路径含中文：默认 locale 解码会在 subprocess 读取线程里抛 UnicodeDecodeError，
+    # 使 stdout 变成 None。显式指定 utf-8 + replace，并要求 git 把非 ASCII 路径转义成
+    # 八进制（core.quotepath=true 是默认值，这里写明以免被环境覆盖）。
+    cmd = ["git", "-C", str(repo_root), "-c", "core.quotepath=true",
+           "status", "--porcelain"]
+    if scope is not None:
+        try:
+            rel = Path(scope).resolve().relative_to(Path(repo_root).resolve())
+        except ValueError:          # scope 不在仓库内 —— 只用 HEAD，不误报
+            return result
+        result["scope"] = rel.as_posix()
+        cmd += ["--", rel.as_posix()]
+    try:
+        out = subprocess.run(cmd, capture_output=True, check=True,
+                             encoding="utf-8", errors="replace")
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return result
+    stdout = out.stdout or ""
+    lines = [ln for ln in stdout.splitlines() if ln.strip()]
+    result["worktree_dirty"] = bool(lines)
+    result["dirty_files"] = lines
+    return result
+
+
+def warn_if_dirty(repo_root: Path, scope: Path | None = None, *, stream=None) -> dict:
+    """跑正式证据前的护栏：工作区有未提交改动时**大声警告**并把出处返回给 manifest。
+
+    不直接拒绝运行（开发期测试要在未提交状态下跑），但让交付物自己说清楚
+    「这份证据是在未提交的工作区上产出的」—— 主控据此可退回重跑。
+    """
+    import sys as _sys
+
+    prov = code_provenance(repo_root, scope)
+    if prov["worktree_dirty"]:
+        print("!! 警告：工作区有未提交改动，本次证据的 code_commit 不完整标识所跑代码：",
+              file=stream or _sys.stderr)
+        for line in prov["dirty_files"]:
+            print(f"!!   {line}", file=stream or _sys.stderr)
+        print("!! 正式交付请在干净提交上重跑（见 RUNBOOK）。", file=stream or _sys.stderr)
+    return prov
+
+
 @dataclass
 class PredictionRecord:
     task_id: str

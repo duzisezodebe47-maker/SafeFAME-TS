@@ -31,14 +31,15 @@ if str(HERE) not in sys.path:
 
 from bundle_reader import (  # noqa: E402
     BundleUnavailable, assert_grid, decision_halves, read_frozen_bundle,
-    segment_bounds, sha256_file,
+    segment_bounds, sha256_file, task_seasonal_period,
 )
 from candidates import GATE_CANDIDATES  # noqa: E402
 from permutation import (  # noqa: E402
     ROW_PERMUTATIONS, circular_shift_null, decision_loss, observed_loss,
     row_permutation_null, write_null,
 )
-from predict_io import code_commit, config_sha256  # noqa: E402
+from predict_io import code_commit, config_sha256, warn_if_dirty  # noqa: E402
+from runtime_profile import cpu_seconds, script_entry_snapshot  # noqa: E402
 from train import RUNNABLE_SCENARIOS, to_feature_bundle  # noqa: E402
 
 REPO_ROOT = HERE.parents[1]
@@ -64,11 +65,20 @@ def main() -> int:
     out = Path(args.output_dir).resolve()
     out.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
+    cpu_started = cpu_seconds()
 
     try:
         bundle = read_frozen_bundle(args.bundle, args.task, args.scenario,
                                     args.signature, args.split_spec)
         bounds = segment_bounds(args.split_spec, args.task)
+    except BundleUnavailable as exc:
+        print(f"BundleUnavailable: {exc}", file=sys.stderr)
+        return 3
+
+    # 协议里登记的季节周期（第六轮修复 3）。本候选是分支残差模型、不消费它，
+    # 只作协议取值留痕；未登记即拒绝，避免记录一个不存在的协议值。
+    try:
+        seasonal_period = task_seasonal_period(args.split_spec, args.task)
     except BundleUnavailable as exc:
         print(f"BundleUnavailable: {exc}", file=sys.stderr)
         return 3
@@ -140,6 +150,28 @@ def main() -> int:
         "split_spec_sha256": sha256_file(args.split_spec),
         "grid": grid_stats,
         "wall_seconds": round(time.perf_counter() - started, 2),
+        # 第六轮补：CPU / 内存实测（任务书要求交付里附实测值，此前只有墙钟）
+        "runtime": script_entry_snapshot(started, cpu_started),
+        # 第六轮补：只写 HEAD 会在改动未提交时把 provenance 记成另一个提交
+        "code_provenance": warn_if_dirty(REPO_ROOT, HERE),
+        # 第六轮修复 3 的可追溯性：把协议里的季节周期记进产物。
+        # 本候选是分支残差模型（N/S/Q/SF），**不消费季节周期**；周期只影响主控
+        # 数值基线的 SeasonalNaive。这里记录以便主控核对协议取值，并写明适用范围。
+        "seasonal_period": {
+            "value": seasonal_period,
+            "source": f"{Path(args.split_spec).name}::seasonal_periods",
+            "applies_to": "numeric_baselines/SeasonalNaive（本置换候选不经过该路径）",
+        },
+        # 置换协议本身也要可追溯：次数、种子规则、循环移位块长
+        "permutation_config": {
+            "nulls_requested": args.nulls,
+            "seed_base": args.seed,
+            "seed_rule": "local_seed = seed_base * 1000 + iteration",
+            "circular_block": args.circular_block,
+            "refit_each_iteration": True,
+            "refit_scope": "PCA / 各分支标度器 / 交互尺度 / α 选择",
+            "loss": "决策段 MSE（标准化坐标）",
+        },
     }
     (out / "permutation_summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
