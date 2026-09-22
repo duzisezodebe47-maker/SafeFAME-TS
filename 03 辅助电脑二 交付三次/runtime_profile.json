@@ -1,0 +1,13 @@
+{
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10",
+  "device": "cpu",
+  "cpu_count": 32,
+  "code_commit": "",
+  "measurements": {
+    "single_candidate_fit_seconds": 0.167,
+    "single_permutation_seconds": 0.156
+  },
+  "measured_on": "合成 Bundle（semantic=768, n=300/80/80, L=24, H=6）",
+  "note": "任务书要求不得用合成样本时长外推 999 次总时长。此处只报单次实测；真实维度与样本量不同，必须以正式 Bundle 实测为准。"
+}

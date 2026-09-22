@@ -1,0 +1,15 @@
+{
+  "files": {
+    "model/branches.py": "b4a632f4bc002db6e4d2321fff68826cba5aeb813898a0d96cbd9afc1a9948ad",
+    "model/bundle_reader.py": "6e1541cc89fd4307c4a8746616b7a89f6d842a32d676b23a4aab199c2f131a69",
+    "model/candidates.py": "ce7ceee03726c084505f211bf7965fadb6967d0b5841181f30481f92a600ee53",
+    "model/permutation.py": "e83aa1b833e7fef45aa9dcff037e95ee7a1b3e578da1ec73a8890001d705678e",
+    "model/permutation_entry.py": "86ae46fed638e028a271d351655841b6f0af07674476724921a41ade443acb92",
+    "model/predict_io.py": "5c7bd985edaba370dca48bf72d6e46e48a46a357b22b6338c115fe430ce71894",
+    "model/predict_test.py": "d23f25fe5d14e21b7e3ed54be776ea786b4b86b2a79c546d317325ce5dc9c532",
+    "model/tests/test_round3.py": "0e7993321e170e765c38dede6c1cc805f96c0ba3b2877539f4322a554ff31554",
+    "model/train.py": "c167f665d1768c588fd13afd83e9bf7cc12d901c975e63750bdd05a098c471e6"
+  },
+  "combined_sha256": "eaa9e4be38e039b560d1acfc1ae3037922b038cf0d19411dddea8bd73d35a88e",
+  "note": "combined_sha256 覆盖 model/ 下全部文件（按路径排序后拼接的 SHA256）"
+}
