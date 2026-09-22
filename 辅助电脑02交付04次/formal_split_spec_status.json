@@ -1,0 +1,13 @@
+{
+  "status": "PENDING_MASTER_FREEZE",
+  "observed_master_commit": "1933b3c93af7d68dbf54e417457a20d5da62a2a6",
+  "observed_path": "team_work/main/round2/split_spec_v2.json",
+  "observed_file_sha256": "36c44036091bd51ea61003ae4729842797b37325d61fd49db89f3bbdca97dc68",
+  "observed_protocol_status": "draft_not_for_training",
+  "observed_approved_by": null,
+  "observed_numerical_sha256_count": 0,
+  "required_numerical_sha256_count": 4,
+  "frozen_commit": null,
+  "frozen_file_sha256": null,
+  "reason": "主控尚未冻结；禁止据此构建正式 Bundle。"
+}

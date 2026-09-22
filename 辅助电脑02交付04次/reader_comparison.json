@@ -1,0 +1,9 @@
+{
+  "status": "PENDING_FORMAL_BUNDLE",
+  "bundle_signature": null,
+  "task": "Agriculture",
+  "origins_compared": 0,
+  "readers": [],
+  "comparisons": [],
+  "reason": "正式 Bundle 尚不存在，不能用第三轮测试夹具充当真实三方读取验收。"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "PENDING_MASTER_FREEZE",
+  "bundle_root": null,
+  "split_spec_sha256": null,
+  "file_count": 0,
+  "files": [],
+  "reason": "等待主控冻结 split_spec_v2.json；未生成正式 Bundle。",
+  "forbidden_substitutes": ["preview", "test_fixture", "third-round TEST_FIXTURE_ONLY output"]
+}

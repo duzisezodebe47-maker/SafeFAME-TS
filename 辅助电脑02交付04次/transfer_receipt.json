@@ -1,0 +1,9 @@
+{
+  "status": "PENDING_MASTER_FREEZE",
+  "delivery_method": null,
+  "attachments": [],
+  "receiver_expected_path": null,
+  "master_downloaded_to_d_drive": false,
+  "master_verified_all_files": false,
+  "reason": "正式 Bundle 尚未生成或上传；不得写为 RECEIVED。"
+}

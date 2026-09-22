@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "OPEN_BLOCKER",
+  "events": [
+    {
+      "severity": "BLOCKER",
+      "stage": "formal_bundle_build",
+      "observed_at_master_commit": "1933b3c93af7d68dbf54e417457a20d5da62a2a6",
+      "condition": "split_spec_v2.status=draft_not_for_training; approved_by=null; four numerical_sha256 values are null",
+      "action": "Formal Bundle build, transfer and real three-reader comparison were not run.",
+      "resolution_needed": "Master publishes a frozen spec commit and its raw-byte SHA256 after independently verifying the four Git snapshots."
+    }
+  ]
+}
