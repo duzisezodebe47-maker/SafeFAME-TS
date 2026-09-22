@@ -57,7 +57,16 @@
 | 权重重演 | 两阶段（train+cal 重演 → 扩至 +dec） | 不适用 |
 | 实现 | `candidates.BranchResidualCandidate` | `numeric_fallbacks.numeric_baselines`（与主控逐行等价） |
 | 输出标记 | `path == "gate_candidate"` | `path == "master_numeric_baseline"` |
-| `N` | — | 属**模型候选型**回退，仍走选择期清单路径 |
+
+**第三类：`N`（模型候选型数值回退）** —— 既非门控候选也非主控基线，单独一行：
+
+| | `N` |
+|---|---|
+| `route.selected` | `numeric_fallback` |
+| `--candidate` | **必须等于** `route.fallback`（即 `"N"`） |
+| `--selection-manifest` | **必填**（与主控基线不同） |
+| 权重重演 | 两阶段 |
+| 输出标记 | `path == "numeric_fallback_candidate"` |
 
 **A.4**：路由必须**同时**携带 `split_spec_sha256` 与 `bundle_signature`。
 缺任一即拒绝 —— 旧的无锚 smoke 路由**不能**作为正式测试许可证。
