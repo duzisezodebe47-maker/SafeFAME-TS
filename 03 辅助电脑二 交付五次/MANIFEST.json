@@ -8,10 +8,10 @@
     "model/permutation.py": "e83aa1b833e7fef45aa9dcff037e95ee7a1b3e578da1ec73a8890001d705678e",
     "model/permutation_entry.py": "1769509fba687e3ddeeb2664811561e40ec437dd27bb461d504210b03f509fb3",
     "model/predict_io.py": "5c7bd985edaba370dca48bf72d6e46e48a46a357b22b6338c115fe430ce71894",
-    "model/predict_test.py": "d212d1d920aa02a35b58b936f633479398bbafabce7e56a03998b033c07deec9",
-    "model/tests/test_round5.py": "217302678ca2d1a046ec0f6c903fc92344b95027bd83429c0dcd98701fed011a",
+    "model/predict_test.py": "37df25fe54743f0c4023b4a0a3cc3da08bfd2d6ed560306119307a2ed4da3328",
+    "model/tests/test_round5.py": "92ceb0543c2e2d5b949508546686f22959c9fd0f131a0e82057c823da961bd06",
     "model/train.py": "5d906abf6363a123c5ee6f4cc50f2f0b7fe295dd3b00a4da20033da36b683874"
   },
-  "combined_sha256": "0589e15298ef8cea47df1bd8c94805b54019b8d08d85dab57f308db701cd20af",
+  "combined_sha256": "2208533786bc997c8d25eecf3c20597216756114815b2090b4288d143caf32ad",
   "note": "combined_sha256 覆盖 model/ 下全部文件（按路径排序拼接的 SHA256）"
 }

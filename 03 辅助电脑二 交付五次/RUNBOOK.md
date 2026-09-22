@@ -10,7 +10,7 @@
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
-# 期望输出：全部通过（35 项检查）
+# 期望输出：全部通过（48 项检查）
 # 期望退出码：0
 ```
 
@@ -103,7 +103,7 @@ Get-FileHash -Algorithm SHA256 <主控路由.json>         # Windows PowerShell
 | 项 | 状态 |
 |---|---|
 | A 部分五项修复 | ✅ `COMPLETE` |
-| 端到端负例 35 项 | ✅ `COMPLETE` |
+| 端到端负例 48 项 | ✅ `COMPLETE` |
 | 资源实测 | ✅ `PARTIAL`（`runtime_profile.json`，不外推） |
 | 真实 Agriculture 选择期预测 | `NOT_RUN` — 无正式 Bundle |
 | 999 次置换 | `NOT_RUN` — 无正式 Bundle |

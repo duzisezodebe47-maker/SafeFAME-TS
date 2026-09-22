@@ -7,7 +7,7 @@
 
 ## 一、状态
 
-**A 部分五项修复完成，35 项合成测试通过；B 部分仍阻塞于正式 Bundle 未交付。**
+**A 部分五项修复完成，48 项合成测试通过；B 部分仍阻塞于正式 Bundle 未交付。**
 
 主控的 `Freeze four audited numerical snapshots` 已完成 —— 解锁链推进了一步，
 模型侧已记下冻结 spec 基准 `a0947a5b…f0031`，Bundle 到位后立即用它核对。
@@ -75,13 +75,25 @@ if candidate != fallback:
   第一次写这个测试时把**整段数组**替换了（train/cal 的真值也被改掉），
   诊断显示四段全变 —— 改为**只改 test 段的行**后通过。
 
+### 再审一次：两处收紧
+
+- **A.2 改为分段比对**：任务书点名"在 calibration/decision/test 比对"，原先只报全量。
+  全量通过不排除某一段整体偏移。现按段分别出结论 + 保留全量结论。
+- **候选合法性改为读冻结 spec**：`check_route` 原先用硬编码的 `GATE_CANDIDATES`。
+  若主控改了 spec 的 `gate_candidates`，入口会放行协议里已不是候选的名字 ——
+  **静默分歧**。现从 spec 读 `gate_candidates` / `numeric_fallback_candidates`，
+  任一为空即拒绝。
+
+另核对了 A.2 参考实现的**抄录忠实度**（与主控源码逐行比对），确认无误 ——
+否则测试只是"自洽"，两边都错也看不出来。
+
 ---
 
-## 三、测试：35 项全部通过
+## 三、测试：48 项全部通过
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
-# 全部通过（35 项检查），退出码 0
+# 全部通过（48 项检查），退出码 0
 ```
 
 ---

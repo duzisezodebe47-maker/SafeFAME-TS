@@ -74,20 +74,20 @@ return fallback          # ← 请求门控候选时条件为假 → 不报错 �
 
 ---
 
-## 二、测试：35 项全部通过（合成数据）
+## 二、测试：48 项全部通过（合成数据）
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
-# 全部通过（35 项检查）
+# 全部通过（48 项检查）
 # 退出码 0
 ```
 
 | 任务书 | 覆盖 |
 |---|---|
 | A.1 | **请求门控候选但路由选数值回退 → 入口拒绝且无预测文件**；请求值严格等于 `route.fallback` 时通过 |
-| A.2 | α / 校准 MSE / 三个基线逐点输出 / 行数，**与主控参考实现逐项比对** |
+| A.2 | α / 校准 MSE / 三个基线逐点输出 / 行数，**与主控参考实现逐项比对**；并按 **calibration / decision / test 分段**分别出结论（cal 8 / dec 13 / test 13 起点，各 3 个基线全绿） |
 | A.3 | 主控基线无 selection manifest 也能跑；路径标记与 α 记录正确 |
-| A.4 | 缺 `split_spec_sha256` → 拒绝；缺 `bundle_signature` → 拒绝；锚不符 → 拒绝；两锚齐备且一致 → 通过 |
+| A.4 | 缺 `split_spec_sha256` → 拒绝；缺 `bundle_signature` → 拒绝；锚不符 → 拒绝；两锚齐备且一致 → 通过；**`selected` 不在 spec 的 `gate_candidates` 中 → 拒绝**；**`fallback` 不在 spec 的 `numeric_fallback_candidates` 中 → 拒绝**；**spec 未声明候选清单 → 拒绝** |
 | A.5 | 推理视图无真值；**改真值并重新签名后预测逐位不变**；删除真值后仍不变 |
 | 沿用 | 签名 == `signature(inputs)`、四段边界、H 窗口、半段 `middle=37` 与掩码逐位一致 |
 
@@ -97,6 +97,16 @@ return fallback          # ← 请求门控候选时条件为假 → 不报错 �
 |---|---|---|
 | A.3「`N` 属模型候选型数值回退，保留其选择期清单并**单独测路径**」 | 代码实现了 `N` 走清单路径，但**没有单独测它** —— 它与主控基线走的是**不同分支** | 新增 `N` 端到端测试：有清单时成功、`path=="numeric_fallback_candidate"`、两个权重哈希都记录；**缺清单时必须拒绝**（这正是它与主控基线的差别） |
 | A.5「预测字节**和权重/路由选择**不变」 | 只测了**预测**不变；模型是篡改**前**就拟合好的，权重当然不变 —— **等于没测到"选路过程是否依赖真值"** | 新增：用篡改真值后的 Bundle **重新跑一遍** `fit_design + select_alphas + refit`，断言 **α 完全一致、权重逐位一致** |
+
+### 再审一次：两处可更严谨的地方
+
+| 项 | 现状 | 问题 |
+|---|---|---|
+| A.2 要求「在 **calibration/decision/test** 比对」 | 原先只比对**全量行** | 范围更强，但**没有按段分别报告** —— 全量通过不排除某一段整体偏移。已改为**分段 + 全量**双重结论 |
+| `check_route` 的候选表 | **硬编码** `GATE_CANDIDATES` | 若主控改了 spec 的 `gate_candidates`，两边会**静默分歧**：入口会放行协议里已不是候选的名字。已改为**从冻结 spec 读** `gate_candidates` / `numeric_fallback_candidates`，两处任一为空即拒绝 |
+
+顺带核对了 A.2 参考实现的**抄录忠实度** —— 与主控源码逐行比对（`seasonal` 公式、
+`np.linalg.solve`、`(loss, alpha)` 平局规则），确认无误。否则测试会"自洽但都不对"。
 
 ### 补测过程中又抓到两个自己的 bug
 
@@ -156,7 +166,7 @@ a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031
     ├── permutation_entry.py   置换入口
     ├── predict_test.py        ★ A.1/A.3/A.4 修复
     ├── audit_tables.py        无文本 + 半段审计表
-    └── tests/test_round5.py   35 项检查
+    └── tests/test_round5.py   48 项检查
 ```
 
 前四轮目录完整保留，未改动。

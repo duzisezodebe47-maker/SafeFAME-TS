@@ -193,11 +193,20 @@ def main() -> int:
         check("A.2 fit_rows / calibration_rows 与主控一致",
               mine["fit_rows"] == ref["fit_rows"]
               and mine["calibration_rows"] == ref["calibration_rows"])
+        # 任务书点名"在 calibration/decision/test 比对" —— 按段分别给结论，
+        # 而不是只报一个全量结论（全量通过不排除某一段整体偏移）
+        for seg in ("calibration", "decision", "test"):
+            mask = segs == seg
+            for name in ("Last", "SeasonalNaive", "AR-Ridge"):
+                a = mine["predictions"][name][mask]
+                b = ref["predictions"][name][mask]
+                check(f"A.2 [{seg}] {name} 逐起点逐步输出与主控一致（{int(mask.sum())} 起点）",
+                      a.shape == b.shape and np.allclose(a, b, rtol=1e-10, atol=1e-12))
         for name in ("Last", "SeasonalNaive", "AR-Ridge"):
-            check(f"A.2 {name} 逐起点逐步输出与主控一致（容差内）",
+            check(f"A.2 [all] {name} 全量逐点一致",
                   np.allclose(mine["predictions"][name], ref["predictions"][name],
                               rtol=1e-10, atol=1e-12))
-        check("A.2 三段（cal/dec/test）行序一致",
+        check("A.2 行序与 Bundle 一致",
               mine["predictions"]["AR-Ridge"].shape == ref["predictions"]["AR-Ridge"].shape
               == full.targets_standardized.shape)
 
@@ -274,7 +283,9 @@ def main() -> int:
             r = False
             try:
                 check_route(route, "Agriculture_h3_f1", 1, "N+S+Q",
-                            bundle_signature="b" * 64, split_spec_sha256="s" * 64)
+                            bundle_signature="b" * 64, split_spec_sha256="s" * 64,
+                            spec_gates={"N+S+Q", "N+S+Q+SF"},
+                            spec_fallbacks={"Last", "SeasonalNaive", "AR-Ridge", "N"})
             except _RR as exc:
                 r = label in str(exc)
             check(f"A.4 缺 {label} 锚被拒绝", r)
@@ -283,14 +294,66 @@ def main() -> int:
         r = False
         try:
             check_route(route, "Agriculture_h3_f1", 1, "N+S+Q",
-                        bundle_signature="X" * 64, split_spec_sha256="s" * 64)
+                        bundle_signature="X" * 64, split_spec_sha256="s" * 64,
+                        spec_gates={"N+S+Q", "N+S+Q+SF"},
+                        spec_fallbacks={"Last", "SeasonalNaive", "AR-Ridge", "N"})
         except _RR as exc:
             r = "bundle_signature" in str(exc)
         check("A.4 bundle_signature 不符被拒绝", r)
         check("A.4 两锚齐备且一致时通过",
               check_route(route, "Agriculture_h3_f1", 1, "N+S+Q",
                           bundle_signature="b" * 64,
-                          split_spec_sha256="s" * 64) == "N+S+Q")
+                          split_spec_sha256="s" * 64,
+                          spec_gates={"N+S+Q", "N+S+Q+SF"},
+                          spec_fallbacks={"Last", "SeasonalNaive", "AR-Ridge", "N"}
+                          ) == "N+S+Q")
+
+        # 候选合法性必须对照**冻结 spec**，而不是本模块的硬编码常量 ——
+        # 否则主控改了 spec 的 gate_candidates，两边会静默分歧。
+        r = False
+        try:
+            check_route(dict(base, selected="N+S+Q+F", split_spec_sha256="s" * 64,
+                             bundle_signature="b" * 64),
+                        "Agriculture_h3_f1", 1, "N+S+Q+F",
+                        bundle_signature="b" * 64, split_spec_sha256="s" * 64,
+                        spec_gates={"N+S+Q", "N+S+Q+SF"},
+                        spec_fallbacks={"Last", "SeasonalNaive", "AR-Ridge", "N"})
+        except _RR as exc:
+            r = "冻结 spec 的门控候选" in str(exc)
+        check("A.4 selected 不在 spec 的 gate_candidates 中 → 拒绝", r)
+
+        r = False
+        try:
+            check_route(dict(base, selected="numeric_fallback", fallback="NotABaseline",
+                             split_spec_sha256="s" * 64, bundle_signature="b" * 64),
+                        "Agriculture_h3_f1", 1, "NotABaseline",
+                        bundle_signature="b" * 64, split_spec_sha256="s" * 64,
+                        spec_gates={"N+S+Q"}, spec_fallbacks={"Last", "N"})
+        except _RR as exc:
+            r = "numeric_fallback_candidates" in str(exc)
+        check("A.4 fallback 不在 spec 的 numeric_fallback_candidates 中 → 拒绝", r)
+
+        # spec 缺候选清单时也必须硬失败，不能"没声明就放行"
+        from predict_test import spec_candidate_lists
+        with tempfile.TemporaryDirectory() as t2:
+            bad_spec = Path(t2) / "nospec.json"
+            bad_spec.write_text(json.dumps({"gate_candidates": []}), encoding="utf-8")
+            r = False
+            try:
+                spec_candidate_lists(bad_spec)
+            except _RR as exc:
+                r = "gate_candidates" in str(exc)
+            check("A.4 spec 未声明 gate_candidates → 拒绝", r)
+
+            bad_spec2 = Path(t2) / "nospec2.json"
+            bad_spec2.write_text(json.dumps({"gate_candidates": ["A"], "numeric_fallback_candidates": []}),
+                                 encoding="utf-8")
+            r = False
+            try:
+                spec_candidate_lists(bad_spec2)
+            except _RR as exc:
+                r = "numeric_fallback_candidates" in str(exc)
+            check("A.4 spec 未声明 numeric_fallback_candidates → 拒绝", r)
 
     # ---------------- A.5 不向模型提供测试真值 ----------------
     print("\n--- A.5 测试真值不进入预测 -------------")

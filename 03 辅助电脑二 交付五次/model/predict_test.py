@@ -77,15 +77,34 @@ def load_route(path: Path, expected_file_sha256: str) -> dict:
     return route
 
 
+def spec_candidate_lists(spec_path: Path) -> tuple[set[str], set[str]]:
+    """从**冻结 spec** 读候选清单，而不是用硬编码列表。
+
+    若主控改了 spec 的 `gate_candidates` / `numeric_fallback_candidates`，
+    硬编码会与协议**静默分歧** —— 那样入口会放行协议里已不是候选的名字，
+    或拒绝协议里新加的名字。两边必须同源。
+    """
+    spec = json.loads(Path(spec_path).read_text(encoding="utf-8"))
+    gates = set(map(str, spec.get("gate_candidates") or []))
+    fallbacks = set(map(str, spec.get("numeric_fallback_candidates") or []))
+    if not gates:
+        raise RouteRejected("冻结 spec 未声明 gate_candidates")
+    if not fallbacks:
+        raise RouteRejected("冻结 spec 未声明 numeric_fallback_candidates")
+    return gates, fallbacks
+
+
 def check_route(
     route: dict, task_id: str, fold_id: int, candidate: str,
     *, bundle_signature: str, split_spec_sha256: str,
+    spec_gates: set[str], spec_fallbacks: set[str],
 ) -> str:
     """核对路由锚与选择结果，返回**实际要跑的模型名**。
 
     A.4：`split_spec_sha256` 与 `bundle_signature` **两锚都必须在路由里且一致**，
     任一缺失即拒绝 —— 旧无锚 smoke 路由不能作为正式测试许可证。
     A.1：`--candidate` 必须与路由的选择结果**严格相等**，不存在旁路。
+    候选合法性一律对照**冻结 spec**，不依赖本模块的硬编码常量。
     """
     for key in ("task_id", "fold_id", "selected", "fallback", "selection_data_segments",
                 "split_spec_sha256", "bundle_signature"):
@@ -116,11 +135,19 @@ def check_route(
             raise RouteRejected(
                 f"路由选中数值回退 {fallback!r}，但 --candidate={candidate!r}；"
                 f"必须严格等于 route.fallback")
+        if fallback not in spec_fallbacks:
+            raise RouteRejected(
+                f"路由的回退模型 {fallback!r} 不在冻结 spec 的 numeric_fallback_candidates "
+                f"{sorted(spec_fallbacks)} 中")
         if fallback not in MASTER_BASELINES and fallback != "N":
-            raise RouteRejected(f"路由的回退模型 {fallback!r} 不在已实现范围内")
+            raise RouteRejected(f"回退模型 {fallback!r} 尚无本侧实现")
         return fallback
+    if selected not in spec_gates:
+        raise RouteRejected(
+            f"路由的 selected={selected!r} 既非冻结 spec 的门控候选 "
+            f"{sorted(spec_gates)} 也非 numeric_fallback")
     if selected not in GATE_CANDIDATES:
-        raise RouteRejected(f"路由的 selected={selected!r} 既非门控候选也非 numeric_fallback")
+        raise RouteRejected(f"门控候选 {selected!r} 尚无本侧实现")
     if candidate != selected:
         raise RouteRejected(
             f"路由选中 {selected!r}，但 --candidate={candidate!r} —— "
@@ -177,9 +204,11 @@ def main() -> int:
     # ---- 1) 路由：文件字节锚 + 两锚必填 + 严格相等 ----
     try:
         route = load_route(args.route, args.route_sha256)
+        spec_gates, spec_fallbacks = spec_candidate_lists(args.split_spec)
         model_name = check_route(route, args.task, fold_id, args.candidate,
                                  bundle_signature=args.signature,
-                                 split_spec_sha256=spec_sha)
+                                 split_spec_sha256=spec_sha,
+                                 spec_gates=spec_gates, spec_fallbacks=spec_fallbacks)
     except RouteRejected as exc:
         print(f"RouteRejected: {exc}", file=sys.stderr)
         return 3
