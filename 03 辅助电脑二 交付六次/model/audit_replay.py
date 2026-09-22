@@ -29,13 +29,18 @@ HERE = Path(__file__).resolve().parent
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
-from candidates import ALL_CANDIDATES  # noqa: E402
+from candidates import ALL_CANDIDATES, GATE_CANDIDATES  # noqa: E402
 from predict_io import warn_if_dirty  # noqa: E402
 from runtime_profile import cpu_seconds, script_entry_snapshot  # noqa: E402
 from train import RUNNABLE_SCENARIOS  # noqa: E402
 
 REPO_ROOT = HERE.parents[1]
 TRAIN = HERE / "train.py"
+
+# 只有当轮交付的那几个候选做重演。`ALL_CANDIDATES` 还含 N+S / N+F / N+S+Q+F 等
+# 诊断候选，它们**不在本轮交付范围内**（没有对应的已交付 CSV），拿它们去比对
+# 「重演 == 交付」必然失败 —— 第一版就这么错了，把不在交付里的候选算成了失败。
+DELIVERED_CANDIDATES = ("N", "N+Q", "N+S+Q", "N+S+Q+SF")
 
 
 def run_train(bundle: Path, task: str, scenario: str, signature: str, spec: Path,
@@ -69,10 +74,16 @@ def main() -> int:
     out.mkdir(parents=True, exist_ok=True)
     delivered = Path(args.delivered_dir).resolve()
 
+    # 交付范围必须恰好是这四个：门控两候选 + 消融 N+Q + 数值回退 N。
+    # 少一个（漏交）或多一个（混入未注册候选）都要在这里暴露。
+    missing = [c for c in GATE_CANDIDATES + ("N", "N+Q")
+               if not (delivered / f"{c.replace('+', '_')}_run_manifest.json").is_file()]
+
     results: dict[str, dict] = {}
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
-        for candidate in ALL_CANDIDATES:
+        for candidate in DELIVERED_CANDIDATES:
+            assert candidate in ALL_CANDIDATES, f"未注册候选: {candidate}"
             stem = candidate.replace("+", "_")
             entry: dict = {"candidate": candidate, "ok": False}
             a, b = tmp / f"{stem}_a", tmp / f"{stem}_b"
@@ -124,8 +135,11 @@ def main() -> int:
     report = {
         "task": args.task, "scenario": args.scenario, "seed": args.seed,
         "bundle_signature": args.signature,
+        "delivered_candidates": list(DELIVERED_CANDIDATES),
+        "missing_delivered_manifests": missing,
         "candidates": results,
-        "verdict": "PASS" if results and all(e["ok"] for e in results.values()) else "FAIL",
+        "verdict": ("PASS" if results and not missing
+                    and all(e["ok"] for e in results.values()) else "FAIL"),
         "code_provenance": warn_if_dirty(REPO_ROOT, HERE),
         "runtime": script_entry_snapshot(started, cpu_started),
         "note": "每个候选跑两次 train.py：两次逐字节相同，且与已交付的 CSV/manifest 一致",
