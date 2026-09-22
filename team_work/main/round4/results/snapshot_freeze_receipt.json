@@ -1,0 +1,22 @@
+{
+  "status": "NUMERICAL_SNAPSHOT_SPEC_FROZEN",
+  "scope": "four_clean_numeric_snapshots_and_pre_registered_splits_only",
+  "frozen_at_utc": "2026-09-22T10:11:55Z",
+  "master_pre_freeze_commit": "1933b3c93af7d68dbf54e417457a20d5da62a2a6",
+  "data_branch_commit_observed": "e6ea158b2100c051a4c42b8aa4e672a958f30d42",
+  "fixed_snapshot_commit": "2d530ec7ab22fce591767baf1af81f8fe9c6a11d",
+  "old_draft_spec_sha256": "36c44036091bd51ea61003ae4729842797b37325d61fd49db89f3bbdca97dc68",
+  "frozen_spec_relative_path": "team_work/main/round2/split_spec_v2.json",
+  "frozen_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "independent_snapshot_audit_relative_path": "team_work/main/round4/results/master_snapshot_audit.json",
+  "independent_snapshot_audit_sha256": "6af133662c434f41453d2a9578d65e4615233ff3ec0f6508fb263e7692cc526a",
+  "files": [
+    {"domain": "Agriculture", "rows": 532, "sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38"},
+    {"domain": "Climate", "rows": 1272, "sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4"},
+    {"domain": "SocialGood", "rows": 916, "sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d"},
+    {"domain": "Environment", "rows": 15979, "sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3"}
+  ],
+  "verified": ["git_blob_extracted_to_D", "actual_csv_sha256", "row_count", "date_order", "valid_intervals", "finite_OT", "fold_boundaries", "registry_match"],
+  "not_verified": ["raw_Time_MMD_cleaning_replay_on_master", "formal_bundle", "three_reader_formal_interoperability", "model_training", "999_refit_nulls", "route", "test_scores"],
+  "next_gate": "data_side_build_and_transfer_formal_bundle_from_this_exact_frozen_spec_sha256"
+}

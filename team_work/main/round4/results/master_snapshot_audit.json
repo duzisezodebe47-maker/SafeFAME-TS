@@ -1,0 +1,72 @@
+{
+  "status": "READY_FOR_HUMAN_FREEZE_REVIEW",
+  "split_spec_sha256": "36c44036091bd51ea61003ae4729842797b37325d61fd49db89f3bbdca97dc68",
+  "registry_sha256": "296ff02b8ef9449dd1dfb847267d836f65654227a04bf022fc051f96be13a18e",
+  "snapshots": [
+    {
+      "task_id": "Agriculture_h12_f1",
+      "path": "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第4轮_2d530ec7\\Agriculture_numerical.csv",
+      "sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38",
+      "rows": 532,
+      "first_start": "1980-01-01",
+      "last_end": "2024-04-30",
+      "bounds": [
+        212,
+        266,
+        372,
+        425
+      ],
+      "ot_finite_rows": 532,
+      "status": "BYTE_AND_CONTENT_CHECK_PASSED"
+    },
+    {
+      "task_id": "Climate_h4_f2",
+      "path": "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第4轮_2d530ec7\\Climate_numerical.csv",
+      "sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+      "rows": 1272,
+      "first_start": "2000-01-04",
+      "last_end": "2024-05-20",
+      "bounds": [
+        636,
+        763,
+        1017,
+        1144
+      ],
+      "ot_finite_rows": 1272,
+      "status": "BYTE_AND_CONTENT_CHECK_PASSED"
+    },
+    {
+      "task_id": "SocialGood_h3_f1",
+      "path": "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第4轮_2d530ec7\\SocialGood_numerical.csv",
+      "sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+      "rows": 916,
+      "first_start": "1948-01-01",
+      "last_end": "2024-04-30",
+      "bounds": [
+        366,
+        458,
+        641,
+        732
+      ],
+      "ot_finite_rows": 916,
+      "status": "BYTE_AND_CONTENT_CHECK_PASSED"
+    },
+    {
+      "task_id": "Environment_h7_f2",
+      "path": "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第4轮_2d530ec7\\Environment_numerical.csv",
+      "sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3",
+      "rows": 15979,
+      "first_start": "1980-01-01",
+      "last_end": "2023-09-30",
+      "bounds": [
+        7989,
+        9587,
+        12783,
+        14381
+      ],
+      "ot_finite_rows": 15979,
+      "status": "BYTE_AND_CONTENT_CHECK_PASSED"
+    }
+  ],
+  "limitation": "This audits supplied clean bytes and registry consistency; it does not independently re-run cleaning from raw Time-MMD sources."
+}
