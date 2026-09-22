@@ -1,0 +1,402 @@
+"""第五轮测试（合成数据；正式 Bundle 未交付）。
+
+覆盖第五轮任务书 A 部分五项，以及沿用前轮的契约/边界/半段负例：
+
+  A.1  numeric_fallback 旁路：请求门控候选却执行回退模型 —— 必须从**入口**拒绝
+  A.2  AR-Ridge 与主控 `v2.numeric_baselines` 的**逐行等价**（含 α）
+  A.3  主控基线不需模型侧选择期清单；`N` 仍需
+  A.4  正式路由必须同时携带 `split_spec_sha256` 与 `bundle_signature` 两锚
+  A.5  测试预测不得接收测试真值 —— 删/改真值后预测字节不变
+
+用法::
+
+    .venv/Scripts/python.exe "03 辅助电脑二 交付五次/model/tests/test_round5.py"
+"""
+
+from __future__ import annotations
+
+import contextlib
+import io
+import json
+import math
+import sys
+import tempfile
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+HERE = Path(__file__).resolve().parent
+MODEL = HERE.parent
+sys.path.insert(0, str(MODEL))
+
+from branches import FeatureBundle  # noqa: E402
+from candidates import GATE_CANDIDATES  # noqa: E402
+
+PASSED: list[str] = []
+
+
+def check(label: str, condition: bool) -> None:
+    if not condition:
+        raise AssertionError(f"FAIL: {label}")
+    PASSED.append(label)
+    print(f"  ok  {label}")
+
+
+# ---------------- 合成冻结 spec 与 Bundle ----------------
+
+def make_spec(path: Path, *, status="frozen", approved="master", n_rows=60) -> Path:
+    """四段边界严格递增：train [0,20) cal [20,30) dec [30,45) test [45,60]。"""
+    spec = {
+        "schema_version": 1, "status": status, "approved_by": approved,
+        "alpha_grid": [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0],
+        "row_permutations": 999, "p_threshold": 0.025,
+        "gate_candidates": ["N+S+Q", "N+S+Q+SF"],
+        "numeric_fallback_candidates": ["Last", "SeasonalNaive", "AR-Ridge", "N"],
+        "tasks": [{"domain": "Agriculture", "fold_id": 1, "input_len": 12, "horizon": 3,
+                   "n_rows_expected": n_rows, "bounds": [20, 30, 45, 60],
+                   "numerical_sha256": "a" * 64}],
+    }
+    path.write_text(json.dumps(spec, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
+def make_bundle(root: Path, spec_path: Path, *, n=60, horizon=3, semantic_dim=16,
+                quality_dim=3, seed=5, tamper=None) -> Path:
+    from bundle_reader import sha256_file, signature
+
+    root.mkdir(parents=True, exist_ok=True)
+    task = root / "Agriculture_h3_f1"
+    task.mkdir(exist_ok=True)
+    rng = np.random.default_rng(seed)
+
+    seg_bounds = [("train", 0, 20), ("calibration", 20, 30),
+                  ("decision", 30, 45), ("test", 45, 60)]
+    keep = []
+    for o in range(n):
+        for name, lo, hi in seg_bounds:
+            if lo <= o < hi and o + horizon <= hi:
+                keep.append((o, name))
+                break
+    origins = np.array([o for o, _ in keep], dtype=np.int64)
+    segments = [s for _, s in keep]
+
+    full = {
+        "numeric_history": rng.normal(size=(n, 12)).astype(np.float32),
+        "targets": rng.normal(size=(n, horizon)).astype(np.float32),
+        "targets_standardized": rng.normal(size=(n, horizon)).astype(np.float32),
+    }
+    for key, val in full.items():
+        np.save(task / f"{key}.npy", val[origins], allow_pickle=False)
+    np.save(task / "origin_index.npy", origins, allow_pickle=False)
+
+    scen = task / "proxy"; scen.mkdir(exist_ok=True)
+    per_scen = {
+        "semantic": rng.normal(size=(n, semantic_dim)).astype(np.float32),
+        "quality": rng.normal(size=(n, quality_dim)).astype(np.float32),
+        "text_available": (rng.random(n) < 0.7),
+    }
+    for key, val in per_scen.items():
+        np.save(scen / f"{key}.npy", val[origins], allow_pickle=False)
+
+    rows = [{"task_id": "Agriculture_h3_f1", "fold_id": 1,
+             "origin_id": f"Agriculture:h3:f1:o{int(o)}", "origin_index": int(o),
+             "segment": segments[i]} for i, o in enumerate(origins)]
+    pd.DataFrame(rows).to_csv(task / "samples.csv", index=False, lineterminator="\n")
+
+    spec = json.loads(Path(spec_path).read_text(encoding="utf-8"))
+    (root / "schema.json").write_text(json.dumps({"status": "frozen"}), encoding="utf-8")
+    inputs = {"mode": "frozen", "split_spec_sha256": sha256_file(spec_path),
+              "split_spec": spec}
+    files = {p.relative_to(root).as_posix(): sha256_file(p)
+             for p in sorted(root.rglob("*")) if p.is_file() and p.name != "manifest.json"}
+    manifest = {"inputs": inputs, "signature": signature(inputs), "files": files}
+    (root / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+
+    if tamper:
+        tamper(root, manifest)
+    return root
+
+
+# ---------------- 主控实现的参考移植（A.2 的比对基准）----------------
+
+def reference_numeric_baselines(samples, arrays, alpha_grid, seasonal_period) -> dict:
+    """`team_eval/v2.py::numeric_baselines` 的**逐行抄录**，仅作比对基准。
+
+    刻意不改任何细节（连 `np.linalg.solve` 与 (loss, alpha) 平局规则都保留），
+    否则比对就失去意义。
+    """
+    x = np.asarray(arrays["numeric_history"], dtype=float)
+    y = np.asarray(arrays["targets_standardized"], dtype=float)
+    train = np.array([r["segment"] == "train" for r in samples])
+    cal = np.array([r["segment"] == "calibration" for r in samples])
+    if train.sum() < 2 or not cal.any() or seasonal_period < 1 or seasonal_period > x.shape[1]:
+        raise RuntimeError("numeric baseline lacks train/cal rows or usable seasonal history")
+
+    last = np.repeat(x[:, -1:], y.shape[1], axis=1)
+    seasonal = np.stack([x[:, -seasonal_period + (step % seasonal_period)]
+                         for step in range(y.shape[1])], axis=1)
+    x_mean, y_mean = x[train].mean(axis=0), y[train].mean(axis=0)
+    xc, yc = x[train] - x_mean, y[train] - y_mean
+    gram, cross = xc.T @ xc, xc.T @ yc
+    candidates = {}
+    for alpha in sorted(set(map(float, alpha_grid))):
+        weights = np.linalg.solve(gram + alpha * np.eye(x.shape[1]), cross)
+        prediction = (x - x_mean) @ weights + y_mean
+        loss = float(np.mean((prediction[cal] - y[cal]) ** 2))
+        candidates[alpha] = (loss, prediction)
+    chosen_alpha = min(candidates, key=lambda a: (candidates[a][0], a))
+    predictions = {"Last": last, "SeasonalNaive": seasonal,
+                   "AR-Ridge": candidates[chosen_alpha][1]}
+    return {"predictions": predictions, "ridge_alpha": chosen_alpha,
+            "ridge_calibration_mse": candidates[chosen_alpha][0],
+            "fit_rows": int(train.sum()), "calibration_rows": int(cal.sum())}
+
+
+def main() -> int:
+    print("第五轮测试（合成数据；正式 Bundle 未交付）")
+
+    from bundle_reader import sha256_file, signature
+    from candidates import BranchResidualCandidate
+    from numeric_fallbacks import numeric_baselines
+    from predict_io import weight_hash
+    from train import merge_bundles, to_feature_bundle, to_inference_bundle
+
+    # ---------------- A.2 与主控实现的逐行等价 ----------------
+    print("\n--- A.2 数值基线与主控实现等价 ---")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        bdir = make_bundle(tmp / "a2", spec)
+        sig = json.loads((bdir / "manifest.json").read_text())["signature"]
+        from bundle_reader import read_frozen_bundle
+        b = read_frozen_bundle(bdir, "Agriculture_h3_f1", "proxy", sig, spec)
+
+        parts = {s: to_feature_bundle(b.segment(s))
+                 for s in ("train", "calibration", "decision", "test")}
+        full = merge_bundles(*[parts[s] for s in
+                               ("train", "calibration", "decision", "test")])
+        segs = np.concatenate([np.full(len(parts[s].numeric_history), s)
+                               for s in ("train", "calibration", "decision", "test")])
+
+        mine = numeric_baselines(full, segs, seasonal_period=12)
+        ref = reference_numeric_baselines(
+            [{"segment": s} for s in segs],
+            {"numeric_history": full.numeric_history,
+             "targets_standardized": full.targets_standardized},
+            [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0], 12)
+
+        check("A.2 α 选择与主控一致", mine["ridge_alpha"] == ref["ridge_alpha"])
+        check("A.2 校准 MSE 与主控一致（容差内）",
+              math.isclose(mine["ridge_calibration_mse"], ref["ridge_calibration_mse"],
+                           rel_tol=1e-10, abs_tol=1e-12))
+        check("A.2 fit_rows / calibration_rows 与主控一致",
+              mine["fit_rows"] == ref["fit_rows"]
+              and mine["calibration_rows"] == ref["calibration_rows"])
+        for name in ("Last", "SeasonalNaive", "AR-Ridge"):
+            check(f"A.2 {name} 逐起点逐步输出与主控一致（容差内）",
+                  np.allclose(mine["predictions"][name], ref["predictions"][name],
+                              rtol=1e-10, atol=1e-12))
+        check("A.2 三段（cal/dec/test）行序一致",
+              mine["predictions"]["AR-Ridge"].shape == ref["predictions"]["AR-Ridge"].shape
+              == full.targets_standardized.shape)
+
+    # ---------------- A.1 数值回退旁路（走入口）----------------
+    print("\n--- A.1 numeric_fallback 旁路 ---")
+    from predict_test import main as pt_main
+
+    def run_entry(tmp: Path, spec: Path, route: dict, candidate: str,
+                  selection: dict | None, sig: str) -> tuple[int, Path]:
+        rp = tmp / "route.json"
+        rp.write_text(json.dumps(route), encoding="utf-8")
+        out = tmp / "out"
+        argv = ["predict_test.py", "--bundle", str(tmp / "b"), "--task", "Agriculture_h3_f1",
+                "--scenario", "proxy", "--signature", sig, "--split-spec", str(spec),
+                "--route", str(rp), "--route-sha256", sha256_file(rp),
+                "--candidate", candidate, "--output-dir", str(out)]
+        if selection is not None:
+            sp = tmp / "selection.json"
+            sp.write_text(json.dumps(selection), encoding="utf-8")
+            argv += ["--selection-manifest", str(sp)]
+        old = sys.argv; sys.argv = argv
+        try:
+            with contextlib.redirect_stdout(io.StringIO()), \
+                    contextlib.redirect_stderr(io.StringIO()):
+                code = pt_main()
+        except SystemExit as exc:
+            code = int(exc.code or 1)
+        finally:
+            sys.argv = old
+        return code, out
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        make_bundle(tmp / "b", spec)
+        sig = json.loads((tmp / "b" / "manifest.json").read_text())["signature"]
+        spec_sha = sha256_file(spec)
+        fb_route = {"task_id": "Agriculture_h3_f1", "fold_id": 1,
+                    "selected": "numeric_fallback", "fallback": "AR-Ridge",
+                    "selection_data_segments": ["cal", "dec"],
+                    "split_spec_sha256": spec_sha, "bundle_signature": sig}
+        # 关键负例：路由选中数值回退，却请求一个门控候选
+        for request in GATE_CANDIDATES:
+            code, out = run_entry(tmp, spec, fb_route, request, None, sig)
+            produced = out.is_dir() and any(out.glob("*_test_predictions.csv"))
+            check(f"A.1 请求门控候选 {request} 但路由选数值回退 → 拒绝且无预测文件",
+                  code != 0 and not produced)
+        # 正确请求：严格等于 route.fallback
+        code, out = run_entry(tmp, spec, fb_route, "AR-Ridge", None, sig)
+        check("A.1 请求值严格等于 route.fallback 时通过", code == 0)
+
+        # A.3：主控基线不需要 selection manifest
+        check("A.3 主控基线（AR-Ridge）无 selection manifest 也能跑", code == 0)
+        man = json.loads((out / "AR_Ridge_test_manifest.json").read_text(encoding="utf-8"))
+        check("A.3 回退路径标记为主控基线且无权重哈希",
+              man["path"] == "master_numeric_baseline" and man["weight_hash"] is None)
+        check("A.3 记录了主控基线的 α 与拟合行数",
+              "ridge_alpha" in man and man["baseline_fit_rows"] > 0)
+
+    # ---------------- A.4 两锚必填 ----------------
+    print("\n--- A.4 路由两锚必填 ---")
+    from predict_test import RouteRejected as _RR, check_route, load_route
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        base = {"task_id": "Agriculture_h3_f1", "fold_id": 1, "selected": "N+S+Q",
+                "fallback": "AR-Ridge", "selection_data_segments": ["cal", "dec"]}
+        for drop, label in (("split_spec_sha256", "split_spec_sha256"),
+                            ("bundle_signature", "bundle_signature")):
+            route = dict(base, split_spec_sha256="s" * 64, bundle_signature="b" * 64)
+            route.pop(drop)
+            p = tmp / f"r_{drop}.json"
+            p.write_text(json.dumps(route), encoding="utf-8")
+            r = False
+            try:
+                check_route(route, "Agriculture_h3_f1", 1, "N+S+Q",
+                            bundle_signature="b" * 64, split_spec_sha256="s" * 64)
+            except _RR as exc:
+                r = label in str(exc)
+            check(f"A.4 缺 {label} 锚被拒绝", r)
+
+        route = dict(base, split_spec_sha256="s" * 64, bundle_signature="b" * 64)
+        r = False
+        try:
+            check_route(route, "Agriculture_h3_f1", 1, "N+S+Q",
+                        bundle_signature="X" * 64, split_spec_sha256="s" * 64)
+        except _RR as exc:
+            r = "bundle_signature" in str(exc)
+        check("A.4 bundle_signature 不符被拒绝", r)
+        check("A.4 两锚齐备且一致时通过",
+              check_route(route, "Agriculture_h3_f1", 1, "N+S+Q",
+                          bundle_signature="b" * 64,
+                          split_spec_sha256="s" * 64) == "N+S+Q")
+
+    # ---------------- A.5 不向模型提供测试真值 ----------------
+    print("\n--- A.5 测试真值不进入预测 -------------")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        bdir = make_bundle(tmp / "a5", spec)
+        sig = json.loads((bdir / "manifest.json").read_text())["signature"]
+
+        from bundle_reader import read_frozen_bundle
+        b = read_frozen_bundle(bdir, "Agriculture_h3_f1", "proxy", sig, spec)
+        view = to_inference_bundle(b.segment("test"))
+        check("A.5 推理视图不含 targets", view.targets is None)
+        check("A.5 推理视图不含 targets_standardized", view.targets_standardized is None)
+        check("A.5 推理视图特征完整",
+              len(view.numeric_history) == len(view.origin_index) == 13)
+
+        model = BranchResidualCandidate("N+S+Q")
+        model.fit_design(to_feature_bundle(b.segment("train")))
+        model.select_alphas(to_feature_bundle(b.segment("train")),
+                            to_feature_bundle(b.segment("calibration")))
+        model.refit(merge_bundles(to_feature_bundle(b.segment("train")),
+                                  to_feature_bundle(b.segment("calibration"))))
+        before = model.predict(view)
+
+        # 把磁盘上的测试真值随机改掉，**并重新签名**（否则 verify_bundle 会先拦下来，
+        # 那样测到的是签名校验、不是"预测是否依赖真值"）
+        task = bdir / "Agriculture_h3_f1"
+        for key in ("targets", "targets_standardized"):
+            arr = np.load(task / f"{key}.npy")
+            np.save(task / f"{key}.npy",
+                    np.random.default_rng(99).normal(size=arr.shape).astype(arr.dtype),
+                    allow_pickle=False)
+
+        def resign(root: Path, spec_path: Path) -> str:
+            s = json.loads(Path(spec_path).read_text(encoding="utf-8"))
+            inputs = {"mode": "frozen", "split_spec_sha256": sha256_file(spec_path),
+                      "split_spec": s}
+            files = {p.relative_to(root).as_posix(): sha256_file(p)
+                     for p in sorted(root.rglob("*"))
+                     if p.is_file() and p.name != "manifest.json"}
+            m = {"inputs": inputs, "signature": signature(inputs), "files": files}
+            (root / "manifest.json").write_text(json.dumps(m), encoding="utf-8")
+            return m["signature"]
+
+        sig2 = resign(bdir, spec)
+        b2 = read_frozen_bundle(bdir, "Agriculture_h3_f1", "proxy", sig2, spec)
+        after = model.predict(to_inference_bundle(b2.segment("test")))
+        check("A.5 改动测试真值（并重新签名）后预测逐位不变",
+              np.array_equal(before, after))
+
+        # 删除测试真值文件也不应影响预测
+        for key in ("targets", "targets_standardized"):
+            (task / f"{key}.npy").unlink()
+        view3 = to_inference_bundle({"numeric_history": b.segment("test")["numeric_history"],
+                                     "semantic": b.segment("test")["semantic"],
+                                     "quality": b.segment("test")["quality"],
+                                     "text_available": b.segment("test")["text_available"],
+                                     "origin_index": b.segment("test")["origin_index"]})
+        check("A.5 测试真值缺失时仍能预测且结果不变",
+              np.array_equal(model.predict(view3), before))
+
+    # ---------------- 沿用：契约 / 边界 / 半段 ----------------
+    print("\n--- 沿用：签名 / 边界 / 半段 ---")
+    from bundle_reader import (
+        BundleUnavailable, assert_grid, decision_halves, segment_bounds,
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        bdir = make_bundle(tmp / "keep", spec)
+        sig = json.loads((bdir / "manifest.json").read_text())["signature"]
+        b = read_frozen_bundle(bdir, "Agriculture_h3_f1", "proxy", sig, spec)
+        bounds = segment_bounds(spec, "Agriculture_h3_f1")
+        check("四段边界与 spec 一致",
+              bounds["train"] == (0, 20) and bounds["calibration"] == (20, 30)
+              and bounds["decision"] == (30, 45) and bounds["test"] == (45, 60))
+        for s in ("train", "calibration", "decision", "test"):
+            assert_grid(b, s, bounds[s], 3)
+        check("各段网格与 H 窗口通过", True)
+
+        info = decision_halves(b, bounds, 3)
+        check("middle = (cal_end+dec_end)//2 = 37", info["middle"] == 37)
+        part = b.segment("decision")
+        origins = np.asarray(part["origin_index"])
+        check("前段 == origin+h<=middle",
+              np.array_equal(info["first_half"]["mask"], origins + 3 <= 37))
+        check("后段 == origin>=middle",
+              np.array_equal(info["second_half"]["mask"], origins >= 37))
+        check("半段不重叠",
+              not (info["first_half"]["mask"] & info["second_half"]["mask"]).any())
+
+        # 签名独立重算
+        m = json.loads((bdir / "manifest.json").read_text())
+        check("签名 == signature(inputs)",
+              m["signature"] == signature(m["inputs"]))
+
+    print(f"\n全部通过（{len(PASSED)} 项检查）")
+    print("未跑（需正式 Bundle）：真实 Agriculture 训练、999 次置换、测试段预测")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except AssertionError as exc:
+        print(f"\n{exc}", file=sys.stderr)
+        raise SystemExit(1)

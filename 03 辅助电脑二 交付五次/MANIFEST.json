@@ -1,0 +1,17 @@
+{
+  "files": {
+    "model/audit_tables.py": "dce9095de5d25d5eb7786288010c0c9cbb86b87d0907c0c149349f3d06f14a0a",
+    "model/branches.py": "b4a632f4bc002db6e4d2321fff68826cba5aeb813898a0d96cbd9afc1a9948ad",
+    "model/bundle_reader.py": "10d743c685efc3f542ec9d677b8f5ac6d2d5b46caea7cdacffc324fc786df837",
+    "model/candidates.py": "5b7be2c04ad8b2bdd219a0305d83813b8f7e4df243149a62133597cd42043927",
+    "model/numeric_fallbacks.py": "c59f23e281b821b35707e92b892ef5c60be365e43409e3ac6a76202e50d0346a",
+    "model/permutation.py": "e83aa1b833e7fef45aa9dcff037e95ee7a1b3e578da1ec73a8890001d705678e",
+    "model/permutation_entry.py": "1769509fba687e3ddeeb2664811561e40ec437dd27bb461d504210b03f509fb3",
+    "model/predict_io.py": "5c7bd985edaba370dca48bf72d6e46e48a46a357b22b6338c115fe430ce71894",
+    "model/predict_test.py": "98610eaf24665062ef4c1c643354cb6913251e31544c2f44e89e4d2cb5c1fbaa",
+    "model/tests/test_round5.py": "a0f9a6a7eda7d8dea5b49443166d23819146b1ce6ed95e801fc7e637758f0574",
+    "model/train.py": "5d906abf6363a123c5ee6f4cc50f2f0b7fe295dd3b00a4da20033da36b683874"
+  },
+  "combined_sha256": "47179d23608818a5a84ffb3cc4ce2f05052e1aba02d8334c0ddd6b32a274dd10",
+  "note": "combined_sha256 覆盖 model/ 下全部文件（按路径排序拼接的 SHA256）"
+}
