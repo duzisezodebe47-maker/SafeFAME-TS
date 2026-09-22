@@ -1,0 +1,36 @@
+{
+  "status": "UPLOADED",
+  "receiver_status": "MASTER_RECEIVED_AND_VERIFIED",
+  "delivery_branch": "3218151885-creator",
+  "delivery_evidence_commit": "PENDING_FINAL_COMMIT",
+  "prior_receipt": {
+    "path": "辅助电脑02交付05次/transfer_receipt.json",
+    "sha256": "10846585f0c1109841f5440c794df8096553777812ff420aa0f4af89f5664576",
+    "prior_receiver_status": "MASTER_ACK_PENDING"
+  },
+  "master_acceptance": {
+    "commit": "1c7180b9a9c095d9af2b91c5996b33b8a2e2d594",
+    "report": "team_work/main/round6/results/master_formal_bundle_audit.json",
+    "report_sha256": "874dae13555f49daec87ab456941cf8675c1b324b33d323cea7418eafff19b8d",
+    "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+    "manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+    "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031"
+  },
+  "audit": {
+    "status": "PASS",
+    "coverage_summary_sha256": "15101b7c111b8e200c3fd51ee8b7bed72008d0c07acc3f0911182d884e4186d3",
+    "origin_detail_sha256": "79419a50472dfef55524cae3cbd9b98c530b9f163d099d0f0dd4ae36205b46f9",
+    "origin_detail_bytes": 58443773,
+    "fact_catalog_sha256": "e48b93939d812e29111c4fd834cdd445aa9a419fcee50a9525a1343563975319",
+    "source_clean_reaudit_sha256": "cf6e97109019ee682e0d30707352efc888f6f52067959cae800a4e85c5b4d0db",
+    "negative_cases": "PASS",
+    "all_retained_origins_checked": true,
+    "quality_max_abs_error": 0.0,
+    "socialgood_text_available": {"proxy": 341, "conservative_lag": 340},
+    "source_url_rows": 0,
+    "publication_time_status": "end_date_proxy_unverified"
+  },
+  "audit_release_url": null,
+  "audit_release_asset_sha256": null,
+  "claim_boundary": "The audit verifies the frozen Bundle's implemented rules and arrays. It does not convert end_date into a verified publication timestamp or establish causality."
+}

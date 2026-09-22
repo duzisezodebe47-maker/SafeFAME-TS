@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "commands": [
+    {
+      "command": ".venv\\Scripts\\python.exe src/audit_timemmd.py --root references/external/Time-MMD --output data_processed/team_transfer/辅助电脑02交付06次/raw_timemmd_reaudit",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv\\Scripts\\python.exe - (辅助电脑02交付01次/audit.py::run_audit)",
+      "exit_code": 0
+    }
+  ],
+  "raw_timemmd_outputs": {
+    "timemmd_audit.json": "0c741d3ef30fb1db7456a015e39eef4a1113f1f451896048932ba09a4df10198",
+    "timemmd_numerical_audit.csv": "03150517426c17a623b57c8f87e93237f4d58d55aaa3fe3684d02bb40d132e48",
+    "timemmd_text_audit.csv": "b7945ed87efbdb1fb39eb4f0f77a9cdd5465ab661e77a9a1756b1f7bbb50ecd0"
+  },
+  "fixed_chain_cache": {
+    "folder": "data_processed\\team_data\\audit-6266b0a931bd32bb166a",
+    "manifest_sha256": "582f89e59a63b10211e7771977dd71712a6d5a005670ce944fcb8dff7386da41",
+    "signature": "6266b0a931bd32bb166afc49638f2dfa0befdc71b9f0afb3d52113a07b755123",
+    "status": "reused_verified_cache",
+    "summary_status": "AUDIT_COMPLETE_PROTOCOL_PENDING",
+    "timemmd_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+    "original_url_rows": 0,
+    "canonical_facts": 25613
+  },
+  "four_csv_comparison": [
+    {
+      "task_id": "Agriculture_h12_f1",
+      "path": "data_processed\\team_data\\audit-6266b0a931bd32bb166a\\Agriculture_numerical.csv",
+      "actual_sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38",
+      "frozen_sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38",
+      "match": true
+    },
+    {
+      "task_id": "Climate_h4_f2",
+      "path": "data_processed\\team_data\\audit-6266b0a931bd32bb166a\\Climate_numerical.csv",
+      "actual_sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+      "frozen_sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+      "match": true
+    },
+    {
+      "task_id": "SocialGood_h3_f1",
+      "path": "data_processed\\team_data\\audit-6266b0a931bd32bb166a\\SocialGood_numerical.csv",
+      "actual_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+      "frozen_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+      "match": true
+    },
+    {
+      "task_id": "Environment_h7_f2",
+      "path": "data_processed\\team_data\\audit-6266b0a931bd32bb166a\\Environment_numerical.csv",
+      "actual_sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3",
+      "frozen_sha256": "d8c33bfdb5558988d1911203dec277ce9a6332455779da81ba7a4ac2d61b8dd3",
+      "match": true
+    }
+  ],
+  "limitations": [
+    "No source files were modified. The fixed chain validated the existing cache; it did not invent a new raw-cleaning result.",
+    "All 0 retained source rows have original_url missing; proxy/conservative scenarios do not require URL, complete_source is not used for model gate.",
+    "end_date remains a proxy for availability time."
+  ]
+}

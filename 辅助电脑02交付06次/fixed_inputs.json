@@ -1,0 +1,15 @@
+{
+  "main_acceptance_commit": "1c7180b9a9c095d9af2b91c5996b33b8a2e2d594",
+  "main_acceptance_report": "team_work/main/round6/results/master_formal_bundle_audit.json",
+  "main_acceptance_report_sha256": "874dae13555f49daec87ab456941cf8675c1b324b33d323cea7418eafff19b8d",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "canonical_audit_signature": "6266b0a931bd32bb166afc49638f2dfa0befdc71b9f0afb3d52113a07b755123",
+  "canonical_audit_manifest_sha256": "582f89e59a63b10211e7771977dd71712a6d5a005670ce944fcb8dff7386da41",
+  "timemmd_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+  "bundle_release_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/tag/data-bundle-a69821be115445265cde",
+  "formal_bundle_zip_sha256": "8abde5043f7399c96d269b5adbbc35dcbcada0e8760114a41b603031c01f0e06",
+  "source_url_rows": 0,
+  "end_date_interpretation": "proxy_unverified_publication_time"
+}

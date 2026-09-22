@@ -1,0 +1,21 @@
+domain,source,rows,start,end,invalid_intervals,usable_fact_rows,unique_usable_facts,fact_missing_pct,prediction_present_pct,duplicate_interval_pct,numerical_interval_coverage_pct,median_texts_per_interval,max_texts_per_interval,model_use
+Agriculture,report,890,2018-11-21,2024-05-17,0,890,716,0.0,99.213,49.101,10.338,0.0,78,fact_only; predictions excluded
+Agriculture,search,1653,1979-12-31,2024-05-05,0,1212,1183,26.679,96.128,0.0,75.564,3.0,6,fact_only; predictions excluded
+Climate,report,590,1999-01-01,2024-04-30,0,582,582,1.356,98.814,48.475,99.843,2.0,4,fact_only; predictions excluded
+Climate,search,2261,1979-12-31,2024-05-19,0,1868,1664,17.382,53.914,0.0,100.0,2.0,2,fact_only; predictions excluded
+Economy,report,435,1995-01-01,2024-03-31,0,435,435,0.0,100.0,20.69,77.181,1.0,2,fact_only; predictions excluded
+Economy,search,2314,1979-12-31,2024-05-05,0,2313,2308,0.043,99.611,0.0,100.0,5.0,6,fact_only; predictions excluded
+Energy,report,354,2011-07-25,2024-04-26,0,354,354,0.0,100.0,0.0,21.825,0.0,1,fact_only; predictions excluded
+Energy,search,2314,1979-12-31,2024-05-05,0,2299,2276,0.648,74.978,0.0,99.63,1.0,1,fact_only; predictions excluded
+Environment,report,156,2021-05-15,2023-10-03,0,140,140,10.256,82.051,46.795,0.494,0.0,18,fact_only; predictions excluded
+Environment,search,2312,1979-12-31,2024-05-05,0,2232,2174,3.46,86.808,0.0,96.408,1.0,1,fact_only; predictions excluded
+Health_AFR,report,482,2017-08-21,2024-05-02,0,108,96,77.593,45.228,20.539,5.886,0.0,4,fact_only; predictions excluded
+Health_AFR,search,1911,1980-01-14,2024-05-05,0,1802,1793,5.704,79.696,0.0,98.22,1.0,1,fact_only; predictions excluded
+Health_US,report,864,1999-01-01,2020-01-04,0,486,455,43.75,98.727,0.231,39.381,0.0,3,fact_only; predictions excluded
+Health_US,search,2087,1979-12-31,2024-05-05,0,1959,1950,6.133,85.002,0.0,99.784,1.0,1,fact_only; predictions excluded
+Security,report,19569,1980-04-10,2024-05-01,0,0,0,100.0,0.0,45.909,0.0,0.0,0,fact_only; predictions excluded
+Security,search,2311,1979-12-31,2024-05-05,0,2277,2230,1.471,66.551,0.0,100.0,5.0,6,fact_only; predictions excluded
+SocialGood,report,371,1994-01-01,2024-04-30,0,347,287,6.469,93.531,0.0,37.446,0.0,2,fact_only; predictions excluded
+SocialGood,search,4590,1979-12-31,2024-05-05,0,4485,4446,2.288,80.044,49.608,57.792,9.0,12,fact_only; predictions excluded
+Traffic,report,367,2002-01-01,2024-03-31,0,367,364,0.0,100.0,0.0,41.014,0.0,7,fact_only; predictions excluded
+Traffic,search,2309,1979-12-31,2024-05-05,0,2280,2187,1.256,98.657,0.0,81.72,5.0,6,fact_only; predictions excluded
