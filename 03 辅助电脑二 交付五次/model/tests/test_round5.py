@@ -316,14 +316,20 @@ def main() -> int:
                                   to_feature_bundle(b.segment("calibration"))))
         before = model.predict(view)
 
-        # 把磁盘上的测试真值随机改掉，**并重新签名**（否则 verify_bundle 会先拦下来，
-        # 那样测到的是签名校验、不是"预测是否依赖真值"）
+        # 把磁盘上的**测试段**真值随机改掉，并重新签名。
+        #
+        # ⚠️ 只能改 test 段的行！直接替换整个数组会把 train/calibration 的真值
+        # 一起改掉 —— 那样 α 会（正确地）变化，测到的是"训练数据被毁"，
+        # 而不是"是否偷看测试真值"。第一版就踩了这个坑。
         task = bdir / "Agriculture_h3_f1"
+        test_mask = b.segment_mask("test")
+        rng_tamper = np.random.default_rng(99)
         for key in ("targets", "targets_standardized"):
             arr = np.load(task / f"{key}.npy")
-            np.save(task / f"{key}.npy",
-                    np.random.default_rng(99).normal(size=arr.shape).astype(arr.dtype),
-                    allow_pickle=False)
+            arr = arr.copy()
+            arr[test_mask] = rng_tamper.normal(size=(int(test_mask.sum()), arr.shape[1]),
+                                               ).astype(arr.dtype)
+            np.save(task / f"{key}.npy", arr, allow_pickle=False)
 
         def resign(root: Path, spec_path: Path) -> str:
             s = json.loads(Path(spec_path).read_text(encoding="utf-8"))
@@ -342,6 +348,20 @@ def main() -> int:
         check("A.5 改动测试真值（并重新签名）后预测逐位不变",
               np.array_equal(before, after))
 
+        # 关键：**重新跑一遍完整选路**（fit_design + select_alphas + refit），
+        # 断言 α 与权重都不变。只比预测的话，用篡改前就拟合好的模型等于没测到
+        # "选路过程是否依赖真值"。
+        m2 = BranchResidualCandidate("N+S+Q")
+        m2.fit_design(to_feature_bundle(b2.segment("train")))
+        m2.select_alphas(to_feature_bundle(b2.segment("train")),
+                         to_feature_bundle(b2.segment("calibration")))
+        m2.refit(merge_bundles(to_feature_bundle(b2.segment("train")),
+                               to_feature_bundle(b2.segment("calibration"))))
+        check("A.5 重新选路后 α 完全一致",
+              m2.alpha_by_group == model.alpha_by_group)
+        check("A.5 重新拟合后权重逐位一致",
+              np.array_equal(m2.weights, model.weights))
+
         # 删除测试真值文件也不应影响预测
         for key in ("targets", "targets_standardized"):
             (task / f"{key}.npy").unlink()
@@ -352,6 +372,80 @@ def main() -> int:
                                      "origin_index": b.segment("test")["origin_index"]})
         check("A.5 测试真值缺失时仍能预测且结果不变",
               np.array_equal(model.predict(view3), before))
+
+    # ---------------- A.3 `N` 路径单独测 ----------------
+    # 任务书：`N` 属**模型候选型**数值回退，保留其选择期清单并**单独测路径**。
+    # 它与主控基线（Last/SeasonalNaive/AR-Ridge）走的是**不同分支**，必须分别验证。
+    print("\n--- A.3 `N` 作为数值回退的独立路径 ---")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        spec = make_spec(tmp / "spec.json")
+        bdir = make_bundle(tmp / "npath", spec)
+        sig = json.loads((bdir / "manifest.json").read_text())["signature"]
+        spec_sha = sha256_file(spec)
+
+        b = read_frozen_bundle(bdir, "Agriculture_h3_f1", "proxy", sig, spec)
+        np_parts = {s: to_feature_bundle(b.segment(s))
+                    for s in ("train", "calibration", "decision")}
+        nm = BranchResidualCandidate("N")
+        nm.fit_design(np_parts["train"])
+        nm.select_alphas(np_parts["train"], np_parts["calibration"])
+        nm.refit(merge_bundles(np_parts["train"], np_parts["calibration"]))
+        n_selection = {"candidate": "N", "bundle_signature": sig,
+                       "alpha_by_group": nm.alpha_by_group,
+                       "weight_hash": weight_hash(nm.weights),
+                       "config_sha256": "cfg-n"}
+
+        n_route = {"task_id": "Agriculture_h3_f1", "fold_id": 1,
+                   "selected": "numeric_fallback", "fallback": "N",
+                   "selection_data_segments": ["cal", "dec"],
+                   "split_spec_sha256": spec_sha, "bundle_signature": sig}
+        rp = tmp / "route_n.json"
+        rp.write_text(json.dumps(n_route), encoding="utf-8")
+        sp = tmp / "selection_n.json"
+        sp.write_text(json.dumps(n_selection), encoding="utf-8")
+        out = tmp / "out_n"
+        old = sys.argv
+        sys.argv = ["predict_test.py", "--bundle", str(bdir),
+                    "--task", "Agriculture_h3_f1", "--scenario", "proxy",
+                    "--signature", sig, "--split-spec", str(spec),
+                    "--route", str(rp), "--route-sha256", sha256_file(rp),
+                    "--selection-manifest", str(sp), "--candidate", "N",
+                    "--output-dir", str(out)]
+        try:
+            with contextlib.redirect_stdout(io.StringIO()), \
+                    contextlib.redirect_stderr(io.StringIO()):
+                code = pt_main()
+        except SystemExit as exc:
+            code = int(exc.code or 1)
+        finally:
+            sys.argv = old
+
+        check("A.3 `N` 作为数值回退走清单路径，端到端成功", code == 0)
+        nman = json.loads((out / "N_test_manifest.json").read_text(encoding="utf-8"))
+        check("A.3 `N` 标为模型候选型回退（既非门控候选也非主控基线）",
+              nman["path"] == "numeric_fallback_candidate"
+              and nman["model_config"]["branches"] == ["N"])
+        check("A.3 `N` 路径记录了选择期与扩展期权重哈希",
+              nman["weight_hash"] is not None and nman["test_fit_weight_hash"] is not None
+              and nman["weight_hash"] != nman["test_fit_weight_hash"])
+
+        # `N` 缺清单时必须拒绝（与主控基线的差别正在于此）
+        old = sys.argv
+        sys.argv = ["predict_test.py", "--bundle", str(bdir),
+                    "--task", "Agriculture_h3_f1", "--scenario", "proxy",
+                    "--signature", sig, "--split-spec", str(spec),
+                    "--route", str(rp), "--route-sha256", sha256_file(rp),
+                    "--candidate", "N", "--output-dir", str(tmp / "out_n2")]
+        try:
+            with contextlib.redirect_stdout(io.StringIO()), \
+                    contextlib.redirect_stderr(io.StringIO()):
+                code2 = pt_main()
+        except SystemExit as exc:
+            code2 = int(exc.code or 1)
+        finally:
+            sys.argv = old
+        check("A.3 `N` 缺选择期清单时被拒绝（区别于主控基线）", code2 != 0)
 
     # ---------------- 沿用：契约 / 边界 / 半段 ----------------
     print("\n--- 沿用：签名 / 边界 / 半段 ---")

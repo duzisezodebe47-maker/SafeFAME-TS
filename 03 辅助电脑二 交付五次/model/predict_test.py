@@ -236,10 +236,19 @@ def main() -> int:
     test_inference = to_inference_bundle(bundle.segment("test"))
     input_sha = {s: weight_hash(p.numeric_history) for s, p in fit_parts.items()}
 
+    # 三种路径的标签、分支组成、求解器各不相同。`N` 是**模型候选型**数值回退
+    # （有选择期清单、有权重重演），不是主控基线，也不是门控候选 ——
+    # 早先把它标成 "gate_candidate" 是错的。
     if model_name in GATE_CANDIDATES:
+        path_label = "gate_candidate"
         branches = list(BranchResidualCandidate(model_name).branch_names)
         solver = "group-penalized ridge, cholesky, float64 normal equations"
+    elif model_name == "N":
+        path_label = "numeric_fallback_candidate"
+        branches = list(BranchResidualCandidate("N").branch_names)
+        solver = "group-penalized ridge, cholesky, float64 normal equations"
     else:
+        path_label = "master_numeric_baseline"
         branches = []
         solver = f"master numeric baseline: {model_name}"
 
@@ -270,7 +279,7 @@ def main() -> int:
                                      seasonal_period=args.seasonal_period)
         n_test = len(test_inference.numeric_history)
         predictions = baseline["predictions"][model_name][-n_test:]
-        report["path"] = "master_numeric_baseline"
+        report["path"] = path_label
         report["ridge_alpha"] = baseline["ridge_alpha"]
         report["ridge_calibration_mse"] = baseline["ridge_calibration_mse"]
         report["baseline_fit_rows"] = baseline["fit_rows"]
@@ -304,7 +313,7 @@ def main() -> int:
         report["test_fit_weight_hash"] = weight_hash(weights_extended)
         # A.5：只喂测试**特征**视图
         predictions = model.predict(test_inference)
-        report["path"] = "gate_candidate"
+        report["path"] = path_label
 
     if predictions.ndim != 2 or predictions.shape[0] != len(test_inference.origin_index):
         print(f"预测形状异常: {predictions.shape}", file=sys.stderr)
