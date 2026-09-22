@@ -15,11 +15,12 @@
 | # | 任务书要求 | 状态 | 位置 |
 |---|---|---|---|
 | A.1 | 核对**全部且只有**清单文件；`split_spec_sha256` 与冻结协议一致；适配层同样校验 | ✅ | [`model/bundle_reader.py`](model/bundle_reader.py) `verify_signature` —— 缺失/哈希不符/**清单外多余文件**三类都拒绝；`split_spec_sha256` 与 `manifest.inputs` 比对 |
-| A.2 | `assert_grid` 核对 `origin_id` 的**领域/H/折**与 `task_id` 一致 | ✅ | 同上 `assert_grid` —— 新增 `TASK_ID_RE`；索引对但领域/跨度/折错也拒绝 |
+| A.2 | `assert_grid` 核对 `origin_id` 的**领域/H/折**与 `task_id` 一致，并核对**分段边界** | ✅ | 同上 `assert_grid` —— 新增 `TASK_ID_RE`；索引对但领域/跨度/折错也拒绝；`bounds=(lo,hi)` 非空时核对起点落在协议半开区间内 |
 | A.3 | 修正 RUNBOOK 命令；`complete_source` 不作为可运行情景 | ✅ | [`RUNBOOK.md`](RUNBOOK.md)；`train.RUNNABLE_SCENARIOS = ("proxy", "conservative_lag")` |
 | A.4 | 逐次记录 `iteration → seed → 损失/失败`；`requested` 与 `successful` 均达 999 才算 p | ✅ | [`model/permutation.py`](model/permutation.py) `NullIteration` + `unavailable_reason` |
 | A.5 | 决策半段按**目标时间边界**切；`circular-block` 真正使用块长；用 7 档 α | ✅ | `bundle_reader.decision_halves_by_target_time`；`circular_shift_null(circular_block=…)`；`PROTOCOL_ALPHAS` 已是 7 档 |
 | A.6 | 新增 `predict_test.py`，拒绝未冻结路由/签名不符/权重不一致 | ✅ | [`model/predict_test.py`](model/predict_test.py) |
+| 交付物 | 「无文本与半段审计表」 | ✅ | [`model/audit_tables.py`](model/audit_tables.py) —— `text_availability_audit.csv` + `decision_halves_audit.csv` |
 
 ### A.4 是本轮最实质的修复
 
@@ -36,11 +37,11 @@
 
 ---
 
-## 二、测试：41 项全部通过（合成数据）
+## 二、测试：49 项全部通过（合成数据）
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付三次/model/tests/test_round3.py"
-# 全部通过（41 项检查）
+# 全部通过（49 项检查）
 ```
 
 按任务书 A 部分逐项对应：
@@ -48,7 +49,7 @@
 | 任务书 | 测试 |
 |---|---|
 | A.1 | 缺失/哈希不符/末项 → 拒绝；**清单外多余文件** → 拒绝；`split_spec_sha256` 不符 → 拒绝 |
-| A.2 | **索引正确但领域错** → 拒绝；**索引正确但跨度错** → 拒绝 |
+| A.2 | **索引正确但领域错** → 拒绝；**索引正确但跨度错** → 拒绝；**起点落在协议边界外** → 拒绝 |
 | A.4 | **故障注入**：第 2 次失败第 3 次成功，种子的损失**未错配**；失败行不带损失且带可定位错误；请求不足/有失败时 p 均不可用 |
 | A.5 | 块长 7 与 2 产生不同结果（证明真的在用块长）；缺 `target_end_time` 时**硬失败不退回按个数切**；两半段互不重叠 |
 | A.6 | 路由未冻结 → 拒绝；路由哈希不符 → 拒绝；权重哈希对 1e-9 改动敏感 |
@@ -101,7 +102,7 @@
 | 逐次 `row_null/` | `NOT_RUN` —— 无 Bundle |
 | `run_manifest.json`（真实任务） | `NOT_RUN` —— 无 Bundle |
 | `runtime_profile.json` | `PARTIAL` —— 仅有合成数据的单次耗时实测，见下 |
-| 无文本与半段审计表 | `PARTIAL` —— 逻辑已实现并测试，真实数据未跑 |
+| 无文本与半段审计表 | ✅ 生成器已实现（`audit_tables.py`）；真实表 `NOT_RUN`（无 Bundle） |
 | 模型权重 SHA256 / 配置哈希 | ✅ 机制已实现（`weight_hash`），真实值待跑 |
 | 正式 Bundle 签名 | `NOT_RUN` —— Bundle 不存在 |
 | 固定代码提交 | ✅ 见本次提交 SHA |
@@ -144,7 +145,8 @@
     ├── train.py               ← 训练入口（A.3：仅 proxy/conservative_lag）
     ├── permutation_entry.py   ← 置换入口（A.4/A.5）
     ├── predict_test.py        ← A.6 测试段入口
-    └── tests/test_round3.py   ← 41 项检查
+    ├── audit_tables.py        ← 无文本审计表 + 决策半段审计表
+    └── tests/test_round3.py   ← 49 项检查
 ```
 
 第二轮目录 [`03 辅助电脑二 交付二次/`](../03%20辅助电脑二%20交付二次/) 完整保留，未改动。

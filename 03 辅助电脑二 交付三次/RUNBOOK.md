@@ -10,7 +10,7 @@
 
 ```bash
 .venv/Scripts/python.exe "03 辅助电脑二 交付三次/model/tests/test_round3.py"
-# 期望：全部通过（41 项检查），退出码 0
+# 期望：全部通过（49 项检查），退出码 0
 ```
 
 ### 训练（**需正式 Bundle；当前不可运行**）
@@ -89,7 +89,7 @@ step, y_pred, target_scale, bundle_signature, config_sha256, code_commit`
 | 项 | 状态 |
 |---|---|
 | A 部分六项修复 | ✅ `COMPLETE` |
-| 合成故障测试（41 项） | ✅ `COMPLETE` |
+| 合成故障测试（49 项） | ✅ `COMPLETE` |
 | 单次拟合 / 单次置换的实测耗时 | ✅ `PARTIAL`（见 `runtime_profile.json`） |
 | 真实 Agriculture 训练 | `NOT_RUN` —— 无正式 Bundle |
 | 999 次置换 | `NOT_RUN` —— 无正式 Bundle |

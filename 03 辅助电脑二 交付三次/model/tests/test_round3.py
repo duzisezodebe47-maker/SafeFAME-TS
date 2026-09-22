@@ -348,6 +348,66 @@ def main() -> int:
           fit_candidate("N+S+Q", t1, c1).predict(e1).shape == (len(e1.numeric_history), 1))
 
 
+    # ---------------- A.2 分段边界核对 ----------------
+    print("\n--- A.2 分段边界核对 ---")
+    with tempfile.TemporaryDirectory() as tmp:
+        b = read_frozen_bundle(make_fake_bundle(Path(tmp) / "bounds"),
+                               "Agriculture_h3_f1", "proxy", "SIG-TEST")
+        assert_grid(b, "train", bounds=(100, 130))
+        check("起点落在协议边界内时通过", True)
+        r = False
+        try:
+            assert_grid(b, "train", bounds=(200, 300))
+        except AssertionError as exc:
+            r = "协议边界" in str(exc)
+        check("起点落在协议边界外时被拒绝", r)
+
+    # ---------------- A.5 半段切分不得重叠 ----------------
+    print("\n--- A.5 半段切分（跨中点窗口两边都不收）---")
+    with tempfile.TemporaryDirectory() as tmp:
+        root = make_fake_bundle(Path(tmp) / "span")
+        task = root / "Agriculture_h3_f1"
+        s = pd.read_csv(task / "samples.csv")
+        # 人工制造"起点在中点前、终点在中点后"的跨中点窗口
+        s.loc[s.index[6], "target_start_time"] = "2020-01-01"
+        s.loc[s.index[6], "target_end_time"] = "2020-12-31"
+        s.to_csv(task / "samples.csv", index=False, lineterminator="\n")
+        from bundle_reader import sha256_file
+        files = {p.relative_to(root).as_posix(): sha256_file(p)
+                 for p in sorted(root.rglob("*")) if p.is_file() and p.name != "manifest.json"}
+        (root / "manifest.json").write_text(json.dumps({
+            "signature": "SIG-TEST", "files": files,
+            "inputs": {"split_spec_sha256": "SPEC-OK", "mode": "frozen"}}), encoding="utf-8")
+        b = read_frozen_bundle(root, "Agriculture_h3_f1", "proxy", "SIG-TEST")
+        masks = decision_halves_by_target_time(b, "decision")
+        check("跨中点窗口出现在半段中（两边都不收）",
+              not (masks["first_half"] & masks["second_half"]).any())
+
+    # ---------------- 无文本 / 半段审计表 ----------------
+    print("\n--- 审计表生成 ---")
+    from audit_tables import decision_half_rows, text_availability_rows
+    tr = synthetic_bundle(150, 12, 4, semantic_dim=16, quality_dim=3, seed=71)
+    ca = synthetic_bundle(50, 12, 4, semantic_dim=16, quality_dim=3, seed=72)
+    de = synthetic_bundle(50, 12, 4, semantic_dim=16, quality_dim=3, seed=73)
+    from permutation import observed_loss
+    _, fitted = observed_loss("N+S+Q", tr, ca, de)
+
+    oids = [f"Agriculture:h4:f1:o{int(o)}" for o in de.origin_index]
+    rows = text_availability_rows(fitted, de, oids)
+    check("无文本审计表覆盖每个起点", len(rows) == len(de.origin_index))
+    no_text = [r for r in rows if r["text_available"] == 0]
+    check("合成数据含无文本起点", len(no_text) > 0)
+    check("无文本起点的贡献严格为零",
+          all(r["contribution_is_zero"] == 1 for r in no_text))
+    check("有文本起点不全是零贡献",
+          any(r["contribution_is_zero"] == 0 for r in rows if r["text_available"] == 1))
+
+    half_rows = decision_half_rows(fitted, {"first_half": de.slice(np.arange(25)),
+                                            "second_half": de.slice(np.arange(25, 50))})
+    check("半段审计表两行且样本量分别给出",
+          len(half_rows) == 2 and half_rows[0]["n_origins"] == 25
+          and all(np.isfinite(r["mean_loss"]) for r in half_rows))
+
     print(f"\n全部通过（{len(PASSED)} 项检查）")
     print("未跑（需正式 Bundle）：真实 Agriculture 训练、999 次置换、测试段预测")
     return 0

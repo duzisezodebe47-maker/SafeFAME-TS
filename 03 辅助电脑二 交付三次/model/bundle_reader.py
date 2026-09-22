@@ -131,8 +131,16 @@ class FrozenBundle:
         } | {"origin_id": self.samples["origin_id"].to_numpy()[mask]}
 
 
-def assert_grid(bundle: FrozenBundle, segment: str, expected_count: int | None = None) -> None:
-    """拒绝重复、缺失、错位、重排的起点网格（契约 `rejection` 条款）。"""
+def assert_grid(
+    bundle: FrozenBundle, segment: str, expected_count: int | None = None,
+    bounds: tuple[int, int] | None = None,
+) -> None:
+    """拒绝重复、缺失、错位、重排的起点网格，并核对分段边界。
+
+    `bounds` 非空时核对本段每个起点都落在协议的半开区间 `[lo, hi)` 内 ——
+    第三轮 A.2 要求 `assert_grid` 同时核对"分段边界"。
+    边界来自主控冻结协议的 `tasks[].bounds`；调用方负责传入对应段的那一段。
+    """
     part = bundle.segment(segment)
     origin_id = part["origin_id"]
     index = part["origin_index"]
@@ -172,6 +180,16 @@ def assert_grid(bundle: FrozenBundle, segment: str, expected_count: int | None =
     if expected_count is not None and len(index) != expected_count:
         raise AssertionError(
             f"{bundle.task_id}/{segment}: 起点数 {len(index)} != 协议期望 {expected_count}")
+
+    # 分段边界核对（A.2）：本段起点必须全部落在协议声明的半开区间内。
+    # 少了这一条，一段的起点被错放进另一段也不会被发现。
+    if bounds is not None:
+        lo, hi = int(bounds[0]), int(bounds[1])
+        outside = index[(index < lo) | (index >= hi)]
+        if outside.size:
+            raise AssertionError(
+                f"{bundle.task_id}/{segment}: {outside.size} 个起点落在协议边界 "
+                f"[{lo}, {hi}) 之外，例如 {outside[:3].tolist()}")
 
 
 def _data_side_dir() -> Path:
@@ -233,6 +251,10 @@ def _load_via_data_side(bundle_folder: Path, task_id: str, scenario: str, signat
     """优先调用数据侧交付目录里的 `read_bundle`；不可用时回退到官方适配层。"""
     module_path = _data_side_dir() / "bundle.py"
     if not module_path.is_file():
+        # A.1「不静默放行」：回退到适配层时给出可见提示。
+        # 校验强度不变（verify_signature 已在调用方先跑），但用户应知道走的是哪条路径。
+        print(f"NOTE: 数据侧读取器不在位（{module_path}），"
+              f"改用官方适配层直读；签名与逐文件哈希校验一致。", file=sys.stderr)
         return _load_direct(bundle_folder, task_id, scenario)
     data_side = module_path.parent
     if str(data_side) not in sys.path:
@@ -310,8 +332,18 @@ def decision_halves_by_target_time(
     else:
         starts = times  # 无起始列时按单点时间处理
 
-    first = starts < midpoint
-    second = times > midpoint
+    # 只有**整窗**落在某一侧才收入该半段：
+    #   前半段 = 目标窗口结束时间 < 中点（`times` 是 end）
+    #   后半段 = 目标窗口起始时间 > 中点（`starts` 是 start）
+    # 跨中点的窗口两边都不收 —— 这才能保证两个半段的目标时间不重叠。
+    # （早先写成 `starts < midpoint` 会让跨中点的窗口同时落进两侧，是个真 bug。）
+    first = times < midpoint
+    second = starts > midpoint
+    overlap = first & second
+    if overlap.any():
+        raise AssertionError(
+            f"{bundle.task_id}/{segment}: 半段切分出现重叠 {int(overlap.sum())} 个，"
+            f"时间列语义可疑（{time_column} 与 {start_column}）")
     if not first.any() or not second.any():
         raise AssertionError(
             f"{bundle.task_id}/{segment}: 按 {time_column} 中点切分后有一半为空，"
