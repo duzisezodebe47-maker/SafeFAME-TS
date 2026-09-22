@@ -87,13 +87,21 @@ class NullResult:
         return float((1 + np.sum(arr <= observed_loss)) / (1 + len(arr)))
 
     def unavailable_reason(self) -> str | None:
-        """p 值不可用时的可定位原因；可用时返回 None。"""
+        """p 值不可用时的可定位原因；可用时返回 None。
+
+        **必须覆盖所有让 `p_value` 返回 None 的情形**，否则 `write_null` 会写出
+        「`p_value: null` + 说明文字却声称 requested 与 successful 均达 999」这种
+        自相矛盾的产物。第三类（无失败记录但成功数不足，例如运行被截断）此前漏了。
+        """
         if self.requested < ROW_PERMUTATIONS:
             return f"请求次数 {self.requested} 低于契约下限 {ROW_PERMUTATIONS}"
         if self.failures:
             return (f"{len(self.failures)} 次置换失败"
                     f"（首次: iteration={self.failures[0].iteration} "
                     f"{self.failures[0].error}）；须先补跑，不得据此计算 p")
+        if len(self.successful) != self.requested:
+            return (f"成功 {len(self.successful)} 次 != 请求 {self.requested} 次，"
+                    f"且无失败记录（运行可能被截断）；须先补跑，不得据此计算 p")
         return None
 
 

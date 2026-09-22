@@ -256,6 +256,59 @@ def main() -> int:
         check("改测试真值后基线输出逐位不变",
               np.array_equal(base_pred, res2["predictions"]["AR-Ridge"]))
 
+    # ========== 置换失败路径：失败不计入成功数，且不得给 p ==========
+    # 任务书：失败不算成功次数、不得人工补 loss、未达 999 时 p_value=null。
+    # 上面跑的都是 0 失败的真实路径，失败路径**没被覆盖** —— 这里注入失败来验。
+    print("\n--- 置换失败路径（失败不计成功、p 必须为 null）---")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        import csv as _csv2
+        from permutation import NullIteration, NullResult, write_null
+
+        mixed = NullResult(
+            candidate="N+S+Q", segment="decision", requested=999, wall_seconds=0.0,
+            iterations=[NullIteration(0, 2026000, 0.1),
+                        NullIteration(1, 2026001, None, "LinAlgError: 注入失败"),
+                        NullIteration(2, 2026002, 0.2)])
+        check("成功/失败计数正确（失败不算成功次数）",
+              len(mixed.successful) == 2 and len(mixed.failures) == 1)
+        check("有失败 → p_value=null（不得报显著性）", mixed.p_value(0.15) is None)
+        check("有失败 → 原因可定位到具体 iteration",
+              "1 次置换失败" in (mixed.unavailable_reason() or "")
+              and "iteration=1" in (mixed.unavailable_reason() or ""))
+
+        # 逐次 CSV：失败那行留痕，种子与损失**不错配**（第三轮修的就是这个）
+        null_csv = tmp / "n.csv"
+        write_null(null_csv, mixed, 0.15)
+        with null_csv.open(encoding="utf-8", newline="") as fh:
+            written = list(_csv2.DictReader(fh))
+        check("逐次 CSV 列 == 主控期望", list(written[0]) == ["iteration", "seed",
+                                                              "status", "loss", "error"])
+        check("逐次 CSV 成功/失败各自留痕",
+              [r["status"] for r in written] == ["ok", "failed", "ok"])
+        check("逐次 CSV 种子与损失不错配",
+              written[0]["seed"] == "2026000" and written[0]["loss"] != ""
+              and written[1]["seed"] == "2026001" and written[1]["loss"] == ""
+              and written[1]["error"] != ""
+              and written[2]["seed"] == "2026002" and written[2]["loss"] != "")
+
+        # 成功数不足 requested 时同样不得给 p
+        short = NullResult(candidate="N+S+Q", segment="decision", requested=999,
+                           wall_seconds=0.0,
+                           iterations=[NullIteration(0, 2026000, 0.1)])
+        check("成功数不足 999 → p_value=null", short.p_value(0.15) is None)
+        # 运行被截断时没有 failed 记录，但成功数也不够 —— 这时**不能**给出
+        # 「requested 与 successful 均达 999」的说明，否则 p=null 与该说明自相矛盾
+        check("成功数不足时给出可定位原因（不谎称已达 999）",
+              (short.unavailable_reason() or "") != ""
+              and "999" in (short.unavailable_reason() or ""))
+        full = NullResult(candidate="N+S+Q", segment="decision", requested=999,
+                          wall_seconds=0.0,
+                          iterations=[NullIteration(k, 2026000 + k, 0.1) for k in range(999)])
+        check("999 次全成功 → p 非空且等于 (1+计数)/(n+1)",
+              full.p_value(0.1) == 1.0 and full.p_value(0.05) == 0.001
+              and full.unavailable_reason() is None)
+
     # ================= 修复 1：只接受主控封印路由 =================
     print("\n--- 修复 1：只接受主控封印路由 ---")
     with tempfile.TemporaryDirectory() as tmp:
