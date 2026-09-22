@@ -33,7 +33,7 @@
   "audit_release_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/tag/source-time-boundary-audit-20260923",
   "audit_release_asset_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/source-time-boundary-audit-20260923/SafeFAME-TS_source_time_audit_06.zip",
   "audit_release_asset_name": "SafeFAME-TS_source_time_audit_06.zip",
-  "audit_release_asset_size": 3178540,
-  "audit_release_asset_sha256": "a2c3b7f6f8fe2ca8a8dde934b746f94d277af358cf20e744f9d94071923fd060",
+  "audit_release_asset_size": 3178547,
+  "audit_release_asset_sha256": "6403718f93949fab2e6a351f5f43c132729b9c906afc31a56f57e851dba2364d",
   "claim_boundary": "The audit verifies the frozen Bundle's implemented rules and arrays. It does not convert end_date into a verified publication timestamp or establish causality."
 }

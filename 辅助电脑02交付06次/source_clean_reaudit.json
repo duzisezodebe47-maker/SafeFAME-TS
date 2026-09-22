@@ -57,7 +57,7 @@
   ],
   "limitations": [
     "No source files were modified. The fixed chain validated the existing cache; it did not invent a new raw-cleaning result.",
-    "All 0 retained source rows have original_url missing; proxy/conservative scenarios do not require URL, complete_source is not used for model gate.",
+    "original_url_rows is 0: no retained fact row provides an original URL; proxy/conservative scenarios do not require URL, and complete_source is not used for model gate.",
     "end_date remains a proxy for availability time."
   ]
 }
