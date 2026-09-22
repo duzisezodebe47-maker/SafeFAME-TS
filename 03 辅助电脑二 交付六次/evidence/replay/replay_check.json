@@ -1,0 +1,129 @@
+{
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "seed": 2026,
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "delivered_candidates": [
+    "N",
+    "N+Q",
+    "N+S+Q",
+    "N+S+Q+SF"
+  ],
+  "missing_delivered_manifests": [],
+  "candidates": {
+    "N": {
+      "candidate": "N",
+      "ok": true,
+      "train_exit_codes": [
+        0,
+        0
+      ],
+      "two_runs_byte_identical": true,
+      "weight_hash": "b3393f5a48dc032cf8d988cd781a5ae99ba369d8608bd57ad024ffa2419c2230",
+      "weight_hash_reproduced": true,
+      "delivered_csv_matches_replay": true,
+      "delivered_weight_hash_matches": true,
+      "alpha_by_group": {
+        "N": 10000.0
+      },
+      "alpha_matches_delivered": true,
+      "branch_widths": {
+        "N": 24
+      },
+      "branch_widths_match_delivered": true
+    },
+    "N+Q": {
+      "candidate": "N+Q",
+      "ok": true,
+      "train_exit_codes": [
+        0,
+        0
+      ],
+      "two_runs_byte_identical": true,
+      "weight_hash": "ba9294b713503c5e559d45c99da544ed196d83a47bb28bce5c9d1215924048cc",
+      "weight_hash_reproduced": true,
+      "delivered_csv_matches_replay": true,
+      "delivered_weight_hash_matches": true,
+      "alpha_by_group": {
+        "N": 0.1,
+        "Q": 100.0
+      },
+      "alpha_matches_delivered": true,
+      "branch_widths": {
+        "N": 24,
+        "Q": 5
+      },
+      "branch_widths_match_delivered": true
+    },
+    "N+S+Q": {
+      "candidate": "N+S+Q",
+      "ok": true,
+      "train_exit_codes": [
+        0,
+        0
+      ],
+      "two_runs_byte_identical": true,
+      "weight_hash": "29f70493d1a79e2ee0bb8954fcba3cac5aa1a792082f949b507aba7004dab131",
+      "weight_hash_reproduced": true,
+      "delivered_csv_matches_replay": true,
+      "delivered_weight_hash_matches": true,
+      "alpha_by_group": {
+        "N": 0.1,
+        "S": 10000.0,
+        "Q": 100.0
+      },
+      "alpha_matches_delivered": true,
+      "branch_widths": {
+        "N": 24,
+        "S": 24,
+        "Q": 5
+      },
+      "branch_widths_match_delivered": true
+    },
+    "N+S+Q+SF": {
+      "candidate": "N+S+Q+SF",
+      "ok": true,
+      "train_exit_codes": [
+        0,
+        0
+      ],
+      "two_runs_byte_identical": true,
+      "weight_hash": "713a94de421421418fa4511cabc5ea99461ed5872c96dd8ca3cf28ccd7a904c0",
+      "weight_hash_reproduced": true,
+      "delivered_csv_matches_replay": true,
+      "delivered_weight_hash_matches": true,
+      "alpha_by_group": {
+        "N": 100.0,
+        "S": 1000.0,
+        "Q": 100.0,
+        "SF": 10000.0
+      },
+      "alpha_matches_delivered": true,
+      "branch_widths": {
+        "N": 24,
+        "S": 24,
+        "Q": 5,
+        "SF": 240
+      },
+      "branch_widths_match_delivered": true
+    }
+  },
+  "verdict": "PASS",
+  "code_provenance": {
+    "code_commit": "40293c758207a07aff3097c87efed9268573b2ff",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付六次/model"
+  },
+  "runtime": {
+    "wall_seconds": 32.768,
+    "cpu_seconds": 0.078,
+    "peak_rss_bytes": 149176320,
+    "peak_rss_mib": 142.3,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "runtime_note": "cpu_seconds / peak_rss_bytes 只覆盖本编排进程；train.py 子进程的 CPU 与内存见各自的 run_manifest.json::runtime",
+  "note": "每个候选跑两次 train.py：两次逐字节相同，且与已交付的 CSV/manifest 一致"
+}

@@ -1,0 +1,110 @@
+{
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "master_csv": {
+    "path_name": "numeric_selection_predictions.csv",
+    "sha256": "3acfd6d29a3980a4bbd192fa49c789b9de6de4ea8de8b90144d8aa86a037bef8",
+    "declared_sha256": "3acfd6d29a3980a4bbd192fa49c789b9de6de4ea8de8b90144d8aa86a037bef8",
+    "sha256_matches_declared": true,
+    "rows": 4968
+  },
+  "master_manifest": {
+    "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+    "bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+    "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+    "baseline_implementation_commit": "c7da1dbed454785aa8442448a8c424635e8fc33f",
+    "origin_count": 138
+  },
+  "per_candidate": {
+    "Last": {
+      "n": 1656,
+      "max_abs_err": 0.0,
+      "exact": 1656,
+      "missing_key": 0
+    },
+    "SeasonalNaive": {
+      "n": 1656,
+      "max_abs_err": 0.0,
+      "exact": 1656,
+      "missing_key": 0
+    },
+    "AR-Ridge": {
+      "n": 1656,
+      "max_abs_err": 0.0,
+      "exact": 1656,
+      "missing_key": 0
+    }
+  },
+  "scalars": {
+    "ridge_alpha": {
+      "mine": 10.0,
+      "master": 10.0,
+      "equal": true
+    },
+    "ridge_calibration_mse": {
+      "mine": 0.017618668697762695,
+      "master": 0.017618668697762695,
+      "equal": true
+    },
+    "fit_rows": {
+      "mine": 177,
+      "master": 177,
+      "equal": true
+    },
+    "calibration_rows": {
+      "mine": 43,
+      "master": 43,
+      "equal": true
+    },
+    "seasonal_period": {
+      "mine": 12,
+      "master": 12,
+      "equal": true
+    },
+    "alpha_grid": {
+      "mine": [
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "master": [
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "equal": true
+    }
+  },
+  "checks": {
+    "master_csv_hash_matches_manifest": true,
+    "all_points_bitwise_equal": true,
+    "scalars_equal": true
+  },
+  "verdict": "PASS",
+  "code_provenance": {
+    "code_commit": "40293c758207a07aff3097c87efed9268573b2ff",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付六次/model"
+  },
+  "runtime": {
+    "wall_seconds": 0.47,
+    "cpu_seconds": 0.438,
+    "peak_rss_bytes": 159064064,
+    "peak_rss_mib": 151.7,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "note": "逐点比对主控选择期基线 CSV；exact 列要求**逐位相等**，非容差内"
+}

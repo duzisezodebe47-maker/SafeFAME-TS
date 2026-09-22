@@ -4,7 +4,7 @@
   "scenario": "proxy",
   "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
   "config_sha256": "1b59d4eaff3afdb9d63898ea30d2e696a88f2caf381f13bd3a7f512cfbf3b27b",
-  "code_commit": "828e7b4d4363ed37bf44cc1f89d15ba4d524cf44",
+  "code_commit": "40293c758207a07aff3097c87efed9268573b2ff",
   "requested": 999,
   "successful": 999,
   "failed": 0,
@@ -75,5 +75,34 @@
       "index_max": 360
     }
   },
-  "wall_seconds": 268.09
+  "wall_seconds": 328.5,
+  "runtime": {
+    "wall_seconds": 328.496,
+    "cpu_seconds": 488.156,
+    "peak_rss_bytes": 177913856,
+    "peak_rss_mib": 169.7,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "code_provenance": {
+    "code_commit": "40293c758207a07aff3097c87efed9268573b2ff",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付六次/model"
+  },
+  "seasonal_period": {
+    "value": 12,
+    "source": "split_spec_v2.json::seasonal_periods",
+    "applies_to": "numeric_baselines/SeasonalNaive（本置换候选不经过该路径）"
+  },
+  "permutation_config": {
+    "nulls_requested": 999,
+    "seed_base": 2026,
+    "seed_rule": "local_seed = seed_base * 1000 + iteration",
+    "circular_block": 7,
+    "refit_each_iteration": true,
+    "refit_scope": "PCA / 各分支标度器 / 交互尺度 / α 选择",
+    "loss": "决策段 MSE（标准化坐标）"
+  }
 }

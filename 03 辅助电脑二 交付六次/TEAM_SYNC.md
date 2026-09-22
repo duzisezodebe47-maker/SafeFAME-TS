@@ -1,84 +1,121 @@
 # TEAM_SYNC · 模型侧第六轮同步说明
 
-**面向**：主控（Jerry ye）
-**分支**：`SHY`　**起点**：`828e7b4`　**日期**：2026-09-22
+**面向**：主控　**分支**：`SHY`　**起点**：`828e7b4`　**日期**：2026-09-22
+**本轮证据 `code_commit`**：`40293c7`（工作区干净）
 
 ---
 
 ## 一、状态
 
-**三项代码修复完成；真实 Agriculture 选择期预测与 999 次置换已跑完；30 项合成测试通过。**
+**三项代码修复完成；真实 Agriculture 选择期预测、999 次置换、四段边界审计、
+基线逐点交叉验证、权重重演全部跑完；49 项合成测试通过。**
 
 **只交选择期证据。** 测试段预测等主控封印路由并公布唯一 SHA256 后执行。
 
 ---
 
-## 二、🎯 核心结果：两条门控候选分道扬镳
+## 二、⚠️ 请先看：相对首次提交 `ce1efcc` 的三处修正
 
-| 候选 | 观察决策损失 | **经验 p** | 门槛 0.025 | 循环移位 p |
+首次提交有三处会被直接退回的问题，**已在固定提交上重跑**：
+
+1. **`code_commit` 记的是上一轮的 `828e7b4`**。原因是 `code_commit()` 只取
+   `git rev-parse HEAD`，而跑证据时三处修复还没提交 —— 记录下来的提交号**不包含
+   实际运行的代码**。你把它当验收锚点，这一条必然对不上。
+   现在 `code_provenance` 同时记录「HEAD + 工作区是否干净 + 脏文件清单」，
+   并在脏工作区上警告；本轮全部产物 `worktree_dirty=false`。
+2. **缺 CPU/内存实测**（任务书第 3 条明列）。现每份 manifest/summary 带 `runtime`：
+   墙钟、CPU 时间、峰值 RSS、核数、平台、Python 版本（`runtime_profile.py`，无新依赖）。
+3. **两句「最强证据」只有结论没有产物**：基线逐点相同、四段边界检查。
+   现补 `audit_baselines.py` 与 `audit_boundaries.py`，产物在 `evidence/` 下。
+
+---
+
+## 三、核心结果
+
+| 候选 | 观察决策损失 | **经验 p** | 门槛 0.025 | 循环移位 p（诊断） |
 |---|---|---|---|---|
 | `N+S+Q` | 0.185302 | **0.761** | ❌ | 0.347 |
-| **`N+S+Q+SF`** | **0.155100** | **0.014** | ✅ | — |
+| `N+S+Q+SF` | 0.155100 | **0.014** | ✅ | 0.031 |
 
 各 **999 次成功、0 失败**，逐次重建 PCA / 尺度 / 交互尺度 / α。
+置换损失分布以**完整 999 个值**交付（`null_scores.csv`），不是分位数摘要 ——
+你的 `convert_nulls` 正是消费这份 CSV，`p = (1 + #{x ≤ observed})/(999+1)` 可由它独立复算。
 
-**判别性**：语义 × 频谱**显式交互**通过置换门槛，纯分支相加版不通过。
-方向与 docs/23 归因审计一致 —— 起作用的是**交互结构**，不是"加了文本"。
+决策半段（`middle=(cal_end+dec_end)//2 = 319`）：`N+S+Q` 前半 0.127755 / 后半 0.158387；
+`N+S+Q+SF` 前半 0.105248 / 后半 0.111527（各 42 起点）。
 
-决策半段（`middle=(cal_end+dec_end)//2 = 319`，跨界窗口剔除）：前半 42 起点 / 0.127755，
-后半 42 起点 / 0.158387。
-
-> **路由判定权在主控。** 本侧只交观察 MSE 与零分布，完整门控（总体 + 前后半段均优于回退）请你独立复算。
-
----
-
-## 三、交叉验证：本侧基线在主控真 Bundle 上**逐位相同**
-
-| 项 | 本侧 | 主控 |
-|---|---|---|
-| `ridge_alpha` | 10.0 | 10.0 |
-| `ridge_calibration_mse` | `0.017618668697762695` | `0.017618668697762695` |
-| `fit_rows` / `cal_rows` | 177 / 43 | 177 / 43 |
-
-逐点比对主控基线 CSV 的 **4968 行**：`Last` / `SeasonalNaive` / `AR-Ridge` 全部
-**`max_abs_err = 0.000e+00`**。第五轮 A.2 的等价移植在真数据上完全命中。
+> **只是置换判据。** 完整资格（决策 MSE < 回退、两个半段都严格改善）请你这边复算，
+> 本侧不替主控下结论。
 
 ---
 
-## 四、三项修复
+## 四、交叉验证：本侧基线在主控真 Bundle 上**逐位相同**
 
-1. **封印路由**：`check_route` 现要求 12 个字段齐备 —— `status` 必须 `frozen`，
-   两锚 + `selection_manifest_sha256` / `refit_review_sha256` / `inputs_sha256`
-   必须是合法 64 位十六进制。**自造路由不能解锁测试预测。**
-2. **真值与特征签名分离**：`numeric_baselines(features, segments, fit_targets)` ——
-   `features.targets` 必须为 `None`；`fit_targets` 在 train/cal 之外含真值即**硬失败**。
-   测试同时验证「输出不变」与「接口中确实没有真值字段」。
-3. **季节周期来自 spec 顶层**：`Climate=52`、`Environment=7`，**默认 12 是错的**。
-   `task_seasonal_period` 读 spec 顶层 `seasonal_periods`；未登记即拒绝；
-   CLI 若给出必须与注册值相等。
+`audit_baselines.py` 先核你清单自报的 CSV 哈希（`3acfd6d2…bef8`，实测一致），
+再逐点对齐 **4968 行**：`Last` / `SeasonalNaive` / `AR-Ridge` 各 1656 点，
+`exact = 1656/1656`，`max_abs_err = 0.000e+00`。标量同样一致：
+α=10.0、`ridge_calibration_mse` `0.017618668697762695`、fit/cal 行 177/43、周期 12。
+
+Bundle 的 `manifest.json` 实测 `6c889af1…0143`，与你的 `baseline_selection_manifest.json`
+记录一致。
 
 ---
 
-## 五、⚠️ 两处需要你注意
+## 五、四段边界审计（上一轮只有一句 ✅，这轮有产物）
+
+四段全过 `assert_grid`：train 177（24–200）、calibration 43（212–254）、
+decision 95（266–360）、test 42（372–413）。选择期合计 **138**，与你的 `origin_count` 一致。
+被排除的起点是契约要求：头部 24 个（`origin < input_len=24`）、段间各 11 个（目标窗口跨界）。
+
+---
+
+## 六、权重重演
+
+主控第六轮任务书把「权重重演」列为验收项，且把 `code_commit` 当锚点 ——
+这两件事只有一起成立才有意义。`audit_replay.py` 对四个交付候选各跑两次 `train.py`：
+两次**逐字节相同**，且与**已交付的** CSV/manifest 一致（`weight_hash`、
+`alpha_by_group`、`branch_widths` 全等）。产物 `evidence/replay/replay_check.json`。
+
+---
+
+## 七、⚠️ 两处需要你注意（与前一轮相同）
 
 ### 1. 冻结 spec 的位置
 
 冻结 spec（`a0947a5b…`）在**主控分支的 `team_work/main/round2/split_spec_v2.json`**。
-模型侧工作区里这个路径的同名文件是**过期草稿**（`36c44036…`，`status=draft_not_for_training`）
-—— 我的 `verify_bundle` 正确拒绝了它。
-
-**建议**：在协议里写明冻结 spec 的**唯一路径**，或改名区分（例如 `split_spec_frozen.json`），
-否则协作者很容易拿到过期版本而不知道。
+模型侧工作区里同名文件是**过期草稿**（`36c44036…`，`status=draft_not_for_training`），
+我的 `verify_bundle` 正确拒绝了它。**建议**：在协议里写明唯一路径，或改名区分。
 
 ### 2. `samples.csv` 的段序
 
-第五轮我修复了导出顺序（按 Bundle 行序而非段名顺序），因为你的 `load_prediction_grid`
-用**有序列表比较**。请确认数据侧产出的 `samples.csv` 段序 —— 模型侧现已与 Bundle 行序一致，
-无论怎么排列都对齐。
+`load_prediction_grid` 用**有序列表**比较，模型侧已按 Bundle 行序导出，与段序无关地对齐。
+请确认数据侧产出的段序 —— 现两侧一致。
 
 ---
 
-## 六、未跑范围
+## 八、⚠️ 本轮新增的两处**你必须知道**的变化
+
+### 1. 预测 CSV 的哈希变了（内容没变）
+
+交付的 `*_proxy_predictions.csv` 与你的烟雾文件**不再逐字节相同**：
+`y_pred` 逐位不变，但 `code_commit` 列由 `828e7b4…` 改成 `40293c7…`。
+你的 `master_both_gate_grid_audit.json` 里记的两个烟雾 CSV 哈希
+（`a13b35ae…d697fe06` / `5f37b80a…cb8a8ed2`）对应上一版；正式交付请以
+本目录 `*_run_manifest.json` + `evidence/replay/` 为准。
+
+**可核对**：把两版预测 CSV 逐列相比，**只有 `code_commit` 一列不同**；
+零分布 `null_scores*.csv` 与上一版**逐字节相同**（同种子、同代码语义）。
+
+### 2. 模型文件集由 11 个变为 16 个
+
+新增 5 个审计 / 工具模块：`audit_boundaries.py`、`audit_baselines.py`、
+`audit_replay.py`、`runtime_profile.py`、`make_manifest.py`。
+你 `master_model_reader_compare.json` 里的 `model_delivery_manifest_files: 11`
+是上一轮快照，重建审计时请以新 `MANIFEST.json` 为准。
+
+---
+
+## 九、未跑范围
 
 | 项 | 状态 |
 |---|---|
@@ -86,4 +123,5 @@
 | Climate / SocialGood / Environment | `NOT_RUN` — Agriculture 闭环后按序扩展 |
 | 保守滞后情景 | `NOT_RUN` |
 
-证据 2.1 MB 已随仓库入库（`evidence/`），无需另找交接位置。
+证据约 3 MB 已随仓库入库（`evidence/`），附逐文件 SHA256 与两个合并哈希
+（`MANIFEST.json`，由 `model/make_manifest.py` 生成，规则写死可复算）。

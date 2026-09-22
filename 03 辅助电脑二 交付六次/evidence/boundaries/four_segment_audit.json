@@ -1,0 +1,152 @@
+{
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "horizon": 12,
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "segments": [
+    {
+      "segment": "train",
+      "bounds": [
+        0,
+        212
+      ],
+      "ok": true,
+      "error": null,
+      "n_origins": 177,
+      "horizon": 12,
+      "index_min": 24,
+      "index_max": 200,
+      "contiguous_step1": true,
+      "in_window": 177,
+      "spans_out": 0,
+      "expected_n_origins": 177,
+      "count_matches_spec": true
+    },
+    {
+      "segment": "calibration",
+      "bounds": [
+        212,
+        266
+      ],
+      "ok": true,
+      "error": null,
+      "n_origins": 43,
+      "horizon": 12,
+      "index_min": 212,
+      "index_max": 254,
+      "contiguous_step1": true,
+      "in_window": 43,
+      "spans_out": 0,
+      "expected_n_origins": 43,
+      "count_matches_spec": true
+    },
+    {
+      "segment": "decision",
+      "bounds": [
+        266,
+        372
+      ],
+      "ok": true,
+      "error": null,
+      "n_origins": 95,
+      "horizon": 12,
+      "index_min": 266,
+      "index_max": 360,
+      "contiguous_step1": true,
+      "in_window": 95,
+      "spans_out": 0,
+      "expected_n_origins": 95,
+      "count_matches_spec": true
+    },
+    {
+      "segment": "test",
+      "bounds": [
+        372,
+        425
+      ],
+      "ok": true,
+      "error": null,
+      "n_origins": 42,
+      "horizon": 12,
+      "index_min": 372,
+      "index_max": 413,
+      "contiguous_step1": true,
+      "in_window": 42,
+      "spans_out": 0,
+      "expected_n_origins": 42,
+      "count_matches_spec": true
+    }
+  ],
+  "checks": {
+    "all_segments_assert_grid_ok": true,
+    "counts_match_spec": true,
+    "origin_ranges_match_spec": true,
+    "partition_no_overlap": true,
+    "samples_labels_match_spec_bounds": true
+  },
+  "verdict": "PASS",
+  "selection_origin_count": 138,
+  "train_origin_count": 177,
+  "all_segment_origin_count": 357,
+  "duplicate_origins": false,
+  "origin_range_matches_spec": {
+    "train": true,
+    "calibration": true,
+    "decision": true,
+    "test": true
+  },
+  "excluded_origins": {
+    "train->calibration": {
+      "excluded": [
+        201,
+        211
+      ],
+      "count": 11,
+      "reason": "跨界目标窗口（origin + horizon > 前一段 hi）"
+    },
+    "calibration->decision": {
+      "excluded": [
+        255,
+        265
+      ],
+      "count": 11,
+      "reason": "跨界目标窗口（origin + horizon > 前一段 hi）"
+    },
+    "decision->test": {
+      "excluded": [
+        361,
+        371
+      ],
+      "count": 11,
+      "reason": "跨界目标窗口（origin + horizon > 前一段 hi）"
+    },
+    "head": {
+      "excluded": [
+        0,
+        23
+      ],
+      "count": 24,
+      "reason": "历史窗口不足（origin < input_len）"
+    }
+  },
+  "input_len": 24,
+  "label_mismatch_sample": [],
+  "code_provenance": {
+    "code_commit": "40293c758207a07aff3097c87efed9268573b2ff",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付六次/model"
+  },
+  "runtime": {
+    "wall_seconds": 0.435,
+    "cpu_seconds": 0.328,
+    "peak_rss_bytes": 151916544,
+    "peak_rss_mib": 144.9,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "note": "四段（train/calibration/decision/test）全部过 assert_grid；selection_origin_count 应等于主控 origin_count=138"
+}

@@ -8,6 +8,6 @@
   "observed_loss": 0.18530205582899092,
   "p_value": 0.761,
   "p_value_note": "经验单侧 p（requested 与 successful 均达 999）",
-  "wall_seconds": 33.73,
+  "wall_seconds": 40.62,
   "failure_detail": []
 }
