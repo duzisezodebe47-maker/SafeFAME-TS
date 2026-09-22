@@ -24,7 +24,8 @@ class IntakeTests(unittest.TestCase):
                     train_end=8, cal_end=10, dec_end=14, test_end=18,
                     snapshot_sha256="a" * 64, feature_manifest_sha256="b" * 64,
                     seasonal_period=2)
-        spec = dict(candidate_variants=self.candidates, selection=dict(row_null_draws=999))
+        spec = dict(status="FROZEN", original_split_spec_sha256="f" * 64,
+                    candidate_variants=self.candidates, selection=dict(row_null_draws=999))
         samples = []
         predictions = []
         for segment, origins in (("cal", (8, 9)), ("dec", (10, 11))):
@@ -45,6 +46,8 @@ class IntakeTests(unittest.TestCase):
             (self.stage / name).write_text("".join(json.dumps(v) + "\n" for v in value), encoding="utf-8")
         manifest = dict(status="READY_FOR_FREEZE", segments=["calibration", "decision"],
                         scenario="proxy", bundle_signature="b" * 64,
+                        split_spec_sha256="f" * 64, sample_rows=len(samples),
+                        prediction_rows=len(predictions),
                         files_sha256={p.name: sha256(p) for p in self.stage.iterdir()})
         (self.stage / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
         self.null_dirs = []
@@ -54,16 +57,17 @@ class IntakeTests(unittest.TestCase):
             self.null_dirs.append(folder)
             with (folder / "null_scores.csv").open("w", encoding="utf-8", newline="") as stream:
                 writer = csv.writer(stream)
-                writer.writerow(["candidate", "segment", "iteration", "seed", "loss"])
+                writer.writerow(["iteration", "seed", "status", "loss", "error"])
                 for i in range(999):
-                    writer.writerow([candidate, "decision", i, 2026000 + i, 2.0])
+                    writer.writerow([i, 2026000 + i, "ok", 2.0, ""])
             summary = dict(candidate=candidate, task="Demo_h1_f1", scenario="proxy",
-                           bundle_signature="b" * 64, requested_permutations=999,
-                           completed_permutations=999, failures=0, code_commit="d" * 40,
+                           bundle_signature="b" * 64, requested=999, successful=999, failed=0,
+                           contract_minimum=999, code_commit="d" * 40,
                            config_sha256="e" * 64, observed_decision_loss=1.0, p_value=0.001)
             (folder / "permutation_summary.json").write_text(json.dumps(summary), encoding="utf-8")
             (folder / "null_scores_summary.json").write_text(json.dumps(dict(candidate=candidate,
-                segment="decision", requested=999, completed=999, failures=0,
+                segment="decision", requested=999, successful=999, failed=0,
+                contract_minimum=999,
                 observed_loss=1.0, p_value=0.001)), encoding="utf-8")
 
     def test_conversion_preserves_every_loss_and_refuses_overwrite(self):
@@ -85,13 +89,33 @@ class IntakeTests(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError, "scenario"):
             convert_nulls(self.stage, self.null_dirs)
 
+    def test_rejects_selection_without_frozen_split_anchor(self):
+        spec_path = self.stage / "spec.json"
+        spec = json.loads(spec_path.read_text(encoding="utf-8"))
+        spec["original_split_spec_sha256"] = "0" * 64
+        spec_path.write_text(json.dumps(spec), encoding="utf-8")
+        manifest_path = self.stage / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["files_sha256"]["spec.json"] = sha256(spec_path)
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        with self.assertRaisesRegex(EvidenceError, "frozen split"):
+            convert_nulls(self.stage, self.null_dirs)
+
     def test_rejects_missing_or_shifted_null_rows(self):
         path = self.null_dirs[0] / "null_scores.csv"
         rows = path.read_text(encoding="utf-8").splitlines()
         path.write_text("\n".join(rows[:-1]) + "\n", encoding="utf-8")
         with self.assertRaises(EvidenceError):
             convert_nulls(self.stage, self.null_dirs)
-        rows[1] = rows[1].replace(",2026000,", ",2026001,")
+        rows[1] = rows[1].replace("0,2026000,", "0,2026001,")
+        path.write_text("\n".join(rows) + "\n", encoding="utf-8")
+        with self.assertRaises(EvidenceError):
+            convert_nulls(self.stage, self.null_dirs)
+
+    def test_rejects_failed_iteration_even_when_summary_claims_success(self):
+        path = self.null_dirs[0] / "null_scores.csv"
+        rows = path.read_text(encoding="utf-8").splitlines()
+        rows[2] = "1,2026001,failed,,injected failure"
         path.write_text("\n".join(rows) + "\n", encoding="utf-8")
         with self.assertRaises(EvidenceError):
             convert_nulls(self.stage, self.null_dirs)

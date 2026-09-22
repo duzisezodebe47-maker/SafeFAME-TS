@@ -40,8 +40,14 @@ def verify_selection_stage(folder: Path) -> tuple[dict, dict, dict, dict, dict]:
         if sha256(folder / name) != recorded:
             raise EvidenceError(f"selection stage hash mismatch: {name}")
     task, spec = _read_json(folder / "task.json"), _read_json(folder / "spec.json")
+    if (spec.get("status") != "FROZEN" or
+            spec.get("original_split_spec_sha256") != manifest.get("split_spec_sha256")):
+        raise EvidenceError("selection spec is not anchored to the frozen split")
     samples, predictions, _ = validate(task, jsonl(folder / "samples.jsonl"),
                                        jsonl(folder / "predictions.jsonl"), spec=spec)
+    if (manifest.get("sample_rows") != len(samples) or
+            manifest.get("prediction_rows") != len(predictions)):
+        raise EvidenceError("selection manifest row counts differ from actual evidence")
     if set(k[0] for k in samples) != {"cal", "dec"} or set(k[0] for k in predictions) != {"cal", "dec"}:
         raise EvidenceError("selection package has test/train evidence or missing cal/dec")
     if task["feature_manifest_sha256"] != manifest.get("bundle_signature"):
@@ -65,7 +71,7 @@ def convert_nulls(selection_folder: Path, null_dirs: list[Path], seed: int = 202
     stage, task, spec, samples, predictions = verify_selection_stage(selection_folder)
     expected_candidates = list(spec["candidate_variants"])
     draws = int(spec["selection"]["row_null_draws"])
-    if draws != 999 or len(null_dirs) != len(expected_candidates):
+    if draws != 999 or len(expected_candidates) != 2 or len(null_dirs) != len(expected_candidates):
         raise EvidenceError("formal conversion requires exactly the registered candidates and 999 draws")
     by_candidate = {}
     source_hashes = {}
@@ -78,14 +84,15 @@ def convert_nulls(selection_folder: Path, null_dirs: list[Path], seed: int = 202
                 summary.get("scenario") != stage.get("scenario") or
                 summary.get("bundle_signature") != stage["bundle_signature"]):
             raise EvidenceError(f"{candidate}: wrong task, scenario or Bundle signature")
-        if summary.get("requested_permutations") != draws or summary.get("completed_permutations") != draws or summary.get("failures") != 0:
+        if (summary.get("requested") != draws or summary.get("successful") != draws or
+                summary.get("failed") != 0 or summary.get("contract_minimum") != draws):
             raise EvidenceError(f"{candidate}: 999 successful refits not documented")
         if not re.fullmatch(r"[0-9a-f]{40}", str(summary.get("code_commit"))) or not re.fullmatch(r"[0-9a-f]{64}", str(summary.get("config_sha256"))):
             raise EvidenceError(f"{candidate}: missing code/config anchor")
         source = folder / "null_scores.csv"
         with source.open(encoding="utf-8-sig", newline="") as stream:
             reader = csv.DictReader(stream)
-            if reader.fieldnames != ["candidate", "segment", "iteration", "seed", "loss"]:
+            if reader.fieldnames != ["iteration", "seed", "status", "loss", "error"]:
                 raise EvidenceError(f"{candidate}: unexpected null CSV columns")
             raw = list(reader)
         if len(raw) != draws:
@@ -96,7 +103,7 @@ def convert_nulls(selection_folder: Path, null_dirs: list[Path], seed: int = 202
                 got_iteration, got_seed, loss = int(row["iteration"]), int(row["seed"]), float(row["loss"])
             except (TypeError, ValueError) as exc:
                 raise EvidenceError(f"{candidate}: invalid null row {iteration}") from exc
-            if (row["candidate"] != candidate or row["segment"] != "decision" or
+            if (row["status"] != "ok" or row["error"] != "" or
                     got_iteration != iteration or got_seed != seed * 1000 + iteration or
                     not math.isfinite(loss) or loss < 0):
                 raise EvidenceError(f"{candidate}: shifted/duplicate/nonfinite null row {iteration}")
@@ -107,8 +114,8 @@ def convert_nulls(selection_folder: Path, null_dirs: list[Path], seed: int = 202
         _close(summary.get("p_value"), expected_p, f"{candidate} p value")
         csv_summary = _read_json(folder / "null_scores_summary.json")
         if (csv_summary.get("candidate") != candidate or csv_summary.get("segment") != "decision" or
-                csv_summary.get("requested") != draws or csv_summary.get("completed") != draws or
-                csv_summary.get("failures") != 0):
+                csv_summary.get("requested") != draws or csv_summary.get("successful") != draws or
+                csv_summary.get("failed") != 0 or csv_summary.get("contract_minimum") != draws):
             raise EvidenceError(f"{candidate}: CSV summary count or identity mismatch")
         _close(csv_summary.get("observed_loss"), observed, f"{candidate} CSV observed MSE")
         _close(csv_summary.get("p_value"), expected_p, f"{candidate} CSV p value")
