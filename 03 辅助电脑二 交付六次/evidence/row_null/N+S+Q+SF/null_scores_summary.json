@@ -1,0 +1,13 @@
+{
+  "candidate": "N+S+Q+SF",
+  "segment": "decision",
+  "requested": 999,
+  "successful": 999,
+  "failed": 0,
+  "contract_minimum": 999,
+  "observed_loss": 0.15510042401261703,
+  "p_value": 0.014,
+  "p_value_note": "经验单侧 p（requested 与 successful 均达 999）",
+  "wall_seconds": 136.18,
+  "failure_detail": []
+}

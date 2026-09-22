@@ -1,0 +1,79 @@
+{
+  "candidate": "N+S+Q",
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "config_sha256": "bab211a65d86eb53c26879e1d3b57b69851bc899827996ce655f620908b80b5f",
+  "code_commit": "828e7b4d4363ed37bf44cc1f89d15ba4d524cf44",
+  "requested": 999,
+  "successful": 999,
+  "failed": 0,
+  "contract_minimum": 999,
+  "observed_decision_loss": 0.18530205582899092,
+  "p_value": 0.761,
+  "p_value_note": "经验单侧 p（requested 与 successful 均达 999）",
+  "circular": {
+    "block": 7,
+    "successful": 999,
+    "failed": 0,
+    "p_value": 0.347,
+    "role": "敏感性诊断，不回写主门控"
+  },
+  "decision_halves": {
+    "first_half": {
+      "n_origins": 42,
+      "mean_loss": 0.1277548622496051
+    },
+    "second_half": {
+      "n_origins": 42,
+      "mean_loss": 0.15838724614871091
+    }
+  },
+  "decision_halves_rule": "middle=(cal_end+dec_end)//2; first: origin+h<=middle; second: origin>=middle",
+  "decision_halves_middle": 319,
+  "decision_halves_kept": {
+    "first_half": 42,
+    "second_half": 42
+  },
+  "decision_halves_excluded": {
+    "first_half": 53,
+    "second_half": 53
+  },
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "grid": {
+    "train": {
+      "segment": "train",
+      "n_origins": 177,
+      "bounds": [
+        0,
+        212
+      ],
+      "horizon": 12,
+      "index_min": 24,
+      "index_max": 200
+    },
+    "calibration": {
+      "segment": "calibration",
+      "n_origins": 43,
+      "bounds": [
+        212,
+        266
+      ],
+      "horizon": 12,
+      "index_min": 212,
+      "index_max": 254
+    },
+    "decision": {
+      "segment": "decision",
+      "n_origins": 95,
+      "bounds": [
+        266,
+        372
+      ],
+      "horizon": 12,
+      "index_min": 266,
+      "index_max": 360
+    }
+  },
+  "wall_seconds": 68.88
+}

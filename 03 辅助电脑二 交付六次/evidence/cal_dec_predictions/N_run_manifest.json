@@ -1,0 +1,87 @@
+{
+  "config": {
+    "task": "Agriculture_h12_f1",
+    "scenario": "proxy",
+    "candidate": "N",
+    "segments": [
+      "calibration",
+      "decision"
+    ],
+    "seed": 2026,
+    "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+    "contract": "team-eval-2.0"
+  },
+  "config_sha256": "b421895df5dd47cd938003f28749b97be612d0789c04f055daddb0b75eda8500",
+  "code_commit": "828e7b4d4363ed37bf44cc1f89d15ba4d524cf44",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "candidate": "N",
+  "status": "completed",
+  "alpha_by_group": {
+    "N": 10000.0
+  },
+  "weight_hash": "b3393f5a48dc032cf8d988cd781a5ae99ba369d8608bd57ad024ffa2419c2230",
+  "branch_widths": {
+    "N": 24
+  },
+  "s_degraded": false,
+  "dropped_zero_variance": {
+    "N": 0
+  },
+  "segments": {
+    "calibration": {
+      "n_origins": 43,
+      "n_text_available": 43,
+      "contribution_abs_mean": {
+        "N": 0.01281388267876635
+      }
+    },
+    "decision": {
+      "n_origins": 95,
+      "n_text_available": 95,
+      "contribution_abs_mean": {
+        "N": 0.021217214376971445
+      }
+    }
+  },
+  "rows_written": 1656,
+  "wall_seconds": 0.312,
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "grid": {
+    "train": {
+      "segment": "train",
+      "n_origins": 177,
+      "bounds": [
+        0,
+        212
+      ],
+      "horizon": 12,
+      "index_min": 24,
+      "index_max": 200
+    },
+    "calibration": {
+      "segment": "calibration",
+      "n_origins": 43,
+      "bounds": [
+        212,
+        266
+      ],
+      "horizon": 12,
+      "index_min": 212,
+      "index_max": 254
+    },
+    "decision": {
+      "segment": "decision",
+      "n_origins": 95,
+      "bounds": [
+        266,
+        372
+      ],
+      "horizon": 12,
+      "index_min": 266,
+      "index_max": 360
+    }
+  },
+  "note": "只含 calibration/decision；测试预测待主控冻结路由后另行生成"
+}

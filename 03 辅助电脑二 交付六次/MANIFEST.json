@@ -1,0 +1,40 @@
+{
+  "model_files": {
+    "model/audit_tables.py": "dce9095de5d25d5eb7786288010c0c9cbb86b87d0907c0c149349f3d06f14a0a",
+    "model/branches.py": "b4a632f4bc002db6e4d2321fff68826cba5aeb813898a0d96cbd9afc1a9948ad",
+    "model/bundle_reader.py": "20aeffbae760bea7fb6097b04b19241683148fee03062821f7754938b3a8b389",
+    "model/candidates.py": "5b7be2c04ad8b2bdd219a0305d83813b8f7e4df243149a62133597cd42043927",
+    "model/numeric_fallbacks.py": "f6b5722315f372015e35b03611682e379983b62cb485a11da5fd04647ba175e8",
+    "model/permutation.py": "e83aa1b833e7fef45aa9dcff037e95ee7a1b3e578da1ec73a8890001d705678e",
+    "model/permutation_entry.py": "1769509fba687e3ddeeb2664811561e40ec437dd27bb461d504210b03f509fb3",
+    "model/predict_io.py": "477ad04446a588418b9d8b30e13582eb6663f010e50127a0542b7251a96358f2",
+    "model/predict_test.py": "1c174a5c221fbff4456990eb7d3aa90020922bfbbaa8269c4e0fe68d3663979c",
+    "model/tests/test_round6.py": "281e0dff6529ca29059ac272d789d40b9324185eb9ec7c5e2ed65df7aae7baae",
+    "model/train.py": "48e01b727e9a458272393aaaf1f7edda063e9787f6490e939dbeb22b0e3223ea"
+  },
+  "model_combined_sha256": "e67dccae546200f95a565d01e4e9c6e81ede4f39c8178c9dcd9f5e98a37d9c42",
+  "evidence_files": {
+    "evidence/cal_dec_predictions/N_proxy_predictions.csv": "47584cf2e579e18684a9a3a0d38a8cb0cbd2d3b61e609b26a6d0474d5114f0fa",
+    "evidence/cal_dec_predictions/N_Q_proxy_predictions.csv": "8141b98a5fd3609d577c7adfbfad34b0d2fff5054fd312523d8f2d01a55ac516",
+    "evidence/cal_dec_predictions/N_Q_run_manifest.json": "80cbc3a8216cdef44909d7351f8a6a78b923895a382ea67cea4b1cd0ad7946ad",
+    "evidence/cal_dec_predictions/N_run_manifest.json": "ad56466ec983eeaf79a1a31fa658b0d20ab96beea0f36be837aaa9cf2d82405e",
+    "evidence/cal_dec_predictions/N_S_Q_proxy_predictions.csv": "a13b35aeb713fb55ee0d8beafcdab538b873549210f62251c32aa0bbd697fe06",
+    "evidence/cal_dec_predictions/N_S_Q_run_manifest.json": "f080486d7c7c43226e64325e7008bc2e9b671f3fc081909d1e320e06e976dfc4",
+    "evidence/cal_dec_predictions/N_S_Q_SF_proxy_predictions.csv": "5f37b80a16dab5672b42fa4a27725439cbca4b7505aca0e0ed3b3f9acb8a8ed2",
+    "evidence/cal_dec_predictions/N_S_Q_SF_run_manifest.json": "220f099aa7a4579da4bbaf7fa05e6fdc2db21194d98b2dbc4985cb6b1eebabb0",
+    "evidence/permutation_run.log": "308ee9c57f280c2a95df7dbaa319fd0b6e34cd2519dee466692640c63075abbf",
+    "evidence/row_null/N+S+Q/null_scores.csv": "4c87cd70de8e50963303f4af8ecd45774b85c3226e9418d5a4126c8c3dd79c6c",
+    "evidence/row_null/N+S+Q/null_scores_circular.csv": "aed251afae6846c62e61694669eb6c565e0debdb6e336b25f546d9bbc5597c6c",
+    "evidence/row_null/N+S+Q/null_scores_circular_summary.json": "7bc07655cf9f45ce0bf2bc7eb384848b26db37e966c97eb6232cec1de26a3b9d",
+    "evidence/row_null/N+S+Q/null_scores_summary.json": "766b5cdf5a08b7972d5ac0380a0db74c2e814f6a3b4f1508db9c36d8a62e39b8",
+    "evidence/row_null/N+S+Q/permutation_summary.json": "65f989a8a74739d0c2627b6293039ba9042c599ae2dc05557ce820aee9a40188",
+    "evidence/row_null/N+S+Q+SF/null_scores.csv": "6afa01f65e09dfb41004b351599f6634b33895fac279a49c017e82678038c453",
+    "evidence/row_null/N+S+Q+SF/null_scores_circular.csv": "0c0007974b370f9ad77c2eb57e3b0fca58ceeaebd793efea4ce16cc0bf9a944b",
+    "evidence/row_null/N+S+Q+SF/null_scores_circular_summary.json": "e231aacf1065ba7a68070ceddfac0dbe49cff7687fee40a8bc7695395f6d2b85",
+    "evidence/row_null/N+S+Q+SF/null_scores_summary.json": "91b41cdb485c0c887646d604484f389b2116fdebfcec326b317e738cdf48eafa",
+    "evidence/row_null/N+S+Q+SF/permutation_summary.json": "2bbe3d468b8226ee2ce7329cc931c527e6e72720e512dec97b091b40a7318088"
+  },
+  "evidence_combined_sha256": "ba4207bc1a24cd205c29765377ccff77b9e856382ae8e0aa913a4caae8a95b78",
+  "evidence_bytes": 2106485,
+  "note": "model_combined 与 evidence_combined 分别为按路径排序拼接后的 SHA256"
+}

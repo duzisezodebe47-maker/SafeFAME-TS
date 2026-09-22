@@ -1,0 +1,97 @@
+{
+  "config": {
+    "task": "Agriculture_h12_f1",
+    "scenario": "proxy",
+    "candidate": "N+S+Q",
+    "segments": [
+      "calibration",
+      "decision"
+    ],
+    "seed": 2026,
+    "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+    "contract": "team-eval-2.0"
+  },
+  "config_sha256": "7fb13f9e90d4c5b8ec2d5558292b9efa9a63a24fbc5015d1645aecfc815e35f3",
+  "code_commit": "828e7b4d4363ed37bf44cc1f89d15ba4d524cf44",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "candidate": "N+S+Q",
+  "status": "completed",
+  "alpha_by_group": {
+    "N": 0.1,
+    "S": 10000.0,
+    "Q": 100.0
+  },
+  "weight_hash": "29f70493d1a79e2ee0bb8954fcba3cac5aa1a792082f949b507aba7004dab131",
+  "branch_widths": {
+    "N": 24,
+    "S": 24,
+    "Q": 5
+  },
+  "s_degraded": false,
+  "dropped_zero_variance": {
+    "N": 0,
+    "S": 0,
+    "Q": 5
+  },
+  "segments": {
+    "calibration": {
+      "n_origins": 43,
+      "n_text_available": 43,
+      "contribution_abs_mean": {
+        "N": 0.1288987744801023,
+        "S": 0.0014746772346062233,
+        "Q": 0.16062665570166076
+      }
+    },
+    "decision": {
+      "n_origins": 95,
+      "n_text_available": 95,
+      "contribution_abs_mean": {
+        "N": 0.363337665691314,
+        "S": 0.0011680123291567363,
+        "Q": 0.21715126430902068
+      }
+    }
+  },
+  "rows_written": 1656,
+  "wall_seconds": 0.344,
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "grid": {
+    "train": {
+      "segment": "train",
+      "n_origins": 177,
+      "bounds": [
+        0,
+        212
+      ],
+      "horizon": 12,
+      "index_min": 24,
+      "index_max": 200
+    },
+    "calibration": {
+      "segment": "calibration",
+      "n_origins": 43,
+      "bounds": [
+        212,
+        266
+      ],
+      "horizon": 12,
+      "index_min": 212,
+      "index_max": 254
+    },
+    "decision": {
+      "segment": "decision",
+      "n_origins": 95,
+      "bounds": [
+        266,
+        372
+      ],
+      "horizon": 12,
+      "index_min": 266,
+      "index_max": 360
+    }
+  },
+  "note": "只含 calibration/decision；测试预测待主控冻结路由后另行生成"
+}
