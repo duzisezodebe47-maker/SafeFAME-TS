@@ -7,6 +7,8 @@ $home08 = 'D:\SafeFAME-TS-Climate-clean-08'
 New-Item -ItemType Directory -Path $home08 | Out-Null
 $url08 = 'https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/climate-isolated-input-v8-20260924/SafeFAME-TS_Climate_isolated_v8_20260924.zip'
 Invoke-WebRequest -Uri $url08 -OutFile (Join-Path $home08 'release.zip')
+$actualHash08 = (Get-FileHash -Algorithm SHA256 (Join-Path $home08 'release.zip')).Hash.ToLowerInvariant()
+if ($actualHash08 -ne 'b028052ed5a09868341024c5b89864490f64c3929747f7f70bcc5ae356db314b') { throw 'Release SHA256 不匹配' }
 Expand-Archive -LiteralPath (Join-Path $home08 'release.zip') -DestinationPath (Join-Path $home08 'release')
 py -3.12 -m pip install -r (Join-Path $home08 'release\requirements-replay.txt')
 py -3.12 (Join-Path $home08 'release\code\verify_climate.py') --package (Join-Path $home08 'release') --out (Join-Path $home08 'output')

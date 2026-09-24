@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "archive_name": "downloaded_release.zip",
+  "archive_bytes": 8109693,
+  "archive_sha256": "b028052ed5a09868341024c5b89864490f64c3929747f7f70bcc5ae356db314b",
+  "clean_directory": "D:\\SafeFAME-TS-Climate-clean-08-remote-20260924",
+  "python": "3.12.10",
+  "runs": [
+    {
+      "step": "verify",
+      "command": "C:\\Users\\Chester\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\SafeFAME-TS-Climate-clean-08-remote-20260924\\release\\code\\verify_climate.py --package D:\\SafeFAME-TS-Climate-clean-08-remote-20260924\\release --out D:\\SafeFAME-TS-Climate-clean-08-remote-20260924\\output",
+      "exit_code": 0,
+      "elapsed_seconds": 1.287,
+      "stdout": "verify.stdout.txt",
+      "stderr": "verify.stderr.txt"
+    },
+    {
+      "step": "negative_cases",
+      "command": "C:\\Users\\Chester\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\SafeFAME-TS-Climate-clean-08-remote-20260924\\release\\tests\\run_negative_cases.py --package D:\\SafeFAME-TS-Climate-clean-08-remote-20260924\\release --out D:\\SafeFAME-TS-Climate-clean-08-remote-20260924\\negative_cases.json",
+      "exit_code": 0,
+      "elapsed_seconds": 9.534,
+      "stdout": "negative_cases.stdout.txt",
+      "stderr": "negative_cases.stderr.txt"
+    }
+  ],
+  "total_elapsed_seconds": 10.821,
+  "output_sha256": {
+    "climate_boundary_audit.json": "fd848506cffc54e5831d2f88b9c1be23a2c53fc0fb95bc6358d6632d2dca6308",
+    "climate_feature_drift.csv": "e269c8ed9dc8f223766afe475f64eb295ca23152108c458c2d6b744b24fde8b6",
+    "climate_source_coverage.csv": "f9db5b8ce5b571e161db887ff49eaf84c09fb5157e89693776b67b657c3700e6",
+    "climate_source_evidence.csv": "6652ba6910b7b90dde35b8865901a09ce4ffd25705d77545e7de17efa40c2de1",
+    "climate_weekly_axis_audit.csv": "ed318f62b873e6fe52273929460556887b66880c979b47973986ac7cc8dc2ec2",
+    "climate_weekly_axis_summary.json": "3aeee4c0225a2eddb5a89d50edf19fda4ab8aaf37be7b80818124c094e8e6488",
+    "paper_ready/Climate数据与边界说明.md": "85bd63d6296a03e8ea59d5b31bddb444038f473c4c9beb3d163796ead2926c0d"
+  },
+  "expected_output_sha256": {
+    "climate_boundary_audit.json": "fd848506cffc54e5831d2f88b9c1be23a2c53fc0fb95bc6358d6632d2dca6308",
+    "climate_feature_drift.csv": "e269c8ed9dc8f223766afe475f64eb295ca23152108c458c2d6b744b24fde8b6",
+    "climate_source_coverage.csv": "f9db5b8ce5b571e161db887ff49eaf84c09fb5157e89693776b67b657c3700e6",
+    "climate_source_evidence.csv": "6652ba6910b7b90dde35b8865901a09ce4ffd25705d77545e7de17efa40c2de1",
+    "climate_weekly_axis_audit.csv": "ed318f62b873e6fe52273929460556887b66880c979b47973986ac7cc8dc2ec2",
+    "climate_weekly_axis_summary.json": "3aeee4c0225a2eddb5a89d50edf19fda4ab8aaf37be7b80818124c094e8e6488",
+    "paper_ready/Climate数据与边界说明.md": "85bd63d6296a03e8ea59d5b31bddb444038f473c4c9beb3d163796ead2926c0d"
+  },
+  "negative_cases_status": "PASS",
+  "negative_cases_sha256": "e86c770c36732f1902f863ba60e3e4bf8edb3a7d3c567b5451004c3d7cb717b1"
+}

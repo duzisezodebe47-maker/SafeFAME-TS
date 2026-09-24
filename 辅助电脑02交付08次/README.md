@@ -16,4 +16,6 @@
 
 各表的统计单位、分母和无法逐起点重放的测试历史聚合限制见 [table_schema.md](table_schema.md)。
 
-新 Release 的下载、运行与核验命令见 [RUNBOOK.md](RUNBOOK.md)。ZIP 只作为 Release 附件，不放入分支。第七轮及更早目录、正式 Bundle、冻结 spec 和模型结果均未修改。
+新 [Climate v8 Release 附件](https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/climate-isolated-input-v8-20260924/SafeFAME-TS_Climate_isolated_v8_20260924.zip) 大小为 8,109,693 字节，SHA256 为 `b028052ed5a09868341024c5b89864490f64c3929747f7f70bcc5ae356db314b`。上传后重新下载，文件字节相同；下载件在全新 D 盘目录重放并通过七个负例，日志见 `clean_replay/remote_download/`。运行命令见 [RUNBOOK.md](RUNBOOK.md)。ZIP 只作为 Release 附件，不放入分支。第七轮及更早目录、正式 Bundle、冻结 spec 和模型结果均未修改。
+
+`MANIFEST.json` 锚定 Release 内部文件。分支 README 与 RUNBOOK 在发布后补入下载信息，因而与 Release 内对应文档的字节不同；不能用分支 README 的字节对照 Release 清单。
