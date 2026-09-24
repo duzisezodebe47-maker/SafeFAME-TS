@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "test_target_column",
+      "exit_code": 2,
+      "expected_reason": "test metadata contains target/truth column",
+      "observed_reason": "VERIFY FAIL: test metadata contains target/truth column",
+      "pass": true
+    },
+    {
+      "case": "test_truth_file",
+      "exit_code": 2,
+      "expected_reason": "unexpected Release file",
+      "observed_reason": "VERIFY FAIL: unexpected Release file(s): ['test_features/truth.npy']; missing: []",
+      "pass": true
+    },
+    {
+      "case": "selection_contains_test_row",
+      "exit_code": 2,
+      "expected_reason": "selection package contains test row",
+      "observed_reason": "VERIFY FAIL: selection package contains test row",
+      "pass": true
+    },
+    {
+      "case": "duplicate_origin",
+      "exit_code": 2,
+      "expected_reason": "duplicate origin",
+      "observed_reason": "VERIFY FAIL: duplicate origin or wrong mapping count",
+      "pass": true
+    },
+    {
+      "case": "origin_horizon_overflow",
+      "exit_code": 2,
+      "expected_reason": "origin+horizon crosses segment boundary",
+      "observed_reason": "VERIFY FAIL: origin+horizon crosses segment boundary: overflow:1142",
+      "pass": true
+    },
+    {
+      "case": "feature_differs_from_bundle",
+      "exit_code": 2,
+      "expected_reason": "feature mismatch with formal Bundle",
+      "observed_reason": "VERIFY FAIL: feature mismatch with formal Bundle: test_features/proxy/quality.npy",
+      "pass": true
+    },
+    {
+      "case": "test_numeric_history_injection",
+      "exit_code": 2,
+      "expected_reason": "unexpected Release file",
+      "observed_reason": "VERIFY FAIL: unexpected Release file(s): ['test_features/numeric_history.npy']; missing: []",
+      "pass": true
+    }
+  ]
+}

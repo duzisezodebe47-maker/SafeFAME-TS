@@ -1,0 +1,3 @@
+source,raw_rows_denominator,nonempty_rows_denominator,canonical_facts,start_min,end_max,duplicate_fact_rows,duplicate_rate_nonempty,original_url_missing_count,original_url_missing_rate,publication_time_proxy_count,publication_time_proxy_rate,source_file,upstream_revision
+report,590,582,582,1999-01-01,2024-04-30,0,0.0,582,1.0,582,1.0,references/external/Time-MMD/textual/Climate/Climate_report.csv,00281e2d86058286d5548b15a7670e8eda57ef62
+search,2261,1868,1660,1980-01-07,2024-05-19,208,0.11134903640256959,1660,1.0,1660,1.0,references/external/Time-MMD/textual/Climate/Climate_search.csv,00281e2d86058286d5548b15a7670e8eda57ef62

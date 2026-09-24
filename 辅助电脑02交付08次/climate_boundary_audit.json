@@ -1,0 +1,70 @@
+{
+  "task": "Climate_h4_f2",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "input_len": 52,
+  "horizon": 4,
+  "period": 52,
+  "bounds": [
+    636,
+    763,
+    1017,
+    1144
+  ],
+  "segments": [
+    {
+      "segment": "train",
+      "candidate_origins": 584,
+      "retained_origins": 581,
+      "origin_min": 52,
+      "origin_max": 632,
+      "excluded_by_reason": {
+        "target_crosses_boundary": 3
+      },
+      "historical_cells": 30212,
+      "historical_missing_cells": 0,
+      "historical_missing_rate": 0.0
+    },
+    {
+      "segment": "calibration",
+      "candidate_origins": 127,
+      "retained_origins": 124,
+      "origin_min": 636,
+      "origin_max": 759,
+      "excluded_by_reason": {
+        "target_crosses_boundary": 3
+      },
+      "historical_cells": 6448,
+      "historical_missing_cells": 0,
+      "historical_missing_rate": 0.0
+    },
+    {
+      "segment": "decision",
+      "candidate_origins": 254,
+      "retained_origins": 251,
+      "origin_min": 763,
+      "origin_max": 1013,
+      "excluded_by_reason": {
+        "target_crosses_boundary": 3
+      },
+      "historical_cells": 13052,
+      "historical_missing_cells": 0,
+      "historical_missing_rate": 0.0
+    },
+    {
+      "segment": "test",
+      "candidate_origins": 127,
+      "retained_origins": 124,
+      "origin_min": 1017,
+      "origin_max": 1140,
+      "excluded_by_reason": {
+        "target_crosses_boundary": 3
+      },
+      "historical_cells": 6448,
+      "historical_missing_cells": 0,
+      "historical_missing_rate": 0.0
+    }
+  ],
+  "test_truth_used_for_audit": false,
+  "test_numeric_history_distributed": false
+}

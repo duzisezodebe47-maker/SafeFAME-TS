@@ -1,0 +1,9 @@
+segment,scenario,origins_denominator,text_available_origins,text_available_rate,selected_facts_total,selected_facts_q25,selected_facts_median,selected_facts_q75,report_cap_32_origins,search_cap_32_origins,either_cap_32_rate,cap_exceeded_reason_origins
+train,proxy,581,581,1.0,32044,55.0,56.0,56.0,0,581,1.0,581
+calibration,proxy,124,124,1.0,6936,56.0,56.0,56.0,0,124,1.0,124
+decision,proxy,251,251,1.0,14034,56.0,56.0,56.0,0,251,1.0,251
+test,proxy,124,124,1.0,6882,55.0,56.0,56.0,0,124,1.0,124
+train,conservative_lag,581,581,1.0,31782,54.0,56.0,56.0,0,581,1.0,581
+calibration,conservative_lag,124,124,1.0,6880,54.0,56.0,56.0,0,124,1.0,124
+decision,conservative_lag,251,251,1.0,13918,54.0,56.0,56.0,0,251,1.0,251
+test,conservative_lag,124,124,1.0,6825,54.0,55.0,56.0,0,124,1.0,124

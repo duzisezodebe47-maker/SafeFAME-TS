@@ -1,0 +1,28 @@
+{
+  "base_commit": "a06dfe1f2c34c604c6d2b7e374aac44e1783dde9",
+  "task": "Climate_h4_f2",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "numerical_snapshot_sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+  "formal_bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "source_safe_full_file_sha256": {
+    "origin_index.npy": "390fab034f970c39f27f7f66b64bd3864a5e964b36df49030e5a672ea186d005",
+    "horizon_time.npy": "c59e868fc902518957b6305495adf4a48ca86f3136269e0b37c528bdb5ce2ade",
+    "numeric_missing.npy": "f4ceb36fdc27b7c87dd81d4001bb2832edaa6b80f28e0f0cd712670039b0f639",
+    "proxy/semantic.npy": "61c9ab1dd4bb4097ba4b216e02c6549bc4464e1ed77dde8ab46d0c6fb4f2b9be",
+    "proxy/quality.npy": "5fdda1a0cf739b1da1da82f2ec52df9e841df142229bd328c84083855e686076",
+    "proxy/source_available.npy": "66e6ea25e71ca09e9854c143cd2e2ff616c2f21b5c49cd6ccf49c1001efe8209",
+    "proxy/text_available.npy": "296af3d488a28b76aee159e64ce2e53e0ea3adc088ce2ed06c5bb63540cce5ee",
+    "conservative_lag/semantic.npy": "f666771921a64917830c2cfd8393d704519951055b99bfb1a9e6c2129776bb82",
+    "conservative_lag/quality.npy": "cff1b3860ce8c8d5d06f6a825f9ae77c69ae7ac2856c3edf1caeceb9a6ee29bf",
+    "conservative_lag/source_available.npy": "66e6ea25e71ca09e9854c143cd2e2ff616c2f21b5c49cd6ccf49c1001efe8209",
+    "conservative_lag/text_available.npy": "296af3d488a28b76aee159e64ce2e53e0ea3adc088ce2ed06c5bb63540cce5ee"
+  },
+  "text_trace_full_file_sha256": {
+    "proxy": "cab783ce2fddf08427701ddd5fb5d3f0d7fa84738df110525048b8928256fcdd",
+    "conservative_lag": "78aebbbba09bd2f12acc77024e565828208527cb7efe5cdede80a6f421079b7d"
+  },
+  "selection_fit_rows": 956,
+  "test_rows": 124,
+  "test_policy": "strict_safe_subset; per-origin numeric history and frequency withheld"
+}

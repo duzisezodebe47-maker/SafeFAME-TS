@@ -1,0 +1,11 @@
+{
+  "files": {
+    "climate_boundary_audit.json": "fd848506cffc54e5831d2f88b9c1be23a2c53fc0fb95bc6358d6632d2dca6308",
+    "climate_feature_drift.csv": "e269c8ed9dc8f223766afe475f64eb295ca23152108c458c2d6b744b24fde8b6",
+    "climate_source_coverage.csv": "f9db5b8ce5b571e161db887ff49eaf84c09fb5157e89693776b67b657c3700e6",
+    "climate_source_evidence.csv": "6652ba6910b7b90dde35b8865901a09ce4ffd25705d77545e7de17efa40c2de1",
+    "climate_weekly_axis_audit.csv": "ed318f62b873e6fe52273929460556887b66880c979b47973986ac7cc8dc2ec2",
+    "climate_weekly_axis_summary.json": "3aeee4c0225a2eddb5a89d50edf19fda4ab8aaf37be7b80818124c094e8e6488",
+    "paper_ready/Climate数据与边界说明.md": "85bd63d6296a03e8ea59d5b31bddb444038f473c4c9beb3d163796ead2926c0d"
+  }
+}
