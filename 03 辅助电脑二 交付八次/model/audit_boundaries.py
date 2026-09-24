@@ -42,6 +42,9 @@ from bundle_reader import (  # noqa: E402
     SEGMENTS, BundleUnavailable, assert_grid, read_frozen_bundle, segment_bounds,
     sha256_file,
 )
+from isolated_package import (  # noqa: E402
+    PackageUnavailable, add_input_args, open_input,
+)
 from predict_io import warn_if_dirty  # noqa: E402
 from runtime_profile import cpu_seconds, script_entry_snapshot  # noqa: E402
 from train import RUNNABLE_SCENARIOS  # noqa: E402
@@ -116,7 +119,7 @@ def audit_segment(bundle, name: str, bounds, horizon: int) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bundle", type=Path, required=True)
+    add_input_args(parser)
     parser.add_argument("--task", required=True)
     parser.add_argument("--scenario", required=True, choices=RUNNABLE_SCENARIOS)
     parser.add_argument("--signature", required=True)
@@ -130,13 +133,13 @@ def main() -> int:
     out.mkdir(parents=True, exist_ok=True)
 
     try:
-        # 第八轮：四段边界审计只查索引与特征结构，用严格隔离让 test 真值不 materialize
-        bundle = read_frozen_bundle(args.bundle, args.task, args.scenario,
-                                    args.signature, args.split_spec,
-                                    isolate_test="strict")
+        # 第八轮：四段边界审计只查索引与特征结构；优先隔离包（test 侧结构上无真值），
+        # 走正式 Bundle 时用 strict 隔离让 test 真值不 materialize
+        bundle, input_kind = open_input(args, args.task, args.scenario,
+                                        args.signature, args.split_spec)
         bounds_all = segment_bounds(args.split_spec, args.task)
-    except BundleUnavailable as exc:
-        print(f"BundleUnavailable: {exc}", file=sys.stderr)
+    except (BundleUnavailable, PackageUnavailable) as exc:
+        print(f"InputUnavailable: {exc}", file=sys.stderr)
         return 3
 
     horizon = int(args.task.split("_h")[1].split("_")[0])
@@ -200,10 +203,21 @@ def main() -> int:
     }
     passed = all(checks.values())
 
+    # 输入可能是隔离包或正式 Bundle：两者的“清单哈希”来源不同，如实记录是哪一种。
+    if input_kind == "isolated_package":
+        input_manifest_sha = sha256_file(Path(args.input_package) / "MANIFEST.json")
+        input_source = Path(args.input_package).name
+    else:
+        input_manifest_sha = sha256_file(Path(args.bundle) / "manifest.json")
+        input_source = Path(args.bundle).name
+
     report = {
         "task": args.task, "scenario": args.scenario, "horizon": horizon,
         "bundle_signature": bundle.signature,
-        "bundle_manifest_sha256": sha256_file(Path(args.bundle) / "manifest.json"),
+        "input_kind": input_kind, "input_source": input_source,
+        "input_manifest_sha256": input_manifest_sha,
+        "bundle_manifest_sha256": input_manifest_sha,
+        "test_isolation": bundle.isolation,
         "split_spec_sha256": sha256_file(args.split_spec),
         "segments": segments,
         "checks": checks,

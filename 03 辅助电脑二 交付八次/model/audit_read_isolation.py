@@ -48,6 +48,9 @@ if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
 from bundle_reader import TARGET_KEYS, TEST_TRUTH_FILE_NAMES  # noqa: E402
+from isolated_package import (  # noqa: E402
+    PackageUnavailable, add_input_args, open_input,
+)
 from predict_io import warn_if_dirty  # noqa: E402
 from runtime_profile import cpu_seconds, script_entry_snapshot  # noqa: E402
 from train import RUNNABLE_SCENARIOS  # noqa: E402
@@ -119,7 +122,7 @@ def _remove() -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bundle", type=Path, required=True)
+    add_input_args(parser)
     parser.add_argument("--task", required=True)
     parser.add_argument("--scenario", required=True, choices=RUNNABLE_SCENARIOS)
     parser.add_argument("--signature", required=True)
@@ -138,11 +141,17 @@ def main() -> int:
 
     import train as train_entry
 
-    argv = ["train.py", "--bundle", str(args.bundle), "--task", args.task,
+    argv = ["train.py", "--task", args.task,
             "--scenario", args.scenario, "--signature", args.signature,
             "--split-spec", str(args.split_spec), "--segments", "calibration", "decision",
             "--candidate", args.candidate, "--seed", str(args.seed),
             "--output-dir", str(args.probe_output)]
+    if getattr(args, "input_package", None) is not None:
+        argv += ["--input-package", str(args.input_package)]
+        if getattr(args, "formal_bundle", None) is not None:
+            argv += ["--formal-bundle", str(args.formal_bundle)]
+    else:
+        argv += ["--bundle", str(args.bundle)]
     old_argv = sys.argv
     sys.argv = argv
     _install()
@@ -156,33 +165,40 @@ def main() -> int:
         _remove()
         sys.argv = old_argv
 
-    bundle_dir = Path(args.bundle).resolve()
+    input_dir = Path(args.input_package if getattr(args, "input_package", None)
+                     else args.bundle).resolve()
     entries = []
     violations: list[str] = []
+    is_package = getattr(args, "input_package", None) is not None
     for e in sorted(_LOG.values(), key=lambda x: x["path"]):
         p = Path(e["path"])
         name = p.name
-        contains_test_truth = name in TEST_TRUTH_FILE_NAMES
         try:
-            under = str(p.parent.relative_to(bundle_dir))
+            under = str(p.parent.relative_to(input_dir))
         except ValueError:
             under = None
+        # 包模式下 `selection_fit/targets.npy` **只含选择期行**，不含 test 真值；
+        # 只有 test_features/ 下的真值名文件才算（结构上不存在）。
+        # Bundle 模式下任务目录里的 targets* 是单表含 test 行，按文件名即可判定。
+        contains_test_truth = name in TEST_TRUTH_FILE_NAMES and (
+            ("test_features" in (under or "")) or not is_package)
         modes = e.get("np_load_modes") or []
         entry = {"path": str(p), "name": name, "under_bundle": under,
                  "channels": e["channels"], "np_load_modes": modes,
                  "contains_test_truth": contains_test_truth,
-                 "class": ("bundle_test_truth_table" if contains_test_truth and under
-                           else ("bundle_feature_or_index" if under else "outside_bundle"))}
+                 "class": ("input_test_truth_table" if contains_test_truth and under
+                           else ("input_feature_or_index" if under else "outside_input"))}
         entries.append(entry)
         if contains_test_truth and "full" in modes:
             violations.append(f"{p} 被 np.load 整表读入（未用 mmap）—— test 真值当作数据读取")
 
-    # 隔离断言：严格模式载入后 test 行必为 NaN，非 test 行不受影响
-    from bundle_reader import read_frozen_bundle
-    b = read_frozen_bundle(args.bundle, args.task, args.scenario, args.signature,
-                           args.split_spec, isolate_test="strict")
+    # 隔离断言：两种输入各按各的判据
+    b, input_kind = open_input(args, args.task, args.scenario, args.signature,
+                               args.split_spec)
     tm = b.segment_mask("test")
-    assertions = {"isolation_mode": (b.isolation or {}).get("mode"),
+    assertions = {"input_kind": input_kind,
+                  "isolation_mode": (b.isolation or {}).get("mode"),
+                  "test_truth_present": (b.isolation or {}).get("test_truth_present"),
                   "test_rows_materialized": (b.isolation or {}).get("test_rows_materialized")}
     for key in TARGET_KEYS:
         if key in b.arrays:
@@ -191,10 +207,16 @@ def main() -> int:
             assertions[f"{key}_non_test_rows_finite"] = bool(np.isfinite(arr[~tm]).all())
     assertions["train_entry_exit_zero"] = code == 0
 
-    ok = (code == 0 and not violations
-          and assertions.get("isolation_mode") == "strict"
-          and assertions.get("test_rows_materialized") is False
-          and all(v for k, v in assertions.items() if k.endswith("_all_nan")))
+    mode = assertions.get("isolation_mode")
+    if mode == "isolated_package":
+        # 隔离包：test 侧**结构上**没有真值 —— 没有可读的真值文件，也没有整表读入的可能
+        mode_ok = (assertions.get("test_truth_present") is False
+                   and all(v for k, v in assertions.items() if k.endswith("_all_nan")))
+    else:
+        mode_ok = (mode == "strict"
+                   and assertions.get("test_rows_materialized") is False
+                   and all(v for k, v in assertions.items() if k.endswith("_all_nan")))
+    ok = code == 0 and not violations and mode_ok
 
     report = {
         "task": args.task, "scenario": args.scenario, "candidate": args.candidate,
@@ -206,6 +228,8 @@ def main() -> int:
                     "【np.load(mmap_mode='r') 且只索引非 test 行】；"
                     "出现不带 mmap 的 np.load 即判失败",
             "files_touched": len(entries),
+            "input_kind": input_kind,
+            "input_root": str(input_dir),
         },
         "read_manifest": entries,
         "violations": violations,

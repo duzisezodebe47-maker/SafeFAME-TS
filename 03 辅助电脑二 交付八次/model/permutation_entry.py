@@ -34,6 +34,9 @@ from bundle_reader import (  # noqa: E402
     segment_bounds, sha256_file, task_seasonal_period,
 )
 from candidates import GATE_CANDIDATES  # noqa: E402
+from isolated_package import (  # noqa: E402
+    PackageUnavailable, add_input_args, open_input,
+)
 from permutation import (  # noqa: E402
     ROW_PERMUTATIONS, circular_shift_null, decision_loss, observed_loss,
     row_permutation_null, write_null,
@@ -47,7 +50,7 @@ REPO_ROOT = HERE.parents[1]
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bundle", type=Path, required=True)
+    add_input_args(parser)
     parser.add_argument("--task", required=True)
     parser.add_argument("--scenario", required=True, choices=RUNNABLE_SCENARIOS)
     parser.add_argument("--signature", required=True)
@@ -68,13 +71,13 @@ def main() -> int:
     cpu_started = cpu_seconds()
 
     try:
-        # 第八轮：置换同样走严格隔离（决策段从不涉及 test 真值）
-        bundle = read_frozen_bundle(args.bundle, args.task, args.scenario,
-                                    args.signature, args.split_spec,
-                                    isolate_test="strict")
+        # 第八轮：置换同样优先走隔离包（决策段从不涉及 test 真值）；
+        # 走正式 Bundle 时用 strict 隔离（test 行从不 materialize）
+        bundle, input_kind = open_input(args, args.task, args.scenario,
+                                        args.signature, args.split_spec)
         bounds = segment_bounds(args.split_spec, args.task)
-    except BundleUnavailable as exc:
-        print(f"BundleUnavailable: {exc}", file=sys.stderr)
+    except (BundleUnavailable, PackageUnavailable) as exc:
+        print(f"InputUnavailable: {exc}", file=sys.stderr)
         return 3
 
     # 协议里登记的季节周期（第六轮修复 3）。本候选是分支残差模型、不消费它，
@@ -156,6 +159,8 @@ def main() -> int:
         "runtime": script_entry_snapshot(started, cpu_started),
         # 第六轮补：只写 HEAD 会在改动未提交时把 provenance 记成另一个提交
         "code_provenance": warn_if_dirty(REPO_ROOT, HERE),
+        "input_kind": input_kind,
+        "test_isolation": bundle.isolation,
         # 第六轮修复 3 的可追溯性：把协议里的季节周期记进产物。
         # 本候选是分支残差模型（N/S/Q/SF），**不消费季节周期**；周期只影响主控
         # 数值基线的 SeasonalNaive。这里记录以便主控核对协议取值，并写明适用范围。

@@ -29,10 +29,13 @@ if str(HERE) not in sys.path:
 
 from branches import FeatureBundle  # noqa: E402
 from bundle_reader import (  # noqa: E402
-    BundleUnavailable, assert_grid, read_frozen_bundle, samples_order_view,
+    BundleUnavailable, assert_grid, samples_order_view,
     segment_bounds, sha256_file, task_seasonal_period,
 )
 from candidates import ALL_CANDIDATES, BranchResidualCandidate  # noqa: E402
+from isolated_package import (  # noqa: E402
+    PackageUnavailable, add_input_args, open_input,
+)
 from predict_io import (  # noqa: E402
     PredictionWriter, code_commit, config_sha256, warn_if_dirty, weight_hash,
 )
@@ -65,7 +68,7 @@ def to_feature_bundle(part: dict[str, np.ndarray]) -> FeatureBundle:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bundle", type=Path, required=True, help="主控冻结 Bundle 目录")
+    add_input_args(parser)
     parser.add_argument("--task", required=True, help="任务 ID，如 Agriculture_h12_f1")
     parser.add_argument("--scenario", required=True, choices=RUNNABLE_SCENARIOS)
     parser.add_argument("--signature", required=True, help="期望的 bundle_signature（必填）")
@@ -84,17 +87,16 @@ def main() -> int:
     cpu_started = cpu_seconds()
 
     try:
-        # 第八轮：**严格隔离** —— 选择期只需要 train/cal/dec 真值，
-        # test 行从不 materialize（bundle_reader 用 memmap + 只索引非 test 行）
-        bundle = read_frozen_bundle(args.bundle, args.task, args.scenario,
-                                    args.signature, args.split_spec,
-                                    isolate_test="strict")
+        # 第八轮：**优先消费选择期隔离包**（--input-package，§五）；
+        # 走正式 Bundle 时用 strict 隔离（memmap + 只索引非 test 行）
+        bundle, input_kind = open_input(args, args.task, args.scenario,
+                                        args.signature, args.split_spec)
         bounds = segment_bounds(args.split_spec, args.task)
         # 本任务在冻结 spec 里登记的季节周期（Climate=52）。门控候选本身不消费它，
         # 但把它记进 manifest 使「周期是否被默认成 12」可一眼核对（第八轮 §七）。
         seasonal_period = task_seasonal_period(args.split_spec, args.task)
-    except BundleUnavailable as exc:
-        print(f"BundleUnavailable: {exc}", file=sys.stderr)
+    except (BundleUnavailable, PackageUnavailable) as exc:
+        print(f"InputUnavailable: {exc}", file=sys.stderr)
         return 3
 
     domain = args.task.split("_")[0]
@@ -183,6 +185,9 @@ def main() -> int:
             "applies_to": "numeric_baselines/SeasonalNaive（门控候选不消费周期）",
         },
         "test_isolation": bundle.isolation,
+        "input_kind": input_kind,
+        "input_package": (str(Path(args.input_package).resolve())
+                          if getattr(args, "input_package", None) else None),
         "grid": grid_stats,
         "note": "只含 calibration/decision；测试预测待主控冻结路由后另行生成",
     }

@@ -29,7 +29,7 @@ HERE = Path(__file__).resolve().parent
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
-from candidates import ALL_CANDIDATES, GATE_CANDIDATES  # noqa: E402
+from candidates import GATE_CANDIDATES  # noqa: E402
 from permutation import ROW_PERMUTATIONS  # noqa: E402
 from predict_io import CONTRACT_FIELDS  # noqa: E402
 
@@ -63,9 +63,17 @@ def _problems_manifest(path: Path) -> list[str]:
     return out
 
 
+# 第八次任务书 §二要求交付的候选**恰好是这四个**：
+#   N（数值模型候选）、N+Q（独立消融）、N+S+Q、N+S+Q+SF（两个注册门控候选）。
+# `ALL_CANDIDATES` 还含 N+S / N+F / N+S+Q+F 等**诊断候选**，它们不在本轮交付范围内 ——
+# 拿它们当默认值会让"缺 N+S 的预测"被误报成交付不完整（本闸门第一版就是这么错的）。
+DELIVERED_CANDIDATES = ("N", "N+Q", "N+S+Q", "N+S+Q+SF")
+
+
 def check(delivery: Path, task: str, horizon: int, expected_origins: int,
-          candidates: tuple[str, ...] = ALL_CANDIDATES,
-          require_nulls: bool = True) -> list[str]:
+          candidates: tuple[str, ...] = DELIVERED_CANDIDATES,
+          require_nulls: bool = True,
+          require_isolated_package: bool = True) -> list[str]:
     """返回问题列表（空 = 完整）。
 
     `require_nulls=False` 供**单元测试**在最小合成交付上只验选择期产物；
@@ -99,6 +107,21 @@ def check(delivery: Path, task: str, horizon: int, expected_origins: int,
             if any(r["segment"] == "test" for r in rows):
                 problems.append(f"{csv_path.name} 出现 test 段（本轮禁止）")
         problems += _problems_manifest(man_path)
+
+    # §五：正式证据必须在**隔离包**上跑；§六/§五：本轮不得生成任何 test 预测
+    if require_isolated_package:
+        for candidate in candidates:
+            man = pred_dir / f"{candidate.replace('+', '_')}_run_manifest.json"
+            if not man.is_file():
+                continue
+            doc = json.loads(man.read_text(encoding="utf-8"))
+            if doc.get("input_kind") != "isolated_package":
+                problems.append(
+                    f"{man.name} 的 input_kind={doc.get('input_kind')!r}，"
+                    f"正式证据必须消费选择期隔离包（§五）")
+    stray_test = sorted(p.name for p in delivery.rglob("*test_predictions.csv"))
+    if stray_test:
+        problems.append(f"交付里出现 test 预测文件（本轮禁止）: {stray_test[:3]}")
 
     for candidate in (GATE_CANDIDATES if require_nulls else ()):
         cand_dir = delivery / "evidence" / "row_null" / candidate
