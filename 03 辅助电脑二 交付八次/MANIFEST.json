@@ -63,13 +63,13 @@
   "evidence_files_count": 30,
   "evidence_combined_sha256": "e040d30218dc24618dce688bb1c59e888ad92c67583d85cf52919f74ad250530",
   "other_files": {
-    "README.md": "03efe32ba34e0660fdf1746f11070ad34d03238b3d1d6ba646f1c589f74090e5",
+    "README.md": "eba5c1e1d142990670c882bab85f9f58e508e71c1887927b96e633ff3fffe03f",
     "RUNBOOK.md": "37f5f49112f1f435ae5a5c853996755c3d4be8f28d0e95f723f827329beef69c",
     "TEAM_SYNC.md": "16c3e1004416330c37a9a017b4bbb5af77ded21a1a33f55f56ed7a91e3e33483"
   },
   "other_files_count": 3,
-  "other_combined_sha256": "07fa0c859356b39061216d3db046ac3f653713e94e2f18f089e7d60699e4d06c",
+  "other_combined_sha256": "c2346b939d123f0da219247380dd8d48641f0199c19b843a5d5d9422b87ca1d5",
   "all_files_count": 57,
-  "all_files_bytes": 3067877,
+  "all_files_bytes": 3069094,
   "note": "三块合并 = 本目录（除 MANIFEST.json 自身与 __pycache__）的全部文件。MANIFEST.json 无法自哈希，其完整性由 git blob 哈希保证。生成脚本 model/make_manifest.py（本文件亦在 model_files 内）。"
 }

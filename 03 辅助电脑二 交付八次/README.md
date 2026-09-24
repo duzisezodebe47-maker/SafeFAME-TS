@@ -179,3 +179,22 @@ Climate 是周频（spec `lag_days=7`），horizon=4 即"整段平移整数个�
 │   └── tests_round{6,7,8}.log   三套测试日志
 └── model/                       与第八轮全部代码；含 isolated_package.py
 ```
+
+---
+
+## 十一、证据锚点与「最后一次改动」
+
+| 项 | 值 |
+|---|---|
+| 预测/置换证据的锚定提交 | **`9af6343`**（各 manifest 的 `code_provenance.code_commit`，`worktree_dirty=false`，`scope=03 辅助电脑二 交付八次/model`） |
+| 与当前 HEAD 的差异 | **只有 `model/verify_delivery.py`**（验证脚本，**不在预测路径上**；证据入库后又加了两条判据：清单哈希 vs 已提交字节、自指文件排除） |
+| 复核命令 | `git diff --stat 9af6343 HEAD -- "03 辅助电脑二 交付八次/model"` → 只列 `verify_delivery.py` |
+
+预测路径上的文件（`train.py` / `permutation_entry.py` / `permutation.py` /
+`candidates.py` / `branches.py` / `bundle_reader.py` / `isolated_package.py` /
+`predict_io.py` / `runtime_profile.py` / `numeric_fallbacks.py`）自 `9af6343` 起**逐字节未变**，
+所以本轮全部证据可由该提交重放。
+
+**执行台账**（`evidence/run_ledger.json` + `test_run.log`）逐条登记了每条命令、时间与退出码：
+正式证据是**消费隔离包**、在 `9af6343` 上、干净工作区里跑出来的那一次；
+此前的尝试（先跑 Bundle、后改块长）均已作废，不混入交付。
