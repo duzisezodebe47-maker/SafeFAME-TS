@@ -7,7 +7,8 @@ $replayHome = 'D:\SafeFAME-TS-clean-replay-07'
 New-Item -ItemType Directory -Force -Path $replayHome | Out-Null
 $asset = 'https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/source-time-audit-v7-20260924/SafeFAME-TS_source_time_audit_v7_20260924.zip'
 Invoke-WebRequest -Uri $asset -OutFile (Join-Path $replayHome 'release.zip')
-Get-FileHash -Algorithm SHA256 (Join-Path $replayHome 'release.zip')
+$actualHash = (Get-FileHash -Algorithm SHA256 (Join-Path $replayHome 'release.zip')).Hash.ToLowerInvariant()
+if ($actualHash -ne 'dc979f4a63308dee4075e9517ddee6652c9d11cca24f45be94a4687e11b1237e') { throw 'Release SHA256 不匹配' }
 Expand-Archive -LiteralPath (Join-Path $replayHome 'release.zip') -DestinationPath (Join-Path $replayHome 'release')
 Set-Location (Join-Path $replayHome 'release')
 py -3.12 -m pip install -r requirements-replay.txt

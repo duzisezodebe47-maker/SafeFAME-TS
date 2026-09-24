@@ -1,6 +1,9 @@
 {
-  "status": "frozen_reference",
-  "files": {
+  "status": "PASS",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "origin_records": 32876,
+  "output_sha256": {
     "audit_summary.json": "0ac094a47eb9499665eac249fd6e623047bbd608d3e692f3db5a35d4c3c8b600",
     "origin_time_audit.jsonl": "79419a50472dfef55524cae3cbd9b98c530b9f163d099d0f0dd4ae36205b46f9",
     "fact_catalog.csv": "a081e963967ca83298f31ed1606a3ded3b63100ff42cbd090631c44adde82b56",
@@ -12,9 +15,11 @@
     "source_tables/missing_source_evidence.csv": "ec76d502fa312c59eaca733e92677508842e395103ed40de074775697b886999",
     "source_tables/coverage_by_segment_scenario.csv": "4b3f6bfc7d76bf5fd0f198390191d7009bb89691ddd5c87d00c37b794584f51d",
     "source_tables/socialgood_scenario_difference_summary.csv": "f128867cde1deedc92d8faf8db96dac6c7bb62fc5932554fb5dee0d97de61af8",
-    "paper_ready/表_数据来源与样本边界.csv": "9f0761ee9c287e696edcab1a825058b2a9c7672563209d96722339f7353e2567",
-    "paper_ready/表_时间边界与覆盖审计.csv": "7a39c5a30ce101e6de8dabc69e1b6a6a7dc638ba55c4e2c0290081ed16af6ed4",
-    "paper_ready/表_来源证据缺口.csv": "ec76d502fa312c59eaca733e92677508842e395103ed40de074775697b886999",
-    "paper_ready/数据方法与限制说明.md": "92d515b130f9b146f915834949fc7a4b01857fa9e839a94f6c5fcb495f9001e7"
-  }
+    "paper_ready/��_������Դ�������߽�.csv": "9f0761ee9c287e696edcab1a825058b2a9c7672563209d96722339f7353e2567",
+    "paper_ready/��_ʱ��߽��븲�����.csv": "7a39c5a30ce101e6de8dabc69e1b6a6a7dc638ba55c4e2c0290081ed16af6ed4",
+    "paper_ready/��_��Դ֤��ȱ��.csv": "ec76d502fa312c59eaca733e92677508842e395103ed40de074775697b886999",
+    "paper_ready/���ݷ���������˵��.md": "92d515b130f9b146f915834949fc7a4b01857fa9e839a94f6c5fcb495f9001e7"
+  },
+  "expected_hashes_checked": true,
+  "elapsed_seconds": 38.844
 }

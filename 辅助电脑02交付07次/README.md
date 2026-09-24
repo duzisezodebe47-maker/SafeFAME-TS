@@ -4,7 +4,7 @@
 
 ## 交付结果
 
-- 单个 [第七轮 Release 附件](https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/tag/source-time-audit-v7-20260924) 包含正式 Bundle、完整规范事实语料、文本血缘记录、冻结 spec、审计代码与输入清单。解包后按 `RUNBOOK.md` 可重放全部 32,876 条起点记录。
+- 单个 [第七轮 Release 附件](https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/source-time-audit-v7-20260924/SafeFAME-TS_source_time_audit_v7_20260924.zip) 包含正式 Bundle、完整规范事实语料、文本血缘记录、冻结 spec、审计代码与输入清单。解包后按 `RUNBOOK.md` 可重放全部 32,876 条起点记录。附件大小 21,789,688 字节，SHA256 为 `dc979f4a63308dee4075e9517ddee6652c9d11cca24f45be94a4687e11b1237e`；上传后重新下载并在独立 D 盘目录重放通过，记录见 `clean_replay/remote_download/`。
 - `source_tables/` 给出来源清单、来源证据缺口、分段覆盖和 SocialGood 情景差异。`paper_ready/` 给出可直接用于技术报告的三张数据表及方法限制文字。
 - 全量审计按冻结规则复算一致。SocialGood 两情景分别有 341/700 和 340/700 个文本可用起点；341 个起点的选中文本集合发生变化，其中只有 1 个起点由可用变为不可用。
 - 规范事实的 `end_date` 只是可用时间代理。现有血缘记录没有原始 URL，也没有独立核验的逐事实发布时间。规则复算通过不等于证明绝无泄漏。
@@ -20,3 +20,5 @@
 - `clean_replay/`：新建 D 盘目录的实际下载、解包和重放记录。
 
 Release ZIP 仅作为 GitHub Release 附件发布；分支不纳入 ZIP 或大体量逐起点证据。输入材料详见 `MANIFEST.json`；从下载到核验的完整步骤见 [RUNBOOK.md](RUNBOOK.md)。
+
+`MANIFEST.json` 锚定的是 Release 内部文件字节，不是分支目录的文件清单；本页及分支版 RUNBOOK 在发布后补入了固定下载信息，因此与附件内对应文档的字节不同，不应据此判定附件输入哈希错误。
