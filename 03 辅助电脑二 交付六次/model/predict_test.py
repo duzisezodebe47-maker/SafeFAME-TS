@@ -531,6 +531,12 @@ def main() -> int:
         # 四个输入锚（第七轮要求）：路由文件字节哈希、Bundle 签名、冻结 spec 字节哈希、
         # 选择期 manifest 文件字节哈希；另附选择期 config 哈希
         "input_anchors": anchors,
+        # 扁平锚**同时保留**：第五次的 test manifest 与 train.py 的 run manifest
+        # 都是这套扁平键，读 manifest 的一方不该因为分组而 KeyError。两处取同一批值。
+        "route_file_sha256": args.route_sha256,
+        "bundle_signature": args.signature,
+        "split_spec_sha256": spec_sha,
+        "selection_config_sha256": selection.get("config_sha256"),
         "n_rows": n_rows, "n_test_origins": int(len(test_inference.origin_index)),
         "csv_columns": list(CONTRACT_FIELDS), "csv_sha256": sha256_file(csv_path),
         "code_commit": code_commit(REPO_ROOT),

@@ -50,8 +50,21 @@ def main() -> int:
 
     model_files = collect(HERE)
     evidence_files = collect(DELIVERY / "evidence")
+    # 第三块：交付根下的其余文件（预测产物、文档等）。
+    # 为什么必须单独列：第七轮交付的主体产物在 `test_prediction/` 下，既不在 model/
+    # 也不在 evidence/ —— 只报前两块的话，交付清单会**漏掉本轮最重要的那个文件**，
+    # 而任务书要求的是「本轮所有文件 SHA256」。前两块的算法保持不变，
+    # 以免主控已记录的 evidence/model 合并哈希发生变化。
+    covered = {"model", "evidence"}
+    other_files = {
+        p.relative_to(DELIVERY).as_posix(): sha256_file(p)
+        for p in sorted(DELIVERY.rglob("*"))
+        if p.is_file() and not any(part in SKIP_DIRS for part in p.parts)
+        and p.name != args.out.name
+        and p.relative_to(DELIVERY).parts[0] not in covered
+    }
     total_bytes = sum((DELIVERY / p).stat().st_size
-                      for p in list(model_files) + list(evidence_files))
+                      for p in list(model_files) + list(evidence_files) + list(other_files))
 
     manifest = {
         "rule": "combined = sha256( '\\n'.join( f'{path}\\t{sha256(file)}' 按 path 排序 ) )",
@@ -61,16 +74,25 @@ def main() -> int:
         "evidence_files": evidence_files,
         "evidence_files_count": len(evidence_files),
         "evidence_combined_sha256": combined(evidence_files),
-        "evidence_bytes": total_bytes,
-        "note": "model/ 排除 __pycache__；evidence/ 全量。生成脚本 model/make_manifest.py（本文件亦在 model_files 内）。",
+        "other_files": other_files,
+        "other_files_count": len(other_files),
+        "other_combined_sha256": combined(other_files),
+        "all_files_count": len(model_files) + len(evidence_files) + len(other_files),
+        "all_files_bytes": total_bytes,
+        "note": "三块合并 = 本目录（除 MANIFEST.json 自身与 __pycache__）的全部文件。"
+                "MANIFEST.json 无法自哈希，其完整性由 git blob 哈希保证。"
+                "生成脚本 model/make_manifest.py（本文件亦在 model_files 内）。",
     }
     args.out.write_text(json.dumps(manifest, ensure_ascii=False, indent=2),
                         encoding="utf-8", newline="\n")
     print(json.dumps({"model_files": len(model_files),
                       "evidence_files": len(evidence_files),
-                      "evidence_bytes": total_bytes,
+                      "other_files": len(other_files),
+                      "all_files": manifest["all_files_count"],
+                      "all_bytes": total_bytes,
                       "model_combined_sha256": manifest["model_combined_sha256"],
-                      "evidence_combined_sha256": manifest["evidence_combined_sha256"]},
+                      "evidence_combined_sha256": manifest["evidence_combined_sha256"],
+                      "other_combined_sha256": manifest["other_combined_sha256"]},
                      ensure_ascii=False))
     return 0
 
