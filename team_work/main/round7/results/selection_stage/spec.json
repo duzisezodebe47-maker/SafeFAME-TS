@@ -1,0 +1,23 @@
+{
+  "protocol_version": "team-eval-2.0-bridge",
+  "status": "FROZEN",
+  "original_split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "numeric_candidates": [
+    "Last",
+    "SeasonalNaive",
+    "AR-Ridge",
+    "N"
+  ],
+  "candidate_variants": [
+    "N+S+Q",
+    "N+S+Q+SF"
+  ],
+  "selection": {
+    "row_null_draws": 999,
+    "p_threshold": 0.025
+  },
+  "uncertainty": {
+    "draws": 5000,
+    "seed": 2026
+  }
+}

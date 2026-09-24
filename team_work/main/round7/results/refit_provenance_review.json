@@ -1,0 +1,27 @@
+{
+  "status": "REFIT_PROVENANCE_VERIFIED",
+  "reviewer": "team/main-eval-20260921:round7-independent-audit",
+  "reviewed_at": "2026-09-24",
+  "null_jsonl_sha256": "011116778d235ab676fbb55dec72d4c686641dd70764ff26833d5c3353e4c5d8",
+  "model_code_commits": [
+    "40293c758207a07aff3097c87efed9268573b2ff"
+  ],
+  "delivery_branch_head": "8cf590b79abec3c80d8678ae0ffa928d4f80b2cd",
+  "model_manifest_sha256": "187eb12b8efff8fd82ab43160a6350b9ffd2fa2cd6eb57715433dee750a54234",
+  "evidence_manifest_sha256": "140dcb255b6c70972df17759626063d7de3f4ab8e99b837eefbfa4409798dace",
+  "checks": {
+    "manifest_file_hashes_recomputed_from_fixed_git_blobs": true,
+    "fixed_commit_worktree_used": true,
+    "round6_tests_passed": 49,
+    "replay_predictions_byte_identical": true,
+    "row_permutation_draws_per_candidate": 999,
+    "per_iteration_seed_rule_verified": true,
+    "semantic_quality_mask_permuted_each_iteration": true,
+    "fit_design_called_each_iteration": true,
+    "alpha_selection_called_each_iteration": true,
+    "refit_called_each_iteration": true,
+    "test_truth_used": false
+  },
+  "scope": "Agriculture_h12_f1/proxy; N+S+Q and N+S+Q+SF row-permutation null evidence only",
+  "limitation": "This review verifies the delivered implementation, hashes, replay and refit call path. It does not independently rerun all 1,998 refits on the master computer."
+}

@@ -1,0 +1,26 @@
+{
+  "status": "READY_FOR_FREEZE",
+  "segments": [
+    "calibration",
+    "decision"
+  ],
+  "task_id": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "prediction_files_sha256": {
+    "team_work\\main\\round6\\results\\agriculture_proxy_baselines\\numeric_selection_predictions.csv": "3acfd6d29a3980a4bbd192fa49c789b9de6de4ea8de8b90144d8aa86a037bef8",
+    "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第6轮模型_SHY_8cf590b\\audit_detached_worktree\\03 辅助电脑二 交付六次\\evidence\\cal_dec_predictions\\N_proxy_predictions.csv": "ec56b2fcc7a484a87b086018a3b60aa06113f70424712a3a047a47dc4bb1e131",
+    "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第6轮模型_SHY_8cf590b\\audit_detached_worktree\\03 辅助电脑二 交付六次\\evidence\\cal_dec_predictions\\N_S_Q_proxy_predictions.csv": "4c8aa588250e4c31d491c913af82480f2efaca0d2272eb4dc7777ffb1457c51c",
+    "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第6轮模型_SHY_8cf590b\\audit_detached_worktree\\03 辅助电脑二 交付六次\\evidence\\cal_dec_predictions\\N_S_Q_SF_proxy_predictions.csv": "9aa7c80f55ced4bf50b1d85882d3e48e4ff190581f671c237053c3cb82325843"
+  },
+  "sample_rows": 138,
+  "prediction_rows": 828,
+  "files_sha256": {
+    "predictions.jsonl": "0ca2bb11f0040f7d0e57d2211a64c2038ede7d763efa66abcfb437de7ccafbf8",
+    "samples.jsonl": "dbde117964ef62a9053e9e31ac493739fb1b081f991518db68e4ce0281a9400b",
+    "spec.json": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3",
+    "task.json": "11a326a23d5a6379e4ca0cbe4190b9778ad4e21a79322098c3b8a6fe61576986"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "status": "ROUTE_SEALED",
+  "reviewed_at": "2026-09-24",
+  "data_delivery": {
+    "branch": "3218151885-creator",
+    "commit": "f43c3c287165fb0a2b0fc8c15f85e07350252295",
+    "rule_audit": "PASS",
+    "canonical_facts": 25613,
+    "original_url_rows": 0,
+    "publication_time_status": "end_date_proxy_unverified",
+    "release_replayability": "FAIL_MISSING_FACT_CORPUS_INPUT"
+  },
+  "model_delivery": {
+    "branch": "SHY",
+    "delivery_commit": "8cf590b79abec3c80d8678ae0ffa928d4f80b2cd",
+    "code_commit": "40293c758207a07aff3097c87efed9268573b2ff",
+    "manifest_hash_verification": "PASS",
+    "tests_passed": 49,
+    "baseline_points_exact": 4968,
+    "replay": "PASS"
+  },
+  "route": {
+    "task_id": "Agriculture_h12_f1",
+    "scenario": "proxy",
+    "fallback": "AR-Ridge",
+    "selected": "N+S+Q+SF",
+    "fallback_decision_mse": 0.21333533040592834,
+    "selected_decision_mse": 0.15510042401261703,
+    "selected_row_permutation_p": 0.014,
+    "sealed_route_sha256": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70"
+  },
+  "next_gate": "ONE_TIME_TEST_PREDICTION_REQUIRED"
+}
