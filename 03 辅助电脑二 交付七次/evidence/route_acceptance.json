@@ -63,16 +63,16 @@
   },
   "verdict": "PASS",
   "code_provenance": {
-    "code_commit": "311271d8c65c903506cd0f70a7266246a5daf701",
+    "code_commit": "de88307a5d288d127151fbc4869873f7e4984ff7",
     "worktree_dirty": false,
     "dirty_files": [],
     "scope": "03 辅助电脑二 交付七次/model"
   },
   "runtime": {
-    "wall_seconds": 0.075,
-    "cpu_seconds": 0.031,
-    "peak_rss_bytes": 68947968,
-    "peak_rss_mib": 65.8,
+    "wall_seconds": 0.073,
+    "cpu_seconds": 0.016,
+    "peak_rss_bytes": 68763648,
+    "peak_rss_mib": 65.6,
     "cpu_count": 32,
     "platform": "Windows 11",
     "python": "3.12.10"

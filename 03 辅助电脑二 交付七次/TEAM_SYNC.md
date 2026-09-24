@@ -1,7 +1,7 @@
 # TEAM_SYNC · 模型侧第七轮同步说明
 
 **面向**：主控　**分支**：`SHY`　**日期**：2026-09-24
-**预测产物锚定的代码提交**：`b9934da`
+**预测产物锚定的代码提交**：`de88307`
 
 ---
 
@@ -40,7 +40,7 @@ train / permutation_entry / audit_boundaries / audit_tables，**唯独没跑
 （补齐 1 个 + 新增 5 个审计/测试模块）已重新生成，`model_manifest_sha256` 不再等于
 你 `refit_provenance_review.json` 里记录的 `187eb12b…`。**证据文件（预测 CSV、
 置换 CSV、各 manifest）一个字节都没动**；同时七次 `model/` 与六次 `model/`
-**逐字节相同**（18 个文件，可直接 `git show` 复核）。
+**逐字节相同**（20 个文件，可直接 `git show` 复核）。
 
 ---
 
@@ -50,11 +50,11 @@ train / permutation_entry / audit_boundaries / audit_tables，**唯独没跑
 |---|---|
 | 文件 | `test_prediction/N_S_Q_SF_test_predictions.csv` |
 | 行数 | **504**（42 起点 × 12 步） |
-| SHA256 | `39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a` |
+| SHA256 | `d43f067d7c8d4c616f728e643b950b8cb060374a05df5a24f9e54c19ee6fc28f` |
 | 列 | 与你 `PREDICTION_COLUMNS` 十四列逐字相同 |
 | 段 / 候选 / seed | 全为 `test` / 全为 `N+S+Q+SF` / 2026 |
-| `weight_hash` | `713a94de…`（**与第六次选择期清单一一致**） |
-| `test_fit_weight_hash` | `c1df9596…`（扩展到 train+cal+dec 的拟合） |
+| `weight_hash` | `713a94de421421418fa4511cabc5ea99461ed5872c96dd8ca3cf28ccd7a904c0`（**与第六次选择期清单一一致**） |
+| `test_fit_weight_hash` | `c1df959654763e61c609c79f87e488878cda8385102919351c1a403197780454`（扩展到 train+cal+dec 的拟合） |
 | 输入锚 | 路由 `8b2c47db…` / Bundle `a69821be…` / spec `a0947a5b…` / 选择期清单 `3849e886…` |
 
 ---
@@ -79,14 +79,21 @@ train / permutation_entry / audit_boundaries / audit_tables，**唯独没跑
 
 ## 五、执行台账（真实 Bundle 上的每一次执行，逐条登记）
 
-预测入口共执行 **5 次**，全部同一授权配置；**另有 2 次不运行预测**的只读调用
-（通道探针、路由接受记录）。逐条原因见 README §四。要点：
+预测入口共执行 **7 次**，全部同一授权配置（同候选、同路由、同 seed）；
+**另有 4 次不运行预测**的只读调用（通道探针、路由接受记录各 2 次）与 4 次测试套件。
+完整台账见 README §四，逐条命令见 `evidence/run_ledger.json`，原始记录见
+`evidence/test_run.log`（第二段会话）与 `evidence/test_run.first_session.log`
+（第一段会话，从提交 `c1a63f4` 恢复 —— 第二段重跑覆盖了它，如实说明）。
 
-- **#4（19:58:28，提交 `b9934da`）= 交付的那一次**；
-- **#5（19:58:40，同一提交）= 受监测重放**，与 #4 **逐字节相同**；
-- #1–#3 是被取代的中间尝试：#2 暴露审计脚本 provenance 作用域写错（指向当时未提交的
-  七次 `model/`，报告里 `worktree_dirty=true`，**仅元数据**）；修好后 #3 又因
-  "两次运行之间隔了一次提交"导致溯源列 `code_commit` 不同。于是把两次都放到同一提交重跑。
+要点：
+
+- **#6（20:05:57，提交 `de88307`）= 交付的那一次**（504 行）；
+- **#7（20:06:00，同一提交）= 受监测重放**，与 #6 **逐字节相同**；
+- #1–#5 是被取代的中间尝试，原因三类：(a) #2 暴露审计脚本 provenance 作用域写错
+  （指向当时未提交的七次 `model/`，`worktree_dirty=true`，**仅元数据**）；
+  (b) #3 因"两次运行之间隔了一次提交"导致溯源列 `code_commit` 不同；
+  (c) 我复核任务书时又发现 manifest 少四个扁平锚键 + 交付清单漏了 `test_prediction/`，
+  修完整轮重跑（#6/#7）。
 
 **没有一次读取 test 真值，没有一次产生评分，没有一次跑别的候选。**
 
@@ -99,8 +106,9 @@ train / permutation_entry / audit_boundaries / audit_tables，**唯独没跑
    `content_identical`（判 PASS 看它）与 `byte_identical`，并列出两次的 `code_commit`
    与差异列计数 —— 避免把"溯源列变了"误读成"预测变了"。
 2. **第六次目录被改动过**：为补齐 `predict_test.py` 尾部并加入第七轮的审计/测试模块。
-   若你的验收流程要求"已验收提交不再变动"，请把这视为一次**已申报的修复提交**
-   （`4fd2c0c`），六次目录下**证据文件未改动**。
+   若你的验收流程要求"已验收提交不再变动"，请把这视为一组**已申报的修复提交**
+   （`SHY` 上从 `4fd2c0c` 起的若干次），六次目录下**证据文件未改动**
+   （`evidence_combined_sha256` 仍等于你记录的 `140dcb25…`）。
 
 ---
 

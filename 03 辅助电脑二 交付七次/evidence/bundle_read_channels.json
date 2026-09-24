@@ -1151,7 +1151,7 @@
     }
   ],
   "code_provenance": {
-    "code_commit": "8791705aab41b5b748de1a5cdb5ebc7dc1398e6f",
+    "code_commit": "de88307a5d288d127151fbc4869873f7e4984ff7",
     "worktree_dirty": false,
     "dirty_files": [],
     "scope": "03 辅助电脑二 交付七次/model"
@@ -1159,8 +1159,8 @@
   "runtime": {
     "wall_seconds": 0.483,
     "cpu_seconds": 0.406,
-    "peak_rss_bytes": 150261760,
-    "peak_rss_mib": 143.3,
+    "peak_rss_bytes": 150642688,
+    "peak_rss_mib": 143.7,
     "cpu_count": 32,
     "platform": "Windows 11",
     "python": "3.12.10"

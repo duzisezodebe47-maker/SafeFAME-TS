@@ -1,0 +1,49 @@
+{
+  "note": "第七轮执行台账：逐条记录命令、时间、退出码、结果",
+  "entries": [
+    {
+      "n": 1,
+      "time": "20:05:53",
+      "purpose": "路由接受记录（只读路由）",
+      "command": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\model\\record_route_acceptance.py --route D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\evidence\\sealed_route.json --route-sha256 8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70 --route-source team_work/main/round7/results/sealed_route.json --sidecar D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\evidence\\sealed_route.json.sha256 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --bundle-signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --candidate N+S+Q+SF --output-dir D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\evidence",
+      "exit": 0,
+      "seconds": 1.03,
+      "counts_as_prediction_run": false,
+      "stdout_tail": "{\"verdict\": \"PASS\", \"checks\": {\"route_sha256_matches_published\": true, \"route_sha256_is_64hex\": true, \"sidecar_matches\": true, \"status_is_frozen\": true, \"selected_is_candidate\": true, \"candidate_is_gate_registered\": true, \"selection_data_segments_is_cal_dec\": true, \"split_spec_sha256_matches_file\": true, \"bundle_signature_matches\": true, \"three_source_anchors_are_64hex\": true, \"inputs_sha256_subkeys_present_and_valid\": true}, \"route_sha256\": \"8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70\"}"
+    },
+    {
+      "n": 2,
+      "time": "20:05:55",
+      "purpose": "Bundle 读取通道探针（只读 Bundle）",
+      "command": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\model\\probe_bundle_reads.py --bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --task Agriculture_h12_f1 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --output-dir D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\evidence",
+      "exit": 0,
+      "seconds": 2.92,
+      "counts_as_prediction_run": false,
+      "stdout_tail": "{\"files_touched\": 95, \"data_loaded\": 8, \"hashed_only\": 87, \"target_task_data_loads\": [\"numeric_history.npy\", \"origin_index.npy\", \"quality.npy\", \"semantic.npy\", \"text_available.npy\", \"samples.csv\", \"targets.npy\", \"targets_standardized.npy\"], \"test_truth_loaded_as_data\": [\"targets.npy\", \"targets_standardized.npy\"]}"
+    },
+    {
+      "n": 3,
+      "time": "20:05:57",
+      "purpose": "第 1 次运行：唯一测试预测（交付物）",
+      "command": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\.venv\\Scripts\\python.exe -B D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付六次\\model\\predict_test.py --bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --task Agriculture_h12_f1 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --route D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\evidence\\sealed_route.json --route-sha256 8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70 --selection-manifest D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付六次\\evidence\\cal_dec_predictions\\N_S_Q_SF_run_manifest.json --candidate N+S+Q+SF --seed 2026 --output-dir D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\test_prediction",
+      "exit": 0,
+      "seconds": 2.95,
+      "counts_as_prediction_run": true,
+      "stdout_tail": "{\"status\": \"completed\", \"model\": \"N+S+Q+SF\", \"rows\": 504, \"path\": \"gate_candidate\", \"test_predictions_sha256\": \"d43f067d7c8d4c616f728e643b950b8cb060374a05df5a24f9e54c19ee6fc28f\"}",
+      "rows": 504,
+      "csv_sha256": "d43f067d7c8d4c616f728e643b950b8cb060374a05df5a24f9e54c19ee6fc28f"
+    },
+    {
+      "n": 4,
+      "time": "20:06:00",
+      "purpose": "第 2 次运行：受监测重放 + 测试隔离审计",
+      "command": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\.venv\\Scripts\\python.exe D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\model\\audit_isolation.py --bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --task Agriculture_h12_f1 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --route D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\evidence\\sealed_route.json --route-sha256 8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70 --selection-manifest D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付六次\\evidence\\cal_dec_predictions\\N_S_Q_SF_run_manifest.json --candidate N+S+Q+SF --seed 2026 --delivered-dir D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\test_prediction --output-dir D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付七次\\evidence",
+      "exit": 0,
+      "seconds": 3.81,
+      "counts_as_prediction_run": true,
+      "stdout_tail": "{\"replay\": \"PASS\", \"isolation\": \"PASS\", \"unique_paths_read\": 98, \"checks\": {\"replay_exit_zero\": true, \"predictions_content_identical\": true, \"predictions_byte_identical\": true, \"weight_hash_identical\": true, \"test_fit_weight_hash_identical\": true, \"alpha_by_group_identical\": true, \"row_count_identical\": true, \"test_targets_are_nan_in_isolated_read\": true, \"non_test_truth_untouched\": true, \"no_test_truth_values_available_to_model\": true, \"no_error_metric_computed_in_entry\": true}}",
+      "rows": null,
+      "csv_sha256": null
+    }
+  ]
+}

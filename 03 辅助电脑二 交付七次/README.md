@@ -2,8 +2,8 @@
 
 **依据**：主控 [`team_work/main/round7/02_辅助电脑二第七次交付指令_封印路由后一次性测试预测.md`](../team_work/main/round7/02_辅助电脑二第七次交付指令_封印路由后一次性测试预测.md)
 **分支**：`SHY`　**日期**：2026-09-24
-**预测产物锚定的代码提交**：`b9934da`（`predict_test.py` 与 `bundle_reader.py` 在
-`b9934da` 与当前 HEAD 上**逐字节相同**，可用 `git show` 复核）
+**预测产物锚定的代码提交**：`de88307`（`predict_test.py` 与 `bundle_reader.py` 在
+`de88307` 与当前 HEAD 上**逐字节相同**，可用 `git show` 复核）
 
 > 对主控封印的唯一路由 `N+S+Q+SF` 完成**一次** Agriculture 测试段预测：
 > **504 行 = 42 起点 × 12 步**。
@@ -108,24 +108,43 @@ train / permutation_entry / audit_boundaries / audit_tables，**唯独没跑
 
 ## 四、执行台账（真实 Bundle 上的每一次执行）
 
-真实 Bundle 上**预测入口共执行 5 次**，全部是**同一授权配置**（同一候选、同一路由、
-同一 seed），没有任何一次读取 test 真值或产生评分。逐条登记如下（源自
-`evidence/test_run.log`）：
+真实 Bundle 上**预测入口共执行 7 次**，全部是**同一授权配置**（同一候选、同一路由、
+同一 seed），没有任何一次读取 test 真值或产生评分。逐条登记：
+
+**第一段会话**（原始 stderr 见 `evidence/test_run.first_session.log`，
+从提交 `c1a63f4` 恢复 —— 第二段会话重跑时把该文件覆盖了，如实说明）：
 
 | # | 时间 | 目的 | 提交 | 行数 | 结果 |
 |---|---|---|---|---|---|
 | 1 | 19:56:24 | 交付物 | `4fd2c0c` | 504 | ✅ 后被 #4 取代 |
-| 2 | 19:56:43 | 受监测重放 | `4fd2c0c` | — | ✅ 预测逐字节相同；但审计的 provenance 作用域指向当时**尚未提交**的七次 `model/`，报告的 `worktree_dirty=true`（仅元数据） |
-| 3 | 19:57:30 | 修正作用域后重放 | `4588e79` | — | 内容相同；但 #1 与 #3 之间发生过提交 → `code_commit` 列不同 → 整文件字节不同 |
-| 4 | 19:58:28 | **交付物（最终）** | **`b9934da`** | **504** | ✅ **本目录交付的就是这一次** |
-| 5 | 19:58:40 | **受监测重放（最终）** | **`b9934da`** | — | ✅ **逐字节相同**（与 #4 同提交） |
+| 2 | 19:56:43 | 受监测重放 | `4fd2c0c` | — | ✅ 预测逐字节相同；但审计的 provenance 作用域指向当时**尚未提交**的七次 `model/`，报告的 `worktree_dirty=true`（**仅元数据**） |
+| 3 | 19:57:30 | 修正作用域后重放 | `4588e79` | — | 内容相同；但 #1 与 #3 之间隔了一次提交 → `code_commit` 列不同 → 整文件字节不同 |
+| 4 | 19:58:28 | 交付物 | `de88307` | 504 | ✅ 被 #6 取代 |
+| 5 | 19:58:40 | 受监测重放 | `de88307` | — | ✅ 与 #4 逐字节相同 |
 
-另有两次**不运行预测**的调用：通道探针（`probe_bundle_reads.py`）与路由接受记录
-（`record_route_acceptance.py`）—— 它们只读 Bundle/路由，不影响任何锚点。
+**第二段会话**（复核时又发现两处遗漏并修复，故整轮重跑；原始记录见
+`evidence/test_run.log` 与 `evidence/run_ledger.json`，含**逐条命令**）：
 
-**为什么会有 2–3 次**：#2 暴露了审计脚本 provenance 作用域写错（指向未提交的目录），
-修好后又因"两次运行之间隔了一次提交"导致溯源列不同 —— 于是把两次都放到**同一提交**
-（`b9934da`）重跑，得到 #4 与 #5 的逐字节一致。原因如实记录，供主控判断。
+| # | 时间 | 目的 | 提交 | 行数 | 结果 |
+|---|---|---|---|---|---|
+| 6 | 20:05:57 | **交付物（最终）** | **`de88307`** | **504** | ✅ **本目录交付的就是这一次** |
+| 7 | 20:06:00 | **受监测重放（最终）** | **`de88307`** | — | ✅ **逐字节相同**（与 #6 同提交） |
+
+另有**不运行预测**的调用（只读 Bundle / 路由）：通道探针与路由接受记录各 2 次，
+测试套件 4 次 —— 见 `run_ledger.json` 与两份测试日志。
+
+**为什么跑了这么多**：每次都是被自己的复核挡下来后又修了一处，(a) 审计脚本 provenance
+作用域指向未提交目录；(b) 两次运行之间隔了提交导致溯源列不同；(c) 复核任务书时发现
+manifest 少了四个扁平锚键 + 交付清单漏了 `test_prediction/`。每次修完都在**同一提交**
+上重跑交付物与重放，因此最终 #6/#7 逐字节一致。原因如实登记，供你判断。
+
+### 预测产物的锚点
+
+| 项 | 值 |
+|---|---|
+| 锚定提交 | `de88307a5d288d127151fbc4869873f7e4984ff7`（`test_prediction/N_S_Q_SF_test_manifest.json` 的 `code_commit`，`worktree_dirty=false`） |
+| 预测路径上的文件 | `predict_test.py`/`bundle_reader.py`/`branches.py`/`candidates.py`/`train.py`/`predict_io.py`/`runtime_profile.py`/`numeric_fallbacks.py` 在 `de88307`、当前 HEAD、工作区**三者逐字节相同** |
+| 与当前 HEAD 的唯一差异 | 仅 `model/make_manifest.py`（清单生成器，**不在预测路径上**）—— 用 `git diff --stat de88307 HEAD -- "03 辅助电脑二 交付七次/model"` 可一眼复核 |
 
 ---
 
@@ -138,12 +157,21 @@ train / permutation_entry / audit_boundaries / audit_tables，**唯独没跑
 | `test_isolation_audit.json`（监测方法 + 读文件清单） | ✅ `evidence/` |
 | `route_acceptance.json`（路由 SHA / selected / status / selection·refit 锚） | ✅ `evidence/` |
 | `replay_check.json`（逐字节一致 + 权重哈希一致） | ✅ `evidence/` |
-| `MANIFEST.json`（本轮全部文件 SHA256） | ✅ |
+| `MANIFEST.json`（本轮**所有**文件 SHA256：model 20 + evidence 11 + other 5 = 36） | ✅ |
 | `README.md` / `RUNBOOK.md` | ✅ |
 
-**预测 CSV**：`sha256 = 39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a`
-**manifest 关键值**：`n_rows=504`、`n_test_origins=42`、`code_commit=b9934da`、
-`weight_hash=713a94de…`（与第六次选择期清单一致）、`test_fit_weight_hash=c1df9596…`
+**预测 CSV**：`sha256` 见下方 manifest 的 `csv_sha256`（也是交付时向主控报告的值）。
+**manifest 关键值**：`n_rows=504`、`n_test_origins=42`、`code_commit=de88307a5d288d127151fbc4869873f7e4984ff7`、
+`weight_hash=713a94de421421418fa4511cabc5ea99461ed5872c96dd8ca3cf28ccd7a904c0`（与第六次选择期清单一致）、
+`test_fit_weight_hash=c1df959654763e61c609c79f87e488878cda8385102919351c1a403197780454`
+
+> **MANIFEST.json 的覆盖范围**：分三块 `model_files` / `evidence_files` / `other_files`，
+> 合起来 = 本目录下除 `MANIFEST.json` 自身与 `__pycache__` 外的**全部文件**（含
+> `test_prediction/` 这个本轮最重要的产物）。`MANIFEST.json` 无法自哈希，
+> 其完整性由 git blob 哈希保证（提交信息里给出）。
+> 第六次交付那一份的 `evidence_combined_sha256` 仍等于主控
+> `refit_provenance_review.json` 记录的 `140dcb25…`，可据此独立确认
+> 「第六次的证据文件一个字节未动」。
 
 ---
 
@@ -189,7 +217,9 @@ test 真值不可用（隔离断言 + 扰动后预测逐字节不变）；输出
 │   ├── test_isolation_audit.json          监测方法 + 读文件清单
 │   ├── bundle_read_channels.json          通道区分（8 数据载入 / 87 仅哈希）
 │   ├── replay_check.json                  确定性重放
-│   ├── test_run.log                       执行台账（原样 stderr）
+│   ├── run_ledger.json                    执行台账（逐条命令/时间/退出码/结果）
+│   ├── test_run.log                       第二段会话的原始记录
+│   ├── test_run.first_session.log         第一段会话的原始记录（自 c1a63f4 恢复）
 │   ├── tests_round6.log / tests_round7.log
 └── model/                                 与六次 model 逐字节相同（18 个文件，已核对）
 ```

@@ -17,7 +17,7 @@
   },
   "read_manifest": [
     {
-      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpcgzamgok\\replay\\N_S_Q_SF_test_predictions.csv",
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp7hqcdfl3\\replay\\N_S_Q_SF_test_predictions.csv",
       "reads": 4,
       "first_via": "pathlib.Path.open",
       "class": "own_output_readback"
@@ -607,11 +607,11 @@
   ],
   "write_manifest": [
     {
-      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpcgzamgok\\replay\\N_S_Q_SF_test_manifest.json",
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp7hqcdfl3\\replay\\N_S_Q_SF_test_manifest.json",
       "writes": 2
     },
     {
-      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpcgzamgok\\replay\\N_S_Q_SF_test_predictions.csv",
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp7hqcdfl3\\replay\\N_S_Q_SF_test_predictions.csv",
       "writes": 2
     }
   ],
@@ -641,22 +641,22 @@
     "verdict": "PASS"
   },
   "code_provenance": {
-    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+    "code_commit": "de88307a5d288d127151fbc4869873f7e4984ff7",
     "worktree_dirty": false,
     "dirty_files": [],
     "scope": "03 辅助电脑二 交付七次/model"
   },
   "audit_script_provenance": {
-    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+    "code_commit": "de88307a5d288d127151fbc4869873f7e4984ff7",
     "worktree_dirty": false,
     "dirty_files": [],
     "scope": "03 辅助电脑二 交付七次/model"
   },
   "runtime": {
-    "wall_seconds": 1.364,
-    "cpu_seconds": 0.938,
-    "peak_rss_bytes": 174546944,
-    "peak_rss_mib": 166.5,
+    "wall_seconds": 1.306,
+    "cpu_seconds": 0.969,
+    "peak_rss_bytes": 174444544,
+    "peak_rss_mib": 166.4,
     "cpu_count": 32,
     "platform": "Windows 11",
     "python": "3.12.10"

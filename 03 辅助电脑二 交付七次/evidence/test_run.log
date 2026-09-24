@@ -1,32 +1,24 @@
-å¼€å§‹: 19:56:24
-NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
-{"status": "completed", "model": "N+S+Q+SF", "rows": 504, "path": "gate_candidate", "test_predictions_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75"}
-EXIT=0
-ç»“æŸ: 19:56:28
-å¼€å§‹: 19:56:43
-NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
-!! ¾¯¸æ£º¹¤×÷ÇøÓĞÎ´Ìá½»¸Ä¶¯£¬±¾´ÎÖ¤¾İµÄ code_commit ²»ÍêÕû±êÊ¶ËùÅÜ´úÂë£º
-!!   ?? "03 \350\276\205\345\212\251\347\224\265\350\204\221\344\272\214 \344\272\244\344\273\230\344\270\203\346\254\241/model/"
-!! ÕıÊ½½»¸¶ÇëÔÚ¸É¾»Ìá½»ÉÏÖØÅÜ£¨¼û RUNBOOK£©¡£
-!! ¾¯¸æ£º¹¤×÷ÇøÓĞÎ´Ìá½»¸Ä¶¯£¬±¾´ÎÖ¤¾İµÄ code_commit ²»ÍêÕû±êÊ¶ËùÅÜ´úÂë£º
-!!   ?? "03 \350\276\205\345\212\251\347\224\265\350\204\221\344\272\214 \344\272\244\344\273\230\344\270\203\346\254\241/model/"
-!! ÕıÊ½½»¸¶ÇëÔÚ¸É¾»Ìá½»ÉÏÖØÅÜ£¨¼û RUNBOOK£©¡£
-{"replay": "PASS", "isolation": "PASS", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_byte_identical": true, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
-EXIT=0
---- ç¬¬ 2 æ¬¡å—ç›‘æµ‹é‡æ”¾ï¼ˆä¿®æ­£ provenance ä½œç”¨åŸŸåé‡è·‘ï¼‰: 19:57:30 ---
-NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
-{"replay": "FAIL", "isolation": "FAIL", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_byte_identical": false, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
-EXIT=6
---- æ‰§è¡Œ #4ï¼šåœ¨å›ºå®šæäº¤ä¸Šé‡å‡ºäº¤ä»˜ç‰© 19:58:28 ---
-NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
-{"status": "completed", "model": "N+S+Q+SF", "rows": 504, "path": "gate_candidate", "test_predictions_sha256": "39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a"}
-EXIT=0
---- æ‰§è¡Œ #5ï¼šåŒä¸€æäº¤ä¸Šçš„å—ç›‘æµ‹é‡æ”¾ 19:58:40 ---
-NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
-{"replay": "PASS", "isolation": "PASS", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_content_identical": true, "predictions_byte_identical": true, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
-EXIT=0
-{"files_touched": 95, "data_loaded": 8, "hashed_only": 87, "target_task_data_loads": ["numeric_history.npy", "origin_index.npy", "quality.npy", "semantic.npy", "text_available.npy", "samples.csv", "targets.npy", "targets_standardized.npy"], "test_truth_loaded_as_data": ["targets.npy", "targets_standardized.npy"]}
-!! ¾¯¸æ£º¹¤×÷ÇøÓĞÎ´Ìá½»¸Ä¶¯£¬±¾´ÎÖ¤¾İµÄ code_commit ²»ÍêÕû±êÊ¶ËùÅÜ´úÂë£º
-!!   ?? "03 \350\276\205\345\212\251\347\224\265\350\204\221\344\272\214 \344\272\244\344\273\230\344\270\203\346\254\241/model/record_route_acceptance.py"
-!! ÕıÊ½½»¸¶ÇëÔÚ¸É¾»Ìá½»ÉÏÖØÅÜ£¨¼û RUNBOOK£©¡£
+ç¬¬ä¸ƒè½®æ‰§è¡Œå°è´¦ï¼ˆæäº¤ de88307a5d288d127151fbc4869873f7e4984ff7ï¼‰
+
+--- æ‰§è¡Œ #1  20:05:53  è·¯ç”±æ¥å—è®°å½•ï¼ˆåªè¯»è·¯ç”±ï¼‰ ---
+$ D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\.venv\Scripts\python.exe D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\model\record_route_acceptance.py --route D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\evidence\sealed_route.json --route-sha256 8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70 --route-source team_work/main/round7/results/sealed_route.json --sidecar D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\evidence\sealed_route.json.sha256 --split-spec D:/äº¤å¤§ä»»åŠ¡/bundle/spec/split_spec_v2.json --bundle-signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --candidate N+S+Q+SF --output-dir D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\evidence
 {"verdict": "PASS", "checks": {"route_sha256_matches_published": true, "route_sha256_is_64hex": true, "sidecar_matches": true, "status_is_frozen": true, "selected_is_candidate": true, "candidate_is_gate_registered": true, "selection_data_segments_is_cal_dec": true, "split_spec_sha256_matches_file": true, "bundle_signature_matches": true, "three_source_anchors_are_64hex": true, "inputs_sha256_subkeys_present_and_valid": true}, "route_sha256": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70"}
+EXIT=0  ç”¨æ—¶ 1.0s
+
+--- æ‰§è¡Œ #2  20:05:55  Bundle è¯»å–é€šé“æ¢é’ˆï¼ˆåªè¯» Bundleï¼‰ ---
+$ D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\.venv\Scripts\python.exe D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\model\probe_bundle_reads.py --bundle D:/äº¤å¤§ä»»åŠ¡/bundle/round3-bundle-a69821be115445265cde --task Agriculture_h12_f1 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/äº¤å¤§ä»»åŠ¡/bundle/spec/split_spec_v2.json --output-dir D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\evidence
+{"files_touched": 95, "data_loaded": 8, "hashed_only": 87, "target_task_data_loads": ["numeric_history.npy", "origin_index.npy", "quality.npy", "semantic.npy", "text_available.npy", "samples.csv", "targets.npy", "targets_standardized.npy"], "test_truth_loaded_as_data": ["targets.npy", "targets_standardized.npy"]}
+NOTE: ï¿½ï¿½ï¿½İ²ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½D:\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½Òµ\ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½Òµ\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½02ï¿½ï¿½ï¿½ï¿½01ï¿½ï¿½\bundle.pyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¹Ù·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ï£Ğ£ï¿½ï¿½ï¿½ï¿½ verify_bundle Í³Ò»Ö´ï¿½Ğ¡ï¿½
+EXIT=0  ç”¨æ—¶ 2.9s
+
+--- æ‰§è¡Œ #3  20:05:57  ç¬¬ 1 æ¬¡è¿è¡Œï¼šå”¯ä¸€æµ‹è¯•é¢„æµ‹ï¼ˆäº¤ä»˜ç‰©ï¼‰ ---
+$ D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\.venv\Scripts\python.exe -B D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜å…­æ¬¡\model\predict_test.py --bundle D:/äº¤å¤§ä»»åŠ¡/bundle/round3-bundle-a69821be115445265cde --task Agriculture_h12_f1 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/äº¤å¤§ä»»åŠ¡/bundle/spec/split_spec_v2.json --route D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\evidence\sealed_route.json --route-sha256 8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70 --selection-manifest D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜å…­æ¬¡\evidence\cal_dec_predictions\N_S_Q_SF_run_manifest.json --candidate N+S+Q+SF --seed 2026 --output-dir D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\test_prediction
+{"status": "completed", "model": "N+S+Q+SF", "rows": 504, "path": "gate_candidate", "test_predictions_sha256": "d43f067d7c8d4c616f728e643b950b8cb060374a05df5a24f9e54c19ee6fc28f"}
+NOTE: ï¿½ï¿½ï¿½İ²ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½D:\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½Òµ\ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½Òµ\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½02ï¿½ï¿½ï¿½ï¿½01ï¿½ï¿½\bundle.pyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¹Ù·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ï£Ğ£ï¿½ï¿½ï¿½ï¿½ verify_bundle Í³Ò»Ö´ï¿½Ğ¡ï¿½
+EXIT=0  ç”¨æ—¶ 2.9s
+
+--- æ‰§è¡Œ #4  20:06:00  ç¬¬ 2 æ¬¡è¿è¡Œï¼šå—ç›‘æµ‹é‡æ”¾ + æµ‹è¯•éš”ç¦»å®¡è®¡ ---
+$ D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\.venv\Scripts\python.exe D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\model\audit_isolation.py --bundle D:/äº¤å¤§ä»»åŠ¡/bundle/round3-bundle-a69821be115445265cde --task Agriculture_h12_f1 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/äº¤å¤§ä»»åŠ¡/bundle/spec/split_spec_v2.json --route D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\evidence\sealed_route.json --route-sha256 8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70 --selection-manifest D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜å…­æ¬¡\evidence\cal_dec_predictions\N_S_Q_SF_run_manifest.json --candidate N+S+Q+SF --seed 2026 --delivered-dir D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\test_prediction --output-dir D:\äº¤å¤§ä»»åŠ¡\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\äººå·¥æ™ºèƒ½å¤§ä½œä¸š\03 è¾…åŠ©ç”µè„‘äºŒ äº¤ä»˜ä¸ƒæ¬¡\evidence
+{"replay": "PASS", "isolation": "PASS", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_content_identical": true, "predictions_byte_identical": true, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
+NOTE: ï¿½ï¿½ï¿½İ²ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½D:\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½Òµ\ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½Òµ\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½02ï¿½ï¿½ï¿½ï¿½01ï¿½ï¿½\bundle.pyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¹Ù·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ï£Ğ£ï¿½ï¿½ï¿½ï¿½ verify_bundle Í³Ò»Ö´ï¿½Ğ¡ï¿½
+EXIT=0  ç”¨æ—¶ 3.8s

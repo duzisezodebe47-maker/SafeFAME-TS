@@ -13,6 +13,10 @@
     "selection_manifest_sha256": "3849e886672ec4f938c60b114dc3e0af8dcca636f9fe0f42f85ca1bec6c98067",
     "selection_config_sha256": "9a296ccb21264f86227cabeaeb171b8a6a56057d8cbb6daa3314e4cfad0f4f71"
   },
+  "route_file_sha256": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "selection_config_sha256": "9a296ccb21264f86227cabeaeb171b8a6a56057d8cbb6daa3314e4cfad0f4f71",
   "n_rows": 504,
   "n_test_origins": 42,
   "csv_columns": [
@@ -31,19 +35,19 @@
     "config_sha256",
     "code_commit"
   ],
-  "csv_sha256": "39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a",
-  "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+  "csv_sha256": "d43f067d7c8d4c616f728e643b950b8cb060374a05df5a24f9e54c19ee6fc28f",
+  "code_commit": "de88307a5d288d127151fbc4869873f7e4984ff7",
   "code_provenance": {
-    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+    "code_commit": "de88307a5d288d127151fbc4869873f7e4984ff7",
     "worktree_dirty": false,
     "dirty_files": [],
     "scope": "03 辅助电脑二 交付六次/model"
   },
   "runtime": {
-    "wall_seconds": 0.481,
-    "cpu_seconds": 0.344,
-    "peak_rss_bytes": 174067712,
-    "peak_rss_mib": 166.0,
+    "wall_seconds": 0.439,
+    "cpu_seconds": 0.328,
+    "peak_rss_bytes": 174407680,
+    "peak_rss_mib": 166.3,
     "cpu_count": 32,
     "platform": "Windows 11",
     "python": "3.12.10"
