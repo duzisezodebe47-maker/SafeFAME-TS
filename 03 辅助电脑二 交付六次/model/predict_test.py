@@ -31,9 +31,11 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
@@ -49,7 +51,10 @@ from bundle_reader import (  # noqa: E402
 )
 from candidates import GATE_CANDIDATES, PROTOCOL_ALPHAS, BranchResidualCandidate  # noqa: E402
 from numeric_fallbacks import numeric_baselines  # noqa: E402
-from predict_io import PredictionWriter, code_commit, weight_hash  # noqa: E402
+from predict_io import (  # noqa: E402
+    CONTRACT_FIELDS, PredictionWriter, code_commit, warn_if_dirty, weight_hash,
+)
+from runtime_profile import cpu_seconds, script_entry_snapshot  # noqa: E402
 from train import (  # noqa: E402
     RUNNABLE_SCENARIOS, merge_bundles, to_feature_bundle, to_inference_bundle,
 )
@@ -175,6 +180,80 @@ def check_route(
     return selected
 
 
+def validate_test_predictions(
+    predictions: np.ndarray, origin_index: np.ndarray, bounds: tuple[int, int],
+    horizon: int,
+) -> list[str]:
+    """输出前的纯校验：形状 / 有限值 / 起点唯一 / 起点落在 test 段且目标窗口不越界。
+
+    返回问题列表，空列表表示通过。第七轮任务书要求「行数不是 504、键不唯一、
+    origin 越界或含非有限预测时拒绝」—— 这里在做任何写出动作**之前**判掉，
+    避免留下半份产物。
+    """
+    problems: list[str] = []
+    arr = np.asarray(predictions, dtype=float)
+    idx = np.asarray(origin_index, dtype=np.int64)
+    lo, hi = int(bounds[0]), int(bounds[1])
+    if arr.ndim != 2:
+        return [f"预测维度 {arr.shape} 不是 (n, H)"]
+    if arr.shape != (idx.size, horizon):
+        problems.append(f"预测形状 {arr.shape} != (起点数 {idx.size}, H {horizon})")
+    finite_mask = np.isfinite(arr)
+    if not finite_mask.all():
+        problems.append(f"预测含 {int((~finite_mask).sum())} 个非有限值")
+    if np.unique(idx).size != idx.size:
+        problems.append("起点索引有重复")
+    outside = idx[(idx < lo) | (idx >= hi)]
+    if outside.size:
+        problems.append(f"{outside.size} 个起点落在 test 段 [{lo}, {hi}) 之外: "
+                        f"{outside[:3].tolist()}")
+    spanning = idx[idx + horizon > hi]
+    if spanning.size:
+        problems.append(f"{spanning.size} 个起点的目标窗口越出 test 段 "
+                        f"(origin + {horizon} > {hi}): {spanning[:3].tolist()}")
+    return problems
+
+
+def verify_written_csv(
+    path: Path, bounds: tuple[int, int], horizon: int,
+    expected_rows: int | None = None,
+) -> list[str]:
+    """写出后回读校验：行数 = 起点数 × H、键唯一、只有 test 段、数值有限、起点在界内。
+
+    「不只在内存里校验」—— CSV 才是交给主控的产物，必须对**文件本身**再判一次。
+    `expected_rows` 给定时还会核对总行数：仅靠"行数与唯一键数相等"**查不出少写一行**
+    （少一行时内部仍自洽），必须拿期望值比。
+    """
+    problems: list[str] = []
+    lo, hi = int(bounds[0]), int(bounds[1])
+    with path.open(encoding="utf-8", newline="") as fh:
+        rows = list(csv.DictReader(fh))
+    if expected_rows is not None and len(rows) != expected_rows:
+        problems.append(f"行数 {len(rows)} != 期望 {expected_rows}")
+    keys: set[tuple[str, int]] = set()
+    for row in rows:
+        try:
+            step = int(row["step"])
+            index = int(row["origin_index"])
+            value = float(row["y_pred"])
+        except (TypeError, ValueError):
+            problems.append(f"行字段不可解析: {row}")
+            continue
+        key = (str(row["origin_id"]), step)
+        if key in keys:
+            problems.append(f"键重复: {key}")
+        keys.add(key)
+        if str(row["segment"]) != "test":
+            problems.append(f"segment 不是 test: {row['segment']!r}")
+        if not np.isfinite(value):
+            problems.append(f"y_pred 非有限: {value!r}")
+        if not (lo <= index < hi) or index + horizon > hi:
+            problems.append(f"起点越界或窗口跨界: origin_index={index}")
+    if len(rows) != len(keys):
+        problems.append(f"行数 {len(rows)} != 唯一键数 {len(keys)}")
+    return problems
+
+
 def bundle_input_sha256(bundle: FeatureBundle) -> str:
     """一个训练**集合**的输入哈希：覆盖全部进入模型的特征与目标。"""
     digest = hashlib.sha256()
@@ -212,8 +291,14 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
+    # 第七轮：拒绝覆盖 —— 一次性测试预测的产物必须是"新写的"，不是被追加/覆盖的。
+    # 这里只**检查**不创建：任何后续校验失败都不该在磁盘上留下空目录（无副作用失败）。
     out = Path(args.output_dir).resolve()
-    out.mkdir(parents=True, exist_ok=True)
+    if out.exists() and any(out.iterdir()):
+        print(f"输出目录已存在且非空，拒绝覆盖: {out}", file=sys.stderr)
+        return 3
+    started = time.perf_counter()
+    cpu_started = cpu_seconds()
     task_match_h = int(args.task.split("_h")[1].split("_")[0])
     fold_id = int(args.task.split("_f")[-1])
 
@@ -265,8 +350,13 @@ def main() -> int:
 
     # ---- 3) 冻结 Bundle ----
     try:
+        # **测试隔离（硬编码，不给开关）**：载入后立刻把 test 段的 targets* 置 NaN，
+        # 使进程里不存在可用的测试真值。targets.npy 是**单文件含全部段**，
+        # train/cal/dec 的拟合与清单完整性哈希都必须打开它，所以"不打开该文件"
+        # 在现结构下不可能；能做到且可验证的是"进程里没有可用的 test 真值"。
         bundle = read_frozen_bundle(args.bundle, args.task, args.scenario,
-                                    args.signature, args.split_spec)
+                                    args.signature, args.split_spec,
+                                    isolate_test=True)
         bounds = segment_bounds(args.split_spec, args.task)
     except BundleUnavailable as exc:
         print(f"BundleUnavailable: {exc}", file=sys.stderr)
@@ -283,7 +373,7 @@ def main() -> int:
     # 拟合视图含真值；**测试视图只含特征**（A.5：不向 predict 提供测试真值）
     fit_parts = {s: to_feature_bundle(bundle.segment(s))
                  for s in ("train", "calibration", "decision")}
-    test_inference = to_inference_bundle(bundle.segment("test"))
+    test_inference = to_inference_bundle(bundle.segment("test", with_targets=False))
     input_sha = {s: weight_hash(p.numeric_history) for s, p in fit_parts.items()}
 
     # 三种路径的标签、分支组成、求解器各不相同。`N` 是**模型候选型**数值回退
@@ -356,4 +446,117 @@ def main() -> int:
         report["baseline_fit_rows"] = baseline["fit_rows"]
         report["baseline_calibration_rows"] = baseline["calibration_rows"]
         report["fit_targets_nan_outside_fit"] = True
+        # 主控基线没有模型侧权重，按"路由 + 主控固定配置"验证（A.3），不虚构哈希
+        report["weight_hash"] = None
+        report["test_fit_weight_hash"] = None
+    else:
+        # 门控候选 / N：**冻结 α 重演 → 扩展拟合 → 只对 test 特征预测**
+        model = BranchResidualCandidate(model_name)
+        model.fit_design(fit_parts["train"])
+        selection_fit = merge_bundles(fit_parts["train"], fit_parts["calibration"])
+        if frozen_alphas:
+            model.alpha_by_group = {k: float(v) for k, v in frozen_alphas.items()}
+        else:
+            model.select_alphas(fit_parts["train"], fit_parts["calibration"])
+
+        weights_replay = _fit(model, selection_fit)
+        replay_hash = weight_hash(weights_replay)
+        report["selection_rows"] = int(len(selection_fit.numeric_history))
+        report["selection_input_sha256"] = bundle_input_sha256(selection_fit)
+        # 选择期清单的 α / weight_hash 只要被动过，这里就对不上 —— 拒绝，不改参数
+        if expected_weight_hash and replay_hash != expected_weight_hash:
+            print(f"选择期权重重演不符: 期望 {expected_weight_hash[:16]}…，"
+                  f"实得 {replay_hash[:16]}…", file=sys.stderr)
+            return 3
+
+        extended_fit = merge_bundles(fit_parts["train"], fit_parts["calibration"],
+                                     fit_parts["decision"])
+        weights_extended = _fit(model, extended_fit)
+        report["extended_rows"] = int(len(extended_fit.numeric_history))
+        report["extended_input_sha256"] = bundle_input_sha256(extended_fit)
+        report["weight_hash"] = replay_hash
+        report["test_fit_weight_hash"] = weight_hash(weights_extended)
+        # A.5：只喂测试**特征**视图（targets 一律 None，测试真值根本传不进来）
+        predictions = model.predict(test_inference)
+        report["path"] = path_label
+
+    test_bounds = bounds["test"]
+    problems = validate_test_predictions(predictions, test_inference.origin_index,
+                                         test_bounds, task_match_h)
+    if problems:
+        print(f"TestPredictionsRejected: {problems}", file=sys.stderr)
+        return 4
+    if predictions.shape[0] != len(test_inference.origin_index):
+        print(f"预测形状异常: {predictions.shape}", file=sys.stderr)
+        return 4
+
+    safe_name = model_name.replace("+", "_").replace("-", "_")
+    # 全部校验都过了才落盘
+    out.mkdir(parents=True, exist_ok=True)
+    csv_path = out / f"{safe_name}_test_predictions.csv"
+    writer = PredictionWriter()
+    writer.extend(
+        predictions,
+        origin_id=np.asarray(bundle.segment("test", with_targets=False)["origin_id"]),
+        origin_index=test_inference.origin_index,
+        task_id=args.task, fold_id=fold_id, segment="test", scenario=args.scenario,
+        candidate_id=model_name, seed=args.seed, bundle_signature=args.signature,
+        config_sha256_value=selection.get("config_sha256", spec_sha),
+        commit=code_commit(REPO_ROOT),
+    )
+    n_rows = writer.write(csv_path)
+
+    written_problems = verify_written_csv(
+        csv_path, test_bounds, task_match_h,
+        expected_rows=len(test_inference.origin_index) * task_match_h)
+    if written_problems:
+        print(f"WrittenCsvRejected: {written_problems}", file=sys.stderr)
+        csv_path.unlink(missing_ok=True)
+        return 4
+
+    selection_manifest_sha = (sha256_file(args.selection_manifest)
+                              if args.selection_manifest is not None else None)
+    anchors = {
+        "route_file_sha256": args.route_sha256,
+        "bundle_signature": args.signature,
+        "split_spec_sha256": spec_sha,
+        "selection_manifest_sha256": selection_manifest_sha,
+        "selection_config_sha256": selection.get("config_sha256"),
+    }
+    manifest = {
+        "task": args.task, "scenario": args.scenario, "candidate": model_name,
+        "requested_candidate": args.candidate,
+        "route_selected": route.get("selected"), "route_fallback": route.get("fallback"),
+        "route_status": route.get("status"),
+        # 四个输入锚（第七轮要求）：路由文件字节哈希、Bundle 签名、冻结 spec 字节哈希、
+        # 选择期 manifest 文件字节哈希；另附选择期 config 哈希
+        "input_anchors": anchors,
+        "n_rows": n_rows, "n_test_origins": int(len(test_inference.origin_index)),
+        "csv_columns": list(CONTRACT_FIELDS), "csv_sha256": sha256_file(csv_path),
+        "code_commit": code_commit(REPO_ROOT),
+        "code_provenance": warn_if_dirty(REPO_ROOT, HERE),
+        "runtime": script_entry_snapshot(started, cpu_started),
+        "test_isolation": {
+            "isolate_test": True,
+            "test_targets_nan": True,
+            "test_view_has_targets": False,
+            "mechanism": "read_frozen_bundle(isolate_test=True)：载入后立即把 test 段 "
+                         "targets/targets_standardized 置 NaN；模型只拿到仅特征视图",
+        },
+        **report,
+        "note": ("测试段预测。生成时未读取测试真值（隔离模式）；路由已冻结且强制校验。"
+                 "最终指标由主控独立计分，本侧不报告任何测试性能。"),
+    }
+    (out / f"{safe_name}_test_manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+
+    print(json.dumps({"status": "completed", "model": model_name, "rows": n_rows,
+                      "path": report["path"],
+                      "test_predictions_sha256": manifest["csv_sha256"]},
+                     ensure_ascii=False))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
 

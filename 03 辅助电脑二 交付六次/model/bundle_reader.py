@@ -176,12 +176,18 @@ class FrozenBundle:
             raise ValueError(f"未知段: {segment}  (合法: {SEGMENTS})")
         return self.samples["segment"].to_numpy() == segment
 
-    def segment(self, segment: str) -> dict[str, np.ndarray]:
-        """取出某一段。起点网格按 `samples.csv` 原始顺序导出，**不排序、不重排、不去重**。"""
+    def segment(self, segment: str, *, with_targets: bool = True) -> dict[str, np.ndarray]:
+        """取出某一段。起点网格按 `samples.csv` 原始顺序导出，**不排序、不重排、不去重**。
+
+        `with_targets=False` 只导出特征 —— 调用方连真值的**切片**都不发生。
+        测试段的预测路径一律用它（第七轮测试隔离）。
+        """
         mask = self.segment_mask(segment)
+        keys = ["numeric_history", "semantic", "quality", "text_available", "origin_index"]
+        if with_targets:
+            keys += ["targets", "targets_standardized"]
         return {key: np.asarray(self.arrays[key])[mask]
-                for key in ("numeric_history", "semantic", "quality", "text_available",
-                            "origin_index", "targets", "targets_standardized")
+                for key in keys
                 if key in self.arrays} | {"origin_id": self.samples["origin_id"].to_numpy()[mask]}
 
 
@@ -246,7 +252,9 @@ def assert_grid(
 
     返回统计字典（起点数、各段边界、跨界窗口数），供审计表记录。
     """
-    part = bundle.segment(segment)
+    # 网格校验**从不需要真值**：只取特征 + origin_id/origin_index。
+    # 用 with_targets=False 使测试段的真值连切片都不发生（第七轮测试隔离）。
+    part = bundle.segment(segment, with_targets=False)
     origin_id = part["origin_id"]
     index = np.asarray(part["origin_index"], dtype=np.int64)
     task_match = TASK_ID_RE.match(bundle.task_id)
@@ -402,14 +410,41 @@ def _load_via_data_side(bundle_folder: Path, task_id: str, scenario: str, signat
     return module.read_bundle(bundle_folder, task_id, scenario, signature_value)
 
 
+def _null_test_targets(arrays: dict, samples, task_id: str) -> dict:
+    """把 **test 段**的 `targets` / `targets_standardized` 就地置 NaN（测试隔离）。
+
+    不改 dtype（float32 仍是 float32）—— 改成 float64 会让 train/cal/dec 的拟合
+    与第六轮交付产生浮点差异，那是不可接受的副作用。
+
+    找不到 test 段时**硬失败**：隔离模式下"没有 test 行"本身就是要报的异常
+    （说明样本划分与预期不符），不能悄悄放行。
+    """
+    segments = np.asarray(samples["segment"])
+    mask = segments == "test"
+    if not mask.any():
+        raise BundleUnavailable(f"{task_id}: 隔离模式要求存在 test 段，实际没有")
+    out = dict(arrays)
+    for key in ("targets", "targets_standardized"):
+        if key in out:
+            arr = np.array(out[key], copy=True)
+            arr[mask] = np.nan
+            out[key] = arr
+    return out
+
+
 def read_frozen_bundle(
     bundle_folder: Path, task_id: str, scenario: str, expected_signature: str,
-    spec_path: Path,
+    spec_path: Path, *, isolate_test: bool = False,
 ) -> FrozenBundle:
     """读取并要求 Bundle 已冻结。
 
     `spec_path` **必填** —— 冻结协议的**文件路径**，本函数自己算它的字节哈希，
     不接受调用方传一个"声称的"哈希字符串（那样无法防伪造）。
+
+    `isolate_test=True`（第七轮）：载入后**立即**把 test 段的真值置 NaN，
+    再交给任何调用方 —— 使"不用测试真值"成为**结构保证**而不是口头约定。
+    为什么不是"不打开 targets.npy"：该文件是**单表含全部段**，train/cal/dec 的
+    拟合与清单完整性哈希都必须读它；能做到且可验证的是"进程里没有可用的 test 真值"。
     """
     folder = Path(bundle_folder)
     spec_path = Path(spec_path)
@@ -428,6 +463,8 @@ def read_frozen_bundle(
     manifest = verify_bundle(folder, expected_signature, spec_path)
     samples, arrays, _ = _load_via_data_side(folder, task_id, scenario, expected_signature)
     arrays = {k: np.asarray(v) for k, v in arrays.items()}
+    if isolate_test:
+        arrays = _null_test_targets(arrays, samples, task_id)
     return FrozenBundle(task_id=task_id, scenario=scenario, signature=expected_signature,
                         samples=samples, arrays=arrays, manifest=manifest)
 
