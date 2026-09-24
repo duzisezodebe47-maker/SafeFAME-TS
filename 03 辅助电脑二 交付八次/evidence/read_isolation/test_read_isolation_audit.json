@@ -1,0 +1,1061 @@
+{
+  "task": "Climate_h4_f2",
+  "scenario": "proxy",
+  "candidate": "N+S+Q",
+  "monitored_entry": "train.py",
+  "monitoring": {
+    "method": "同进程包装 builtins.open / io.open / pathlib.Path.open / numpy.load / pandas.read_csv，记录逐路径通道与 np.load 是否带 mmap",
+    "rule": "含 test 真值的文件只允许【完整性哈希】或【np.load(mmap_mode='r') 且只索引非 test 行】；出现不带 mmap 的 np.load 即判失败",
+    "files_touched": 74,
+    "input_kind": "isolated_package",
+    "input_root": "D:\\交大任务\\climate_pkg\\release"
+  },
+  "read_manifest": [
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\frequency.npy",
+      "name": "frequency.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 1,
+        "builtins.open": 3
+      },
+      "np_load_modes": [
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\numeric_history.npy",
+      "name": "numeric_history.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 1,
+        "builtins.open": 3
+      },
+      "np_load_modes": [
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\numeric_history_raw.npy",
+      "name": "numeric_history_raw.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 1,
+        "builtins.open": 3
+      },
+      "np_load_modes": [
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 2,
+        "builtins.open": 6
+      },
+      "np_load_modes": [
+        "mmap",
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 2,
+        "builtins.open": 6
+      },
+      "np_load_modes": [
+        "mmap",
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 2,
+        "builtins.open": 6
+      },
+      "np_load_modes": [
+        "mmap",
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 2,
+        "builtins.open": 6
+      },
+      "np_load_modes": [
+        "mmap",
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 2,
+        "builtins.open": 6
+      },
+      "np_load_modes": [
+        "mmap",
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 2,
+        "builtins.open": 6
+      },
+      "np_load_modes": [
+        "mmap",
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\samples.csv",
+      "name": "samples.csv",
+      "under_bundle": null,
+      "channels": {
+        "pandas.read_csv": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\targets.npy",
+      "name": "targets.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 1,
+        "builtins.open": 3
+      },
+      "np_load_modes": [
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\targets_raw.npy",
+      "name": "targets_raw.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 1,
+        "builtins.open": 3
+      },
+      "np_load_modes": [
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\targets_standardized.npy",
+      "name": "targets_standardized.npy",
+      "under_bundle": null,
+      "channels": {
+        "numpy.load": 1,
+        "builtins.open": 3
+      },
+      "np_load_modes": [
+        "mmap"
+      ],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\spec\\split_spec_v2.json",
+      "name": "split_spec_v2.json",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open": 4,
+        "io.open": 4
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\EXPECTED_OUTPUTS.json",
+      "name": "EXPECTED_OUTPUTS.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\MANIFEST.json",
+      "name": "MANIFEST.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\RUNBOOK.md",
+      "name": "RUNBOOK.md",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\anchors\\formal_bundle_manifest.json",
+      "name": "formal_bundle_manifest.json",
+      "under_bundle": "anchors",
+      "channels": {
+        "pathlib.Path.open": 3,
+        "io.open": 3
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\code\\verify_climate.py",
+      "name": "verify_climate.py",
+      "under_bundle": "code",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\mapping.csv",
+      "name": "mapping.csv",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\requirements-replay.txt",
+      "name": "requirements-replay.txt",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\sample_audit.csv",
+      "name": "sample_audit.csv",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\conservative_lag\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "selection_fit\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\conservative_lag\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "selection_fit\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\conservative_lag\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "selection_fit\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\conservative_lag\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "selection_fit\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\frequency.npy",
+      "name": "frequency.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2,
+        "numpy.load": 3,
+        "builtins.open": 5
+      },
+      "np_load_modes": [
+        "mmap",
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\horizon_time.npy",
+      "name": "horizon_time.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\metadata.csv",
+      "name": "metadata.csv",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "pandas.read_csv": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\numeric_history.npy",
+      "name": "numeric_history.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2,
+        "numpy.load": 3,
+        "builtins.open": 5
+      },
+      "np_load_modes": [
+        "mmap",
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\numeric_history_raw.npy",
+      "name": "numeric_history_raw.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2,
+        "numpy.load": 3,
+        "builtins.open": 5
+      },
+      "np_load_modes": [
+        "mmap",
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "selection_fit\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "selection_fit\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "selection_fit\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "selection_fit\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\targets.npy",
+      "name": "targets.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2,
+        "numpy.load": 3,
+        "builtins.open": 5
+      },
+      "np_load_modes": [
+        "mmap",
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\targets_raw.npy",
+      "name": "targets_raw.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2,
+        "numpy.load": 3,
+        "builtins.open": 5
+      },
+      "np_load_modes": [
+        "mmap",
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit\\targets_standardized.npy",
+      "name": "targets_standardized.npy",
+      "under_bundle": "selection_fit",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2,
+        "numpy.load": 3,
+        "builtins.open": 5
+      },
+      "np_load_modes": [
+        "mmap",
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\selection_fit_commitments.json",
+      "name": "selection_fit_commitments.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_anchors.json",
+      "name": "source_anchors.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_lineage_slim.csv",
+      "name": "source_lineage_slim.csv",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\conservative_lag\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "source_safe\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\conservative_lag\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "source_safe\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\conservative_lag\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "source_safe\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\conservative_lag\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "source_safe\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\horizon_time.npy",
+      "name": "horizon_time.npy",
+      "under_bundle": "source_safe",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": "source_safe",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": "source_safe",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "source_safe\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "source_safe\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "source_safe\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\source_safe\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "source_safe\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\conservative_lag\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "test_features\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\conservative_lag\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "test_features\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\conservative_lag\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "test_features\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\conservative_lag\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "test_features\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\horizon_time.npy",
+      "name": "horizon_time.npy",
+      "under_bundle": "test_features",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\metadata.csv",
+      "name": "metadata.csv",
+      "under_bundle": "test_features",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "pandas.read_csv": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": "test_features",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": "test_features",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "test_features\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "test_features\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "test_features\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_features\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "test_features\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 2,
+        "builtins.open": 2
+      },
+      "np_load_modes": [
+        "full",
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\test_history_aggregate.json",
+      "name": "test_history_aggregate.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\tests\\run_negative_cases.py",
+      "name": "run_negative_cases.py",
+      "under_bundle": "tests",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\text_trace\\conservative_lag.jsonl",
+      "name": "conservative_lag.jsonl",
+      "under_bundle": "text_trace",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\text_trace\\proxy.jsonl",
+      "name": "proxy.jsonl",
+      "under_bundle": "text_trace",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\truth_commitment.json",
+      "name": "truth_commitment.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\climate_pkg\\release\\weekly_axis.csv",
+      "name": "weekly_axis.csv",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "input_feature_or_index"
+    },
+    {
+      "path": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付八次\\evidence\\_probe_train\\N_S_Q_proxy_predictions.csv",
+      "name": "N_S_Q_proxy_predictions.csv",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open(write)": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    },
+    {
+      "path": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付八次\\evidence\\_probe_train\\N_S_Q_run_manifest.json",
+      "name": "N_S_Q_run_manifest.json",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open(write)": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_input"
+    }
+  ],
+  "violations": [],
+  "isolation_assertions": {
+    "input_kind": "isolated_package",
+    "isolation_mode": "isolated_package",
+    "test_truth_present": false,
+    "test_rows_materialized": null,
+    "targets_test_rows_all_nan": true,
+    "targets_non_test_rows_finite": true,
+    "targets_standardized_test_rows_all_nan": true,
+    "targets_standardized_non_test_rows_finite": true,
+    "train_entry_exit_zero": true
+  },
+  "verdict": "PASS",
+  "code_provenance": {
+    "code_commit": "9af63439860907e7b35bb0ddff0d819cfda04537",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付八次/model"
+  },
+  "runtime": {
+    "wall_seconds": 0.654,
+    "cpu_seconds": 0.844,
+    "peak_rss_bytes": 178507776,
+    "peak_rss_mib": 170.2,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  }
+}

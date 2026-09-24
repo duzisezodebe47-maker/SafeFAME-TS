@@ -1,0 +1,96 @@
+第八轮执行台账（提交 9af63439860907e7b35bb0ddff0d819cfda04537；输入 = 选择期隔离包）
+
+--- 执行 #1  00:52:26  选择期预测 N ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\train.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --segments calibration decision --candidate N --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions
+{"status": "completed", "candidate": "N", "rows": 1500, "seconds": 0.246}
+EXIT=0  用时 2.9s
+
+--- 执行 #2  00:52:29  选择期预测 N+Q ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\train.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --segments calibration decision --candidate N+Q --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions
+{"status": "completed", "candidate": "N+Q", "rows": 1500, "seconds": 0.226}
+EXIT=0  用时 2.8s
+
+--- 执行 #3  00:52:32  选择期预测 N+S+Q ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\train.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --segments calibration decision --candidate N+S+Q --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions
+{"status": "completed", "candidate": "N+S+Q", "rows": 1500, "seconds": 0.346}
+EXIT=0  用时 3.0s
+
+--- 执行 #4  00:52:35  选择期预测 N+S+Q+SF ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\train.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --segments calibration decision --candidate N+S+Q+SF --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions
+{"status": "completed", "candidate": "N+S+Q+SF", "rows": 1500, "seconds": 0.512}
+EXIT=0  用时 3.1s
+
+--- 执行 #5  00:52:38  四段边界审计（test 只查索引与特征结构） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\audit_boundaries.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\boundaries
+{"status": "PASS", "task": "Climate_h4_f2", "selection_origin_count": 375, "checks": {"all_segments_assert_grid_ok": true, "counts_match_spec": true, "origin_ranges_match_spec": true, "partition_no_overlap": true, "samples_labels_match_spec_bounds": true}}
+EXIT=0  用时 2.7s
+
+--- 执行 #6  00:52:40  权重重演（四候选各两次） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\audit_replay.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --delivered-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\replay
+{"status": "PASS", "candidates": {"N": {"ok": true, "weight_hash": "014474d38babe4106a4891e631c72b6076294891a0870a03b6d5fb08f8d9d6d5"}, "N+Q": {"ok": true, "weight_hash": "a4d4febb7a34b25bb9e4f37d9795f89b9bbb0ec748d62f865f73795bfa86a391"}, "N+S+Q": {"ok": true, "weight_hash": "0b0524087365ef8c7bc27a1b47419d42391c3ae8beec81702fe6ef5c9fc908d4"}, "N+S+Q+SF": {"ok": true, "weight_hash": "9772a0a1d075dcc63c73a484f1164622f18d169af9b2f2fca3c1f8fdbea8d60e"}}}
+EXIT=0  用时 26.0s
+
+--- 执行 #7  00:53:06  入口读文件审计（包模式：结构上无 test 真值） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\audit_read_isolation.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --candidate N+S+Q --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\read_isolation --probe-output D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\_probe_train
+{"verdict": "PASS", "files_touched": 74, "violations": [], "isolation_mode": "isolated_package"}
+EXIT=0  用时 3.2s
+
+--- 执行 #8  00:53:10  999 次逐行置换 + 999 次循环移位（N+S+Q） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\permutation_entry.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --candidate N+S+Q --nulls 999 --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\row_null\N+S+Q
+{"status": "completed", "candidate": "N+S+Q", "successful": 999, "failed": 0, "p_value": 0.983}
+  N+S+Q: �۲���ʧ 0.268329����ʼ 999 ���û���
+    N+S+Q: 100/999 ʧ�� 0
+    N+S+Q: 200/999 ʧ�� 0
+    N+S+Q: 300/999 ʧ�� 0
+    N+S+Q: 400/999 ʧ�� 0
+    N+S+Q: 500/999 ʧ�� 0
+    N+S+Q: 600/999 ʧ�� 0
+    N+S+Q: 700/999 ʧ�� 0
+    N+S+Q: 800/999 ʧ�� 0
+    N+S+Q: 900/999 ʧ�� 0
+  N+S+Q: ѭ����λ��ϣ��鳤 4����Դ spec_derived����
+    N+S+Q: 100/999 ʧ�� 0
+    N+S+Q: 200/999 ʧ�� 0
+    N+S+Q: 300/999 ʧ�� 0
+    N+S+Q: 400/999 ʧ�� 0
+    N+S+Q: 500/999 ʧ�� 0
+    N+S+Q: 600/999 ʧ�� 0
+    N+S+Q: 700/999 ʧ�� 0
+    N+S+Q: 800/999 ʧ�� 0
+    N+S+Q: 900/999 ʧ�� 0
+EXIT=0  用时 240.3s
+
+--- 执行 #9  00:57:10  999 次逐行置换 + 999 次循环移位（N+S+Q+SF） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\permutation_entry.py --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --input-package D:/交大任务/climate_pkg/release --formal-bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --candidate N+S+Q+SF --nulls 999 --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\row_null\N+S+Q+SF
+{"status": "completed", "candidate": "N+S+Q+SF", "successful": 999, "failed": 0, "p_value": 0.984}
+  N+S+Q+SF: �۲���ʧ 0.288924����ʼ 999 ���û���
+    N+S+Q+SF: 100/999 ʧ�� 0
+    N+S+Q+SF: 200/999 ʧ�� 0
+    N+S+Q+SF: 300/999 ʧ�� 0
+    N+S+Q+SF: 400/999 ʧ�� 0
+    N+S+Q+SF: 500/999 ʧ�� 0
+    N+S+Q+SF: 600/999 ʧ�� 0
+    N+S+Q+SF: 700/999 ʧ�� 0
+    N+S+Q+SF: 800/999 ʧ�� 0
+    N+S+Q+SF: 900/999 ʧ�� 0
+  N+S+Q+SF: ѭ����λ��ϣ��鳤 4����Դ spec_derived����
+    N+S+Q+SF: 100/999 ʧ�� 0
+    N+S+Q+SF: 200/999 ʧ�� 0
+    N+S+Q+SF: 300/999 ʧ�� 0
+    N+S+Q+SF: 400/999 ʧ�� 0
+    N+S+Q+SF: 500/999 ʧ�� 0
+    N+S+Q+SF: 600/999 ʧ�� 0
+    N+S+Q+SF: 700/999 ʧ�� 0
+    N+S+Q+SF: 800/999 ʧ�� 0
+    N+S+Q+SF: 900/999 ʧ�� 0
+EXIT=0  用时 591.1s
+
+--- 执行 #10  01:07:20  交付完备性闸门（§四.5） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\verify_delivery.py --delivery D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次 --task Climate_h4_f2 --horizon 4 --expected-origins 375
+{
+  "status": "INCOMPLETE",
+  "problems": [
+    "ȱ�ٽ�����: MANIFEST.json"
+  ]
+}
+EXIT=6  用时 2.9s
