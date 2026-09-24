@@ -70,6 +70,34 @@ def _problems_manifest(path: Path) -> list[str]:
 DELIVERED_CANDIDATES = ("N", "N+Q", "N+S+Q", "N+S+Q+SF")
 
 
+def _manifest_vs_git(delivery: Path) -> list[str]:
+    """清单哈希 vs 已提交字节：已跟踪但两者不一致 → 报错（未跟踪的跳过，正常）。"""
+    import hashlib
+    import subprocess
+
+    manifest_path = delivery / "MANIFEST.json"
+    if not manifest_path.is_file():
+        return []
+    repo = subprocess.run(["git", "-C", str(delivery), "rev-parse", "--show-toplevel"],
+                          capture_output=True, text=True, encoding="utf-8",
+                          errors="replace")
+    if repo.returncode != 0:
+        return []
+    root = Path(repo.stdout.strip())
+    rel_root = delivery.resolve().relative_to(root.resolve()).as_posix()
+    problems = []
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for section in ("model_files", "evidence_files", "other_files"):
+        for rel, recorded in (manifest.get(section) or {}).items():
+            blob = subprocess.run(["git", "-C", str(root), "show", f"HEAD:{rel_root}/{rel}"],
+                                  capture_output=True)
+            if blob.returncode != 0:
+                continue            # 未跟踪 —— 提交前属正常
+            if hashlib.sha256(blob.stdout).hexdigest() != recorded:
+                problems.append(f"{rel} 的清单哈希与已提交字节不一致（行尾归一化？）")
+    return problems
+
+
 def check(delivery: Path, task: str, horizon: int, expected_origins: int,
           candidates: tuple[str, ...] = DELIVERED_CANDIDATES,
           require_nulls: bool = True,
@@ -119,6 +147,12 @@ def check(delivery: Path, task: str, horizon: int, expected_origins: int,
                 problems.append(
                     f"{man.name} 的 input_kind={doc.get('input_kind')!r}，"
                     f"正式证据必须消费选择期隔离包（§五）")
+    # 提交后的字节才是主控拿到的字节：`.gitattributes` 会把 *.json/*.csv 归一成 LF，
+    # 若文件在磁盘上是 CRLF，清单里记的哈希与检出后对不上（本轮就踩过一次：
+    # 用 shell 重定向写出来的 verify_delivery.json 是 CRLF）。
+    tracked_bad = _manifest_vs_git(delivery)
+    problems += tracked_bad
+
     stray_test = sorted(p.name for p in delivery.rglob("*test_predictions.csv"))
     if stray_test:
         problems.append(f"交付里出现 test 预测文件（本轮禁止）: {stray_test[:3]}")
