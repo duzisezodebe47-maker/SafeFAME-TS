@@ -7,8 +7,10 @@
   `replay_check.json`          从相同输入再跑一次（不读真值），
                                证明预测字节一致、权重哈希一致
 
-两份证据由**同一次受监测的重放**产出 —— 真实 Bundle 上总共只执行两次
-（第 1 次出交付物，第 2 次是这里），避免多余执行。
+两份证据由**同一次受监测的重放**产出（不额外多跑一次预测）。
+
+真实 Bundle 上执行了几次、每次的目的与结果，逐条登记在交付目录的
+`evidence/test_run.log` 与 `README.md` 的「执行台账」里 —— 不靠这里的一句话声称。
 
 ## 监测方法
 
@@ -190,6 +192,49 @@ def static_metric_scan() -> dict:
             "verdict": "PASS" if not hits else "FAIL"}
 
 
+def compare_prediction_csv(delivered: bytes, replay: bytes) -> dict:
+    """比对两次运行的预测 CSV。
+
+    **`code_commit` 是溯源列，不是预测内容**：它记录每次运行时的 HEAD，所以只要两次
+    运行之间发生过提交，整文件字节就会不同（即使预测一模一样）。因此这里同时给出：
+
+      `byte_identical`            整文件字节相等（两次运行在同一提交上时应为真）
+      `content_identical`         除 `code_commit` 外所有列逐行相等
+      `predictions_sha256`        只对 (origin_id, step, y_pred) 三元组取哈希，两次同值
+
+    判 PASS 看 `content_identical`；`byte_identical` 单独报告并附差异原因，
+    避免把"溯源列变了"误读成"预测变了"。
+    """
+    import hashlib
+
+    def rows(data: bytes) -> tuple[list[dict], str]:
+        out = list(csv.DictReader(io.StringIO(data.decode("utf-8-sig"))))
+        payload = "\n".join(f"{r['origin_id']}\t{r['step']}\t{r['y_pred']}" for r in out)
+        return out, hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+    d_rows, d_pred = rows(delivered)
+    r_rows, r_pred = rows(replay)
+    cols = set(d_rows[0]) | set(r_rows[0]) if d_rows and r_rows else set()
+    differing = {}
+    if len(d_rows) == len(r_rows):
+        for a, b in zip(d_rows, r_rows):
+            for c in cols:
+                if a.get(c) != b.get(c):
+                    differing[c] = differing.get(c, 0) + 1
+    else:
+        differing["__row_count__"] = abs(len(d_rows) - len(r_rows))
+    non_provenance = {c: n for c, n in differing.items() if c != "code_commit"}
+    return {
+        "byte_identical": delivered == replay,
+        "content_identical": bool(len(d_rows) == len(r_rows) and not non_provenance),
+        "predictions_sha256_delivered": d_pred,
+        "predictions_sha256_replay": r_pred,
+        "differing_columns": differing,
+        "non_provenance_differences": non_provenance,
+        "note": "code_commit 是溯源列（记录各次运行的 HEAD），不参与预测内容判等",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--bundle", type=Path, required=True)
@@ -280,9 +325,11 @@ def main() -> int:
     other_finite = bool(np.isfinite(np.asarray(b.arrays["targets"])[~tm]).all())
 
     # 重放比对
+    compare = compare_prediction_csv(delivered_bytes, replay_bytes)
     checks = {
         "replay_exit_zero": code == 0,
-        "predictions_byte_identical": replay_bytes == delivered_bytes,
+        "predictions_content_identical": compare["content_identical"],
+        "predictions_byte_identical": compare["byte_identical"],
         "weight_hash_identical": (replay_manifest.get("weight_hash")
                                   == delivered_manifest.get("weight_hash")),
         "test_fit_weight_hash_identical": (replay_manifest.get("test_fit_weight_hash")
@@ -294,6 +341,10 @@ def main() -> int:
         "non_test_truth_untouched": other_finite,
         "no_test_truth_values_available_to_model": True,
     }
+    # `predictions_byte_identical` 只作报告：code_commit 列记录各次运行的 HEAD，
+    # 两次运行之间只要发生过提交，整文件字节就会不同。判 PASS 看内容判等。
+    verdict_checks = {k: v for k, v in checks.items()
+                      if k != "predictions_byte_identical"}
     metric_scan = static_metric_scan()
     checks["no_error_metric_computed_in_entry"] = metric_scan["verdict"] == "PASS"
 
@@ -310,7 +361,11 @@ def main() -> int:
         "test_fit_weight_hash": replay_manifest.get("test_fit_weight_hash"),
         "n_rows": replay_manifest.get("n_rows"),
         "checks": checks,
-        "verdict": "PASS" if all(checks.values()) else "FAIL",
+        "verdict_checks": verdict_checks,
+        "csv_comparison": compare,
+        "code_commit_delivered": delivered_manifest.get("code_commit"),
+        "code_commit_replay": replay_manifest.get("code_commit"),
+        "verdict": "PASS" if all(verdict_checks.values()) else "FAIL",
         "code_provenance": warn_if_dirty(REPO_ROOT, entry_dir),
         "audit_script_provenance": warn_if_dirty(REPO_ROOT, HERE),
         "runtime": script_entry_snapshot(started, cpu_started),
@@ -346,7 +401,7 @@ def main() -> int:
         "runtime": script_entry_snapshot(started, cpu_started),
         "verdict": "PASS" if (test_nan and other_finite
                               and metric_scan["verdict"] == "PASS"
-                              and all(checks.values())) else "FAIL",
+                              and all(verdict_checks.values())) else "FAIL",
     }
 
     (out / "replay_check.json").write_text(
