@@ -563,6 +563,26 @@ def main() -> int:
     check("诊断候选不在交付要求里",
           not ({"N+S", "N+F", "N+S+Q+F"} & set(DELIVERED_CANDIDATES)))
 
+    # ============ 循环移位块长必须由 Climate 周频结构推导（§三）============
+    print("\n--- 循环移位块长（§三：不得沿用默认值）---")
+    import permutation_entry as perm_entry
+    blk, src = perm_entry.derive_circular_block(52)
+    check("Climate：块长由 spec 季节周期推导 = 52，来源 spec_seasonal_period",
+          blk == 52 and src == "spec_seasonal_period")
+    blk2, src2 = perm_entry.derive_circular_block(52, 52)
+    check("显式给同值 → 仍记为 spec_seasonal_period", blk2 == 52 and src2 == "spec_seasonal_period")
+    blk3, src3 = perm_entry.derive_circular_block(52, 7)
+    check("显式给不同值 → 记为 cli_override（如实留痕，不静默）",
+          blk3 == 7 and src3 == "cli_override")
+    blk4, _ = perm_entry.derive_circular_block(12)
+    check("Agriculture 周期 12 → 块长 12（同一条规则换任务即换块长）", blk4 == 12)
+    r = False
+    try:
+        perm_entry.derive_circular_block(0)
+    except ValueError:
+        r = True
+    check("非法季节周期 → 拒绝（不默认）", r)
+
     total = len(r6.PASSED)
     print(f"\n全部通过（{total} 项检查：第六轮 49 + 第七轮 36 + 第八轮 {total - 85}）")
     return 0

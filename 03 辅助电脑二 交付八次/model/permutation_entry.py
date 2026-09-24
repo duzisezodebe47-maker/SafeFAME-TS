@@ -48,6 +48,21 @@ from train import RUNNABLE_SCENARIOS, to_feature_bundle  # noqa: E402
 REPO_ROOT = HERE.parents[1]
 
 
+def derive_circular_block(seasonal_period: int, cli_value: int | None = None) -> tuple[int, str]:
+    """循环移位块长的推导（§三）：块长必须**由 Climate 的周频结构给出**，不能沿用默认值。
+
+    Climate 是周频（冻结 spec: `lag_days=7`），季节周期 52 周 → 取**一个完整季节周期**
+    为块长：每次整段平移整数个季节周期，保留全部季节结构与短期依赖，
+    只破坏文本与目标的配对。返回 `(块长, 来源)`；显式给定且与推导值不同时来源记为
+    `cli_override`（产物里如实记录，便于主控判断是否偏离）。
+    """
+    if seasonal_period < 1:
+        raise ValueError(f"季节周期非法: {seasonal_period}")
+    if cli_value is None or int(cli_value) == int(seasonal_period):
+        return int(seasonal_period), "spec_seasonal_period"
+    return int(cli_value), "cli_override"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     add_input_args(parser)
@@ -60,8 +75,9 @@ def main() -> int:
                         help="只允许门控候选；诊断消融不进门槛")
     parser.add_argument("--nulls", type=int, default=ROW_PERMUTATIONS)
     parser.add_argument("--seed", type=int, default=2026)
-    parser.add_argument("--circular-block", type=int, default=7,
-                        help="循环移位的真实块长度（A.5）")
+    parser.add_argument("--circular-block", type=int, default=None,
+                        help="循环移位块长；留空则**按冻结 spec 的季节周期推导**"
+                             "（Climate=52 周 = 一个完整季节周期）。诊断用，不回写正式 p 值")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -87,6 +103,15 @@ def main() -> int:
     except BundleUnavailable as exc:
         print(f"BundleUnavailable: {exc}", file=sys.stderr)
         return 3
+
+    # §三：循环移位的块长必须由 **Climate 的周频结构**给出并解释，不能沿用默认值。
+    # 推导规则：Climate 是周频（spec: lag_days=7），季节周期 52 周 → 取**一个完整季节周期**
+    # 为块长；每次整段平移整数个季节周期，保留全部季节结构与短期依赖，只破坏文本与目标的配对。
+    circular_block, block_source = derive_circular_block(seasonal_period,
+                                                         args.circular_block)
+    if block_source == "cli_override":
+        print(f"注意：--circular-block={circular_block} 与 spec 推导值 {seasonal_period} 不同；"
+              f"按给定值执行，产物里记录来源为 cli_override", file=sys.stderr)
 
     horizon = int(args.task.split("_h")[1].split("_")[0])
     try:
@@ -117,9 +142,10 @@ def main() -> int:
                                 count=args.nulls, seed=args.seed)
     write_null(out / "null_scores.csv", null, observed)
 
-    print(f"  {args.candidate}: 循环移位诊断（块长 {args.circular_block}）…", file=sys.stderr)
+    print(f"  {args.candidate}: 循环移位诊断（块长 {circular_block}，来源 {block_source}）…",
+          file=sys.stderr)
     circular = circular_shift_null(args.candidate, train, cal, decision, count=args.nulls,
-                                   seed=args.seed, circular_block=args.circular_block)
+                                   seed=args.seed, circular_block=circular_block)
     write_null(out / "null_scores_circular.csv", circular, observed)
 
     reason = null.unavailable_reason()
@@ -136,7 +162,14 @@ def main() -> int:
         "observed_decision_loss": observed,
         "p_value": null.p_value(observed),
         "p_value_note": reason or "经验单侧 p（requested 与 successful 均达 999）",
-        "circular": {"block": args.circular_block,
+        "circular": {"block": circular_block,
+                     "block_derivation": {
+                         "source": block_source, "value": circular_block,
+                         "rule": "block = 冻结 spec 里 Climate 的季节周期（52 周）",
+                         "why": "Climate 为周频（spec lag_days=7）、季节周期 52 周；"
+                                "取一个完整季节周期为块长，整段平移整数个周期，"
+                                "保留季节结构与短期依赖，只破坏文本与目标的配对",
+                         "role": "敏感性诊断，不回写正式门控 p 值"},
                      "successful": len(circular.successful),
                      "failed": len(circular.failures),
                      "p_value": circular.p_value(observed),
