@@ -1,0 +1,42 @@
+{
+  "rule": "combined = sha256( '\\n'.join( f'{path}\\t{sha256(file)}' 按 path 排序 ) )",
+  "model_files": {
+    "model/audit_baselines.py": "07c116952ea478b6d45f201c309b1d613f5c9c8311714cc669ecab7340271adf",
+    "model/audit_boundaries.py": "31fa176941eb3ee7451fb2b6f612e2465e8a41b224bd8c0f7f42621539657aea",
+    "model/audit_isolation.py": "6f01c0070b278c843057530de4de45255150970f9eadf77d8c7ff91f3f7430aa",
+    "model/audit_replay.py": "f6671173605b94b72c38cf82d67d3229110b1fd347f3c9f83dfdf09a1287cc33",
+    "model/audit_tables.py": "dce9095de5d25d5eb7786288010c0c9cbb86b87d0907c0c149349f3d06f14a0a",
+    "model/branches.py": "b4a632f4bc002db6e4d2321fff68826cba5aeb813898a0d96cbd9afc1a9948ad",
+    "model/bundle_reader.py": "b04e731f2fda9ae2feda894d37d743627951e2d9c7efd5b68bf8745271672760",
+    "model/candidates.py": "5b7be2c04ad8b2bdd219a0305d83813b8f7e4df243149a62133597cd42043927",
+    "model/make_manifest.py": "8fcc20a75a3fcc8fdaf0e54a58dd3bc4e4310d53dbd9511af2692d39fb330758",
+    "model/numeric_fallbacks.py": "63916b6dd5dcfd044ebc7bf391bb665770f1af3fe9fea8caaeba3cd7ab801070",
+    "model/permutation.py": "89b1f7137775b0a268707c40e84c63ac7ef020a1da705837fee47620ce6abb84",
+    "model/permutation_entry.py": "4063ba4c7cbd5416a77deceb3ae3a88d8043fa561bdc6c3ceb8f910bfb3eb1e8",
+    "model/predict_io.py": "e53eebafc20d2098ba4d66e173d73748630d7b340ac5fbfc00529b35f742d4dd",
+    "model/predict_test.py": "7f423075e04aaad5f4d3d807318edc9e533d90ec85d8f4314cdc1206a0549442",
+    "model/probe_bundle_reads.py": "eede7b22d1d1a40126b09f0e38b69685eb5244fef8d5cb97eb4825605cb50417",
+    "model/record_route_acceptance.py": "41f6ca8e7ba5ba771de50d99a6386c647ea390d5ed596a33861f77bdc3cb3739",
+    "model/runtime_profile.py": "50e19603c3854aa2596793895cfd9786112976d4c0f14b0b22c0f7f923deb36b",
+    "model/tests/test_round6.py": "64fd980f506249885323e35749a3b9783f63d5e99289d6b0e36158b5094c3dea",
+    "model/tests/test_round7.py": "81bf1432015892046228cfe2a64cf7e20c2949011c2f2e0b3aeee4c95724bef2",
+    "model/train.py": "60b28f0313340d1fcd181881864307ed7a6b96515b5654e3f46c0f227b8bff65"
+  },
+  "model_files_count": 20,
+  "model_combined_sha256": "43fce4ea954361942dc03e5b92e0aebf610d7c38e3387745d9a0bae9cc219712",
+  "evidence_files": {
+    "evidence/bundle_read_channels.json": "6b8ba7d65708e1bcca9e4cc9a5c6d2f2fcd975e6972dcfbf3f16ce56609ad598",
+    "evidence/replay_check.json": "99759019c0957cb797cc3ebb90742501a17c8adc4cfd68f59825e4a9e1b33e10",
+    "evidence/route_acceptance.json": "e3da1ca5c3393a3c6da4122042e475339d3d9759c53fa29304412922cca65b25",
+    "evidence/sealed_route.json": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70",
+    "evidence/sealed_route.json.sha256": "d141e75d1c8f4c7275821ed10de28f3f58a18fd5dc681de783bdb371b50e88d1",
+    "evidence/test_isolation_audit.json": "8b4f6390243633d64c53dd1ce325d5504b999dcfe297e6d25a97809652025ad9",
+    "evidence/test_run.log": "bbbcd1cb1e193edf25eca63d0a3551f1d10766e71234ad5a1a9aa21a87b050d2",
+    "evidence/tests_round6.log": "d74bbcbc22971a972bf9bd5d55d38ebc10604081ce52944597e2b642d4eb64c7",
+    "evidence/tests_round7.log": "6f7156ce1a00ae5ee7a194aa8eeac358cd395e7df23f3cfbad9e06bfdb4bdcaa"
+  },
+  "evidence_files_count": 9,
+  "evidence_combined_sha256": "0b4917f04a5e890df03efada9509bed074a49ce6e41a58012269630a9a2e8e8a",
+  "evidence_bytes": 315414,
+  "note": "model/ 排除 __pycache__；evidence/ 全量。生成脚本 model/make_manifest.py（本文件亦在 model_files 内）。"
+}

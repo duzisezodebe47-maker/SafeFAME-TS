@@ -31,17 +31,17 @@
     "config_sha256",
     "code_commit"
   ],
-  "csv_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75",
-  "code_commit": "4fd2c0cf945937ec9b0611e8ed46cc27dc08c0ae",
+  "csv_sha256": "39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a",
+  "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
   "code_provenance": {
-    "code_commit": "4fd2c0cf945937ec9b0611e8ed46cc27dc08c0ae",
+    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
     "worktree_dirty": false,
     "dirty_files": [],
     "scope": "03 辅助电脑二 交付六次/model"
   },
   "runtime": {
-    "wall_seconds": 1.036,
-    "cpu_seconds": 0.391,
+    "wall_seconds": 0.481,
+    "cpu_seconds": 0.344,
     "peak_rss_bytes": 174067712,
     "peak_rss_mib": 166.0,
     "cpu_count": 32,

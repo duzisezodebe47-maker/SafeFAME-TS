@@ -17,7 +17,7 @@
   },
   "read_manifest": [
     {
-      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmplrqz9i56\\replay\\N_S_Q_SF_test_predictions.csv",
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpcgzamgok\\replay\\N_S_Q_SF_test_predictions.csv",
       "reads": 4,
       "first_via": "pathlib.Path.open",
       "class": "own_output_readback"
@@ -607,11 +607,11 @@
   ],
   "write_manifest": [
     {
-      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmplrqz9i56\\replay\\N_S_Q_SF_test_manifest.json",
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpcgzamgok\\replay\\N_S_Q_SF_test_manifest.json",
       "writes": 2
     },
     {
-      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmplrqz9i56\\replay\\N_S_Q_SF_test_predictions.csv",
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpcgzamgok\\replay\\N_S_Q_SF_test_predictions.csv",
       "writes": 2
     }
   ],
@@ -641,18 +641,22 @@
     "verdict": "PASS"
   },
   "code_provenance": {
-    "code_commit": "4fd2c0cf945937ec9b0611e8ed46cc27dc08c0ae",
-    "worktree_dirty": true,
-    "dirty_files": [
-      "?? \"03 \\350\\276\\205\\345\\212\\251\\347\\224\\265\\350\\204\\221\\344\\272\\214 \\344\\272\\244\\344\\273\\230\\344\\270\\203\\346\\254\\241/model/\""
-    ],
+    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付七次/model"
+  },
+  "audit_script_provenance": {
+    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+    "worktree_dirty": false,
+    "dirty_files": [],
     "scope": "03 辅助电脑二 交付七次/model"
   },
   "runtime": {
-    "wall_seconds": 1.23,
-    "cpu_seconds": 1.0,
-    "peak_rss_bytes": 174080000,
-    "peak_rss_mib": 166.0,
+    "wall_seconds": 1.364,
+    "cpu_seconds": 0.938,
+    "peak_rss_bytes": 174546944,
+    "peak_rss_mib": 166.5,
     "cpu_count": 32,
     "platform": "Windows 11",
     "python": "3.12.10"

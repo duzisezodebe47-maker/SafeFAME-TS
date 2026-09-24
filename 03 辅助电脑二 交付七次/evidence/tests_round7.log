@@ -1,0 +1,107 @@
+NOTE: 数据侧读取器不在位（D:\交大任务\人工智能大作业\人工智能大作业\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+NOTE: 数据侧读取器不在位（D:\交大任务\人工智能大作业\人工智能大作业\辅助电脑02交付01次\bundle.py），改用官方适配层直读；签名与逐文件哈希校验由 verify_bundle 统一执行。
+第七轮测试（合成数据）
+
+========== 先跑第六轮 49 项 ==========
+第六轮测试（合成数据）
+
+--- 修复 3：季节周期来自冻结 spec ---
+  ok  Agriculture 周期 = 3（非默认 12）
+  ok  Climate 周期 = 5
+  ok  Environment 周期 = 2
+  ok  任务域未登记周期 → 拒绝（不默认 12）
+  ok  spec 未声明 seasonal_periods → 拒绝
+
+--- 修复 2：数值回退接口无真值字段 ---
+  ok  推理视图不含 targets / targets_standardized
+  ok  传入含真值对象 → 拒绝
+  ok  省略 seasonal_period → TypeError（无默认值，不回落 12）
+  ok  合法调用可运行且 α 来自 7 档
+  ok  fit_targets 在 train/cal 之外含真值 → 拒绝
+  ok  改测试真值后基线输出逐位不变
+
+--- 置换失败路径（失败不计成功、p 必须为 null）---
+  ok  成功/失败计数正确（失败不算成功次数）
+  ok  有失败 → p_value=null（不得报显著性）
+  ok  有失败 → 原因可定位到具体 iteration
+  ok  逐次 CSV 列 == 主控期望
+  ok  逐次 CSV 成功/失败各自留痕
+  ok  逐次 CSV 种子与损失不错配
+  ok  成功数不足 999 → p_value=null
+  ok  成功数不足时给出可定位原因（不谎称已达 999）
+  ok  999 次全成功 → p 非空且等于 (1+计数)/(n+1)
+
+--- 修复 1：只接受主控封印路由 ---
+  ok  完整封印路由通过
+  ok  缺封印字段 status → 拒绝
+  ok  缺封印字段 scenario → 拒绝
+  ok  缺封印字段 selection_manifest_sha256 → 拒绝
+  ok  缺封印字段 refit_review_sha256 → 拒绝
+  ok  缺封印字段 inputs_sha256 → 拒绝
+  ok  status 非 frozen → 拒绝
+  ok  selection_manifest_sha256 格式非法 → 拒绝
+  ok  refit_review_sha256 格式非法 → 拒绝
+  ok  inputs_sha256 含非法哈希 → 拒绝
+  ok  数值回退时请求门控候选 → 拒绝（第五轮 A.1 保持）
+
+--- 入口端到端 ---
+  ok  train.py 端到端成功
+  ok  CSV 列 == 主控 PREDICTION_COLUMNS
+  ok  segment 列是逐行段名（不是数组字符串）
+  ok  target_scale 为主控 SCALE
+  ok  每起点每步恰一行
+  ok  permutation_entry.py 端到端成功
+  ok  未满 999 时 p=null 且 successful 计数正确
+  ok  置换摘要含季节周期与置换协议
+  ok  置换摘要含 CPU/内存实测
+  ok  置换摘要含代码出处（HEAD + 工作区是否干净）
+  ok  null_scores.csv 列 == 主控期望（多一列即失败）
+  ok  audit_boundaries.py 端到端成功
+  ok  四段全部通过边界检查
+  ok  四段审计记录了被排除的起点（head = input_len，段间 = horizon-1）
+  ok  四段审计记录了 CPU/内存实测
+  ok  主控 CSV 哈希与清单不符 → FAIL
+  ok  audit_tables.py 端到端成功
+  ok  审计表两张都在
+
+全部通过（49 项检查）
+  ok  第六轮 49 项全部通过
+
+========== 第七轮：测试预测入口端到端 ==========
+  ok  选择期 train.py 端到端成功
+  ok  选择期 manifest 含 weight_hash 与 alpha_by_group
+  ok  封印路由 + 正确候选 → 端到端成功
+  ok  预测 CSV 已写出
+  ok  CSV 列 == 主控 PREDICTION_COLUMNS
+  ok  只有 test 段
+  ok  每起点每步恰一行（13 起点 × 3 步）
+  ok  预测全为有限值
+  ok  manifest 含四个输入锚 + 选择期 config 哈希
+  ok  manifest 含列名 / 运行时间 / 峰值内存 / 代码出处
+  ok  manifest 不含任何 test 误差字段
+  ok  输出目录非空 → 拒绝覆盖
+  ok  路由 SHA 不符 → 拒绝
+  ok  候选不是路由 selected → 拒绝
+  ok  选择期 manifest 的 alpha_by_group 被改 → 拒绝
+  ok  选择期 manifest 的 weight_hash 被改 → 拒绝
+  ok  隔离模式：test 段 targets 全为 NaN
+  ok  隔离模式：train/cal/dec 真值未被波及
+  ok  隔离模式：test 特征切片不含 targets 键
+  ok  扰动 test 真值后清单已重签（signature 只覆盖 inputs，不变）
+  ok  扰动 test 真值后预测逐字节不变（真值无因果影响）
+  ok  合法预测 → 无问题
+  ok  行数与起点数不符（13 起点只给 12×3）→ 报错
+  ok  步数不符（13×2 而非 13×3）→ 报错
+  ok  起点重复 → 报错
+  ok  origin 越界 → 报错
+  ok  目标窗口跨界 → 报错
+  ok  含非有限预测 → 报错
+  ok  非二维预测 → 报错
+  ok  文件校验：合法 CSV → 无问题
+  ok  文件校验：键重复 → 报错
+  ok  文件校验：segment 不是 test → 报错
+  ok  文件校验：y_pred 非有限 → 报错
+  ok  文件校验：行数少一行 → 报错（须给期望行数才查得出）
+  ok  文件校验：不给期望行数时少一行查不出（说明为何必须传期望值）
+
+全部通过（85 项检查：第六轮 49 + 第七轮 36）

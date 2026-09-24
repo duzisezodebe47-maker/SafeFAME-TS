@@ -13,3 +13,20 @@ NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»
 !! ÕıÊ½½»¸¶ÇëÔÚ¸É¾»Ìá½»ÉÏÖØÅÜ£¨¼û RUNBOOK£©¡£
 {"replay": "PASS", "isolation": "PASS", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_byte_identical": true, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
 EXIT=0
+--- ç¬¬ 2 æ¬¡å—ç›‘æµ‹é‡æ”¾ï¼ˆä¿®æ­£ provenance ä½œç”¨åŸŸåé‡è·‘ï¼‰: 19:57:30 ---
+NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
+{"replay": "FAIL", "isolation": "FAIL", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_byte_identical": false, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
+EXIT=6
+--- æ‰§è¡Œ #4ï¼šåœ¨å›ºå®šæäº¤ä¸Šé‡å‡ºäº¤ä»˜ç‰© 19:58:28 ---
+NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
+{"status": "completed", "model": "N+S+Q+SF", "rows": 504, "path": "gate_candidate", "test_predictions_sha256": "39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a"}
+EXIT=0
+--- æ‰§è¡Œ #5ï¼šåŒä¸€æäº¤ä¸Šçš„å—ç›‘æµ‹é‡æ”¾ 19:58:40 ---
+NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
+{"replay": "PASS", "isolation": "PASS", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_content_identical": true, "predictions_byte_identical": true, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
+EXIT=0
+{"files_touched": 95, "data_loaded": 8, "hashed_only": 87, "target_task_data_loads": ["numeric_history.npy", "origin_index.npy", "quality.npy", "semantic.npy", "text_available.npy", "samples.csv", "targets.npy", "targets_standardized.npy"], "test_truth_loaded_as_data": ["targets.npy", "targets_standardized.npy"]}
+!! ¾¯¸æ£º¹¤×÷ÇøÓĞÎ´Ìá½»¸Ä¶¯£¬±¾´ÎÖ¤¾İµÄ code_commit ²»ÍêÕû±êÊ¶ËùÅÜ´úÂë£º
+!!   ?? "03 \350\276\205\345\212\251\347\224\265\350\204\221\344\272\214 \344\272\244\344\273\230\344\270\203\346\254\241/model/record_route_acceptance.py"
+!! ÕıÊ½½»¸¶ÇëÔÚ¸É¾»Ìá½»ÉÏÖØÅÜ£¨¼û RUNBOOK£©¡£
+{"verdict": "PASS", "checks": {"route_sha256_matches_published": true, "route_sha256_is_64hex": true, "sidecar_matches": true, "status_is_frozen": true, "selected_is_candidate": true, "candidate_is_gate_registered": true, "selection_data_segments_is_cal_dec": true, "split_spec_sha256_matches_file": true, "bundle_signature_matches": true, "three_source_anchors_are_64hex": true, "inputs_sha256_subkeys_present_and_valid": true}, "route_sha256": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70"}

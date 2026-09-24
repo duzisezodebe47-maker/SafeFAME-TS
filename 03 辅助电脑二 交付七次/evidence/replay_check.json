@@ -3,13 +3,14 @@
   "scenario": "proxy",
   "candidate": "N+S+Q+SF",
   "purpose": "确定性重放：相同输入再跑一次，仅用于证明可复现，不用于调参",
-  "delivered_csv_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75",
-  "replay_csv_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75",
+  "delivered_csv_sha256": "39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a",
+  "replay_csv_sha256": "39ff28868b78f990ef791e548e7014670e1c617aa5e99a6000c6980b7737065a",
   "weight_hash": "713a94de421421418fa4511cabc5ea99461ed5872c96dd8ca3cf28ccd7a904c0",
   "test_fit_weight_hash": "c1df959654763e61c609c79f87e488878cda8385102919351c1a403197780454",
   "n_rows": 504,
   "checks": {
     "replay_exit_zero": true,
+    "predictions_content_identical": true,
     "predictions_byte_identical": true,
     "weight_hash_identical": true,
     "test_fit_weight_hash_identical": true,
@@ -20,20 +21,46 @@
     "no_test_truth_values_available_to_model": true,
     "no_error_metric_computed_in_entry": true
   },
+  "verdict_checks": {
+    "replay_exit_zero": true,
+    "predictions_content_identical": true,
+    "weight_hash_identical": true,
+    "test_fit_weight_hash_identical": true,
+    "alpha_by_group_identical": true,
+    "row_count_identical": true,
+    "test_targets_are_nan_in_isolated_read": true,
+    "non_test_truth_untouched": true,
+    "no_test_truth_values_available_to_model": true
+  },
+  "csv_comparison": {
+    "byte_identical": true,
+    "content_identical": true,
+    "predictions_sha256_delivered": "8131ee0a335d623232fc6819378539d94ec4239437822bebf7ab84501f17f9b8",
+    "predictions_sha256_replay": "8131ee0a335d623232fc6819378539d94ec4239437822bebf7ab84501f17f9b8",
+    "differing_columns": {},
+    "non_provenance_differences": {},
+    "note": "code_commit 是溯源列（记录各次运行的 HEAD），不参与预测内容判等"
+  },
+  "code_commit_delivered": "b9934da5380e428eab40ae17777951ceb8e34897",
+  "code_commit_replay": "b9934da5380e428eab40ae17777951ceb8e34897",
   "verdict": "PASS",
   "code_provenance": {
-    "code_commit": "4fd2c0cf945937ec9b0611e8ed46cc27dc08c0ae",
-    "worktree_dirty": true,
-    "dirty_files": [
-      "?? \"03 \\350\\276\\205\\345\\212\\251\\347\\224\\265\\350\\204\\221\\344\\272\\214 \\344\\272\\244\\344\\273\\230\\344\\270\\203\\346\\254\\241/model/\""
-    ],
+    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付七次/model"
+  },
+  "audit_script_provenance": {
+    "code_commit": "b9934da5380e428eab40ae17777951ceb8e34897",
+    "worktree_dirty": false,
+    "dirty_files": [],
     "scope": "03 辅助电脑二 交付七次/model"
   },
   "runtime": {
-    "wall_seconds": 1.166,
-    "cpu_seconds": 1.0,
-    "peak_rss_bytes": 174080000,
-    "peak_rss_mib": 166.0,
+    "wall_seconds": 1.231,
+    "cpu_seconds": 0.938,
+    "peak_rss_bytes": 174546944,
+    "peak_rss_mib": 166.5,
     "cpu_count": 32,
     "platform": "Windows 11",
     "python": "3.12.10"

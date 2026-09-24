@@ -125,3 +125,38 @@ decision 95（266–360）、test 42（372–413）。选择期合计 **138**，
 
 证据约 3 MB 已随仓库入库（`evidence/`），附逐文件 SHA256 与两个合并哈希
 （`MANIFEST.json`，由 `model/make_manifest.py` 生成，规则写死可复算）。
+
+---
+
+## 十、⚠️ 2026-09-24 补遗（第七轮准备时发现并修复）
+
+### 修的是什么
+
+本目录 `model/predict_test.py` **原本残缺**：359 行，`main()` 在主控基线分支中途断掉，
+**门控候选预测路径、`PredictionWriter` 写出、`return 0`、`__main__` 守卫全部缺失**
+（第五次同名文件 386 行且完整）。这是**静默失败** —— 文件仍能 `ast.parse`，
+且没有 `__main__` 守卫，按第七轮任务书跑那条命令会「退出码 0 但什么都不写」。
+
+**你的验收没抓到，因为**：`tests/test_round6.py` 只从 `predict_test` 导入了
+`RouteRejected/check_route/spec_candidate_lists`；端到端 `run_entry` 跑了
+train / permutation_entry / audit_boundaries / audit_tables，**唯独没跑
+`predict_test.main()`**。你在固定工作树上复跑的正是同一套 49 项。
+第七轮已把该入口的端到端 + 6 类负例补进测试。
+
+### 你记录的两个哈希，现在是什么状态
+
+| 你记录的值 | 现在 |
+|---|---|
+| `evidence_manifest_sha256` = `140dcb255b6c7097…9798dace` | **完全一致** —— 证据文件一个字节都没动 |
+| `model_manifest_sha256` = `187eb12b8efff8fd…50a54234` | **已变** → `43fce4ea95436194…9cc219712`，因为模型文件集补齐 1 个 + 新增 4 个（测试与审计模块） |
+
+**证据未动**这一点可独立复核：`evidence/` 下 27 个文件的合并哈希仍等于你记录的值，
+说明第六次交付的选择期预测、999 次置换、边界/基线/重放证据**全部原样**
+（它们走 `train.py` / `permutation_entry.py`，不经过 `predict_test.py`）。
+
+### 两点提醒
+
+1. 本目录在验收后被改动过（修复提交 `4fd2c0c`）。若你的流程要求"已验收提交不再变动"，
+   请把它视为一次**已申报的修复提交**。
+2. `03 辅助电脑二 交付七次/model/` 与本目录 `model/` **逐字节相同**（20 个文件，已核对），
+   第七轮交付自包含。
