@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "end_exactly_at_cutoff",
+      "expected_contains": "not_strictly_before_cutoff",
+      "observed": "not_strictly_before_cutoff",
+      "pass": true
+    },
+    {
+      "case": "lag_exact_boundary",
+      "expected_contains": "lag_not_elapsed",
+      "observed": "lag_not_elapsed",
+      "pass": true
+    },
+    {
+      "case": "reversed_interval",
+      "expected_contains": "reversed_interval",
+      "observed": "reversed_interval",
+      "pass": true
+    },
+    {
+      "case": "missing_original_url",
+      "expected_contains": "missing_original_url",
+      "observed": "missing_original_url",
+      "pass": true
+    },
+    {
+      "case": "duplicate_fact",
+      "expected_contains": "duplicate text_id",
+      "observed": "ReplayError: Canonical facts contain missing or duplicate text_id",
+      "pass": true
+    },
+    {
+      "case": "release_missing_corpus",
+      "expected_contains": "Required Release input missing",
+      "observed": "ReplayError: Required Release input missing: inputs/fact_corpus.csv",
+      "pass": true
+    },
+    {
+      "case": "corpus_hash_changed",
+      "expected_contains": "hash/size mismatch",
+      "observed": "ReplayError: Release input hash/size mismatch: inputs/fact_corpus.csv",
+      "pass": true
+    },
+    {
+      "case": "required_column_missing",
+      "expected_contains": "missing required columns",
+      "observed": "ReplayError: fact_corpus.csv missing required columns: ['text_id']",
+      "pass": true
+    },
+    {
+      "case": "outside_release_path",
+      "expected_contains": "escapes Release",
+      "observed": "ReplayError: Input path escapes Release: ../external_prohibited_input.csv",
+      "pass": true
+    }
+  ]
+}

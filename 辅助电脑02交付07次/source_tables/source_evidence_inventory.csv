@@ -1,0 +1,9 @@
+domain,source,source_file,fact_count,start_min,end_max,original_url_count,publication_time_status,upstream_revision
+Agriculture,report,references/external/Time-MMD/textual/Agriculture/Agriculture_report.csv,714,2018-11-21,2024-05-17,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62
+Agriculture,search,references/external/Time-MMD/textual/Agriculture/Agriculture_search.csv,1182,1980-09-29,2024-05-05,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62
+Climate,report,references/external/Time-MMD/textual/Climate/Climate_report.csv,582,1999-01-01,2024-04-30,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62
+Climate,search,references/external/Time-MMD/textual/Climate/Climate_search.csv,1660,1980-01-07,2024-05-19,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62
+Environment,report,references/external/Time-MMD/textual/Environment/Environment_report.csv,140,2021-05-15,2023-10-03,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62
+Environment,search,references/external/Time-MMD/textual/Environment/Environment_search.csv,2174,1979-12-31,2024-04-28,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62
+SocialGood,report,references/external/Time-MMD/textual/SocialGood/SocialGood_report.csv,280,1994-01-01,2022-12-31,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62
+SocialGood,search,references/external/Time-MMD/textual/SocialGood/SocialGood_search.csv,4444,1979-12-31,2024-05-05,0,end_date_proxy_unverified,00281e2d86058286d5548b15a7670e8eda57ef62

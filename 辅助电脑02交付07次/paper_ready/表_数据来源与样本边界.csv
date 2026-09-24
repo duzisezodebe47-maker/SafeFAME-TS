@@ -1,0 +1,5 @@
+task_id,domain,numerical_rows,retained_origins,canonical_facts,report_facts,search_facts,registered_original_url_count,upstream_revision
+Agriculture_h12_f1,Agriculture,532,357,1896,714,1182,0,00281e2d86058286d5548b15a7670e8eda57ef62
+Climate_h4_f2,Climate,1272,1080,2242,582,1660,0,00281e2d86058286d5548b15a7670e8eda57ef62
+SocialGood_h3_f1,SocialGood,916,700,4724,280,4444,0,00281e2d86058286d5548b15a7670e8eda57ef62
+Environment_h7_f2,Environment,15979,14301,2314,140,2174,0,00281e2d86058286d5548b15a7670e8eda57ef62

@@ -1,0 +1,9 @@
+task_id,scenario,origins_denominator,text_available_origins,text_available_rate,selected_facts_total,mask_mismatches,trace_mismatches,quality_max_abs_error
+Agriculture_h12_f1,proxy,357,357,1.0,6979,0,0,0.0
+Agriculture_h12_f1,conservative_lag,357,357,1.0,6881,0,0,0.0
+Climate_h4_f2,proxy,1080,1080,1.0,59896,0,0,0.0
+Climate_h4_f2,conservative_lag,1080,1080,1.0,59405,0,0,0.0
+SocialGood_h3_f1,proxy,700,341,0.4871428571428571,13898,0,0,0.0
+SocialGood_h3_f1,conservative_lag,700,340,0.4857142857142857,13677,0,0,0.0
+Environment_h7_f2,proxy,14301,14301,1.0,106766,0,0,0.0
+Environment_h7_f2,conservative_lag,14301,14301,1.0,104859,0,0,0.0

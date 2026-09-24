@@ -1,0 +1,6 @@
+task_id,segment,origins_denominator,selected_set_changed_origins,selected_set_changed_rate,coverage_true_to_false_origins,coverage_true_to_false_rate,changed_but_still_available_origins
+SocialGood_h3_f1,train,340,0,0.0,0,0.0,0
+SocialGood_h3_f1,calibration,90,71,0.7888888888888889,1,0.011111111111111112,70
+SocialGood_h3_f1,decision,181,181,1.0,0,0.0,181
+SocialGood_h3_f1,test,89,89,1.0,0,0.0,89
+SocialGood_h3_f1,all,700,341,0.48714285714285716,1,0.0014285714285714286,340

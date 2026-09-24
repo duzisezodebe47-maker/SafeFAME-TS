@@ -1,0 +1,9 @@
+task_id,domain,source,fact_count_denominator,source_file_missing_count,source_file_missing_rate,original_url_missing_count,original_url_missing_rate,publication_time_proxy_count,publication_time_proxy_rate
+Agriculture_h12_f1,Agriculture,report,714,0,0.0,714,1.0,714,1.0
+Agriculture_h12_f1,Agriculture,search,1182,0,0.0,1182,1.0,1182,1.0
+Climate_h4_f2,Climate,report,582,0,0.0,582,1.0,582,1.0
+Climate_h4_f2,Climate,search,1660,0,0.0,1660,1.0,1660,1.0
+Environment_h7_f2,Environment,report,140,0,0.0,140,1.0,140,1.0
+Environment_h7_f2,Environment,search,2174,0,0.0,2174,1.0,2174,1.0
+SocialGood_h3_f1,SocialGood,report,280,0,0.0,280,1.0,280,1.0
+SocialGood_h3_f1,SocialGood,search,4444,0,0.0,4444,1.0,4444,1.0
