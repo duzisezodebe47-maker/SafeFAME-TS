@@ -1,0 +1,15 @@
+å¼€å§‹: 19:56:24
+NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
+{"status": "completed", "model": "N+S+Q+SF", "rows": 504, "path": "gate_candidate", "test_predictions_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75"}
+EXIT=0
+ç»“æŸ: 19:56:28
+å¼€å§‹: 19:56:43
+NOTE: Êı¾İ²à¶ÁÈ¡Æ÷²»ÔÚÎ»£¨D:\½»´óÈÎÎñ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\ÈË¹¤ÖÇÄÜ´ó×÷Òµ\¸¨ÖúµçÄÔ02½»¸¶01´Î\bundle.py£©£¬¸ÄÓÃ¹Ù·½ÊÊÅä²ãÖ±¶Á£»Ç©ÃûÓëÖğÎÄ¼ş¹şÏ£Ğ£ÑéÓÉ verify_bundle Í³Ò»Ö´ĞĞ¡£
+!! ¾¯¸æ£º¹¤×÷ÇøÓĞÎ´Ìá½»¸Ä¶¯£¬±¾´ÎÖ¤¾İµÄ code_commit ²»ÍêÕû±êÊ¶ËùÅÜ´úÂë£º
+!!   ?? "03 \350\276\205\345\212\251\347\224\265\350\204\221\344\272\214 \344\272\244\344\273\230\344\270\203\346\254\241/model/"
+!! ÕıÊ½½»¸¶ÇëÔÚ¸É¾»Ìá½»ÉÏÖØÅÜ£¨¼û RUNBOOK£©¡£
+!! ¾¯¸æ£º¹¤×÷ÇøÓĞÎ´Ìá½»¸Ä¶¯£¬±¾´ÎÖ¤¾İµÄ code_commit ²»ÍêÕû±êÊ¶ËùÅÜ´úÂë£º
+!!   ?? "03 \350\276\205\345\212\251\347\224\265\350\204\221\344\272\214 \344\272\244\344\273\230\344\270\203\346\254\241/model/"
+!! ÕıÊ½½»¸¶ÇëÔÚ¸É¾»Ìá½»ÉÏÖØÅÜ£¨¼û RUNBOOK£©¡£
+{"replay": "PASS", "isolation": "PASS", "unique_paths_read": 98, "checks": {"replay_exit_zero": true, "predictions_byte_identical": true, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_targets_are_nan_in_isolated_read": true, "non_test_truth_untouched": true, "no_test_truth_values_available_to_model": true, "no_error_metric_computed_in_entry": true}}
+EXIT=0

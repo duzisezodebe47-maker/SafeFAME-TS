@@ -1,0 +1,41 @@
+{
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "candidate": "N+S+Q+SF",
+  "purpose": "确定性重放：相同输入再跑一次，仅用于证明可复现，不用于调参",
+  "delivered_csv_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75",
+  "replay_csv_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75",
+  "weight_hash": "713a94de421421418fa4511cabc5ea99461ed5872c96dd8ca3cf28ccd7a904c0",
+  "test_fit_weight_hash": "c1df959654763e61c609c79f87e488878cda8385102919351c1a403197780454",
+  "n_rows": 504,
+  "checks": {
+    "replay_exit_zero": true,
+    "predictions_byte_identical": true,
+    "weight_hash_identical": true,
+    "test_fit_weight_hash_identical": true,
+    "alpha_by_group_identical": true,
+    "row_count_identical": true,
+    "test_targets_are_nan_in_isolated_read": true,
+    "non_test_truth_untouched": true,
+    "no_test_truth_values_available_to_model": true,
+    "no_error_metric_computed_in_entry": true
+  },
+  "verdict": "PASS",
+  "code_provenance": {
+    "code_commit": "4fd2c0cf945937ec9b0611e8ed46cc27dc08c0ae",
+    "worktree_dirty": true,
+    "dirty_files": [
+      "?? \"03 \\350\\276\\205\\345\\212\\251\\347\\224\\265\\350\\204\\221\\344\\272\\214 \\344\\272\\244\\344\\273\\230\\344\\270\\203\\346\\254\\241/model/\""
+    ],
+    "scope": "03 辅助电脑二 交付七次/model"
+  },
+  "runtime": {
+    "wall_seconds": 1.166,
+    "cpu_seconds": 1.0,
+    "peak_rss_bytes": 174080000,
+    "peak_rss_mib": 166.0,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  }
+}

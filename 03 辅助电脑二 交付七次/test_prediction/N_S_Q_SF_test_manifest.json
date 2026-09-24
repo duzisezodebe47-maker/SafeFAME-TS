@@ -1,0 +1,149 @@
+{
+  "task": "Agriculture_h12_f1",
+  "scenario": "proxy",
+  "candidate": "N+S+Q+SF",
+  "requested_candidate": "N+S+Q+SF",
+  "route_selected": "N+S+Q+SF",
+  "route_fallback": "AR-Ridge",
+  "route_status": "frozen",
+  "input_anchors": {
+    "route_file_sha256": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70",
+    "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+    "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+    "selection_manifest_sha256": "3849e886672ec4f938c60b114dc3e0af8dcca636f9fe0f42f85ca1bec6c98067",
+    "selection_config_sha256": "9a296ccb21264f86227cabeaeb171b8a6a56057d8cbb6daa3314e4cfad0f4f71"
+  },
+  "n_rows": 504,
+  "n_test_origins": 42,
+  "csv_columns": [
+    "task_id",
+    "fold_id",
+    "origin_id",
+    "origin_index",
+    "segment",
+    "scenario",
+    "candidate_id",
+    "seed",
+    "step",
+    "y_pred",
+    "target_scale",
+    "bundle_signature",
+    "config_sha256",
+    "code_commit"
+  ],
+  "csv_sha256": "fb51b7b03b22929bce1553ecce21948d8c83b1723a48a58035bb1d425db69e75",
+  "code_commit": "4fd2c0cf945937ec9b0611e8ed46cc27dc08c0ae",
+  "code_provenance": {
+    "code_commit": "4fd2c0cf945937ec9b0611e8ed46cc27dc08c0ae",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付六次/model"
+  },
+  "runtime": {
+    "wall_seconds": 1.036,
+    "cpu_seconds": 0.391,
+    "peak_rss_bytes": 174067712,
+    "peak_rss_mib": 166.0,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "test_isolation": {
+    "isolate_test": true,
+    "test_targets_nan": true,
+    "test_view_has_targets": false,
+    "mechanism": "read_frozen_bundle(isolate_test=True)：载入后立即把 test 段 targets/targets_standardized 置 NaN；模型只拿到仅特征视图"
+  },
+  "model_run": "N+S+Q+SF",
+  "grid": {
+    "train": {
+      "segment": "train",
+      "n_origins": 177,
+      "bounds": [
+        0,
+        212
+      ],
+      "horizon": 12,
+      "index_min": 24,
+      "index_max": 200
+    },
+    "calibration": {
+      "segment": "calibration",
+      "n_origins": 43,
+      "bounds": [
+        212,
+        266
+      ],
+      "horizon": 12,
+      "index_min": 212,
+      "index_max": 254
+    },
+    "decision": {
+      "segment": "decision",
+      "n_origins": 95,
+      "bounds": [
+        266,
+        372
+      ],
+      "horizon": 12,
+      "index_min": 266,
+      "index_max": 360
+    },
+    "test": {
+      "segment": "test",
+      "n_origins": 42,
+      "bounds": [
+        372,
+        425
+      ],
+      "horizon": 12,
+      "index_min": 372,
+      "index_max": 413
+    }
+  },
+  "input_sha256": {
+    "train": "268683113705947d3d752497fe0e880f8866cdd8d661b379de88437c612e7a2a",
+    "calibration": "48ce9a1f2da9748995f4534a03b76378e1e2967163bb522b8eb700a34f240651",
+    "decision": "9571a6ac176d937a680afd23b772dc0ff6029a3092104be81035185fd1003ebb"
+  },
+  "route_anchors_checked": [
+    "split_spec_sha256",
+    "bundle_signature"
+  ],
+  "route_anchors_missing": [],
+  "test_view_has_targets": false,
+  "model_config": {
+    "candidate": "N+S+Q+SF",
+    "branches": [
+      "N",
+      "S",
+      "Q",
+      "SF"
+    ],
+    "alpha_grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0,
+      10000.0
+    ],
+    "frozen_alpha_by_group": {
+      "N": 100.0,
+      "S": 1000.0,
+      "Q": 100.0,
+      "SF": 10000.0
+    },
+    "solver": "group-penalized ridge, cholesky, float64 normal equations",
+    "target_scale": "train_only_standardized_OT"
+  },
+  "selection_input_sha256": "10eb1c36c3bbe2f26a21d71be2f4abd04c57a69c46e292dc988e0747aba68304",
+  "extended_input_sha256": "c69a1c91eb99cbf75e8d4a3809f222c2fe7c06566711843e9b071560f6009ceb",
+  "selection_rows": 220,
+  "extended_rows": 315,
+  "weight_hash": "713a94de421421418fa4511cabc5ea99461ed5872c96dd8ca3cf28ccd7a904c0",
+  "test_fit_weight_hash": "c1df959654763e61c609c79f87e488878cda8385102919351c1a403197780454",
+  "path": "gate_candidate",
+  "note": "测试段预测。生成时未读取测试真值（隔离模式）；路由已冻结且强制校验。最终指标由主控独立计分，本侧不报告任何测试性能。"
+}
