@@ -1,0 +1,42 @@
+{
+  "status": "AGRICULTURE_TEST_CLOSED",
+  "reviewed_at": "2026-09-24",
+  "data_delivery": {
+    "branch": "3218151885-creator",
+    "commit": "a06dfe1f2c34c604c6d2b7e374aac44e1783dde9",
+    "release_bytes": 21789688,
+    "release_sha256": "dc979f4a63308dee4075e9517ddee6652c9d11cca24f45be94a4687e11b1237e",
+    "zip_entries": 108,
+    "master_clean_replay": "PASS",
+    "origin_records": 32876,
+    "negative_cases_passed": 9,
+    "remaining_source_limitation": "original URLs and publication times are unverified"
+  },
+  "model_delivery": {
+    "branch": "SHY",
+    "commit": "d842602ebf4030f05f5fbdc9ee86acb7e3067cdb",
+    "prediction_code_commit": "de88307a5d288d127151fbc4869873f7e4984ff7",
+    "prediction_rows": 504,
+    "prediction_sha256": "d43f067d7c8d4c616f728e643b950b8cb060374a05df5a24f9e54c19ee6fc28f",
+    "manifest_files_verified": 36,
+    "master_tests_passed": 85,
+    "deterministic_replay": "PASS",
+    "historical_directory_mutated": true,
+    "test_truth_isolation": "loaded container then test rows masked; perturbation invariant"
+  },
+  "test_result": {
+    "task": "Agriculture_h12_f1",
+    "scenario": "proxy",
+    "selected": "N+S+Q+SF",
+    "fallback": "AR-Ridge",
+    "test_origins": 42,
+    "prediction_points": 504,
+    "fallback_mse": 0.44564054723239305,
+    "selected_mse": 0.18937278281768827,
+    "gain_pct": 57.505486429866096,
+    "paired_delta": 0.25626776441470484,
+    "moving_block_ci95": [0.22195515802974186, 0.38498597625637615],
+    "origin_win_rate": 0.9761904761904762
+  },
+  "next_domain": "Climate_h4_f2"
+}

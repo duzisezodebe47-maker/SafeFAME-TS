@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "files_sha256": {
+    "Agriculture_half_metrics.csv": "fc2af11ea82668b264745c44972bdec6c11555de843e5bf9e330df3e08327fd5",
+    "Agriculture_horizon_metrics.csv": "09fb1d4b1f06d97a57136b50ddc1f07742c6d03408c276886d5503816e77f64d",
+    "Agriculture_paired_bootstrap.csv": "53e9ce436e65bb3008116267e25d54def8d88f9bf6291cc67b077c3a639cc30e",
+    "Agriculture_test_predictions_bound.csv": "91f634b05865658aeffff5e3db71c6d692df7a6944d947ab1f648c08ec63169a",
+    "Agriculture_test_score.json": "f1448182d7d166b272a2366e661995440d076878eff8c8a5cb53633a5353e927",
+    "sealed_route.json": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70",
+    "spec.json": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3",
+    "task.json": "11a326a23d5a6379e4ca0cbe4190b9778ad4e21a79322098c3b8a6fe61576986",
+    "test_predictions.jsonl": "37bbc98efb3dca2dedc618356a274e7d5eab89a53ebf4ff2236ad471949f0e83",
+    "test_samples.jsonl": "38d6a65746b9ffbb5a735983cb0504d9e0bc471f7fdaa8545b653d18dd60b071"
+  },
+  "input_sha256": {
+    "baseline_csv": "9f5e068570245597727f9ccdad976df786c47738b49bc03c280e76f18098c9f0",
+    "selected_csv": "d43f067d7c8d4c616f728e643b950b8cb060374a05df5a24f9e54c19ee6fc28f",
+    "route": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70",
+    "task": "11a326a23d5a6379e4ca0cbe4190b9778ad4e21a79322098c3b8a6fe61576986",
+    "spec": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3"
+  },
+  "note": "Positive paired delta means N+S+Q+SF has lower origin-level MSE than AR-Ridge."
+}

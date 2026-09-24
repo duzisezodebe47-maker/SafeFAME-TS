@@ -1,0 +1,15 @@
+{
+  "task_id": "Agriculture_h12_f1",
+  "fold_id": 1,
+  "domain": "Agriculture",
+  "horizon": 12,
+  "input_len": 24,
+  "n_rows": 532,
+  "train_end": 212,
+  "cal_end": 266,
+  "dec_end": 372,
+  "test_end": 425,
+  "seasonal_period": 12,
+  "snapshot_sha256": "c50789b329440a1612a160433081ecdd39e7e8b9dfde49f6aee5d63653c4db38",
+  "feature_manifest_sha256": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38"
+}

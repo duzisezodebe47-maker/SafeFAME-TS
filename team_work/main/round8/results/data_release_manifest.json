@@ -1,0 +1,1772 @@
+{
+  "schema_version": 1,
+  "status": "frozen_release_inputs",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+  "self_exclusion": "MANIFEST.json is excluded from its own hash inventory to avoid a circular hash.",
+  "files": [
+    {
+      "relative_path": "EXPECTED_OUTPUTS.json",
+      "bytes": 1726,
+      "rows": 1,
+      "columns": [
+        "status",
+        "files"
+      ],
+      "shape": null,
+      "sha256": "69208d0ada4c440c5e06dabbf0c658037eb18985c651fa64e3f1a17e69b6daf8",
+      "generation_command": "code/replay.py --build-reference; SHA256 computed from generated output",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "README.md",
+      "bytes": 2246,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "1e43f3a27d9ce1451d4d9488748a083ac0b8f0e71f780b6d5af101042b489c7f",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "RUNBOOK.md",
+      "bytes": 1785,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "2bcaec8ffada2d2b17230df920130b3096566508da794d8d4397377867fd9626",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "code/audit_source_time_boundaries.py",
+      "bytes": 21039,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "554563d92039ad0bb212413ea48d8911a5f6ac432b8b130f47faaf58f56c5323",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "code/build_tables.py",
+      "bytes": 9889,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "7cad1b9a19acf94f77f00e6bff1d18e917a0db89d78c708b4b8eb1d936b20e12",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "code/make_manifest.py",
+      "bytes": 4859,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "0bdb2275e7fba81655637a416cb314e5782e91a31454b2333c4894071135082f",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "code/replay.py",
+      "bytes": 8815,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "54d33650e0f072e89b8af37c28e18920ff8cf15702832e3721286bb07e2fadcc",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "docs/table_schema.md",
+      "bytes": 3168,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "cb94cfdbe394f6afc7a3902e6d7e7b529d963dff88ed12a965bdb14b14bfcade",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "inputs/fact_corpus.csv",
+      "bytes": 5992592,
+      "rows": 25613,
+      "columns": [
+        "domain",
+        "source",
+        "start_date",
+        "end_date",
+        "fact",
+        "text_id",
+        "characters",
+        "future_language_flag"
+      ],
+      "shape": null,
+      "sha256": "c07126f36c05278486b1379a7c4c9be2e1c2a890214802bfccca7b517e7d7ffb",
+      "generation_command": "辅助电脑02交付01次/audit.py::run_audit (fixed Time-MMD revision)",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/conservative_lag/quality.npy",
+      "bytes": 14408,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:10"
+      ],
+      "shape": [
+        357,
+        10
+      ],
+      "sha256": "9507a343716c7dd1e9e47cb8153af10b02aa0474dec8ba23e3f17356f3d4dd72",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/conservative_lag/semantic.npy",
+      "bytes": 1096832,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:768"
+      ],
+      "shape": [
+        357,
+        768
+      ],
+      "sha256": "67b2532c73295dd03fafe470f8e16d20e06304f3463d55a98f376c8b8e8231e2",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/conservative_lag/source_available.npy",
+      "bytes": 842,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:2"
+      ],
+      "shape": [
+        357,
+        2
+      ],
+      "sha256": "f0130c339feea285ec43675cb3247e505f7c40576170f50a30664feb63fe868c",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/conservative_lag/text_available.npy",
+      "bytes": 485,
+      "rows": 357,
+      "columns": [
+        "axis_0:357"
+      ],
+      "shape": [
+        357
+      ],
+      "sha256": "878c523d17dbf5e80b3151b3e3d8df47c4106f50275ee255a5c55bac55d8c13b",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/conservative_lag/text_trace.jsonl",
+      "bytes": 242654,
+      "rows": 357,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "004498a838955695d242e49055b9e69452a49d179749b37f4d6217eb9344d185",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/frequency.npy",
+      "bytes": 14408,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:10"
+      ],
+      "shape": [
+        357,
+        10
+      ],
+      "sha256": "eda95de93d8814d2716c8a821317374f36dc4e3b581732612f2632d5f5970b9e",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/numeric_fit.json",
+      "bytes": 224,
+      "rows": 1,
+      "columns": [
+        "mean",
+        "std",
+        "median",
+        "fit_rows_sha256",
+        "train_end",
+        "ddof"
+      ],
+      "shape": null,
+      "sha256": "edc2fea8d04e4dbfb58e614d32b9e044d916a81755e2efb40f38103b5e879f6c",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/numeric_history.npy",
+      "bytes": 34400,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:24"
+      ],
+      "shape": [
+        357,
+        24
+      ],
+      "sha256": "19a66bd888f6bde083349397702e002c4e61983922b54f16de9f60d1672aebe8",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/numeric_history_raw.npy",
+      "bytes": 34400,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:24"
+      ],
+      "shape": [
+        357,
+        24
+      ],
+      "sha256": "a16afe69766121a9c21958981aad7d1567db81fdf34aab3eb40d54363467df56",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/numeric_missing.npy",
+      "bytes": 8696,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:24"
+      ],
+      "shape": [
+        357,
+        24
+      ],
+      "sha256": "be1943da938b12b31abd82f562be89ed11d75a1bd58f1d20910e079a64dbd2ef",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/origin_index.npy",
+      "bytes": 2984,
+      "rows": 357,
+      "columns": [
+        "axis_0:357"
+      ],
+      "shape": [
+        357
+      ],
+      "sha256": "ee9d3d0b9bee6b18d91e8af22cd31b762383b4ab408d3f79ff4132891c0e84b4",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/proxy/quality.npy",
+      "bytes": 14408,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:10"
+      ],
+      "shape": [
+        357,
+        10
+      ],
+      "sha256": "fd0ea13b86900227dcd8169bcf7c05a6efa872e47163c145bc190be1be11ee83",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/proxy/semantic.npy",
+      "bytes": 1096832,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:768"
+      ],
+      "shape": [
+        357,
+        768
+      ],
+      "sha256": "d89fef08426e819756721ee3192e11fcd415a51367b733b4a16af121a9c7bf5b",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/proxy/source_available.npy",
+      "bytes": 842,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:2"
+      ],
+      "shape": [
+        357,
+        2
+      ],
+      "sha256": "f0130c339feea285ec43675cb3247e505f7c40576170f50a30664feb63fe868c",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/proxy/text_available.npy",
+      "bytes": 485,
+      "rows": 357,
+      "columns": [
+        "axis_0:357"
+      ],
+      "shape": [
+        357
+      ],
+      "sha256": "878c523d17dbf5e80b3151b3e3d8df47c4106f50275ee255a5c55bac55d8c13b",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/proxy/text_trace.jsonl",
+      "bytes": 244646,
+      "rows": 357,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "af693d36d9cc0da034397c92674d189f5d20980dbe42aced155e79d25b902795",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/sample_audit.csv",
+      "bytes": 48905,
+      "rows": 401,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "9358b8c74163d3929c3a2e784e657b9fbf9b6ee1ec10c5f7abfa29fd0e2e3c28",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/samples.csv",
+      "bytes": 42899,
+      "rows": 357,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "b5472e1035bdb7e70874c16d18079ee56bc71e77d1002b2cbc127216972802ec",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/target_time.npy",
+      "bytes": 548480,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:12"
+      ],
+      "shape": [
+        357,
+        12
+      ],
+      "sha256": "f72391703865710e107c958ec351cb4f968dfd2ff821b7f6309cdeb1f21eff14",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/targets.npy",
+      "bytes": 17264,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:12"
+      ],
+      "shape": [
+        357,
+        12
+      ],
+      "sha256": "249f0912ce0d2f19055aa0c36838cda1b44659aef7962f27097ef20c1e2ce55c",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/targets_raw.npy",
+      "bytes": 17264,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:12"
+      ],
+      "shape": [
+        357,
+        12
+      ],
+      "sha256": "249f0912ce0d2f19055aa0c36838cda1b44659aef7962f27097ef20c1e2ce55c",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Agriculture_h12_f1/targets_standardized.npy",
+      "bytes": 17264,
+      "rows": 357,
+      "columns": [
+        "axis_0:357",
+        "axis_1:12"
+      ],
+      "shape": [
+        357,
+        12
+      ],
+      "sha256": "7268185a8068aeb2ee6c1785f63b5486ba816f9e42a068fe74a42f7b5cc3ec9e",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/conservative_lag/quality.npy",
+      "bytes": 43328,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:10"
+      ],
+      "shape": [
+        1080,
+        10
+      ],
+      "sha256": "cff1b3860ce8c8d5d06f6a825f9ae77c69ae7ac2856c3edf1caeceb9a6ee29bf",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/conservative_lag/semantic.npy",
+      "bytes": 3317888,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:768"
+      ],
+      "shape": [
+        1080,
+        768
+      ],
+      "sha256": "f666771921a64917830c2cfd8393d704519951055b99bfb1a9e6c2129776bb82",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/conservative_lag/source_available.npy",
+      "bytes": 2288,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:2"
+      ],
+      "shape": [
+        1080,
+        2
+      ],
+      "sha256": "66e6ea25e71ca09e9854c143cd2e2ff616c2f21b5c49cd6ccf49c1001efe8209",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/conservative_lag/text_available.npy",
+      "bytes": 1208,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080"
+      ],
+      "shape": [
+        1080
+      ],
+      "sha256": "296af3d488a28b76aee159e64ce2e53e0ea3adc088ce2ed06c5bb63540cce5ee",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/conservative_lag/text_trace.jsonl",
+      "bytes": 1500347,
+      "rows": 1080,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "78aebbbba09bd2f12acc77024e565828208527cb7efe5cdede80a6f421079b7d",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/frequency.npy",
+      "bytes": 43328,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:10"
+      ],
+      "shape": [
+        1080,
+        10
+      ],
+      "sha256": "85faa8ea2aedc881ea04e30e0666b336eaa5dfdb771e48f1e3686a73a287dba6",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/numeric_fit.json",
+      "bytes": 210,
+      "rows": 1,
+      "columns": [
+        "mean",
+        "std",
+        "median",
+        "fit_rows_sha256",
+        "train_end",
+        "ddof"
+      ],
+      "shape": null,
+      "sha256": "778eed1a8c001913bbe77d42077941d48f0b030ea329cd5117d2a9f8a94e4cbc",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/numeric_history.npy",
+      "bytes": 224768,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:52"
+      ],
+      "shape": [
+        1080,
+        52
+      ],
+      "sha256": "87c4289d1ecd4d06c684558e2b64c96ae5e20f8632c8e7f793775d8f030cb833",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/numeric_history_raw.npy",
+      "bytes": 224768,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:52"
+      ],
+      "shape": [
+        1080,
+        52
+      ],
+      "sha256": "d13d3bc8c37c7d77a2953d4a04eac74a22cc64607c443ea0e3b33019b8b6bfb7",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/numeric_missing.npy",
+      "bytes": 56288,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:52"
+      ],
+      "shape": [
+        1080,
+        52
+      ],
+      "sha256": "f4ceb36fdc27b7c87dd81d4001bb2832edaa6b80f28e0f0cd712670039b0f639",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/origin_index.npy",
+      "bytes": 8768,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080"
+      ],
+      "shape": [
+        1080
+      ],
+      "sha256": "390fab034f970c39f27f7f66b64bd3864a5e964b36df49030e5a672ea186d005",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/proxy/quality.npy",
+      "bytes": 43328,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:10"
+      ],
+      "shape": [
+        1080,
+        10
+      ],
+      "sha256": "5fdda1a0cf739b1da1da82f2ec52df9e841df142229bd328c84083855e686076",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/proxy/semantic.npy",
+      "bytes": 3317888,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:768"
+      ],
+      "shape": [
+        1080,
+        768
+      ],
+      "sha256": "61c9ab1dd4bb4097ba4b216e02c6549bc4464e1ed77dde8ab46d0c6fb4f2b9be",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/proxy/source_available.npy",
+      "bytes": 2288,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:2"
+      ],
+      "shape": [
+        1080,
+        2
+      ],
+      "sha256": "66e6ea25e71ca09e9854c143cd2e2ff616c2f21b5c49cd6ccf49c1001efe8209",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/proxy/text_available.npy",
+      "bytes": 1208,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080"
+      ],
+      "shape": [
+        1080
+      ],
+      "sha256": "296af3d488a28b76aee159e64ce2e53e0ea3adc088ce2ed06c5bb63540cce5ee",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/proxy/text_trace.jsonl",
+      "bytes": 1510187,
+      "rows": 1080,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "cab783ce2fddf08427701ddd5fb5d3f0d7fa84738df110525048b8928256fcdd",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/sample_audit.csv",
+      "bytes": 120369,
+      "rows": 1092,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "375b41ab213222b30a18231dcf712c32711ff7ecee214578bce69f01981ee288",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/samples.csv",
+      "bytes": 118836,
+      "rows": 1080,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "70a294d4d118661128adfe174e26be9df8d28d6511a0b3268e91d7b013851e17",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/target_time.npy",
+      "bytes": 553088,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:4"
+      ],
+      "shape": [
+        1080,
+        4
+      ],
+      "sha256": "c59e868fc902518957b6305495adf4a48ca86f3136269e0b37c528bdb5ce2ade",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/targets.npy",
+      "bytes": 17408,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:4"
+      ],
+      "shape": [
+        1080,
+        4
+      ],
+      "sha256": "f5736b863f06d17d98a074bc0924dc0e7c78f299ccc1ea36148be566c1d676c9",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/targets_raw.npy",
+      "bytes": 17408,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:4"
+      ],
+      "shape": [
+        1080,
+        4
+      ],
+      "sha256": "f5736b863f06d17d98a074bc0924dc0e7c78f299ccc1ea36148be566c1d676c9",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Climate_h4_f2/targets_standardized.npy",
+      "bytes": 17408,
+      "rows": 1080,
+      "columns": [
+        "axis_0:1080",
+        "axis_1:4"
+      ],
+      "shape": [
+        1080,
+        4
+      ],
+      "sha256": "a3953baa2c5b5827ccd2bad1d864a72f161624a823d9b75a64cc9ea6fb22e249",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/conservative_lag/quality.npy",
+      "bytes": 572168,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:10"
+      ],
+      "shape": [
+        14301,
+        10
+      ],
+      "sha256": "699b5d3396015d2fda0c1a601a8b188df41ebd7278927cb027c564f4f3ed19fb",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/conservative_lag/semantic.npy",
+      "bytes": 43932800,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:768"
+      ],
+      "shape": [
+        14301,
+        768
+      ],
+      "sha256": "6f975faedadc31470d17becc36b994faced04b2fc505d2bc966c81675995a0d1",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/conservative_lag/source_available.npy",
+      "bytes": 28730,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:2"
+      ],
+      "shape": [
+        14301,
+        2
+      ],
+      "sha256": "9a25cd567786f8e6be188e550fc7859286c73906dfddfa707d1a965d1327f34d",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/conservative_lag/text_available.npy",
+      "bytes": 14429,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301"
+      ],
+      "shape": [
+        14301
+      ],
+      "sha256": "ca71d0f05d9fcb3ca597479c8836e98be9d6bdefab1bbde48033162a9d5bc573",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/conservative_lag/text_trace.jsonl",
+      "bytes": 6308436,
+      "rows": 14301,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "e7f020a0a7c0ea59e55dcf78b762d542e38b409b09314ecbf90860072f46fcfb",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/frequency.npy",
+      "bytes": 572168,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:10"
+      ],
+      "shape": [
+        14301,
+        10
+      ],
+      "sha256": "fbfdc9bc06d06d88d7fc42bf826b719bfd3fb141a99554225f776eb4445f3815",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/numeric_fit.json",
+      "bytes": 209,
+      "rows": 1,
+      "columns": [
+        "mean",
+        "std",
+        "median",
+        "fit_rows_sha256",
+        "train_end",
+        "ddof"
+      ],
+      "shape": null,
+      "sha256": "b6d59f5fada826ab2ae511487f3c93cd6a7a4f1cf0bf59eb7a54f9fff615fbea",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/numeric_history.npy",
+      "bytes": 3203552,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:56"
+      ],
+      "shape": [
+        14301,
+        56
+      ],
+      "sha256": "a949ee667cd12637a76e4874113ee55fefa709ca34b942cd3a72c0904f544766",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/numeric_history_raw.npy",
+      "bytes": 3203552,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:56"
+      ],
+      "shape": [
+        14301,
+        56
+      ],
+      "sha256": "83c56892d15235d69199547a0aaaf6540cb5094943d6aabc5d90d8fa9fcbcfdf",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/numeric_missing.npy",
+      "bytes": 800984,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:56"
+      ],
+      "shape": [
+        14301,
+        56
+      ],
+      "sha256": "dc4a99bad42c47427ee3c58f0a07d98a8c0f485aa6eb01ab51f9429eb0b8db44",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/origin_index.npy",
+      "bytes": 114536,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301"
+      ],
+      "shape": [
+        14301
+      ],
+      "sha256": "ab8812221a40c4c043c1274248b5746eb09960ca62309737620d187dc5eaad79",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/proxy/quality.npy",
+      "bytes": 572168,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:10"
+      ],
+      "shape": [
+        14301,
+        10
+      ],
+      "sha256": "e6596af4e58a5959a482322c7336c67048aae4c74c1293d687b8f6dc9bfee443",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/proxy/semantic.npy",
+      "bytes": 43932800,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:768"
+      ],
+      "shape": [
+        14301,
+        768
+      ],
+      "sha256": "66c927be738d777c145c035298c9d6966d8444a97d9691fd59564b122462284d",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/proxy/source_available.npy",
+      "bytes": 28730,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:2"
+      ],
+      "shape": [
+        14301,
+        2
+      ],
+      "sha256": "9a25cd567786f8e6be188e550fc7859286c73906dfddfa707d1a965d1327f34d",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/proxy/text_available.npy",
+      "bytes": 14429,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301"
+      ],
+      "shape": [
+        14301
+      ],
+      "sha256": "ca71d0f05d9fcb3ca597479c8836e98be9d6bdefab1bbde48033162a9d5bc573",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/proxy/text_trace.jsonl",
+      "bytes": 6346576,
+      "rows": 14301,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "4e0fad9cf3228a2aee225c1f9315f37f4feac19184e052e702c82c808e6b74a3",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/sample_audit.csv",
+      "bytes": 1758509,
+      "rows": 14325,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "6f1ed0460b9be808f8aa98b44404c70e2fc63ca758b96b957a922c96f24cedc3",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/samples.csv",
+      "bytes": 1755137,
+      "rows": 14301,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "1d5f8d59c5cdea48eb02b3cdb32186105e6b430861cc7a105d81c23dbfa0a891",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/target_time.npy",
+      "bytes": 12813824,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:7"
+      ],
+      "shape": [
+        14301,
+        7
+      ],
+      "sha256": "3a8a8476171b1e7765b0ab979c79d58035349757d891193e99af8e388da5123b",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/targets.npy",
+      "bytes": 400556,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:7"
+      ],
+      "shape": [
+        14301,
+        7
+      ],
+      "sha256": "9114354b93b003bd9d99added7ebc54dcaa95951a1f25895ab57157815acee26",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/targets_raw.npy",
+      "bytes": 400556,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:7"
+      ],
+      "shape": [
+        14301,
+        7
+      ],
+      "sha256": "9114354b93b003bd9d99added7ebc54dcaa95951a1f25895ab57157815acee26",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/Environment_h7_f2/targets_standardized.npy",
+      "bytes": 400556,
+      "rows": 14301,
+      "columns": [
+        "axis_0:14301",
+        "axis_1:7"
+      ],
+      "shape": [
+        14301,
+        7
+      ],
+      "sha256": "2290da37d6fd5ae5eadc8c32d3e56927b099c5d5ee1cac5afe5472936b44c192",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/conservative_lag/quality.npy",
+      "bytes": 28128,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:10"
+      ],
+      "shape": [
+        700,
+        10
+      ],
+      "sha256": "4fe6349f9f9b63c6c411988948963caf444d86a07db4691c35098b2c3abfd69f",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/conservative_lag/semantic.npy",
+      "bytes": 2150528,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:768"
+      ],
+      "shape": [
+        700,
+        768
+      ],
+      "sha256": "9ad5c0bc640c80e29d01f1de5ba3672ed3a09a51c36330fd98962550f06a9fd6",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/conservative_lag/source_available.npy",
+      "bytes": 1528,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:2"
+      ],
+      "shape": [
+        700,
+        2
+      ],
+      "sha256": "076b9d62f300f75c83bd402fad6ea5a103581f2c7890a4409b4ef034145149c1",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/conservative_lag/text_available.npy",
+      "bytes": 828,
+      "rows": 700,
+      "columns": [
+        "axis_0:700"
+      ],
+      "shape": [
+        700
+      ],
+      "sha256": "a847b54c7d8425939cde11820d191d6c45acdb2c07ae8ba60ad286791db053da",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/conservative_lag/text_trace.jsonl",
+      "bytes": 479126,
+      "rows": 700,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "81b629dcc5faea8d4661501d5c58d5bb26ca5a8772a27ee63d35b4e5d4767e6f",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/frequency.npy",
+      "bytes": 28128,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:10"
+      ],
+      "shape": [
+        700,
+        10
+      ],
+      "sha256": "c56bc2a91b18ad9f7561785312bfce658c4cef872f018466e0c1cc56e0a81f17",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/numeric_fit.json",
+      "bytes": 208,
+      "rows": 1,
+      "columns": [
+        "mean",
+        "std",
+        "median",
+        "fit_rows_sha256",
+        "train_end",
+        "ddof"
+      ],
+      "shape": null,
+      "sha256": "291f19cff9270d4ae89297eceaffebc63748fe645dba6549827b4d953b8306b0",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/numeric_history.npy",
+      "bytes": 67328,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:24"
+      ],
+      "shape": [
+        700,
+        24
+      ],
+      "sha256": "8706ef0ddc2696b86b217ebded9dcef2baa9c3da7d6a9746b8e0622d601111ab",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/numeric_history_raw.npy",
+      "bytes": 67328,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:24"
+      ],
+      "shape": [
+        700,
+        24
+      ],
+      "sha256": "30ca8deede411585ff44ad9a13bea94339a896b897dd566a78897d3391ad0b11",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/numeric_missing.npy",
+      "bytes": 16928,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:24"
+      ],
+      "shape": [
+        700,
+        24
+      ],
+      "sha256": "73738665ab4a7d19165eaf31ac3535f50a715294bd1406f991845dea7f0d09b3",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/origin_index.npy",
+      "bytes": 5728,
+      "rows": 700,
+      "columns": [
+        "axis_0:700"
+      ],
+      "shape": [
+        700
+      ],
+      "sha256": "fd54ec46816bba7622e6d3b20da4b9c96d515691a4c6a72d9e9b40b042893d35",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/proxy/quality.npy",
+      "bytes": 28128,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:10"
+      ],
+      "shape": [
+        700,
+        10
+      ],
+      "sha256": "498dc14e092d85e5ff7331c50cc39d3ff3747ba8d4d62fdb45af7877e37065e0",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/proxy/semantic.npy",
+      "bytes": 2150528,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:768"
+      ],
+      "shape": [
+        700,
+        768
+      ],
+      "sha256": "7cc41cc4ea32f02887c41830f7ba589b4e4d50f861e9c94d73ad0f08d46b84d8",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/proxy/source_available.npy",
+      "bytes": 1528,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:2"
+      ],
+      "shape": [
+        700,
+        2
+      ],
+      "sha256": "c40bfdff3c76c16619c916e72d09d74f6573eea282bb4725e24dd02f895917b1",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/proxy/text_available.npy",
+      "bytes": 828,
+      "rows": 700,
+      "columns": [
+        "axis_0:700"
+      ],
+      "shape": [
+        700
+      ],
+      "sha256": "acc926889fb25955b07f6d79c7d42a0bc33d1d039c128895816c3b0fb9bd1952",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/proxy/text_trace.jsonl",
+      "bytes": 483546,
+      "rows": 700,
+      "columns": [
+        "origin_id",
+        "origin_index",
+        "report_ids",
+        "search_ids",
+        "reason_counts",
+        "publication_time_status"
+      ],
+      "shape": null,
+      "sha256": "320ab9b2a2b655bc5b7864369bb56de77698915c486071d3807a51256a6739b8",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/sample_audit.csv",
+      "bytes": 81769,
+      "rows": 708,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "8bfb9a45b83984964204d63f0618dc50c16aa40db51cd7c6562a2855cc15f25f",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/samples.csv",
+      "bytes": 80717,
+      "rows": 700,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "98c2a9cb948aa3e391e6bbf594bfb6d5cc5106b142099985708996368b1ecaa8",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/target_time.npy",
+      "bytes": 268928,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:3"
+      ],
+      "shape": [
+        700,
+        3
+      ],
+      "sha256": "8c86a779e090594c1643bb6aed188693aed04773877aa15f4ab9881ce15f40f2",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/targets.npy",
+      "bytes": 8528,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:3"
+      ],
+      "shape": [
+        700,
+        3
+      ],
+      "sha256": "1a58c31aa8a42f0aa47e290dae772bfa8200cc516f96772117c64792e978dfae",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/targets_raw.npy",
+      "bytes": 8528,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:3"
+      ],
+      "shape": [
+        700,
+        3
+      ],
+      "sha256": "1a58c31aa8a42f0aa47e290dae772bfa8200cc516f96772117c64792e978dfae",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/SocialGood_h3_f1/targets_standardized.npy",
+      "bytes": 8528,
+      "rows": 700,
+      "columns": [
+        "axis_0:700",
+        "axis_1:3"
+      ],
+      "shape": [
+        700,
+        3
+      ],
+      "sha256": "fd368ad17ffe688956f0482a7642799a05f418be1b65a2c7935e789579332774",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/coverage.csv",
+      "bytes": 7988,
+      "rows": 48,
+      "columns": [
+        "task_id",
+        "scenario",
+        "segment",
+        "candidate_origins",
+        "retained_origins",
+        "excluded_origins",
+        "target_crossing_excluded",
+        "nonfinite_target_excluded",
+        "text_available_origins",
+        "unique_selected_texts",
+        "target_raw_mean",
+        "target_raw_std",
+        "target_standardized_mean",
+        "target_standardized_std",
+        "standardization_max_abs_error"
+      ],
+      "shape": null,
+      "sha256": "a3a2b0ea408ea53fa3aada72a687f47c368e9ab4f668a08820c79a4ee9abb4f7",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/manifest.json",
+      "bytes": 14783,
+      "rows": 1,
+      "columns": [
+        "bundle_signature",
+        "signature",
+        "inputs",
+        "files"
+      ],
+      "shape": null,
+      "sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/sample_audit.csv",
+      "bytes": 2009168,
+      "rows": 16526,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "horizon",
+        "origin_index",
+        "segment",
+        "reason",
+        "origin_id",
+        "cutoff_time",
+        "history_start",
+        "target_end_index",
+        "segment_lo",
+        "segment_hi"
+      ],
+      "shape": null,
+      "sha256": "be356bd89f0161bee9e6895507c8e0281cc733acc869b70097a8c5931b33c9b3",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/sample_audit_summary.csv",
+      "bytes": 1494,
+      "rows": 32,
+      "columns": [
+        "task_id",
+        "segment",
+        "reason",
+        "origins"
+      ],
+      "shape": null,
+      "sha256": "1a00fbf3883be49123122f15baa4f65899bbd8a2dcbbfcc305ffc1391019cbf5",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/samples.jsonl",
+      "bytes": 12523105,
+      "rows": 16438,
+      "columns": [
+        "task_id",
+        "fold_id",
+        "origin_id",
+        "origin_index",
+        "segment",
+        "horizon",
+        "cutoff_time",
+        "target_time",
+        "target",
+        "target_raw",
+        "cutoff_index",
+        "target_start_index",
+        "snapshot_sha256",
+        "bundle_signature",
+        "preprocessing_fit_end"
+      ],
+      "shape": null,
+      "sha256": "30b4a3cc119bead65159888635bbcdfe26b370030d82b049b81a7b81e9a3322c",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/formal_bundle/schema.json",
+      "bytes": 491,
+      "rows": 1,
+      "columns": [
+        "schema_version",
+        "scenarios",
+        "complete_source",
+        "semantic_dim",
+        "quality_dim",
+        "frequency_dim",
+        "numeric_interface",
+        "target_scale",
+        "status",
+        "numeric_features",
+        "split_spec_sha256"
+      ],
+      "shape": null,
+      "sha256": "5eaa444683aafe85b0ea2476a951b00835648aa05d4027242174f4cdcc854917",
+      "generation_command": "formal Bundle frozen by auxiliary data pipeline; signature a69821be115445265cde...",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/split_spec_v2.json",
+      "bytes": 2418,
+      "rows": 1,
+      "columns": [
+        "schema_version",
+        "status",
+        "approved_by",
+        "frozen_at_utc",
+        "snapshot_source_commit",
+        "snapshot_audit_sha256",
+        "basis_config",
+        "target_boundary",
+        "fit_policy",
+        "numeric_features",
+        "complete_source_rule",
+        "max_per_source",
+        "scenarios",
+        "primary_scenario",
+        "seed",
+        "alpha_grid",
+        "row_permutations",
+        "p_threshold",
+        "gate_candidates",
+        "numeric_fallback_candidates",
+        "seasonal_periods",
+        "notes",
+        "tasks"
+      ],
+      "shape": null,
+      "sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+      "generation_command": "master-frozen split_spec_v2.json, copied byte-for-byte",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "inputs/text_lineage.csv",
+      "bytes": 17838808,
+      "rows": 48140,
+      "columns": [
+        "raw_row",
+        "domain",
+        "source",
+        "raw_start",
+        "raw_end",
+        "fact",
+        "normalized_fact",
+        "start_date",
+        "end_date",
+        "text_id",
+        "canonical_text_id",
+        "reason",
+        "source_file",
+        "source_url",
+        "publication_verified",
+        "pred_fields_excluded"
+      ],
+      "shape": null,
+      "sha256": "90603c6e7fd62dc0f7b8d0ad80c93edea17a4a479afd536ef3668724ff01e9d1",
+      "generation_command": "辅助电脑02交付01次/audit.py::run_audit (fixed Time-MMD revision)",
+      "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+    },
+    {
+      "relative_path": "requirements-replay.txt",
+      "bytes": 27,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "8da5d35db6024eab34612e77ecd23453b669886d67747fb332e0a0c352d2f005",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    },
+    {
+      "relative_path": "tests/run_negative_cases.py",
+      "bytes": 4261,
+      "rows": null,
+      "columns": null,
+      "shape": null,
+      "sha256": "73b87a6e412bfd44ae6d56cfcbd670d612821e4020230392d9c60260026b8757",
+      "generation_command": "seventh-round source code / documentation",
+      "upstream_revision": null
+    }
+  ]
+}

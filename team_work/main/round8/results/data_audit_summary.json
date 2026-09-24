@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "audit_folder": "derived_input",
+  "facts": 25613,
+  "registered_sources": [
+    "report",
+    "search"
+  ],
+  "scenarios": [
+    "proxy",
+    "conservative_lag"
+  ],
+  "max_per_source": 32,
+  "origin_detail": "origin_time_audit.jsonl",
+  "origin_detail_sha256": "79419a50472dfef55524cae3cbd9b98c530b9f163d099d0f0dd4ae36205b46f9",
+  "fact_catalog_sha256": "a081e963967ca83298f31ed1606a3ded3b63100ff42cbd090631c44adde82b56",
+  "coverage_summary_sha256": "15101b7c111b8e200c3fd51ee8b7bed72008d0c07acc3f0911182d884e4186d3",
+  "socialgood_differences": 341,
+  "failures": [],
+  "failure_count": 0,
+  "negative_cases_v6": {
+    "status": "PASS",
+    "cases": [
+      {
+        "case": "end_exactly_at_cutoff",
+        "expected": "not_strictly_before_cutoff",
+        "observed": "not_strictly_before_cutoff",
+        "pass": true
+      },
+      {
+        "case": "end_at_conservative_lag_boundary",
+        "expected": "lag_not_elapsed",
+        "observed": "lag_not_elapsed",
+        "pass": true
+      },
+      {
+        "case": "reversed_interval",
+        "expected": "reversed_interval",
+        "observed": "reversed_interval",
+        "pass": true
+      },
+      {
+        "case": "missing_original_url",
+        "expected": "missing_original_url",
+        "observed": "missing_original_url",
+        "pass": true
+      },
+      {
+        "case": "duplicate_fact",
+        "expected": "duplicate_fact_later_excluded_by_canonical_dedup",
+        "observed": "duplicate_fact_later_excluded_by_canonical_dedup",
+        "pass": true,
+        "note": "Independent fixture only; formal Bundle is unchanged. Canonical identity is normalized fact plus source/date rule."
+      }
+    ],
+    "base_text_id": "38d16528a0b7bcd2"
+  },
+  "upstream_revision": "00281e2d86058286d5548b15a7670e8eda57ef62"
+}

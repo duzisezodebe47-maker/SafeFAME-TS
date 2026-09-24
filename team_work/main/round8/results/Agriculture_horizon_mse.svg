@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="620" viewBox="0 0 1080 620">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Arial,sans-serif;fill:#263238}.grid{stroke:#d9e1e6;stroke-width:1}.axis{stroke:#546e7a;stroke-width:1.5}</style>
+<text x="540.0" y="34" text-anchor="middle" font-size="24" font-weight="700">Agriculture held-out test error by forecast horizon</text>
+<line class="grid" x1="95" y1="540.00" x2="1045" y2="540.00"/>
+<text x="83" y="545.00" text-anchor="end" font-size="14">0.00</text>
+<line class="grid" x1="95" y1="447.00" x2="1045" y2="447.00"/>
+<text x="83" y="452.00" text-anchor="end" font-size="14">0.19</text>
+<line class="grid" x1="95" y1="354.00" x2="1045" y2="354.00"/>
+<text x="83" y="359.00" text-anchor="end" font-size="14">0.37</text>
+<line class="grid" x1="95" y1="261.00" x2="1045" y2="261.00"/>
+<text x="83" y="266.00" text-anchor="end" font-size="14">0.56</text>
+<line class="grid" x1="95" y1="168.00" x2="1045" y2="168.00"/>
+<text x="83" y="173.00" text-anchor="end" font-size="14">0.74</text>
+<line class="grid" x1="95" y1="75.00" x2="1045" y2="75.00"/>
+<text x="83" y="80.00" text-anchor="end" font-size="14">0.93</text>
+<line class="grid" x1="95.00" y1="75" x2="95.00" y2="540"/>
+<text x="95.00" y="568" text-anchor="middle" font-size="14">1</text>
+<line class="grid" x1="181.36" y1="75" x2="181.36" y2="540"/>
+<text x="181.36" y="568" text-anchor="middle" font-size="14">2</text>
+<line class="grid" x1="267.73" y1="75" x2="267.73" y2="540"/>
+<text x="267.73" y="568" text-anchor="middle" font-size="14">3</text>
+<line class="grid" x1="354.09" y1="75" x2="354.09" y2="540"/>
+<text x="354.09" y="568" text-anchor="middle" font-size="14">4</text>
+<line class="grid" x1="440.45" y1="75" x2="440.45" y2="540"/>
+<text x="440.45" y="568" text-anchor="middle" font-size="14">5</text>
+<line class="grid" x1="526.82" y1="75" x2="526.82" y2="540"/>
+<text x="526.82" y="568" text-anchor="middle" font-size="14">6</text>
+<line class="grid" x1="613.18" y1="75" x2="613.18" y2="540"/>
+<text x="613.18" y="568" text-anchor="middle" font-size="14">7</text>
+<line class="grid" x1="699.55" y1="75" x2="699.55" y2="540"/>
+<text x="699.55" y="568" text-anchor="middle" font-size="14">8</text>
+<line class="grid" x1="785.91" y1="75" x2="785.91" y2="540"/>
+<text x="785.91" y="568" text-anchor="middle" font-size="14">9</text>
+<line class="grid" x1="872.27" y1="75" x2="872.27" y2="540"/>
+<text x="872.27" y="568" text-anchor="middle" font-size="14">10</text>
+<line class="grid" x1="958.64" y1="75" x2="958.64" y2="540"/>
+<text x="958.64" y="568" text-anchor="middle" font-size="14">11</text>
+<line class="grid" x1="1045.00" y1="75" x2="1045.00" y2="540"/>
+<text x="1045.00" y="568" text-anchor="middle" font-size="14">12</text>
+<line class="axis" x1="95" y1="540" x2="1045" y2="540"/>
+<line class="axis" x1="95" y1="75" x2="95" y2="540"/>
+<polyline points="95.00,504.62 181.36,475.81 267.73,442.60 354.09,412.03 440.45,376.14 526.82,340.44 613.18,301.02 699.55,263.17 785.91,228.84 872.27,193.21 958.64,154.61 1045.00,109.44" fill="none" stroke="#D95F4B" stroke-width="4"/>
+<polyline points="95.00,521.60 181.36,509.93 267.73,494.00 354.09,481.65 440.45,468.65 526.82,457.06 613.18,444.30 699.55,428.21 785.91,408.77 872.27,395.00 958.64,376.75 1045.00,356.04" fill="none" stroke="#2474B5" stroke-width="4"/>
+<circle cx="95.00" cy="504.62" r="5" fill="#D95F4B"/>
+<circle cx="181.36" cy="475.81" r="5" fill="#D95F4B"/>
+<circle cx="267.73" cy="442.60" r="5" fill="#D95F4B"/>
+<circle cx="354.09" cy="412.03" r="5" fill="#D95F4B"/>
+<circle cx="440.45" cy="376.14" r="5" fill="#D95F4B"/>
+<circle cx="526.82" cy="340.44" r="5" fill="#D95F4B"/>
+<circle cx="613.18" cy="301.02" r="5" fill="#D95F4B"/>
+<circle cx="699.55" cy="263.17" r="5" fill="#D95F4B"/>
+<circle cx="785.91" cy="228.84" r="5" fill="#D95F4B"/>
+<circle cx="872.27" cy="193.21" r="5" fill="#D95F4B"/>
+<circle cx="958.64" cy="154.61" r="5" fill="#D95F4B"/>
+<circle cx="1045.00" cy="109.44" r="5" fill="#D95F4B"/>
+<circle cx="95.00" cy="521.60" r="5" fill="#2474B5"/>
+<circle cx="181.36" cy="509.93" r="5" fill="#2474B5"/>
+<circle cx="267.73" cy="494.00" r="5" fill="#2474B5"/>
+<circle cx="354.09" cy="481.65" r="5" fill="#2474B5"/>
+<circle cx="440.45" cy="468.65" r="5" fill="#2474B5"/>
+<circle cx="526.82" cy="457.06" r="5" fill="#2474B5"/>
+<circle cx="613.18" cy="444.30" r="5" fill="#2474B5"/>
+<circle cx="699.55" cy="428.21" r="5" fill="#2474B5"/>
+<circle cx="785.91" cy="408.77" r="5" fill="#2474B5"/>
+<circle cx="872.27" cy="395.00" r="5" fill="#2474B5"/>
+<circle cx="958.64" cy="376.75" r="5" fill="#2474B5"/>
+<circle cx="1045.00" cy="356.04" r="5" fill="#2474B5"/>
+<text x="570.0" y="596" text-anchor="middle" font-size="17">Forecast horizon</text>
+<text x="25" y="307.5" text-anchor="middle" font-size="17" transform="rotate(-90 25 307.5)">MSE (train-standardized OT)</text>
+<line x1="800" y1="55" x2="845" y2="55" stroke="#D95F4B" stroke-width="4"/><text x="855" y="61" font-size="15">AR-Ridge</text>
+<line x1="930" y1="55" x2="975" y2="55" stroke="#2474B5" stroke-width="4"/><text x="985" y="61" font-size="15">N+S+Q+SF</text>
+</svg>

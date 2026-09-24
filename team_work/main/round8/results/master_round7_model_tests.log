@@ -1,0 +1,107 @@
+NOTE: ���ݲ��ȡ������λ��D:\aaa2026�˹����ܿγ̱���\���ؽ�������\SafeFAME_TS_��7��ģ��_SHY_d842602\audit_detached_worktree\��������02����01��\bundle.py�������ùٷ������ֱ����ǩ�������ļ���ϣУ���� verify_bundle ͳһִ�С�
+NOTE: ���ݲ��ȡ������λ��D:\aaa2026�˹����ܿγ̱���\���ؽ�������\SafeFAME_TS_��7��ģ��_SHY_d842602\audit_detached_worktree\��������02����01��\bundle.py�������ùٷ������ֱ����ǩ�������ļ���ϣУ���� verify_bundle ͳһִ�С�
+�����ֲ��ԣ��ϳ����ݣ�
+
+========== ���ܵ����� 49 �� ==========
+�����ֲ��ԣ��ϳ����ݣ�
+
+--- �޸� 3�������������Զ��� spec ---
+  ok  Agriculture ���� = 3����Ĭ�� 12��
+  ok  Climate ���� = 5
+  ok  Environment ���� = 2
+  ok  ������δ�Ǽ����� �� �ܾ�����Ĭ�� 12��
+  ok  spec δ���� seasonal_periods �� �ܾ�
+
+--- �޸� 2����ֵ���˽ӿ�����ֵ�ֶ� ---
+  ok  ������ͼ���� targets / targets_standardized
+  ok  ���뺬��ֵ���� �� �ܾ�
+  ok  ʡ�� seasonal_period �� TypeError����Ĭ��ֵ�������� 12��
+  ok  �Ϸ����ÿ������� �� ���� 7 ��
+  ok  fit_targets �� train/cal ֮�⺬��ֵ �� �ܾ�
+  ok  �Ĳ�����ֵ����������λ����
+
+--- �û�ʧ��·����ʧ�ܲ��Ƴɹ���p ����Ϊ null��---
+  ok  �ɹ�/ʧ�ܼ�����ȷ��ʧ�ܲ���ɹ�������
+  ok  ��ʧ�� �� p_value=null�����ñ������ԣ�
+  ok  ��ʧ�� �� ԭ��ɶ�λ������ iteration
+  ok  ��� CSV �� == ��������
+  ok  ��� CSV �ɹ�/ʧ�ܸ�������
+  ok  ��� CSV ��������ʧ������
+  ok  �ɹ������� 999 �� p_value=null
+  ok  �ɹ�������ʱ�����ɶ�λԭ�򣨲��ѳ��Ѵ� 999��
+  ok  999 ��ȫ�ɹ� �� p �ǿ��ҵ��� (1+����)/(n+1)
+
+--- �޸� 1��ֻ�������ط�ӡ·�� ---
+  ok  ������ӡ·��ͨ��
+  ok  ȱ��ӡ�ֶ� status �� �ܾ�
+  ok  ȱ��ӡ�ֶ� scenario �� �ܾ�
+  ok  ȱ��ӡ�ֶ� selection_manifest_sha256 �� �ܾ�
+  ok  ȱ��ӡ�ֶ� refit_review_sha256 �� �ܾ�
+  ok  ȱ��ӡ�ֶ� inputs_sha256 �� �ܾ�
+  ok  status �� frozen �� �ܾ�
+  ok  selection_manifest_sha256 ��ʽ�Ƿ� �� �ܾ�
+  ok  refit_review_sha256 ��ʽ�Ƿ� �� �ܾ�
+  ok  inputs_sha256 ���Ƿ���ϣ �� �ܾ�
+  ok  ��ֵ����ʱ�����ſغ�ѡ �� �ܾ��������� A.1 ���֣�
+
+--- ��ڶ˵��� ---
+  ok  train.py �˵��˳ɹ�
+  ok  CSV �� == ���� PREDICTION_COLUMNS
+  ok  segment �������ж��������������ַ�����
+  ok  target_scale Ϊ���� SCALE
+  ok  ÿ���ÿ��ǡһ��
+  ok  permutation_entry.py �˵��˳ɹ�
+  ok  δ�� 999 ʱ p=null �� successful ������ȷ
+  ok  �û�ժҪ�������������û�Э��
+  ok  �û�ժҪ�� CPU/�ڴ�ʵ��
+  ok  �û�ժҪ�����������HEAD + �������Ƿ�ɾ���
+  ok  null_scores.csv �� == ������������һ�м�ʧ�ܣ�
+  ok  audit_boundaries.py �˵��˳ɹ�
+  ok  �Ķ�ȫ��ͨ���߽���
+  ok  �Ķ���Ƽ�¼�˱��ų�����㣨head = input_len���μ� = horizon-1��
+  ok  �Ķ���Ƽ�¼�� CPU/�ڴ�ʵ��
+  ok  ���� CSV ��ϣ���嵥���� �� FAIL
+  ok  audit_tables.py �˵��˳ɹ�
+  ok  ��Ʊ����Ŷ���
+
+ȫ��ͨ����49 ���飩
+  ok  ������ 49 ��ȫ��ͨ��
+
+========== �����֣�����Ԥ����ڶ˵��� ==========
+  ok  ѡ���� train.py �˵��˳ɹ�
+  ok  ѡ���� manifest �� weight_hash �� alpha_by_group
+  ok  ��ӡ·�� + ��ȷ��ѡ �� �˵��˳ɹ�
+  ok  Ԥ�� CSV ��д��
+  ok  CSV �� == ���� PREDICTION_COLUMNS
+  ok  ֻ�� test ��
+  ok  ÿ���ÿ��ǡһ�У�13 ��� �� 3 ����
+  ok  Ԥ��ȫΪ����ֵ
+  ok  manifest ���ĸ�����ê + ѡ���� config ��ϣ
+  ok  manifest ������ / ����ʱ�� / ��ֵ�ڴ� / �������
+  ok  manifest �����κ� test ����ֶ�
+  ok  ���Ŀ¼�ǿ� �� �ܾ�����
+  ok  ·�� SHA ���� �� �ܾ�
+  ok  ��ѡ����·�� selected �� �ܾ�
+  ok  ѡ���� manifest �� alpha_by_group ���� �� �ܾ�
+  ok  ѡ���� manifest �� weight_hash ���� �� �ܾ�
+  ok  ����ģʽ��test �� targets ȫΪ NaN
+  ok  ����ģʽ��train/cal/dec ��ֵδ������
+  ok  ����ģʽ��test ������Ƭ���� targets ��
+  ok  �Ŷ� test ��ֵ���嵥����ǩ��signature ֻ���� inputs�����䣩
+  ok  �Ŷ� test ��ֵ��Ԥ�����ֽڲ��䣨��ֵ�����Ӱ�죩
+  ok  �Ϸ�Ԥ�� �� ������
+  ok  �����������������13 ���ֻ�� 12��3���� ����
+  ok  ����������13��2 ���� 13��3���� ����
+  ok  ����ظ� �� ����
+  ok  origin Խ�� �� ����
+  ok  Ŀ�괰�ڿ�� �� ����
+  ok  ��������Ԥ�� �� ����
+  ok  �Ƕ�άԤ�� �� ����
+  ok  �ļ�У�飺�Ϸ� CSV �� ������
+  ok  �ļ�У�飺���ظ� �� ����
+  ok  �ļ�У�飺segment ���� test �� ����
+  ok  �ļ�У�飺y_pred ������ �� ����
+  ok  �ļ�У�飺������һ�� �� ������������������Ų�ó���
+  ok  �ļ�У�飺������������ʱ��һ�в鲻����˵��Ϊ�α��봫����ֵ��
+
+ȫ��ͨ����85 ���飺������ 49 + ������ 36��
