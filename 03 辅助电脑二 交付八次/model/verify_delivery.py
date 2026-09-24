@@ -87,8 +87,13 @@ def _manifest_vs_git(delivery: Path) -> list[str]:
     rel_root = delivery.resolve().relative_to(root.resolve()).as_posix()
     problems = []
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    # 本闸门**自己的结论文件**排除在外：它是读到清单之后才写出的，属自指，
+    # 任何时刻都不可能与该清单自洽（写它就是改变它）。其余每个已跟踪文件都要对得上。
+    self_output = "evidence/verify_delivery.json"
     for section in ("model_files", "evidence_files", "other_files"):
         for rel, recorded in (manifest.get(section) or {}).items():
+            if rel == self_output:
+                continue
             blob = subprocess.run(["git", "-C", str(root), "show", f"HEAD:{rel_root}/{rel}"],
                                   capture_output=True)
             if blob.returncode != 0:
