@@ -30,6 +30,7 @@ if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
 from candidates import ALL_CANDIDATES, GATE_CANDIDATES  # noqa: E402
+from isolated_package import add_input_args  # noqa: E402
 from predict_io import warn_if_dirty  # noqa: E402
 from runtime_profile import cpu_seconds, script_entry_snapshot  # noqa: E402
 from train import RUNNABLE_SCENARIOS  # noqa: E402
@@ -43,12 +44,20 @@ TRAIN = HERE / "train.py"
 DELIVERED_CANDIDATES = ("N", "N+Q", "N+S+Q", "N+S+Q+SF")
 
 
-def run_train(bundle: Path, task: str, scenario: str, signature: str, spec: Path,
-              candidate: str, out_dir: Path, seed: int) -> int:
-    cmd = [sys.executable, str(TRAIN), "--bundle", str(bundle), "--task", task,
+def run_train(bundle: Path | None, task: str, scenario: str, signature: str, spec: Path,
+              candidate: str, out_dir: Path, seed: int,
+              input_package: Path | None = None,
+              formal_bundle: Path | None = None) -> int:
+    cmd = [sys.executable, str(TRAIN), "--task", task,
            "--scenario", scenario, "--signature", signature, "--split-spec", str(spec),
            "--segments", "calibration", "decision", "--candidate", candidate,
            "--seed", str(seed), "--output-dir", str(out_dir)]
+    if input_package is not None:
+        cmd += ["--input-package", str(input_package)]
+        if formal_bundle is not None:
+            cmd += ["--formal-bundle", str(formal_bundle)]
+    else:
+        cmd += ["--bundle", str(bundle)]
     proc = subprocess.run(cmd, capture_output=True, encoding="utf-8", errors="replace")
     if proc.returncode != 0:
         print(f"train.py 失败（{candidate}）: {proc.stderr[-500:]}", file=sys.stderr)
@@ -57,7 +66,7 @@ def run_train(bundle: Path, task: str, scenario: str, signature: str, spec: Path
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bundle", type=Path, required=True)
+    add_input_args(parser)
     parser.add_argument("--task", required=True)
     parser.add_argument("--scenario", required=True, choices=RUNNABLE_SCENARIOS)
     parser.add_argument("--signature", required=True)
@@ -88,9 +97,13 @@ def main() -> int:
             entry: dict = {"candidate": candidate, "ok": False}
             a, b = tmp / f"{stem}_a", tmp / f"{stem}_b"
             rc_a = run_train(args.bundle, args.task, args.scenario, args.signature,
-                             args.split_spec, candidate, a, args.seed)
+                             args.split_spec, candidate, a, args.seed,
+                             input_package=getattr(args, "input_package", None),
+                             formal_bundle=getattr(args, "formal_bundle", None))
             rc_b = run_train(args.bundle, args.task, args.scenario, args.signature,
-                             args.split_spec, candidate, b, args.seed)
+                             args.split_spec, candidate, b, args.seed,
+                             input_package=getattr(args, "input_package", None),
+                             formal_bundle=getattr(args, "formal_bundle", None))
             entry["train_exit_codes"] = [rc_a, rc_b]
             if rc_a or rc_b:
                 entry["error"] = "train.py 未能成功退出"
