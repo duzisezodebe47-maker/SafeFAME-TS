@@ -1,7 +1,7 @@
 {
-  "revision": "2026-09-20",
-  "stage": "docx_revision",
-  "authority": "root SafeFAME-TS_01/02/03 DOCX; paper/final DOCX mirrors",
+  "revision": "2026-09-27",
+  "stage": "reports_rewrite_pending",
+  "authority": "planned report paths only; no current DOCX submission version",
   "pdf_required": false,
   "pdf_status": "deferred until an explicit user instruction after DOCX finalization",
   "reports": [
