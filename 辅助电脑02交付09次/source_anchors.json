@@ -1,0 +1,34 @@
+{
+  "task": "SocialGood_h3_f1",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "formal_bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "numeric_snapshot_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+  "lineage_sha256": "90603c6e7fd62dc0f7b8d0ad80c93edea17a4a479afd536ef3668724ff01e9d1",
+  "source_safe_sha256": {
+    "origin_index.npy": "fd54ec46816bba7622e6d3b20da4b9c96d515691a4c6a72d9e9b40b042893d35",
+    "horizon_time.npy": "8c86a779e090594c1643bb6aed188693aed04773877aa15f4ab9881ce15f40f2",
+    "numeric_missing.npy": "73738665ab4a7d19165eaf31ac3535f50a715294bd1406f991845dea7f0d09b3",
+    "proxy/semantic.npy": "7cc41cc4ea32f02887c41830f7ba589b4e4d50f861e9c94d73ad0f08d46b84d8",
+    "proxy/quality.npy": "498dc14e092d85e5ff7331c50cc39d3ff3747ba8d4d62fdb45af7877e37065e0",
+    "proxy/source_available.npy": "c40bfdff3c76c16619c916e72d09d74f6573eea282bb4725e24dd02f895917b1",
+    "proxy/text_available.npy": "acc926889fb25955b07f6d79c7d42a0bc33d1d039c128895816c3b0fb9bd1952",
+    "conservative_lag/semantic.npy": "9ad5c0bc640c80e29d01f1de5ba3672ed3a09a51c36330fd98962550f06a9fd6",
+    "conservative_lag/quality.npy": "4fe6349f9f9b63c6c411988948963caf444d86a07db4691c35098b2c3abfd69f",
+    "conservative_lag/source_available.npy": "076b9d62f300f75c83bd402fad6ea5a103581f2c7890a4409b4ef034145149c1",
+    "conservative_lag/text_available.npy": "a847b54c7d8425939cde11820d191d6c45acdb2c07ae8ba60ad286791db053da"
+  },
+  "text_trace_sha256": {
+    "proxy": "320ab9b2a2b655bc5b7864369bb56de77698915c486071d3807a51256a6739b8",
+    "conservative_lag": "81b629dcc5faea8d4661501d5c58d5bb26ca5a8772a27ee63d35b4e5d4767e6f"
+  },
+  "computed_retained_by_segment": {
+    "train": 340,
+    "calibration": 90,
+    "decision": 181,
+    "test": 89
+  },
+  "selection_origins": 611,
+  "test_origins": 89,
+  "test_policy": "safe subset; test numeric history and frequency withheld"
+}

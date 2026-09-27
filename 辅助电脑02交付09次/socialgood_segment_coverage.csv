@@ -1,0 +1,9 @@
+scenario,segment,candidate_origins,retained_origins,text_available_origins,text_available_rate,report_selected_uses,search_selected_uses,selected_source_uses,distinct_source_ids
+proxy,train,342,340,0,0.0,0,0,0,0
+proxy,calibration,92,90,71,0.7888888888888889,0,2218,2218,568
+proxy,decision,183,181,181,1.0,1443,5792,7235,1561
+proxy,test,91,89,89,1.0,1597,2848,4445,863
+conservative_lag,train,342,340,0,0.0,0,0,0,0
+conservative_lag,calibration,92,90,70,0.7777777777777778,0,2186,2186,561
+conservative_lag,decision,183,181,181,1.0,1350,5792,7142,1558
+conservative_lag,test,91,89,89,1.0,1501,2848,4349,860
