@@ -1,0 +1,9 @@
+{
+  "status": "INCOMPLETE",
+  "task": "Climate_h4_f2",
+  "candidate": "N",
+  "expected_rows": 496,
+  "problems": [
+    "model/verify_test_delivery.py ���嵥��ϣ�����ύ�ֽڲ�һ�£���β��һ������"
+  ]
+}

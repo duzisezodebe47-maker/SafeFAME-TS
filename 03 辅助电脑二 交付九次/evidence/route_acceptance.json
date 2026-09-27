@@ -1,0 +1,83 @@
+{
+  "route_source_path": "team_work/main/round9/results/sealed_route.json",
+  "route_file_in_delivery": "sealed_route.json",
+  "route_file_sha256_actual": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+  "route_file_sha256_published": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+  "sidecar_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+  "recorded": {
+    "task_id": "Climate_h4_f2",
+    "fold_id": 2,
+    "scenario": "proxy",
+    "status": "frozen",
+    "selected": "numeric_fallback",
+    "fallback": "N",
+    "selection_data_segments": [
+      "cal",
+      "dec"
+    ],
+    "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+    "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+    "selection_manifest_sha256": "e3e73bcd08079dc702846a3b0abd0997e64244b537fe0ce7907a47cdc1a364e2",
+    "refit_review_sha256": "3594a55e65590ccffac4336a4c44af5c28879094212d0c8dad7a828d4723e49e",
+    "inputs_sha256": {
+      "task": "7d51eac8451e024ca8b7b4790d3b617a64028aa6bf69255ec10954b8e7c4e0fa",
+      "samples": "117388efbb93a8405255c3eb135a5e46b2ce09e94aea742570dbd5447d39fbe3",
+      "predictions": "1143d2e8dfd3eb74c57b9ee005affaafcb580938e1ac8690f58721b33b104591",
+      "nulls": "aa794c9a54b35b489a16c816a99c5c1b5de2c60f3cddba89b1e2593dc71fcff4",
+      "spec": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3"
+    },
+    "calibration_mse": {
+      "Last": 0.1542410603350722,
+      "SeasonalNaive": 5.689782817143001,
+      "AR-Ridge": 0.16805618105026346,
+      "N": 0.14545201989222872
+    },
+    "decision_fallback_mse": 0.2464905159726441,
+    "candidates": {
+      "N+S+Q": {
+        "decision_mse": 0.2683285334702679,
+        "row_p": 0.983,
+        "segment_wins": false,
+        "eligible": false
+      },
+      "N+S+Q+SF": {
+        "decision_mse": 0.28892436861507814,
+        "row_p": 0.984,
+        "segment_wins": false,
+        "eligible": false
+      }
+    }
+  },
+  "checks": {
+    "route_sha256_matches_published": true,
+    "route_sha256_is_64hex": true,
+    "sidecar_matches": true,
+    "status_is_frozen": true,
+    "selected_is_candidate_or_fallback": true,
+    "candidate_is_registered": true,
+    "selection_data_segments_is_cal_dec": true,
+    "split_spec_sha256_matches_file": true,
+    "bundle_signature_matches": true,
+    "three_source_anchors_are_64hex": true,
+    "selection_manifest_sha256_matches_master_artifacts": true,
+    "local_selection_manifest_candidate_matches": true,
+    "inputs_sha256_subkeys_present_and_valid": true
+  },
+  "verdict": "PASS",
+  "code_provenance": {
+    "code_commit": "0367157d8f584a40ab54657c8f5375a423f28eac",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付九次/model"
+  },
+  "runtime": {
+    "wall_seconds": 0.089,
+    "cpu_seconds": 0.031,
+    "peak_rss_bytes": 68415488,
+    "peak_rss_mib": 65.2,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "note": "路由文件按主控发布字节原样收录；本脚本只读、不改写路由内容"
+}

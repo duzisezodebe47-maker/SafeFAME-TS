@@ -1,0 +1,1279 @@
+{
+  "task": "Climate_h4_f2",
+  "scenario": "proxy",
+  "candidate": "N",
+  "monitoring": {
+    "method": "同进程包装 builtins.open / io.open / pathlib.Path.open / numpy.load / pandas.read_csv，记录逐路径通道与 np.load 是否带 mmap",
+    "wrapped": [
+      "builtins.open",
+      "io.open",
+      "pathlib.Path.open",
+      "numpy.load",
+      "pandas.read_csv"
+    ],
+    "unique_paths_read": 99
+  },
+  "read_manifest": [
+    {
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp_p0rfchl\\replay\\N_test_manifest.json",
+      "name": "N_test_manifest.json",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_bundle"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp_p0rfchl\\replay\\N_test_predictions.csv",
+      "name": "N_test_predictions.csv",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open": 3,
+        "io.open": 3
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_bundle"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\conservative_lag\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "Agriculture_h12_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\conservative_lag\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "Agriculture_h12_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\conservative_lag\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "Agriculture_h12_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\conservative_lag\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "Agriculture_h12_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\conservative_lag\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "Agriculture_h12_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\frequency.npy",
+      "name": "frequency.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\numeric_fit.json",
+      "name": "numeric_fit.json",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\numeric_history.npy",
+      "name": "numeric_history.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\numeric_history_raw.npy",
+      "name": "numeric_history_raw.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "Agriculture_h12_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "Agriculture_h12_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "Agriculture_h12_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "Agriculture_h12_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\proxy\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "Agriculture_h12_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\sample_audit.csv",
+      "name": "sample_audit.csv",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\samples.csv",
+      "name": "samples.csv",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\target_time.npy",
+      "name": "target_time.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\targets.npy",
+      "name": "targets.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\targets_raw.npy",
+      "name": "targets_raw.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Agriculture_h12_f1\\targets_standardized.npy",
+      "name": "targets_standardized.npy",
+      "under_bundle": "Agriculture_h12_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\conservative_lag\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "Climate_h4_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\conservative_lag\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "Climate_h4_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\conservative_lag\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "Climate_h4_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\conservative_lag\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "Climate_h4_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\conservative_lag\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "Climate_h4_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\frequency.npy",
+      "name": "frequency.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\numeric_fit.json",
+      "name": "numeric_fit.json",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\numeric_history.npy",
+      "name": "numeric_history.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\numeric_history_raw.npy",
+      "name": "numeric_history_raw.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "Climate_h4_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "Climate_h4_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "Climate_h4_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "Climate_h4_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [
+        "full"
+      ],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\proxy\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "Climate_h4_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\sample_audit.csv",
+      "name": "sample_audit.csv",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\samples.csv",
+      "name": "samples.csv",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "pandas.read_csv": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\target_time.npy",
+      "name": "target_time.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\targets.npy",
+      "name": "targets.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [
+        "full"
+      ],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\targets_raw.npy",
+      "name": "targets_raw.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Climate_h4_f2\\targets_standardized.npy",
+      "name": "targets_standardized.npy",
+      "under_bundle": "Climate_h4_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1,
+        "numpy.load": 1,
+        "builtins.open": 1
+      },
+      "np_load_modes": [
+        "full"
+      ],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\conservative_lag\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "Environment_h7_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\conservative_lag\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "Environment_h7_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\conservative_lag\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "Environment_h7_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\conservative_lag\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "Environment_h7_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\conservative_lag\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "Environment_h7_f2\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\frequency.npy",
+      "name": "frequency.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\numeric_fit.json",
+      "name": "numeric_fit.json",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\numeric_history.npy",
+      "name": "numeric_history.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\numeric_history_raw.npy",
+      "name": "numeric_history_raw.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "Environment_h7_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "Environment_h7_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "Environment_h7_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "Environment_h7_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\proxy\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "Environment_h7_f2\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\sample_audit.csv",
+      "name": "sample_audit.csv",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\samples.csv",
+      "name": "samples.csv",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\target_time.npy",
+      "name": "target_time.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\targets.npy",
+      "name": "targets.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\targets_raw.npy",
+      "name": "targets_raw.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\Environment_h7_f2\\targets_standardized.npy",
+      "name": "targets_standardized.npy",
+      "under_bundle": "Environment_h7_f2",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\conservative_lag\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "SocialGood_h3_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\conservative_lag\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "SocialGood_h3_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\conservative_lag\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "SocialGood_h3_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\conservative_lag\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "SocialGood_h3_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\conservative_lag\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "SocialGood_h3_f1\\conservative_lag",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\frequency.npy",
+      "name": "frequency.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\numeric_fit.json",
+      "name": "numeric_fit.json",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\numeric_history.npy",
+      "name": "numeric_history.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\numeric_history_raw.npy",
+      "name": "numeric_history_raw.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\numeric_missing.npy",
+      "name": "numeric_missing.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\origin_index.npy",
+      "name": "origin_index.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\proxy\\quality.npy",
+      "name": "quality.npy",
+      "under_bundle": "SocialGood_h3_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\proxy\\semantic.npy",
+      "name": "semantic.npy",
+      "under_bundle": "SocialGood_h3_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\proxy\\source_available.npy",
+      "name": "source_available.npy",
+      "under_bundle": "SocialGood_h3_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\proxy\\text_available.npy",
+      "name": "text_available.npy",
+      "under_bundle": "SocialGood_h3_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\proxy\\text_trace.jsonl",
+      "name": "text_trace.jsonl",
+      "under_bundle": "SocialGood_h3_f1\\proxy",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\sample_audit.csv",
+      "name": "sample_audit.csv",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\samples.csv",
+      "name": "samples.csv",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\target_time.npy",
+      "name": "target_time.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\targets.npy",
+      "name": "targets.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\targets_raw.npy",
+      "name": "targets_raw.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\SocialGood_h3_f1\\targets_standardized.npy",
+      "name": "targets_standardized.npy",
+      "under_bundle": "SocialGood_h3_f1",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": true,
+      "class": "bundle_truth_table(single table, all segments)"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\coverage.csv",
+      "name": "coverage.csv",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\manifest.json",
+      "name": "manifest.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\sample_audit.csv",
+      "name": "sample_audit.csv",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\sample_audit_summary.csv",
+      "name": "sample_audit_summary.csv",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\samples.jsonl",
+      "name": "samples.jsonl",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 1,
+        "io.open": 1
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\round3-bundle-a69821be115445265cde\\schema.json",
+      "name": "schema.json",
+      "under_bundle": ".",
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "bundle_other"
+    },
+    {
+      "path": "D:\\交大任务\\bundle\\spec\\split_spec_v2.json",
+      "name": "split_spec_v2.json",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open": 5,
+        "io.open": 5
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_bundle"
+    },
+    {
+      "path": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付九次\\evidence\\sealed_route.json",
+      "name": "sealed_route.json",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_bundle"
+    },
+    {
+      "path": "D:\\交大任务\\人工智能大作业\\人工智能大作业\\03 辅助电脑二 交付八次\\evidence\\cal_dec_predictions\\N_run_manifest.json",
+      "name": "N_run_manifest.json",
+      "under_bundle": null,
+      "channels": {
+        "pathlib.Path.open": 2,
+        "io.open": 2
+      },
+      "np_load_modes": [],
+      "contains_test_truth": false,
+      "class": "outside_bundle"
+    }
+  ],
+  "test_truth_data_access_count": 0,
+  "test_truth_data_access_definition": "test 真值**进入模型或参与任何计算**的次数。模型只拿到仅特征视图（targets=None），test 行的真值在载入后立即被置为 NaN，故本项为 0。",
+  "truth_file_array_loads": 2,
+  "truth_file_loads_note": "`targets*.npy` 是**单表含全部段**，清单完整性哈希与 train/cal/dec 的拟合都必须打开它；上表如实报出整表载入的次数，不做掩盖。它与上面那项的区别是：这一项是**文件层面**的读取，上面那项是**数据有没有进入模型/计算**。",
+  "isolation_assertions": {
+    "isolation_mode": "nan-mask",
+    "test_view_has_targets": false,
+    "test_targets_all_nan": true,
+    "non_test_targets_finite": true,
+    "train_entry_exit_zero": true,
+    "no_error_metric_in_entry": true
+  },
+  "static_scan_no_error_metric": {
+    "tokens_scanned": [
+      "test_mse",
+      "test_mae",
+      "rmse",
+      "r2_score",
+      "mean_squared",
+      "mean_absolute",
+      "residual",
+      "np.square",
+      "candidate_rank"
+    ],
+    "unexpected_hits": [],
+    "verdict": "PASS"
+  },
+  "code_provenance": {
+    "code_commit": "d7de6a3e34065aeac178084720e3cae5d7e170aa",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付九次/model"
+  },
+  "runtime": {
+    "wall_seconds": 1.109,
+    "cpu_seconds": 0.875,
+    "peak_rss_bytes": 165920768,
+    "peak_rss_mib": 158.2,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "verdict": "PASS"
+}

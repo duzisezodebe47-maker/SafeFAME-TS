@@ -1,0 +1,58 @@
+第九轮执行台账（提交 d7de6a3e34065aeac178084720e3cae5d7e170aa；候选 N；封印路由）
+
+--- 尝试 #1  22:07:32  正式运行：唯一一次 N 的 Climate 测试预测（§二） ---
+$ -B D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\model\predict_test.py --bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --route D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence\sealed_route.json --route-sha256 b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a --selection-manifest D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions\N_run_manifest.json --candidate N --seed 2026 --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\test_prediction
+{"status": "completed", "model": "N", "rows": 496, "path": "numeric_fallback_candidate", "test_predictions_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122"}
+NOTE: ���ݲ��ȡ������λ��D:\��������\�˹����ܴ���ҵ\�˹����ܴ���ҵ\��������02����01��\bundle.py�������ùٷ������ֱ����ǩ�������ļ���ϣУ���� verify_bundle ͳһִ�С�
+EXIT=0  用时 4.4s
+
+--- 尝试 #2  22:07:36  确定性重放 + 隔离审计（第二段，只用于比对，不用于挑选） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\model\audit_test_isolation.py --bundle D:/交大任务/bundle/round3-bundle-a69821be115445265cde --task Climate_h4_f2 --scenario proxy --signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --route D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence\sealed_route.json --route-sha256 b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a --selection-manifest D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions\N_run_manifest.json --candidate N --seed 2026 --delivered-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\test_prediction --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence
+{"replay": "PASS", "isolation": "PASS", "test_truth_data_access_count": 0, "truth_file_array_loads": 2, "unique_paths_read": 99, "checks": {"replay_exit_zero": true, "predictions_content_identical": true, "predictions_byte_identical": true, "weight_hash_identical": true, "test_fit_weight_hash_identical": true, "alpha_by_group_identical": true, "row_count_identical": true, "test_truth_data_access_count_is_zero": true}}
+NOTE: ���ݲ��ȡ������λ��D:\��������\�˹����ܴ���ҵ\�˹����ܴ���ҵ\��������02����01��\bundle.py�������ùٷ������ֱ����ǩ�������ļ���ϣУ���� verify_bundle ͳһִ�С�
+EXIT=0  用时 4.2s
+
+--- 尝试 #3  22:07:40  路由接受记录（11+ 项一致性） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\model\record_route_acceptance.py --route D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence\sealed_route.json --route-sha256 b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a --route-source team_work/main/round9/results/sealed_route.json --sidecar D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence\sealed_route.json.sha256 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --bundle-signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --candidate N --selection-manifest D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions\N_run_manifest.json --output-dir D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence
+{"verdict": "FAIL", "checks": {"route_sha256_matches_published": true, "route_sha256_is_64hex": true, "sidecar_matches": true, "status_is_frozen": true, "selected_is_candidate_or_fallback": true, "candidate_is_registered": true, "selection_data_segments_is_cal_dec": true, "split_spec_sha256_matches_file": true, "bundle_signature_matches": true, "three_source_anchors_are_64hex": true, "selection_manifest_matches_route": false, "inputs_sha256_subkeys_present_and_valid": true}, "route_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a"}
+EXIT=6  用时 1.3s
+
+--- 尝试 #4  22:08:06  第九轮完备性闸门（§五.8） ---
+$ D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\model\verify_test_delivery.py --delivery D:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次 --task Climate_h4_f2 --horizon 4 --expected-origins 124 --candidate N --route-sha256 b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a
+{
+  "status": "INCOMPLETE",
+  "task": "Climate_h4_f2",
+  "candidate": "N",
+  "expected_rows": 496,
+  "problems": [
+    "provenance scope ���ǵھŴ�Ŀ¼: '03 �������Զ� �����˴�/model'",
+    "route_acceptance verdict=FAIL",
+    "ȱ�� attempt_ledger.json������/����.5��",
+    "test_isolation_audit.json �������������ֶ� test_mse",
+    "ȱ�� MANIFEST.json",
+    "ȱ�� README.md",
+    "ȱ�� RUNBOOK.md"
+  ]
+}
+EXIT=6  用时 0.4s
+
+--- 尝试 #5  22:08:56  路由接受记录（修正 selection_manifest 的语义后重跑；不涉及预测） ---
+$ d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\model\record_route_acceptance.py --route d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence\sealed_route.json --route-sha256 b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a --route-source team_work/main/round9/results/sealed_route.json --sidecar d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence\sealed_route.json.sha256 --split-spec D:/交大任务/bundle/spec/split_spec_v2.json --bundle-signature a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38 --candidate N --selection-manifest d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付八次\evidence\cal_dec_predictions\N_run_manifest.json --master-artifacts d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence\master_ARTIFACTS_SHA256.tsv --output-dir d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\evidence
+{"verdict": "PASS", "checks": {"route_sha256_matches_published": true, "route_sha256_is_64hex": true, "sidecar_matches": true, "status_is_frozen": true, "selected_is_candidate_or_fallback": true, "candidate_is_registered": true, "selection_data_segments_is_cal_dec": true, "split_spec_sha256_matches_file": true, "bundle_signature_matches": true, "three_source_anchors_are_64hex": true, "selection_manifest_sha256_matches_master_artifacts": true, "local_selection_manifest_candidate_matches": true, "inputs_sha256_subkeys_present_and_valid": true}, "route_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a"}
+EXIT=0  用时 1.3s
+
+--- 尝试 #6  22:09:20  第九轮完备性闸门（修正 scope 判据后重跑） ---
+$ d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次\model\verify_test_delivery.py --delivery d:\交大任务\人工智能大作业\人工智能大作业\03 辅助电脑二 交付九次 --task Climate_h4_f2 --horizon 4 --expected-origins 124 --candidate N --route-sha256 b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a
+{
+  "status": "INCOMPLETE",
+  "task": "Climate_h4_f2",
+  "candidate": "N",
+  "expected_rows": 496,
+  "problems": [
+    "test_isolation_audit.json �������������ֶ� test_mse",
+    "ȱ�� MANIFEST.json",
+    "ȱ�� README.md",
+    "ȱ�� RUNBOOK.md"
+  ]
+}
+EXIT=6  用时 0.4s

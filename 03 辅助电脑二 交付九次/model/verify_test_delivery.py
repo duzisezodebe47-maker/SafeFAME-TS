@@ -36,6 +36,20 @@ HEX40 = re.compile(r"^[0-9a-f]{40}$")
 SCORE_KEYS = ("test_mse", "test_mae", "test_rmse", "r2", "residual", "score", "ranking")
 
 
+def _numeric_score_keys(node, path: str = ""):
+    """递归找出**数值型**的评分键（列表/字典都下钻；字符串列表不算）。"""
+    if isinstance(node, dict):
+        for key, value in node.items():
+            low = str(key).lower()
+            if low in SCORE_KEYS and isinstance(value, (int, float)) and not isinstance(value, bool):
+                yield f"{path}.{key}", value
+            else:
+                yield from _numeric_score_keys(value, f"{path}.{key}")
+    elif isinstance(node, list):
+        for i, value in enumerate(node):
+            yield from _numeric_score_keys(value, f"{path}[{i}]")
+
+
 def _manifest_vs_git(delivery: Path) -> list[str]:
     """清单哈希 vs 已提交字节（未跟踪的跳过）——与第八轮同一判据。"""
     manifest_path = delivery / "MANIFEST.json"
@@ -194,19 +208,20 @@ def check(delivery: Path, *, task: str, horizon: int, expected_origins: int,
     if not (delivery / "attempt_ledger.json").is_file():
         problems.append("缺少 attempt_ledger.json（§四/§三.5）")
 
-    # 8) 不得出现评分字段
+    # 8) 不得出现评分字段。
+    #    只把**数值型**的评分键算作指标：审计报告里会**列出**它扫了哪些 token
+    #    （`tokens_scanned: ["test_mse", ...]`），那是元信息不是指标 ——
+    #    按字符串一刀切会误报（本闸门第一版就是这么误报的）。
     for p in delivery.rglob("*.json"):
         if "MANIFEST.json" in p.name or "model" in p.parts:
             continue
         try:
-            text = json.dumps(json.loads(p.read_text(encoding="utf-8")), ensure_ascii=False)
+            doc = json.loads(p.read_text(encoding="utf-8"))
         except (ValueError, OSError):
             continue
-        low = text.lower()
-        for token in SCORE_KEYS:
-            if f'"{token}"' in low:
-                problems.append(f"{p.name} 出现疑似评分字段 {token}")
-                break
+        hits = [key for key, value in _numeric_score_keys(doc) if key not in ("",)]
+        if hits:
+            problems.append(f"{p.name} 出现数值型评分字段 {sorted(set(hits))}")
 
     # 9) 清单 vs 提交字节
     problems += _manifest_vs_git(delivery)

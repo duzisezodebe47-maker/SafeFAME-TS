@@ -1,0 +1,55 @@
+{
+  "task": "Climate_h4_f2",
+  "scenario": "proxy",
+  "candidate": "N",
+  "purpose": "确定性重放：相同输入再跑一次，仅用于证明可复现，不用于挑选输出",
+  "checks": {
+    "replay_exit_zero": true,
+    "predictions_content_identical": true,
+    "predictions_byte_identical": true,
+    "weight_hash_identical": true,
+    "test_fit_weight_hash_identical": true,
+    "alpha_by_group_identical": true,
+    "row_count_identical": true,
+    "test_truth_data_access_count_is_zero": true
+  },
+  "verdict_checks": {
+    "replay_exit_zero": true,
+    "predictions_content_identical": true,
+    "weight_hash_identical": true,
+    "test_fit_weight_hash_identical": true,
+    "alpha_by_group_identical": true,
+    "row_count_identical": true,
+    "test_truth_data_access_count_is_zero": true
+  },
+  "csv_comparison": {
+    "byte_identical": true,
+    "content_identical": true,
+    "predictions_sha256_delivered": "10b03100331a12d4e2938104370c6055b7c0e55fae8a9562b2dbf1a4e2e60152",
+    "predictions_sha256_replay": "10b03100331a12d4e2938104370c6055b7c0e55fae8a9562b2dbf1a4e2e60152",
+    "differing_columns": {},
+    "non_provenance_differences": {},
+    "note": "code_commit 是溯源列，不参与预测内容判等"
+  },
+  "code_commit_delivered": "d7de6a3e34065aeac178084720e3cae5d7e170aa",
+  "code_commit_replay": "d7de6a3e34065aeac178084720e3cae5d7e170aa",
+  "weight_hash": "014474d38babe4106a4891e631c72b6076294891a0870a03b6d5fb08f8d9d6d5",
+  "test_fit_weight_hash": "e522b9a2ecb5cff70e42ec8dcc019384145e4cb4d72c492e675de796bb4969be",
+  "n_rows": 496,
+  "verdict": "PASS",
+  "code_provenance": {
+    "code_commit": "d7de6a3e34065aeac178084720e3cae5d7e170aa",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付九次/model"
+  },
+  "runtime": {
+    "wall_seconds": 1.034,
+    "cpu_seconds": 0.875,
+    "peak_rss_bytes": 165920768,
+    "peak_rss_mib": 158.2,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  }
+}

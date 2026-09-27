@@ -1,0 +1,147 @@
+{
+  "task": "Climate_h4_f2",
+  "scenario": "proxy",
+  "candidate": "N",
+  "requested_candidate": "N",
+  "route_selected": "numeric_fallback",
+  "route_fallback": "N",
+  "route_status": "frozen",
+  "input_anchors": {
+    "route_file_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+    "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+    "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+    "selection_manifest_sha256": "adb6527947a484c863197c3227600876c2d9510b37744130ac7fa290e1249df7",
+    "selection_config_sha256": "a5fecfbf1d1d8a72268d280f82a8b491db33fd05ecbec618ed8a06a46339587e"
+  },
+  "route_file_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "selection_config_sha256": "a5fecfbf1d1d8a72268d280f82a8b491db33fd05ecbec618ed8a06a46339587e",
+  "n_rows": 496,
+  "n_test_origins": 124,
+  "csv_columns": [
+    "task_id",
+    "fold_id",
+    "origin_id",
+    "origin_index",
+    "segment",
+    "scenario",
+    "candidate_id",
+    "seed",
+    "step",
+    "y_pred",
+    "target_scale",
+    "bundle_signature",
+    "config_sha256",
+    "code_commit"
+  ],
+  "csv_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+  "code_commit": "d7de6a3e34065aeac178084720e3cae5d7e170aa",
+  "code_provenance": {
+    "code_commit": "d7de6a3e34065aeac178084720e3cae5d7e170aa",
+    "worktree_dirty": false,
+    "dirty_files": [],
+    "scope": "03 辅助电脑二 交付八次/model"
+  },
+  "runtime": {
+    "wall_seconds": 1.118,
+    "cpu_seconds": 0.391,
+    "peak_rss_bytes": 166871040,
+    "peak_rss_mib": 159.1,
+    "cpu_count": 32,
+    "platform": "Windows 11",
+    "python": "3.12.10"
+  },
+  "test_isolation": {
+    "isolate_test": true,
+    "test_targets_nan": true,
+    "test_view_has_targets": false,
+    "mechanism": "read_frozen_bundle(isolate_test=True)：载入后立即把 test 段 targets/targets_standardized 置 NaN；模型只拿到仅特征视图"
+  },
+  "model_run": "N",
+  "grid": {
+    "train": {
+      "segment": "train",
+      "n_origins": 581,
+      "bounds": [
+        0,
+        636
+      ],
+      "horizon": 4,
+      "index_min": 52,
+      "index_max": 632
+    },
+    "calibration": {
+      "segment": "calibration",
+      "n_origins": 124,
+      "bounds": [
+        636,
+        763
+      ],
+      "horizon": 4,
+      "index_min": 636,
+      "index_max": 759
+    },
+    "decision": {
+      "segment": "decision",
+      "n_origins": 251,
+      "bounds": [
+        763,
+        1017
+      ],
+      "horizon": 4,
+      "index_min": 763,
+      "index_max": 1013
+    },
+    "test": {
+      "segment": "test",
+      "n_origins": 124,
+      "bounds": [
+        1017,
+        1144
+      ],
+      "horizon": 4,
+      "index_min": 1017,
+      "index_max": 1140
+    }
+  },
+  "input_sha256": {
+    "train": "8843bea16d9ea937b3a24aa75bc1db2ef1e35273f7b883115f1b0374f07548c8",
+    "calibration": "ba0d08d7c78556744de77c52b41b23b0a4f024a77403eab8cc3f53b0e930af03",
+    "decision": "252b89b7e4f510b4db41c74f1cd45d0af20c066e701cd9c3b74d6b7d454c2c92"
+  },
+  "route_anchors_checked": [
+    "split_spec_sha256",
+    "bundle_signature"
+  ],
+  "route_anchors_missing": [],
+  "test_view_has_targets": false,
+  "model_config": {
+    "candidate": "N",
+    "branches": [
+      "N"
+    ],
+    "alpha_grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0,
+      10000.0
+    ],
+    "frozen_alpha_by_group": {
+      "N": 10000.0
+    },
+    "solver": "group-penalized ridge, cholesky, float64 normal equations",
+    "target_scale": "train_only_standardized_OT"
+  },
+  "selection_input_sha256": "36afa05a571d3fe9ea1913c51b40c0bf6931fab02e840b435e73cf79abf2a912",
+  "extended_input_sha256": "8ba190499edfe2528f1e2d530363ef21e552c33d10e95f3c888170a4442ec327",
+  "selection_rows": 705,
+  "extended_rows": 956,
+  "weight_hash": "014474d38babe4106a4891e631c72b6076294891a0870a03b6d5fb08f8d9d6d5",
+  "test_fit_weight_hash": "e522b9a2ecb5cff70e42ec8dcc019384145e4cb4d72c492e675de796bb4969be",
+  "path": "numeric_fallback_candidate",
+  "note": "测试段预测。生成时未读取测试真值（隔离模式）；路由已冻结且强制校验。最终指标由主控独立计分，本侧不报告任何测试性能。"
+}
