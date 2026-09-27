@@ -1,13 +1,15 @@
 # SocialGood 第九次交付独立重放
 
-在 Windows PowerShell 中使用 Python 3.12、NumPy 2.5.3、pandas 3.0.5。只在 D 盘新目录操作。先从本分支 README 取得固定 Release URL、字节数与 SHA256；下载后**先核对字节数和 SHA256**，不符立即停止。不要用第七/八轮缓存替代下载件。
+在 Windows PowerShell 中使用 Python 3.12、NumPy 2.5.3、pandas 3.0.5。只在 D 盘新目录操作。固定 Release ZIP 为 3,343,370 字节，SHA256 为 `f75cbe2dcd6689f3d6a1b6800e366f4bc041d24f9efdf3d341b20baac3154e6f`。下载后**先核对字节数和 SHA256**，不符立即停止。不要用第七/八轮缓存替代下载件。
 
 ```powershell
 $replay = 'D:\SafeFAME-TS-SocialGood-clean-09'
 New-Item -ItemType Directory -Path $replay | Out-Null
-$url = '<以本分支 README 登记的固定 Release URL 替换>'
+$url = 'https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/socialgood-isolated-input-v9-20260927/SafeFAME-TS_SocialGood_isolated_v9_20260927.zip'
 Invoke-WebRequest -Uri $url -OutFile (Join-Path $replay 'release.zip')
-# 对照 README 检查 (Get-Item ...).Length 和 (Get-FileHash -Algorithm SHA256 ...).Hash
+$zip = Join-Path $replay 'release.zip'
+if ((Get-Item -LiteralPath $zip).Length -ne 3343370) { throw 'Release 字节数不匹配' }
+if ((Get-FileHash -Algorithm SHA256 -LiteralPath $zip).Hash.ToLowerInvariant() -ne 'f75cbe2dcd6689f3d6a1b6800e366f4bc041d24f9efdf3d341b20baac3154e6f') { throw 'Release SHA256 不匹配' }
 Expand-Archive -LiteralPath (Join-Path $replay 'release.zip') -DestinationPath (Join-Path $replay 'release')
 py -3.12 -m pip install -r (Join-Path $replay 'release\requirements-replay.txt')
 py -3.12 (Join-Path $replay 'release\code\verify_socialgood.py') --package (Join-Path $replay 'release') --out (Join-Path $replay 'audit')

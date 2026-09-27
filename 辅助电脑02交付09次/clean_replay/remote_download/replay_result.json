@@ -1,0 +1,12 @@
+{
+  "url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/socialgood-isolated-input-v9-20260927/SafeFAME-TS_SocialGood_isolated_v9_20260927.zip",
+  "fresh_directory": "D:\\SafeFAME-TS-SocialGood-clean-09",
+  "downloaded_bytes": 3343370,
+  "downloaded_sha256": "f75cbe2dcd6689f3d6a1b6800e366f4bc041d24f9efdf3d341b20baac3154e6f",
+  "expected_bytes": 3343370,
+  "expected_sha256": "f75cbe2dcd6689f3d6a1b6800e366f4bc041d24f9efdf3d341b20baac3154e6f",
+  "verify_command": "py -3.12 \"D:\\SafeFAME-TS-SocialGood-clean-09\\release\\code\\verify_socialgood.py\" --package \"D:\\SafeFAME-TS-SocialGood-clean-09\\release\" --out \"D:\\SafeFAME-TS-SocialGood-clean-09\\audit\"",
+  "verify_exit_code": 0,
+  "negative_command": "py -3.12 \"D:\\SafeFAME-TS-SocialGood-clean-09\\release\\tests\\run_negative_cases.py\" --package \"D:\\SafeFAME-TS-SocialGood-clean-09\\release\" --out \"D:\\SafeFAME-TS-SocialGood-clean-09\\negative_cases.json\"",
+  "negative_exit_code": 0
+}

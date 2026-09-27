@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "passed": 7,
+  "total": 7,
+  "cases": [
+    {
+      "case": "test_truth_injection",
+      "exit_code": 2,
+      "expected_reason": "test directory whitelist violation",
+      "observed_stderr": "VERIFY FAIL: test directory whitelist violation: ['targets_raw.npy']",
+      "pass": true
+    },
+    {
+      "case": "test_numeric_history_injection",
+      "exit_code": 2,
+      "expected_reason": "test directory whitelist violation",
+      "observed_stderr": "VERIFY FAIL: test directory whitelist violation: ['numeric_history.npy']",
+      "pass": true
+    },
+    {
+      "case": "test_frequency_injection",
+      "exit_code": 2,
+      "expected_reason": "test directory whitelist violation",
+      "observed_stderr": "VERIFY FAIL: test directory whitelist violation: ['frequency.npy']",
+      "pass": true
+    },
+    {
+      "case": "selection_slice_tamper",
+      "exit_code": 2,
+      "expected_reason": "selection slice commitment mismatch",
+      "observed_stderr": "VERIFY FAIL: selection slice commitment mismatch: targets_raw.npy",
+      "pass": true
+    },
+    {
+      "case": "mapping_wrong_row",
+      "exit_code": 2,
+      "expected_reason": "selection_fit row mapping mismatch",
+      "observed_stderr": "VERIFY FAIL: selection_fit row mapping mismatch",
+      "pass": true
+    },
+    {
+      "case": "bundle_signature_wrong",
+      "exit_code": 2,
+      "expected_reason": "frozen Bundle signature or spec anchor mismatch",
+      "observed_stderr": "VERIFY FAIL: frozen Bundle signature or spec anchor mismatch",
+      "pass": true
+    },
+    {
+      "case": "frozen_spec_wrong",
+      "exit_code": 2,
+      "expected_reason": "frozen spec SHA256 mismatch",
+      "observed_stderr": "VERIFY FAIL: frozen spec SHA256 mismatch",
+      "pass": true
+    }
+  ]
+}

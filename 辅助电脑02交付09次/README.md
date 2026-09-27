@@ -8,4 +8,6 @@
 
 原始来源 URL 与真实发布时间未核验，`end_date` 仅作为文本可得时间代理。来源/日期表保留原有字段和空值，不补造。正式 Bundle 的其他存储位置可能包含测试真值；本隔离仅约束本 Release。
 
-Release ZIP **不进入 Git**。发布后在此登记固定下载 URL、字节数、SHA256 和从远端下载后的重放证据。分支内脚本/文档可能在发布后补充这些信息，因此 Release 内文件哈希以 ZIP 内 `MANIFEST.json` 为准。
+Release ZIP **不进入 Git**。固定下载地址：[SafeFAME-TS SocialGood v9 Release 附件](https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/socialgood-isolated-input-v9-20260927/SafeFAME-TS_SocialGood_isolated_v9_20260927.zip)。ZIP 为 **3,343,370 字节**，SHA256 为 `f75cbe2dcd6689f3d6a1b6800e366f4bc041d24f9efdf3d341b20baac3154e6f`；Release 标签指向固定提交 `9009a53f7d6239be59f7d711238cd3ef036dd502`。从远端重新下载到全新 D 盘目录后，字节数与 SHA256 一致，验证器退出码 0，七个负例全部被拒绝；证据在 `clean_replay/remote_download/`。
+
+分支内 README/RUNBOOK 是发布后补充的说明，与 Release 内对应文件字节不同；Release 内文件哈希以 ZIP 内 `MANIFEST.json` 为准。`MANIFEST.json`、`EXPECTED_OUTPUTS.json` 和审计表在分支与 Release 中应保持一致。
