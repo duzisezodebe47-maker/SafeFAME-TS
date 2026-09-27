@@ -1,0 +1,15 @@
+{
+  "task_id": "Climate_h4_f2",
+  "fold_id": 2,
+  "domain": "Climate",
+  "horizon": 4,
+  "input_len": 52,
+  "n_rows": 1272,
+  "train_end": 636,
+  "cal_end": 763,
+  "dec_end": 1017,
+  "test_end": 1144,
+  "seasonal_period": 52,
+  "snapshot_sha256": "d12f44f6c1a0703ec8da29c67e453869921612addb6483454bd601bc99af5ff4",
+  "feature_manifest_sha256": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "READY_FOR_FREEZE",
+  "segments": [
+    "calibration",
+    "decision"
+  ],
+  "task_id": "Climate_h4_f2",
+  "scenario": "proxy",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "prediction_files_sha256": {
+    "D:\\aaa2026人工智能课程报告\\SafeFAME-TS_主控技术工作区\\team_work\\main\\round9\\results\\numeric_selection_predictions.csv": "e8f2358d60db8823f48d9075bce09d1be58ba4dfd845cddafc2b33a2592ee241",
+    "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第8轮模型_SHY_232dd01\\audit_detached_worktree\\03 辅助电脑二 交付八次\\evidence\\cal_dec_predictions\\N_proxy_predictions.csv": "507f4877e342932d7a11ee059609c2228fc3264e1dfc28a236df4b110918f2fe",
+    "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第8轮模型_SHY_232dd01\\audit_detached_worktree\\03 辅助电脑二 交付八次\\evidence\\cal_dec_predictions\\N_S_Q_proxy_predictions.csv": "2b8803ba9539dffcc019c95ed2c1474b5bc461890983679eacb9d94639b6c996",
+    "D:\\aaa2026人工智能课程报告\\主控接收数据\\SafeFAME_TS_第8轮模型_SHY_232dd01\\audit_detached_worktree\\03 辅助电脑二 交付八次\\evidence\\cal_dec_predictions\\N_S_Q_SF_proxy_predictions.csv": "e1d28b3bdf17a2cd87df9e12bf107f837da8ebaa3a296039f05a04b6a51b5581"
+  },
+  "sample_rows": 375,
+  "prediction_rows": 2250,
+  "files_sha256": {
+    "predictions.jsonl": "1143d2e8dfd3eb74c57b9ee005affaafcb580938e1ac8690f58721b33b104591",
+    "samples.jsonl": "117388efbb93a8405255c3eb135a5e46b2ce09e94aea742570dbd5447d39fbe3",
+    "spec.json": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3",
+    "task.json": "7d51eac8451e024ca8b7b4790d3b617a64028aa6bf69255ec10954b8e7c4e0fa"
+  }
+}

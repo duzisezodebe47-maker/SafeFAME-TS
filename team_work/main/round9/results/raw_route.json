@@ -1,0 +1,38 @@
+{
+  "task_id": "Climate_h4_f2",
+  "fold_id": 2,
+  "fallback": "N",
+  "selected": "numeric_fallback",
+  "calibration_mse": {
+    "Last": 0.1542410603350722,
+    "SeasonalNaive": 5.689782817143001,
+    "AR-Ridge": 0.16805618105026346,
+    "N": 0.14545201989222872
+  },
+  "decision_fallback_mse": 0.2464905159726441,
+  "candidates": {
+    "N+S+Q": {
+      "decision_mse": 0.2683285334702679,
+      "row_p": 0.983,
+      "segment_wins": false,
+      "eligible": false
+    },
+    "N+S+Q+SF": {
+      "decision_mse": 0.28892436861507814,
+      "row_p": 0.984,
+      "segment_wins": false,
+      "eligible": false
+    }
+  },
+  "selection_data_segments": [
+    "cal",
+    "dec"
+  ],
+  "inputs_sha256": {
+    "task": "7d51eac8451e024ca8b7b4790d3b617a64028aa6bf69255ec10954b8e7c4e0fa",
+    "samples": "117388efbb93a8405255c3eb135a5e46b2ce09e94aea742570dbd5447d39fbe3",
+    "predictions": "1143d2e8dfd3eb74c57b9ee005affaafcb580938e1ac8690f58721b33b104591",
+    "nulls": "aa794c9a54b35b489a16c816a99c5c1b5de2c60f3cddba89b1e2593dc71fcff4",
+    "spec": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3"
+  }
+}

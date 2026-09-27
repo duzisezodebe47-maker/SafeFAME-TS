@@ -1,0 +1,21 @@
+{
+  "status": "NUMERICALLY_VERIFIED_REFIT_PROVENANCE_PENDING",
+  "task_id": "Climate_h4_f2",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "selection_manifest_sha256": "e3e73bcd08079dc702846a3b0abd0997e64244b537fe0ce7907a47cdc1a364e2",
+  "source_hashes": {
+    "N+S+Q": {
+      "csv": "399fb17dcb08bfd518f642f7f5af19e94d71e470734df7157fa4861488657e3b",
+      "csv_summary": "24bdd17e6e3ce47b3ca5076b193acab47b84865dce54a4fc156990bf609ae43f",
+      "run_summary": "5d60552cce5abeaf9391057d5fa75dd4d2ea8ecfd744a872b1e4f81fe68c0299"
+    },
+    "N+S+Q+SF": {
+      "csv": "8b6151f7956cbcb41f5c5eede0f9a1e4944f3884e1613a8d78806b81324e1122",
+      "csv_summary": "b6c76fc705b82b4ed97911b49027cc0cfafb4efed17818ba99faec7c1ec9faec",
+      "run_summary": "fee6d35a014e312064a2ccf7bc4676382c9baf4b662fa06da4f4d8ab235b2dcf"
+    }
+  },
+  "draws_per_candidate": 999,
+  "limitation": "The converter verifies identities, row counts, hashes, observed MSE and p; it cannot prove that each CSV loss came from a separate refit without model execution logs and code audit.",
+  "converted_jsonl_sha256": "aa794c9a54b35b489a16c816a99c5c1b5de2c60f3cddba89b1e2593dc71fcff4"
+}

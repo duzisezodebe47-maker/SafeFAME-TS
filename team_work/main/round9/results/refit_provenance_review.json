@@ -1,0 +1,30 @@
+{
+  "status": "REFIT_PROVENANCE_VERIFIED",
+  "reviewer": "team/main-eval-20260921:round9-independent-audit",
+  "reviewed_at": "2026-09-27",
+  "null_jsonl_sha256": "aa794c9a54b35b489a16c816a99c5c1b5de2c60f3cddba89b1e2593dc71fcff4",
+  "model_code_commits": [
+    "9af63439860907e7b35bb0ddff0d819cfda04537"
+  ],
+  "delivery_branch_head": "232dd01886d77d9a37aabae59d298fdd1477624a",
+  "model_manifest_sha256": "94b0158f385ded6afa143e6e5c52e7d70741d0655c2e24e348e90f0d258c9f03",
+  "verify_delivery_sha256": "f88097834bc92fdb89f4406b24ed6455c3e9e2e1525dfc84ba2b4bf7d1cb78ad",
+  "checks": {
+    "fixed_commit_worktree_used": true,
+    "round8_tests_passed": 131,
+    "delivery_gate_complete": true,
+    "prediction_rows_per_candidate": 1500,
+    "row_permutation_draws_per_candidate": 999,
+    "failed_permutation_draws_per_candidate": 0,
+    "per_iteration_seed_rule_verified": true,
+    "semantic_quality_rows_permuted_each_iteration": true,
+    "fit_design_called_each_iteration": true,
+    "alpha_selection_called_each_iteration": true,
+    "refit_called_each_iteration": true,
+    "isolated_package_used": true,
+    "test_predictions_present": false,
+    "test_truth_used": false
+  },
+  "scope": "Climate_h4_f2/proxy; N+S+Q and N+S+Q+SF row-permutation null evidence only",
+  "limitation": "This review independently verifies hashes, the 131-test suite, delivery gate, fixed code call path and isolation. It does not rerun all 1,998 refits on the master computer."
+}
