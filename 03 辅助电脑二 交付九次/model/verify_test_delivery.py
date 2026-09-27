@@ -139,8 +139,13 @@ def check(delivery: Path, *, task: str, horizon: int, expected_origins: int,
             prov = man.get("code_provenance") or {}
             if require_git_clean and prov.get("worktree_dirty"):
                 problems.append("工作区不干净（§六 退回条件）")
-            if not str(prov.get("scope") or "").endswith("03 辅助电脑二 交付九次/model"):
-                problems.append(f"provenance scope 不是第九次目录: {prov.get('scope')!r}")
+            # §二 指定用**第八次那份已过 131 项测试的入口**跑正式预测，
+            # 因此 provenance 的 scope 如实指向那次运行所用的 model 目录：
+            # 第八次或第九次都接受（两者都是本侧代码），但必须说得出是哪一个。
+            scope = str(prov.get("scope") or "")
+            if not scope.endswith(("03 辅助电脑二 交付八次/model",
+                                   "03 辅助电脑二 交付九次/model")):
+                problems.append(f"provenance scope 指向非本侧目录: {scope!r}")
             rt = man.get("runtime") or {}
             if (rt.get("peak_rss_bytes") or 0) <= 0:
                 problems.append("缺峰值内存实测")

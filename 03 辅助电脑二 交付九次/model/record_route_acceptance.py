@@ -34,6 +34,15 @@ REPO_ROOT = HERE.parents[1]
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
 
+def _tsv_value(tsv: Path, rel_path: str) -> str | None:
+    """从主控的 ARTIFACTS_SHA256.tsv 里取某路径的 sha256。"""
+    for line in Path(tsv).read_text(encoding="utf-8").splitlines()[1:]:
+        parts = line.split("	")
+        if len(parts) >= 3 and parts[2].strip() == rel_path:
+            return parts[0].strip()
+    return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--route", type=Path, required=True)
@@ -47,7 +56,9 @@ def main() -> int:
     parser.add_argument("--bundle-signature", required=True)
     parser.add_argument("--candidate", required=True)
     parser.add_argument("--selection-manifest", type=Path, default=None,
-                        help="本侧实际消费的选择期清单；给出则与路由记录比对")
+                        help="本侧实际消费的选择期清单；给出则核对候选是否一致")
+    parser.add_argument("--master-artifacts", type=Path, default=None,
+                        help="主控 ARTIFACTS_SHA256.tsv；给出则核对路由的选择阶段清单哈希")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -87,11 +98,19 @@ def main() -> int:
             HEX64.match(str(route.get(k, "")))
             for k in ("selection_manifest_sha256", "refit_review_sha256",
                       "split_spec_sha256", "bundle_signature")),
-        # 第九轮新增：路由自报的选择期清单 SHA 必须等于本侧实际消费的那份清单
-        "selection_manifest_matches_route": (
-            True if getattr(args, "selection_manifest", None) is None
+        # 路由的 `selection_manifest_sha256` 指的是**主控自己**的选择阶段清单
+        # （`results/selection_stage/manifest.json`），不是本侧的 run manifest ——
+        # 第七轮同一字段也是这个含义。所以：
+        #   a) 必须等于主控 ARTIFACTS_SHA256.tsv 里该行的值（给了 TSV 时核对）；
+        #   b) 本侧消费的选择期清单必须是**同一候选**的（局部可核对的一致性）。
+        "selection_manifest_sha256_matches_master_artifacts": (
+            True if getattr(args, "master_artifacts", None) is None
             else route.get("selection_manifest_sha256")
-            == sha256_file(args.selection_manifest)),
+            == _tsv_value(args.master_artifacts, "results/selection_stage/manifest.json")),
+        "local_selection_manifest_candidate_matches": (
+            True if getattr(args, "selection_manifest", None) is None
+            else (json.loads(Path(args.selection_manifest).read_text(encoding="utf-8"))
+                  .get("candidate") == args.candidate)),
         "inputs_sha256_subkeys_present_and_valid": all(
             HEX64.match(str(v)) for v in (route.get("inputs_sha256") or {}).values())
         and set(route.get("inputs_sha256") or {}) >= {"task", "samples", "predictions",
