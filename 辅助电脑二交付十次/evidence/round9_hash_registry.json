@@ -1,0 +1,307 @@
+{
+  "note": "逐文件双哈希（A.5）：worktree_sha256 是磁盘字节，git_blob_sha1 是仓库真正存储的对象；两者不同说明该文件在提交时会被改写（行尾等）",
+  "files": {
+    "model/audit_baselines.py": {
+      "worktree_sha256": "07c116952ea478b6d45f201c309b1d613f5c9c8311714cc669ecab7340271adf",
+      "git_blob_sha1": "71f2e6f22aa14dcf4b8d77760e26023f3bb0f115",
+      "bytes_worktree": 9578,
+      "bytes_stored": 9578,
+      "normalized_on_commit": false
+    },
+    "model/audit_boundaries.py": {
+      "worktree_sha256": "32c1ce5276821a2ff1c5a7f2937d4c79a1e104ca8afd4868464e049473474b52",
+      "git_blob_sha1": "21fa1321e17aa0cfbe09caa213a6c8c674bfc308",
+      "bytes_worktree": 11954,
+      "bytes_stored": 11954,
+      "normalized_on_commit": false
+    },
+    "model/audit_isolation.py": {
+      "worktree_sha256": "6f01c0070b278c843057530de4de45255150970f9eadf77d8c7ff91f3f7430aa",
+      "git_blob_sha1": "6a9379fa1cecccebee53aece4ac2069980d4ffca",
+      "bytes_worktree": 19834,
+      "bytes_stored": 19834,
+      "normalized_on_commit": false
+    },
+    "model/audit_read_isolation.py": {
+      "worktree_sha256": "f4093b9eba046bcac82facee640ee71a79ef57cadd86a4ae397ed5fc7291a265",
+      "git_blob_sha1": "f2ec32174229a136e83a6003cbea67a50da5c92b",
+      "bytes_worktree": 10576,
+      "bytes_stored": 10576,
+      "normalized_on_commit": false
+    },
+    "model/audit_replay.py": {
+      "worktree_sha256": "970e9263d6e1e718961e9b98c243029e47a68ef9fa514b0fb3cd2c8e5dab7292",
+      "git_blob_sha1": "835c78aa42d5946c5ec1285568904297b75b4a4c",
+      "bytes_worktree": 9082,
+      "bytes_stored": 9082,
+      "normalized_on_commit": false
+    },
+    "model/audit_tables.py": {
+      "worktree_sha256": "dce9095de5d25d5eb7786288010c0c9cbb86b87d0907c0c149349f3d06f14a0a",
+      "git_blob_sha1": "10549c263b1256974d863384f4cdf7d0f229e1e3",
+      "bytes_worktree": 6048,
+      "bytes_stored": 6048,
+      "normalized_on_commit": false
+    },
+    "model/audit_test_isolation.py": {
+      "worktree_sha256": "f685c3d66f752cafb118b14a8d5402c7652f0c5c8647c3d2a853739280c396f8",
+      "git_blob_sha1": "92651a5b0b5f38400a117ec5cceaf2e3d9bdd0cc",
+      "bytes_worktree": 15602,
+      "bytes_stored": 15602,
+      "normalized_on_commit": false
+    },
+    "model/branches.py": {
+      "worktree_sha256": "b4a632f4bc002db6e4d2321fff68826cba5aeb813898a0d96cbd9afc1a9948ad",
+      "git_blob_sha1": "09ad7be6c10199140ecca46feb877605f9362249",
+      "bytes_worktree": 10639,
+      "bytes_stored": 10639,
+      "normalized_on_commit": false
+    },
+    "model/bundle_reader.py": {
+      "worktree_sha256": "ff58990c775b85c52763bcf3bfc0c08c8c70346f7bf3ea8019bda815f3980022",
+      "git_blob_sha1": "650a9b98e9298bed1c3b1e224e8ee9716c6b0a41",
+      "bytes_worktree": 25223,
+      "bytes_stored": 25223,
+      "normalized_on_commit": false
+    },
+    "model/candidates.py": {
+      "worktree_sha256": "5b7be2c04ad8b2bdd219a0305d83813b8f7e4df243149a62133597cd42043927",
+      "git_blob_sha1": "ec0815e1e59540ef6de6ce60059d590e6fcb3b2a",
+      "bytes_worktree": 10573,
+      "bytes_stored": 10573,
+      "normalized_on_commit": false
+    },
+    "model/isolated_package.py": {
+      "worktree_sha256": "43677a2f8c4fbcf3abe69e4e7d75e1e75ec67449432f05cf5dba7cda628d4580",
+      "git_blob_sha1": "206b033224853a88cd2553819de71a09057cd439",
+      "bytes_worktree": 17675,
+      "bytes_stored": 17675,
+      "normalized_on_commit": false
+    },
+    "model/make_manifest.py": {
+      "worktree_sha256": "658fac4914f158513c3ee43ddf8f909c1a47744bf58ef615676d50e0e41c37d1",
+      "git_blob_sha1": "f05148907bc489350e8db513a6860e0be03be7c9",
+      "bytes_worktree": 8705,
+      "bytes_stored": 8705,
+      "normalized_on_commit": false
+    },
+    "model/numeric_fallbacks.py": {
+      "worktree_sha256": "63916b6dd5dcfd044ebc7bf391bb665770f1af3fe9fea8caaeba3cd7ab801070",
+      "git_blob_sha1": "4a0b64ca982ff116596ee8e15e48db380e07c3a1",
+      "bytes_worktree": 7332,
+      "bytes_stored": 7332,
+      "normalized_on_commit": false
+    },
+    "model/permutation.py": {
+      "worktree_sha256": "89b1f7137775b0a268707c40e84c63ac7ef020a1da705837fee47620ce6abb84",
+      "git_blob_sha1": "cd496b436860df87b81b6f7abe1ac873aab824a1",
+      "bytes_worktree": 11159,
+      "bytes_stored": 11159,
+      "normalized_on_commit": false
+    },
+    "model/permutation_entry.py": {
+      "worktree_sha256": "5787eab71c6e766b6f6db72697240ac6f8636c629dab5477e262914c8f995ac3",
+      "git_blob_sha1": "2ee237d028e0f94bf69d7bd6b8ab1f5f60d77f4f",
+      "bytes_worktree": 11972,
+      "bytes_stored": 11972,
+      "normalized_on_commit": false
+    },
+    "model/predict_io.py": {
+      "worktree_sha256": "e53eebafc20d2098ba4d66e173d73748630d7b340ac5fbfc00529b35f742d4dd",
+      "git_blob_sha1": "4a802726c72cbc372bde5439a43cb468d7709df6",
+      "bytes_worktree": 9776,
+      "bytes_stored": 9776,
+      "normalized_on_commit": false
+    },
+    "model/predict_test.py": {
+      "worktree_sha256": "d5104bbb4e6abb4c7b166c7594150be05fbdcf6aaa3209c6e41de7121e94084d",
+      "git_blob_sha1": "00b38c08d818a375e2e02525bb3b55fd1d1c4f0b",
+      "bytes_worktree": 28569,
+      "bytes_stored": 28569,
+      "normalized_on_commit": false
+    },
+    "model/probe_bundle_reads.py": {
+      "worktree_sha256": "eede7b22d1d1a40126b09f0e38b69685eb5244fef8d5cb97eb4825605cb50417",
+      "git_blob_sha1": "64395225d9e449b9adf111dc442e1eaa467c17ad",
+      "bytes_worktree": 7632,
+      "bytes_stored": 7632,
+      "normalized_on_commit": false
+    },
+    "model/record_route_acceptance.py": {
+      "worktree_sha256": "6b37ebf3db3d8306f29c055dbb12e42f9d30d160c8ee8c343dacf7369a216619",
+      "git_blob_sha1": "5aa3fa0a00c228ad95828eb080449be63ca07171",
+      "bytes_worktree": 7865,
+      "bytes_stored": 7865,
+      "normalized_on_commit": false
+    },
+    "model/runtime_profile.py": {
+      "worktree_sha256": "50e19603c3854aa2596793895cfd9786112976d4c0f14b0b22c0f7f923deb36b",
+      "git_blob_sha1": "89de7ea21a991d0cbe8f7e3c58d443c5cd5d84cf",
+      "bytes_worktree": 5050,
+      "bytes_stored": 5050,
+      "normalized_on_commit": false
+    },
+    "model/tests/test_round6.py": {
+      "worktree_sha256": "64fd980f506249885323e35749a3b9783f63d5e99289d6b0e36158b5094c3dea",
+      "git_blob_sha1": "92e1f4977c9a1a96b7bc4f15b0b160c76cc05a61",
+      "bytes_worktree": 25683,
+      "bytes_stored": 25683,
+      "normalized_on_commit": false
+    },
+    "model/tests/test_round7.py": {
+      "worktree_sha256": "81bf1432015892046228cfe2a64cf7e20c2949011c2f2e0b3aeee4c95724bef2",
+      "git_blob_sha1": "ca5fac58fac64ec46eb41ef71de25627068cada4",
+      "bytes_worktree": 15315,
+      "bytes_stored": 15315,
+      "normalized_on_commit": false
+    },
+    "model/tests/test_round8.py": {
+      "worktree_sha256": "a665c344146c89574daada39c6cdffffa00fdd5b0f814a65a4850def25e8362e",
+      "git_blob_sha1": "69734f17d09cb046144edbe45bc2e2a29273754f",
+      "bytes_worktree": 31258,
+      "bytes_stored": 31258,
+      "normalized_on_commit": false
+    },
+    "model/tests/test_round9.py": {
+      "worktree_sha256": "57bdde3f3bac045d31416cff671e422c03d809d94915c82e94522cc4824c2e9c",
+      "git_blob_sha1": "c8f956a8e4d36825daf6e3317d693825269f3820",
+      "bytes_worktree": 12525,
+      "bytes_stored": 12525,
+      "normalized_on_commit": false
+    },
+    "model/train.py": {
+      "worktree_sha256": "454133490d001cbc159a7b644fb46d2e751f45f36d29ae242b311c8bdb993b2d",
+      "git_blob_sha1": "9587386b38388d294c70fb737f5fefbb2511ab10",
+      "bytes_worktree": 10938,
+      "bytes_stored": 10938,
+      "normalized_on_commit": false
+    },
+    "model/verify_delivery.py": {
+      "worktree_sha256": "091cfddeeaf19474f10979c4b24865dde7fd6f3f3e0b4af891af1fa8a94ec191",
+      "git_blob_sha1": "b2503ecff04d56014b0601fcb64e7c17b9b3456c",
+      "bytes_worktree": 11845,
+      "bytes_stored": 11845,
+      "normalized_on_commit": false
+    },
+    "model/verify_test_delivery.py": {
+      "worktree_sha256": "d20ff6eb05d393ec46cc29a2b6afda56f8ac23c724fbba2d75a5f950cc4c3b16",
+      "git_blob_sha1": "00e8030709c4b919c4adf92aa1609509f93db8b4",
+      "bytes_worktree": 12748,
+      "bytes_stored": 12748,
+      "normalized_on_commit": false
+    },
+    "evidence/master_ARTIFACTS_SHA256.tsv": {
+      "worktree_sha256": "2ea60bba05e516012957a82b910f98453216ae1f96fc728c61b3ea1b85c6357e",
+      "git_blob_sha1": "9c3a14d4f78c7d5de0b3abbd663bc531672e9759",
+      "bytes_worktree": 2460,
+      "bytes_stored": 2460,
+      "normalized_on_commit": false
+    },
+    "evidence/replay_check.json": {
+      "worktree_sha256": "51ca9227682a884d4a259c6593b6c2d33630b030261165f85727a3890360d2dc",
+      "git_blob_sha1": "702042adcc1c7eb551f011ffd7e98bc33b1f125d",
+      "bytes_worktree": 1999,
+      "bytes_stored": 1999,
+      "normalized_on_commit": false
+    },
+    "evidence/route_acceptance.json": {
+      "worktree_sha256": "2dcb84559a5bc24f7245c523d7664c49f66b186e44b3c4790f84ff542453692d",
+      "git_blob_sha1": "4bd8278526df9e89994a39be26117d796940c912",
+      "bytes_worktree": 3154,
+      "bytes_stored": 3154,
+      "normalized_on_commit": false
+    },
+    "evidence/run.log": {
+      "worktree_sha256": "74294b6199f3480a52eb8069e3e39945480cbb75dff3c57dbb7a046f7ce9efc1",
+      "git_blob_sha1": "cb244ba53c4c761ec17103c54415ea3050ba6d2e",
+      "bytes_worktree": 8756,
+      "bytes_stored": 8756,
+      "normalized_on_commit": false
+    },
+    "evidence/sealed_route.json": {
+      "worktree_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+      "git_blob_sha1": "048d20d06a4031d77db35c7eb7ead83b6d73ac5b",
+      "bytes_worktree": 1530,
+      "bytes_stored": 1530,
+      "normalized_on_commit": false
+    },
+    "evidence/sealed_route.json.sha256": {
+      "worktree_sha256": "16efbad47a92fb359ff46d3b0caebe770d519720d9b161d6d12442e9136ac1c5",
+      "git_blob_sha1": "aa2ea0a70caee33fc20b3ea062a48440b82fc33c",
+      "bytes_worktree": 84,
+      "bytes_stored": 84,
+      "normalized_on_commit": false
+    },
+    "evidence/test_isolation_audit.json": {
+      "worktree_sha256": "035b955f32887894708b1653a4337887b7cee6d04c24b74bbe58866cf56d52b5",
+      "git_blob_sha1": "999d295702f8d9b18e42eed8b89505ccb4ab723f",
+      "bytes_worktree": 41308,
+      "bytes_stored": 41308,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round6.log": {
+      "worktree_sha256": "e7db3fc7354b16c565c992fc33b27c2875586d294d99e4c722dc2bf12756cbce",
+      "git_blob_sha1": "3c335face8a8cc7407d3c44a99ea9c9c7220f3a7",
+      "bytes_worktree": 3868,
+      "bytes_stored": 3868,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round7.log": {
+      "worktree_sha256": "365904029c99e2ca498b9abc3fd0deb5413f323e4846c294ebfaeb6eefe55225",
+      "git_blob_sha1": "2fd9706fa62840b7fe2b27efe7c96c1b8b473334",
+      "bytes_worktree": 6923,
+      "bytes_stored": 6923,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round8.log": {
+      "worktree_sha256": "8308d839a67e1ea1907f263a1012cc5ce8b47dd69029ce0ab629957ce393c107",
+      "git_blob_sha1": "03a51eda0583062e344875aa3f2c953ac90776a9",
+      "bytes_worktree": 11543,
+      "bytes_stored": 11543,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round9.log": {
+      "worktree_sha256": "68732d9ed60053bf5558200f2d736311e71182b8c7623c7e5d8c6f2bedfb0d34",
+      "git_blob_sha1": "b0b63eb9ab9259e1c1392a78971ef26d685a370b",
+      "bytes_worktree": 13915,
+      "bytes_stored": 13915,
+      "normalized_on_commit": false
+    },
+    "attempt_ledger.json": {
+      "worktree_sha256": "4777fdb954eea1ad2dc28c83243615bef138abe7b0373ee11287625a717912f1",
+      "git_blob_sha1": "c59c043fcc3b4b527b5c3beaa99a648e4a09da3a",
+      "bytes_worktree": 9464,
+      "bytes_stored": 9464,
+      "normalized_on_commit": false
+    },
+    "README.md": {
+      "worktree_sha256": "26cb31ea8afdb1f50ee82954637fd32914fc4094308628eef223674135712f3a",
+      "git_blob_sha1": "835e3f975a3484e5641212f5488f2e03d500748c",
+      "bytes_worktree": 7302,
+      "bytes_stored": 7302,
+      "normalized_on_commit": false
+    },
+    "RUNBOOK.md": {
+      "worktree_sha256": "c9526ff7d5dc20cdd763d9da173aa39e724c2ec75249c1bc93eac7d3b689673e",
+      "git_blob_sha1": "dbb4b3855e3f241a6ff9adcdc973a337bde0eb84",
+      "bytes_worktree": 4484,
+      "bytes_stored": 4484,
+      "normalized_on_commit": false
+    },
+    "test_prediction/N_test_manifest.json": {
+      "worktree_sha256": "e63a8b9ad49cc9e08bb33b2c452401975547f17579e451d2215fecb7452f859b",
+      "git_blob_sha1": "577e521b45de8b8afbd881e9974d69273ced29fe",
+      "bytes_worktree": 4463,
+      "bytes_stored": 4463,
+      "normalized_on_commit": false
+    },
+    "test_prediction/N_test_predictions.csv": {
+      "worktree_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+      "git_blob_sha1": "7cc87e561638a11bd18dbb9e61e6606961e763e7",
+      "bytes_worktree": 138196,
+      "bytes_stored": 138196,
+      "normalized_on_commit": false
+    }
+  },
+  "normalized_on_commit": []
+}

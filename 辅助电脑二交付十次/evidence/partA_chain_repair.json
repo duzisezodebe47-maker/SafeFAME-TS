@@ -1,0 +1,29 @@
+{
+  "purpose": "第十轮 A：第九次交付证据链修复的验证（不重跑、不改写预测）",
+  "frozen_prediction": {
+    "path": "03 辅助电脑二 交付九次/test_prediction/N_test_predictions.csv",
+    "expected_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+    "committed_sha256_at_round9_acceptance": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+    "worktree_sha256_after_repair": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+    "clean_checkout_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+    "unchanged": true
+  },
+  "issues_fixed": {
+    "A2_manifest_recorded_worktree_bytes": "清单原先对**工作区字节**取哈希；.gitattributes 把文本归一成 LF 后与检出字节不符。现记录 **git 会存储的 blob 字节**（hash-object --path 后 cat-file blob），清单不可能记录注定对不上的值。",
+    "A3_receipt_self_reference": "门控回执（evidence/verify_*.json）是读取清单后写出的派生文件，写它会改变它自己校验的清单，必须迭代到不动点、一旦漏写最后一次就自相矛盾（第九次正是如此）。现把 receipt 排除在清单之外（与 MANIFEST.json 自身同理）。",
+    "encoding_trap": "回执曾用 shell 重定向写出 → 本机 cp936 中文，检出后无法按 UTF-8 读取。现一律由 Python 以 UTF-8 + LF 写出。"
+  },
+  "clean_checkout_verification": {
+    "method": "git archive HEAD | tar -x 到全新临时目录（无工作区、无 __pycache__）",
+    "gate_exit_code": 0,
+    "verdict": "COMPLETE",
+    "problems": [],
+    "receipt_in_checkout": "COMPLETE"
+  },
+  "hash_algorithms_note": {
+    "sha256_in_MANIFEST.json": "git 归一化后的最终字节 —— 与检出后一致，用于跨机器核对",
+    "worktree_sha256": "磁盘原始字节 —— 用于发现「提交时会被改写」的文件（本轮为 0 个）",
+    "git_blob_sha1": "git 对象 id，可用 git rev-parse HEAD:<path> 直接比对",
+    "see": "evidence/round9_hash_registry.json（逐文件双哈希）"
+  }
+}

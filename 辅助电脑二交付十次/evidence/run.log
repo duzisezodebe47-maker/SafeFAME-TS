@@ -1,0 +1,6 @@
+第十轮执行记录（A 证据链修复 + B 退化契约）
+$ test_round6.py  EXIT=0  ok=49
+$ test_round7.py  EXIT=0  ok=85
+$ test_round8.py  EXIT=0  ok=131
+$ test_round9.py  EXIT=0  ok=160
+$ test_round10.py  EXIT=0  ok=195
