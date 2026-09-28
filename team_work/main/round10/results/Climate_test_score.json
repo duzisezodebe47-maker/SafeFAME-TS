@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "task": "Climate_h4_f2",
+  "scenario": "proxy",
+  "route_selected": "numeric_fallback",
+  "route_fallback": "N",
+  "n_origins": 124,
+  "horizon": 4,
+  "metrics_standardized_and_raw": {
+    "Last": {
+      "mse": 0.14462253011129927,
+      "mae": 0.28713703419893016,
+      "rmse": 0.3802926900576703,
+      "raw_mse": 11.417664771038456,
+      "raw_mae": 2.5512902927621828,
+      "raw_rmse": 3.379003517464647
+    },
+    "SeasonalNaive": {
+      "mse": 5.5410247305907125,
+      "mae": 1.906056338804774,
+      "rmse": 2.353938132277633,
+      "raw_mse": 437.4530221067922,
+      "raw_mae": 16.93582664534105,
+      "raw_rmse": 20.915377646764885
+    },
+    "AR-Ridge": {
+      "mse": 0.1632910883640473,
+      "mae": 0.31309433758630983,
+      "rmse": 0.4040929204577176,
+      "raw_mse": 12.891510787454033,
+      "raw_mae": 2.781927961439306,
+      "raw_rmse": 3.5904750086101465
+    },
+    "N": {
+      "mse": 0.13402219508423302,
+      "mae": 0.27603968492166364,
+      "rmse": 0.3660904192740272,
+      "raw_mse": 10.580789135502307,
+      "raw_mae": 2.4526873397663445,
+      "raw_rmse": 3.2528124962103653
+    }
+  },
+  "comparisons_vs_N": {
+    "Last": {
+      "baseline": "Last",
+      "gain_pct": 7.329656740833124,
+      "mean_origin_delta": 0.010600335027066268,
+      "block_bootstrap_ci95": [
+        -0.006538141255776769,
+        0.02783630305414872
+      ],
+      "origin_win_rate": 0.5887096774193549
+    },
+    "SeasonalNaive": {
+      "baseline": "SeasonalNaive",
+      "gain_pct": 97.58127419384492,
+      "mean_origin_delta": 5.4070025355064795,
+      "block_bootstrap_ci95": [
+        3.5643710380622595,
+        7.491552548623832
+      ],
+      "origin_win_rate": 0.9193548387096774
+    },
+    "AR-Ridge": {
+      "baseline": "AR-Ridge",
+      "gain_pct": 17.92436658549369,
+      "mean_origin_delta": 0.029268893279814287,
+      "block_bootstrap_ci95": [
+        0.00871631554973444,
+        0.051876215229572364
+      ],
+      "origin_win_rate": 0.6693548387096774
+    }
+  },
+  "half_metrics": [
+    {
+      "half": "first_half",
+      "origins": 62,
+      "Last_mse": 0.21387790288350553,
+      "SeasonalNaive_mse": 3.1098036550288275,
+      "AR-Ridge_mse": 0.24728648449944685,
+      "N_mse": 0.19419867102371755,
+      "N_vs_Last_gain_pct": 9.201152430649561
+    },
+    {
+      "half": "second_half",
+      "origins": 62,
+      "Last_mse": 0.07536715733909301,
+      "SeasonalNaive_mse": 7.972245806152598,
+      "AR-Ridge_mse": 0.07929569222864767,
+      "N_mse": 0.07384571914474844,
+      "N_vs_Last_gain_pct": 2.0187018431639836
+    }
+  ],
+  "horizon_metrics": [
+    {
+      "step": 1,
+      "Last_mse": 0.048987949287132876,
+      "SeasonalNaive_mse": 5.655614248858973,
+      "AR-Ridge_mse": 0.0515876313903365,
+      "N_mse": 0.04723227617042366
+    },
+    {
+      "step": 2,
+      "Last_mse": 0.11481112405798079,
+      "SeasonalNaive_mse": 5.554754399684738,
+      "AR-Ridge_mse": 0.12323025084765354,
+      "N_mse": 0.10787723500944295
+    },
+    {
+      "step": 3,
+      "Last_mse": 0.174889890921591,
+      "SeasonalNaive_mse": 5.50478163720522,
+      "AR-Ridge_mse": 0.1974545718387312,
+      "N_mse": 0.1617752932442958
+    },
+    {
+      "step": 4,
+      "Last_mse": 0.23980115617849243,
+      "SeasonalNaive_mse": 5.448948636613918,
+      "AR-Ridge_mse": 0.28089189937946785,
+      "N_mse": 0.21920397591276963
+    }
+  ],
+  "route_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+  "selected_prediction_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+  "baseline_prediction_sha256": "9d7d950f54717d214dd53ba1be614d01dedf0540049c3974d59e9e2ee4fd87b9",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "bootstrap": {
+    "method": "circular moving-block bootstrap over ordered origins",
+    "block": 4,
+    "draws": 5000,
+    "seed": 2026
+  },
+  "interpretation_boundary": "Test results describe the already sealed N route. They are not used to reopen candidate selection."
+}

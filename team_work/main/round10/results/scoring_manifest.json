@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "inputs": {
+    "route": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+    "baseline_csv": "9d7d950f54717d214dd53ba1be614d01dedf0540049c3974d59e9e2ee4fd87b9",
+    "selected_csv": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122"
+  },
+  "files": {
+    "Climate_half_metrics.csv": "4527bb12e786f83c9e872c6909a26c81fb548b6459104b526a384952882f1d56",
+    "Climate_horizon_metrics.csv": "5aba5eb73af2b9dc157611fc3520141baad069a3ba0e923e3f1a6fbc5bb56e03",
+    "Climate_numeric_test_baselines.csv": "9d7d950f54717d214dd53ba1be614d01dedf0540049c3974d59e9e2ee4fd87b9",
+    "Climate_origin_losses.csv": "acc63e0586be758ef6ff2d71ce4de0a4a6a5ec2bb4f2cb1c59915c5f6e111aca",
+    "Climate_test_predictions_bound.csv": "97cc2f7ab909276558026ee05f4d39daa751f66bcbb5e55e717f211ececb7592",
+    "Climate_test_score.json": "e763ff4feede63d9bf0d4dfb7041fbc4e0a107dca30c1f0d27e5506305614aa2",
+    "score_climate_test.log": "9c568dcfbd154e55d30b09b53bad65018027f650dd216d8e79f5ea223084899c"
+  }
+}

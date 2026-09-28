@@ -1,0 +1,17 @@
+{
+  "status": "CONDITIONAL_PASS",
+  "branch": "SHY",
+  "commit": "008a7223c8570cc8fe3fd5d7202b287cfa8f2f78",
+  "delivery": "03 辅助电脑二 交付九次",
+  "prediction_rows": 496,
+  "origins": 124,
+  "horizon": 4,
+  "selected_candidate": "N",
+  "prediction_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+  "route_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+  "independent_tests": "160/160 PASS",
+  "independent_gate": "COMPLETE",
+  "committed_gate": "INCOMPLETE",
+  "reservation": "Committed gate evidence has a trailing-newline manifest hash mismatch. Prediction bytes are accepted and must remain frozen; round 10 repairs evidence only.",
+  "test_truth_boundary": "Target arrays were opened for integrity/non-test fitting, while test truth was masked before model access; model-side test_truth_data_access_count=0."
+}

@@ -1,0 +1,12 @@
+Independent replay audit
+branch=SHY
+commit=008a7223c8570cc8fe3fd5d7202b287cfa8f2f78
+delivery=03 辅助电脑二 交付九次
+result=PASS
+tests_passed=160
+tests_failed=0
+prediction_rows=496
+origins=124
+horizon=4
+candidate=N
+note=Replayed in detached worktree; raw console log was replaced by this UTF-8 summary to avoid code-page corruption.
