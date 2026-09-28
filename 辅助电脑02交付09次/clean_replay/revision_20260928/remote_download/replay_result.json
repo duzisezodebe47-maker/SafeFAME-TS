@@ -1,0 +1,18 @@
+{
+  "url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/download/socialgood-isolated-input-v9r2-20260928/SafeFAME-TS_SocialGood_isolated_v9r2_20260928.zip",
+  "release_url": "https://github.com/duzisezodebe47-maker/SafeFAME-TS/releases/tag/socialgood-isolated-input-v9r2-20260928",
+  "tag": "socialgood-isolated-input-v9r2-20260928",
+  "target_commitish": "92b545bbc1a417d860b493fa9669094b10ca4ac8",
+  "fresh_directory": "D:\\Documents\\Codex\\2026-09-27\\safefame-ts-git-push-d-aaa\\work\\socialgood09r2-remote-clean-20260928",
+  "downloaded_bytes": 3353590,
+  "downloaded_sha256": "2fe3deeda8999b037b8f0ff50d7083aced93470d5fa0e7ab042ac8091d1952f7",
+  "remote_asset_digest": "sha256:2fe3deeda8999b037b8f0ff50d7083aced93470d5fa0e7ab042ac8091d1952f7",
+  "verify_status": "PASS",
+  "output_hashes_checked": true,
+  "negative_status": "PASS",
+  "negative_passed": 8,
+  "negative_total": 8,
+  "retained_origins": 700,
+  "selection_origins": 611,
+  "test_origins": 89
+}
