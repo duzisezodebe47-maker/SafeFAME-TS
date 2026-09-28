@@ -5,6 +5,7 @@
   "formal_bundle_manifest_sha256": "6c889af1a687592453a5d1d4d83dc2b4eaf9118653f1ac1085b1997c91800143",
   "numeric_snapshot_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
   "lineage_sha256": "90603c6e7fd62dc0f7b8d0ad80c93edea17a4a479afd536ef3668724ff01e9d1",
+  "raw_clean_audit_sha256": "9b5632118a6082e9a663b6d2988fdf1bf5bb621885a316b7a49983cdee787079",
   "source_safe_sha256": {
     "origin_index.npy": "fd54ec46816bba7622e6d3b20da4b9c96d515691a4c6a72d9e9b40b042893d35",
     "horizon_time.npy": "8c86a779e090594c1643bb6aed188693aed04773877aa15f4ab9881ce15f40f2",

@@ -12,8 +12,9 @@ from pathlib import Path, PurePosixPath
 import numpy as np
 import pandas as pd
 
-
 sys.dont_write_bytecode = True
+from audit_socialgood_raw_clean import CLEAN_SHA, LINEAGE_SHA, RAW_SHA, SOURCE_REVISION
+
 TASK = "SocialGood_h3_f1"
 BUNDLE_SHA = "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38"
 SPEC_SHA = "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031"
@@ -108,6 +109,18 @@ def check(root: Path) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
             "frozen task parameters mismatch")
     require(anchors["numeric_snapshot_sha256"] == task_spec["numerical_sha256"],
             "numeric source snapshot anchor mismatch")
+    raw_audit_path = root / "raw_clean_audit.json"
+    require(sha(raw_audit_path) == anchors["raw_clean_audit_sha256"],
+            "raw-to-clean audit anchor mismatch")
+    raw_audit = json.loads(raw_audit_path.read_text(encoding="utf-8"))
+    require(raw_audit["schema_version"] == 1 and raw_audit["task"] == TASK
+            and raw_audit["source_repository_revision"] == SOURCE_REVISION
+            and raw_audit["raw_sha256"] == RAW_SHA
+            and raw_audit["text_lineage_sha256"] == LINEAGE_SHA
+            and raw_audit["numeric"]["clean_sha256"] == CLEAN_SHA
+            and CLEAN_SHA == anchors["numeric_snapshot_sha256"]
+            and LINEAGE_SHA == anchors["lineage_sha256"],
+            "raw-to-clean source hash mismatch")
     for relative, expected in anchors["source_safe_sha256"].items():
         original = "target_time.npy" if relative == "horizon_time.npy" else relative
         require(expected == formal["files"][f"{TASK}/{original}"]
@@ -133,6 +146,29 @@ def check(root: Path) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     axis = pd.read_csv(root / "monthly_axis.csv", keep_default_na=False)
     require(len(axis) == task_spec["n_rows_expected"] and np.array_equal(axis.numerical_row, np.arange(len(axis))),
             "monthly time axis mismatch")
+    numeric_audit = raw_audit["numeric"]
+    require(numeric_audit["raw_rows"] == 924 and numeric_audit["clean_rows"] == len(axis)
+            and numeric_audit["removed_missing_OT_rows"] == 8
+            and numeric_audit["raw_rows"] - numeric_audit["removed_missing_OT_rows"] == len(axis)
+            and numeric_audit["raw_missing_by_field"]["OT"] == 8
+            and all(count == 0 for count in numeric_audit["clean_missing_by_field"].values())
+            and numeric_audit["raw_duplicate_start_dates"] == 0
+            and numeric_audit["clean_duplicate_start_dates"] == 0
+            and numeric_audit["byte_exact_replay"] is True,
+            "raw-to-clean numeric count/missing/duplicate audit mismatch")
+    lineage = pd.read_csv(root / "source_lineage_slim.csv", keep_default_na=False)
+    for source in ("report", "search"):
+        rows = lineage.loc[lineage.source.eq(source)]
+        record = raw_audit["text"][source]
+        require(record["raw_sha256"] == RAW_SHA[source]
+                and record["raw_rows"] == record["lineage_rows"] == len(rows)
+                and record["raw_missing_fact_rows"] == int(rows.reason.eq("missing_fact").sum())
+                and record["lineage_reasons"] == {str(k): int(v) for k, v in rows.reason.value_counts().items()}
+                and record["canonical_facts"] == int(rows.reason.eq("retained").sum()),
+                f"raw-to-clean text count/missing/duplicate audit mismatch: {source}")
+    require(raw_audit["text_raw_rows"] == len(lineage)
+            and raw_audit["text_canonical_facts"] == int(lineage.reason.eq("retained").sum()),
+            "raw-to-clean text totals mismatch")
     require(len(mapping) == 700 and mapping.origin_id.is_unique and mapping.origin_index.is_unique
             and np.array_equal(mapping.source_bundle_row, np.arange(len(mapping))),
             "mapping Bundle row/origin mismatch")

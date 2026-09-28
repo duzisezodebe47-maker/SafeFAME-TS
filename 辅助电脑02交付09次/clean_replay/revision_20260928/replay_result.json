@@ -1,0 +1,16 @@
+{
+  "task": "SocialGood_h3_f1",
+  "revision": "v9r2-20260928",
+  "source_package": "newly rebuilt from frozen formal Bundle and raw Time-MMD inputs",
+  "clean_directory": "D:\\Documents\\Codex\\2026-09-27\\safefame-ts-git-push-d-aaa\\work\\socialgood09r2-final-clean-20260928",
+  "archive_name": "SafeFAME-TS_SocialGood_isolated_v9r2_20260928.zip",
+  "archive_bytes": 3353590,
+  "archive_sha256": "2fe3deeda8999b037b8f0ff50d7083aced93470d5fa0e7ab042ac8091d1952f7",
+  "manifest_sha256": "849cb7a5e8c5ab27e1c17fbc3be03248aed2ebf0c8397674944561fc438ecc0f",
+  "verify_status": "PASS",
+  "output_hashes_checked": true,
+  "negative_status": "PASS",
+  "negative_passed": 8,
+  "negative_total": 8,
+  "test_truth_read_for_audit": false
+}

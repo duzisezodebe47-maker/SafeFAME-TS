@@ -12,13 +12,13 @@
     },
     {
       "relative_path": "README.md",
-      "bytes": 1997,
-      "sha256": "5d6fbe3ee93618009ab548715640e0d4f657268b250b7d2e32b8f54cc15b8dff"
+      "bytes": 3411,
+      "sha256": "e6163aa0cf7f0608baa32286274da14fc1d001f59228e37d59941f271f640adc"
     },
     {
       "relative_path": "RUNBOOK.md",
-      "bytes": 2653,
-      "sha256": "a256991e9ca247c3b7f09b7d8b63cf87822fad83e9617aa74723d18580a50c04"
+      "bytes": 3825,
+      "sha256": "f9598a90a3c52b8528b7bf7252fac9d21f2ca4c367ce673f1112cf5e91c1e72b"
     },
     {
       "relative_path": "anchors/formal_bundle_manifest.json",
@@ -31,9 +31,24 @@
       "sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031"
     },
     {
+      "relative_path": "code/audit_socialgood_raw_clean.py",
+      "bytes": 5655,
+      "sha256": "c5b001f507b173da3687cf0475385bde59b995de4b44bf4d0ce0692f3a2d74f7"
+    },
+    {
+      "relative_path": "code/make_manifest.py",
+      "bytes": 2719,
+      "sha256": "930f92ffbc18736c8d6ca81012a0747255098d1cb97b61d579bf2e7f0faec547"
+    },
+    {
+      "relative_path": "code/prepare_socialgood.py",
+      "bytes": 10269,
+      "sha256": "f9e4dd651e63de2d5af039a4b3499aebf1fe157084a42fe9e71bd2dcf5c688f6"
+    },
+    {
       "relative_path": "code/verify_socialgood.py",
-      "bytes": 25126,
-      "sha256": "4dbf61286e709e6780e79e8f63db5e864083e36c82d2c829746e7ac3aa5abe63"
+      "bytes": 27611,
+      "sha256": "fe9f082b7b874f1c8879ba68b9b6bffce227f64f76381ec8dcd73c4a3df241f1"
     },
     {
       "relative_path": "mapping.csv",
@@ -49,6 +64,11 @@
       "relative_path": "paper_ready/SocialGood数据边界与退化说明.md",
       "bytes": 1735,
       "sha256": "aa667d364a9bb4f7ba3fc6f44cc4276bb9034aec59284cc60f380223c42958f0"
+    },
+    {
+      "relative_path": "raw_clean_audit.json",
+      "bytes": 2512,
+      "sha256": "9b5632118a6082e9a663b6d2988fdf1bf5bb621885a316b7a49983cdee787079"
     },
     {
       "relative_path": "requirements-replay.txt",
@@ -182,8 +202,8 @@
     },
     {
       "relative_path": "source_anchors.json",
-      "bytes": 2114,
-      "sha256": "69c733651fd090411ea21a3a404bc5e47a1a152c03440c7c7bf777a84a542dee"
+      "bytes": 2211,
+      "sha256": "bffbbaf5fd1820512c1c0023d63daac7717ec7ce3a14c45f42468b67c19cffcd"
     },
     {
       "relative_path": "source_lineage_slim.csv",
@@ -307,8 +327,8 @@
     },
     {
       "relative_path": "tests/run_negative_cases.py",
-      "bytes": 4687,
-      "sha256": "016b43467528dd358b494fcea1385a2acba5c312d9cf303415922149fb4c4bf0"
+      "bytes": 5522,
+      "sha256": "6678eeb00fc36d8e7337ba9ef1a0eab329cef48224a4216261d3668ede2d27eb"
     },
     {
       "relative_path": "text_trace/conservative_lag.jsonl",

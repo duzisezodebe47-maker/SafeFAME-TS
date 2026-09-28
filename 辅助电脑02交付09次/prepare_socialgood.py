@@ -7,10 +7,14 @@ import hashlib
 import io
 import json
 import shutil
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+sys.dont_write_bytecode = True
+from audit_socialgood_raw_clean import audit as audit_raw_clean
 
 
 TASK = "SocialGood_h3_f1"
@@ -47,10 +51,10 @@ def copy(source: Path, target: Path) -> None:
     shutil.copyfile(source, target)
 
 
-def build(bundle: Path, spec_path: Path, numeric: Path, lineage_path: Path,
+def build(bundle: Path, spec_path: Path, numeric: Path, lineage_path: Path, raw_root: Path,
           release: Path, delivery: Path) -> dict:
-    bundle, spec_path, numeric, lineage_path = (p.resolve(strict=True) for p in
-                                                (bundle, spec_path, numeric, lineage_path))
+    bundle, spec_path, numeric, lineage_path, raw_root = (p.resolve(strict=True) for p in
+                                                          (bundle, spec_path, numeric, lineage_path, raw_root))
     if release.exists():
         raise ValueError(f"release stage already exists: {release}")
     formal_manifest = json.loads((bundle / "manifest.json").read_text(encoding="utf-8"))
@@ -63,6 +67,7 @@ def build(bundle: Path, spec_path: Path, numeric: Path, lineage_path: Path,
         raise ValueError("SocialGood task parameters are not frozen values")
     if sha(numeric) != task_spec["numerical_sha256"]:
         raise ValueError("numeric snapshot SHA256 mismatch")
+    raw_clean_audit = audit_raw_clean(raw_root, numeric, lineage_path)
     files = formal_manifest["files"]
     task = bundle / TASK
     for relative, expected in files.items():
@@ -144,16 +149,21 @@ def build(bundle: Path, spec_path: Path, numeric: Path, lineage_path: Path,
     columns = ["raw_row", "domain", "source", "start_date", "end_date", "text_id",
                "canonical_text_id", "reason", "source_file", "source_url", "publication_verified"]
     lineage.loc[lineage.domain.eq("SocialGood"), columns].to_csv(release / "source_lineage_slim.csv", index=False)
+    put_json(release / "raw_clean_audit.json", raw_clean_audit)
     put_json(release / "source_anchors.json", {
         "task": TASK, "bundle_signature": BUNDLE_SHA, "split_spec_sha256": SPEC_SHA,
         "formal_bundle_manifest_sha256": sha(bundle / "manifest.json"),
         "numeric_snapshot_sha256": sha(numeric), "lineage_sha256": sha(lineage_path),
+        "raw_clean_audit_sha256": sha(release / "raw_clean_audit.json"),
         "source_safe_sha256": anchors,
         "text_trace_sha256": {s: files[f"{TASK}/{s}/text_trace.jsonl"] for s in SCENARIOS},
         "computed_retained_by_segment": calculated,
         "selection_origins": len(fit), "test_origins": len(test),
         "test_policy": "safe subset; test numeric history and frequency withheld"})
     for source, target in (("verify_socialgood.py", "code/verify_socialgood.py"),
+                           ("audit_socialgood_raw_clean.py", "code/audit_socialgood_raw_clean.py"),
+                           ("prepare_socialgood.py", "code/prepare_socialgood.py"),
+                           ("make_manifest.py", "code/make_manifest.py"),
                            ("tests/run_negative_cases.py", "tests/run_negative_cases.py"),
                            ("requirements-replay.txt", "requirements-replay.txt"),
                            ("README.md", "README.md"),
@@ -165,8 +175,8 @@ def build(bundle: Path, spec_path: Path, numeric: Path, lineage_path: Path,
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    for option in ("bundle", "spec", "numeric", "lineage", "release", "delivery"):
+    for option in ("bundle", "spec", "numeric", "lineage", "raw-root", "release", "delivery"):
         parser.add_argument(f"--{option}", required=True, type=Path)
     args = parser.parse_args()
-    print(json.dumps(build(args.bundle, args.spec, args.numeric, args.lineage,
+    print(json.dumps(build(args.bundle, args.spec, args.numeric, args.lineage, args.raw_root,
                            args.release, args.delivery), ensure_ascii=False))

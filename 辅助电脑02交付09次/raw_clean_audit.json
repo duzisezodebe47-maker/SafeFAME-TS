@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "task": "SocialGood_h3_f1",
+  "source_repository_revision": "00281e2d86058286d5548b15a7670e8eda57ef62",
+  "raw_sha256": {
+    "numerical": "cfa785d875d9cd826115c24eedb2747e6f762a61c1af8b258f00769a09470387",
+    "report": "6d6a9efb2a885511d08fb45a7adce4b1b0c53fba81a31d3f4d62183320512fa0",
+    "search": "6a3700b4b499f9f55dfab1aaca87ff0d944b98baade97a3d6e99f2cf41edbf18"
+  },
+  "numeric": {
+    "raw_rows": 924,
+    "clean_rows": 916,
+    "removed_missing_OT_rows": 8,
+    "raw_missing_by_field": {
+      "date": 0,
+      "start_date": 0,
+      "end_date": 0,
+      "OT": 8
+    },
+    "clean_missing_by_field": {
+      "start_date": 0,
+      "end_date": 0,
+      "OT": 0
+    },
+    "raw_duplicate_start_dates": 0,
+    "clean_duplicate_start_dates": 0,
+    "raw_invalid_start_dates": 0,
+    "clean_sha256": "f25a9a64ec0e21dc8e8f176565a12c366296e556d9ababe808c46273d073869d",
+    "clean_rule": "drop rows with missing OT; retain start_date,end_date,OT in original order",
+    "byte_exact_replay": true
+  },
+  "text": {
+    "report": {
+      "raw_rows": 371,
+      "lineage_rows": 371,
+      "raw_missing_fact_rows": 24,
+      "raw_duplicate_intervals": 0,
+      "raw_missing_by_field": {
+        "start_date": 0,
+        "end_date": 0,
+        "fact": 24
+      },
+      "lineage_reasons": {
+        "retained": 280,
+        "duplicate_fact_later": 67,
+        "missing_fact": 24
+      },
+      "canonical_facts": 280,
+      "raw_sha256": "6d6a9efb2a885511d08fb45a7adce4b1b0c53fba81a31d3f4d62183320512fa0"
+    },
+    "search": {
+      "raw_rows": 4590,
+      "lineage_rows": 4590,
+      "raw_missing_fact_rows": 105,
+      "raw_duplicate_intervals": 2277,
+      "raw_missing_by_field": {
+        "start_date": 0,
+        "end_date": 0,
+        "fact": 77
+      },
+      "lineage_reasons": {
+        "retained": 4444,
+        "missing_fact": 105,
+        "duplicate_fact_exact": 21,
+        "duplicate_fact_later": 20
+      },
+      "canonical_facts": 4444,
+      "raw_sha256": "6a3700b4b499f9f55dfab1aaca87ff0d944b98baade97a3d6e99f2cf41edbf18"
+    }
+  },
+  "text_lineage_sha256": "90603c6e7fd62dc0f7b8d0ad80c93edea17a4a479afd536ef3668724ff01e9d1",
+  "text_raw_rows": 4961,
+  "text_canonical_facts": 4724,
+  "limits": "Raw inputs and full numeric snapshot are not distributed in the safe Release because later OT values disclose test truth; reproduce from the anchored Time-MMD revision and frozen local inputs."
+}

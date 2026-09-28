@@ -1,4 +1,4 @@
-"""Seven disposable mutations must each be rejected by the actual verifier."""
+"""Disposable mutations must each be rejected by the actual verifier."""
 
 from __future__ import annotations
 
@@ -37,6 +37,7 @@ def test(package: Path, output: Path) -> dict:
         ("selection_slice_tamper", "selection_fit/targets_raw.npy", "selection slice commitment mismatch"),
         ("mapping_wrong_row", "mapping.csv", "selection_fit row mapping mismatch"),
         ("bundle_signature_wrong", "source_anchors.json", "frozen Bundle signature or spec anchor mismatch"),
+        ("raw_audit_tamper", "raw_clean_audit.json", "raw-to-clean numeric count/missing/duplicate audit mismatch"),
         ("frozen_spec_wrong", "anchors/split_spec_v2.json", "frozen spec SHA256 mismatch"),
     )
     results = []
@@ -64,6 +65,16 @@ def test(package: Path, output: Path) -> dict:
                 payload["bundle_signature"] = "0" * 64
                 file.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
                 reanchor(root, relative)
+            elif name == "raw_audit_tamper":
+                payload = json.loads(file.read_text(encoding="utf-8"))
+                payload["numeric"]["removed_missing_OT_rows"] += 1
+                file.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                reanchor(root, relative)
+                anchors = root / "source_anchors.json"
+                payload = json.loads(anchors.read_text(encoding="utf-8"))
+                payload["raw_clean_audit_sha256"] = hashlib.sha256(file.read_bytes()).hexdigest()
+                anchors.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                reanchor(root, "source_anchors.json")
             else:
                 payload = json.loads(file.read_text(encoding="utf-8"))
                 payload["seed"] += 1
