@@ -71,6 +71,13 @@
       "bytes_stored": 10573,
       "normalized_on_commit": false
     },
+    "model/degradation_contract.py": {
+      "worktree_sha256": "bad6c35439f0a0b3d53cdc8f39c8dbe9706cbc8d800ce5472ca9081d37ccf440",
+      "git_blob_sha1": "ef77d82bdba9b2b2a6bad6369fe8ba8b401ecba5",
+      "bytes_worktree": 11251,
+      "bytes_stored": 11251,
+      "normalized_on_commit": false
+    },
     "model/isolated_package.py": {
       "worktree_sha256": "43677a2f8c4fbcf3abe69e4e7d75e1e75ec67449432f05cf5dba7cda628d4580",
       "git_blob_sha1": "206b033224853a88cd2553819de71a09057cd439",
@@ -141,6 +148,13 @@
       "bytes_stored": 5050,
       "normalized_on_commit": false
     },
+    "model/tests/test_round10.py": {
+      "worktree_sha256": "75c6f98591302f855af6ed9915357c1dc366b931e0e860b28cef21d2ced8544f",
+      "git_blob_sha1": "9460341a67d98def7ab3b7b3e922094eb7ce2b21",
+      "bytes_worktree": 10748,
+      "bytes_stored": 10748,
+      "normalized_on_commit": false
+    },
     "model/tests/test_round6.py": {
       "worktree_sha256": "64fd980f506249885323e35749a3b9783f63d5e99289d6b0e36158b5094c3dea",
       "git_blob_sha1": "92e1f4977c9a1a96b7bc4f15b0b160c76cc05a61",
@@ -188,6 +202,76 @@
       "git_blob_sha1": "00e8030709c4b919c4adf92aa1609509f93db8b4",
       "bytes_worktree": 12748,
       "bytes_stored": 12748,
+      "normalized_on_commit": false
+    },
+    "evidence/partA_chain_repair.json": {
+      "worktree_sha256": "fb62f042527a8e2a55b7fd60d07eeb2f4f3f370a4fb4ec10e853dcb256fb685a",
+      "git_blob_sha1": "195be88c74ebec2d89c8572ffbfbdb291b0d334b",
+      "bytes_worktree": 2137,
+      "bytes_stored": 2137,
+      "normalized_on_commit": false
+    },
+    "evidence/round9_hash_registry.json": {
+      "worktree_sha256": "1c3bd2d0fa09ed43312c530c8ac23235a58c5afcdfddbc75b494a0ce6e653911",
+      "git_blob_sha1": "d2fc9a6000135be0891d234624c1bcf3e049b8fd",
+      "bytes_worktree": 12992,
+      "bytes_stored": 12992,
+      "normalized_on_commit": false
+    },
+    "evidence/run.log": {
+      "worktree_sha256": "f8e7e8daa16f22c04277d807ea980baf0423cf6ab82685e4aff592060f252edb",
+      "git_blob_sha1": "af998ed9a5b5e462f5c0efbedf96abafca958602",
+      "bytes_worktree": 226,
+      "bytes_stored": 226,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round10.log": {
+      "worktree_sha256": "8b7cbade8362e6a9ab03d7cacaff21cd11d905369ac0e644288dd8adda0b02d0",
+      "git_blob_sha1": "6d41e7f240449261e95e039dc06e32aa0f141a97",
+      "bytes_worktree": 17227,
+      "bytes_stored": 17227,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round6.log": {
+      "worktree_sha256": "e7db3fc7354b16c565c992fc33b27c2875586d294d99e4c722dc2bf12756cbce",
+      "git_blob_sha1": "3c335face8a8cc7407d3c44a99ea9c9c7220f3a7",
+      "bytes_worktree": 3868,
+      "bytes_stored": 3868,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round7.log": {
+      "worktree_sha256": "365904029c99e2ca498b9abc3fd0deb5413f323e4846c294ebfaeb6eefe55225",
+      "git_blob_sha1": "2fd9706fa62840b7fe2b27efe7c96c1b8b473334",
+      "bytes_worktree": 6923,
+      "bytes_stored": 6923,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round8.log": {
+      "worktree_sha256": "9d29243411573c482ee68722a52f9c98d12b04dbb8b448f40d5cc33e81f9ca31",
+      "git_blob_sha1": "c357baf27e2318c2a8396be2ee3e794eee833b4a",
+      "bytes_worktree": 11539,
+      "bytes_stored": 11539,
+      "normalized_on_commit": false
+    },
+    "evidence/tests_round9.log": {
+      "worktree_sha256": "7ea93ff17c292db645c4355a62c7f4cb00a3762ff87689d30e2b4f8c86c86e9d",
+      "git_blob_sha1": "101455aa1dfecb5da4d901c854d58807eed27f52",
+      "bytes_worktree": 13911,
+      "bytes_stored": 13911,
+      "normalized_on_commit": false
+    },
+    "README.md": {
+      "worktree_sha256": "17ce063ba1f00eb34624ab727152011d9e5d96aae401924cc8bf70be39f7560d",
+      "git_blob_sha1": "9d19a376a238ae044b8c3d8eebce87f223c913e6",
+      "bytes_worktree": 6776,
+      "bytes_stored": 6776,
+      "normalized_on_commit": false
+    },
+    "RUNBOOK.md": {
+      "worktree_sha256": "1471a6ec5f65d6e92b8e16b6bd270056be87bbdd098c09e229f2e01a4f6571b1",
+      "git_blob_sha1": "13f137ecea02c15fc766a8abb3629fe886cf664a",
+      "bytes_worktree": 3887,
+      "bytes_stored": 3887,
       "normalized_on_commit": false
     }
   },
