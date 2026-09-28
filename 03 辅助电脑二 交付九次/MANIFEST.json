@@ -1,5 +1,11 @@
 {
-  "rule": "combined = sha256( '\\n'.join( f'{path}\\t{sha256(file)}' 按 path 排序 ) )",
+  "rule": "combined = sha256( '\\n'.join( f'{path}\\t{sha256}' 按 path 排序 ) )；逐文件 sha256 取自 **git 会存储的 blob 字节**（`git hash-object --path` 再 `cat-file blob`），因此提交后必然与仓库字节一致（A.2）",
+  "excluded_receipts": [
+    "evidence/verify_delivery.json",
+    "evidence/verify_evidence_chain.json",
+    "evidence/verify_test_delivery.json"
+  ],
+  "excluded_note": "receipt 由校验动作写出，属自指，无法列入自身校验的清单（A.3）；其内容可由重跑同一门控在干净检出中复现",
   "model_files": {
     "model/audit_baselines.py": "07c116952ea478b6d45f201c309b1d613f5c9c8311714cc669ecab7340271adf",
     "model/audit_boundaries.py": "32c1ce5276821a2ff1c5a7f2937d4c79a1e104ca8afd4868464e049473474b52",
@@ -12,7 +18,7 @@
     "model/bundle_reader.py": "ff58990c775b85c52763bcf3bfc0c08c8c70346f7bf3ea8019bda815f3980022",
     "model/candidates.py": "5b7be2c04ad8b2bdd219a0305d83813b8f7e4df243149a62133597cd42043927",
     "model/isolated_package.py": "43677a2f8c4fbcf3abe69e4e7d75e1e75ec67449432f05cf5dba7cda628d4580",
-    "model/make_manifest.py": "fa49480f7f54688104e1895d4f98047cc42e8e846019d7ee9b8eea1b8d4ba0d8",
+    "model/make_manifest.py": "658fac4914f158513c3ee43ddf8f909c1a47744bf58ef615676d50e0e41c37d1",
     "model/numeric_fallbacks.py": "63916b6dd5dcfd044ebc7bf391bb665770f1af3fe9fea8caaeba3cd7ab801070",
     "model/permutation.py": "89b1f7137775b0a268707c40e84c63ac7ef020a1da705837fee47620ce6abb84",
     "model/permutation_entry.py": "5787eab71c6e766b6f6db72697240ac6f8636c629dab5477e262914c8f995ac3",
@@ -30,7 +36,7 @@
     "model/verify_test_delivery.py": "d20ff6eb05d393ec46cc29a2b6afda56f8ac23c724fbba2d75a5f950cc4c3b16"
   },
   "model_files_count": 27,
-  "model_combined_sha256": "342daf2bb39e7487bdbe750a7444fb2c810a824f337dd5f3d3ab873e13fbbb44",
+  "model_combined_sha256": "27d4f2149c8ac89e4f3e94db6a4cf86f13776494b8d3c18979f7b772ca6042ab",
   "evidence_files": {
     "evidence/master_ARTIFACTS_SHA256.tsv": "2ea60bba05e516012957a82b910f98453216ae1f96fc728c61b3ea1b85c6357e",
     "evidence/replay_check.json": "51ca9227682a884d4a259c6593b6c2d33630b030261165f85727a3890360d2dc",
@@ -42,11 +48,10 @@
     "evidence/tests_round6.log": "e7db3fc7354b16c565c992fc33b27c2875586d294d99e4c722dc2bf12756cbce",
     "evidence/tests_round7.log": "365904029c99e2ca498b9abc3fd0deb5413f323e4846c294ebfaeb6eefe55225",
     "evidence/tests_round8.log": "8308d839a67e1ea1907f263a1012cc5ce8b47dd69029ce0ab629957ce393c107",
-    "evidence/tests_round9.log": "68732d9ed60053bf5558200f2d736311e71182b8c7623c7e5d8c6f2bedfb0d34",
-    "evidence/verify_test_delivery.json": "ef366fd75464a09c39df1aeeac2b4622a95a5799146ca15e6aa3f335e8bd95a4"
+    "evidence/tests_round9.log": "68732d9ed60053bf5558200f2d736311e71182b8c7623c7e5d8c6f2bedfb0d34"
   },
-  "evidence_files_count": 12,
-  "evidence_combined_sha256": "be5e0d637668c9ff3ef65c70d10a4f91d7db3a018d10a4800611c92e818f89ad",
+  "evidence_files_count": 11,
+  "evidence_combined_sha256": "d2e1fe22a141a7736ddbb4bd634665c12d94056e7b927492620ddf01bdcd176c",
   "other_files": {
     "attempt_ledger.json": "4777fdb954eea1ad2dc28c83243615bef138abe7b0373ee11287625a717912f1",
     "README.md": "26cb31ea8afdb1f50ee82954637fd32914fc4094308628eef223674135712f3a",
@@ -56,7 +61,12 @@
   },
   "other_files_count": 5,
   "other_combined_sha256": "44b312c6eb888cd984519b53f99eb7d6b698dd497eb765cc99248a4ffb176e7d",
-  "all_files_count": 44,
-  "all_files_bytes": 621977,
-  "note": "三块合并 = 本目录（除 MANIFEST.json 自身与 __pycache__）的全部文件。MANIFEST.json 无法自哈希，其完整性由 git blob 哈希保证。生成脚本 model/make_manifest.py（本文件亦在 model_files 内）。"
+  "all_files_count": 43,
+  "all_combined_sha256": "0cafdbf8ba081063d4618364b4f0071d8a09f0e4cbbb0306b5acc0c6863e9b63",
+  "files_normalized_on_commit": [],
+  "hash_algorithms": {
+    "sha256": "文件内容（git 归一化后的最终字节）",
+    "worktree_sha256": "磁盘上的原始字节 —— 用途不同：发现会被归一化的文件",
+    "git_blob_sha1": "git 对象 id，与 `git rev-parse HEAD:<path>` 可直接比对"
+  }
 }
