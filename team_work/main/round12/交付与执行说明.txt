@@ -1,0 +1,16 @@
+当前正式入口：round12/run_master.py。round11为原始冻结实验快照，包含旧校准评分缺陷，不作为新的选模入口。
+
+本轮已经完成SocialGood与Environment两任务×两时间情景，连同Agriculture与Climate形成四领域实验闭环。完整结果与限制见results/final/主控技术进展与验收说明.txt。
+
+源代码与结果保存在主控分支team/main-eval-20260921。大型selection_predictions.csv按仓库规则不上传Git，仍保留在本机和D盘本轮交付文件夹；路线清单中的哈希由执行时计算，未手工修改。普通克隆缺少本地包时finalize_master.py输出PARTIAL_VERIFICATION，不能当作验收通过。--require-full要求本地完整证据，否则失败。
+
+本机复核：在PowerShell执行本目录的verify_local.ps1。它使用已有Python 3.12和D盘依赖，不下载或安装；输出到D盘交付文件夹的复核输出。该入口仅复算已存预测的分数、核对证据和执行46项测试，不重新训练、不重新预测测试、不重新选择路线。
+
+初次实验阶段：prepare建立物理隔离数据包；select仅消费selection_fit，成功后保存sealed_route与sidecar；test核验冻结代码和路线，写出预测后才访问测试真值评分；verify验证隔离包。所有阶段参数使用run_master.py --help。不得覆盖已有封印或测试预测；本轮数据测试已揭示，不能再次调参并描述为盲测。
+
+正式输入：D:\aaa2026人工智能课程报告\主控接收数据\SafeFAME_TS_第7轮数据_02_a06dfe1\release_unpacked\inputs\formal_bundle
+本轮隔离输入：D:\aaa2026人工智能课程报告\主控接收数据\主控接管_20261007
+依赖：D:\aaa2026人工智能课程报告\主控接收数据\runtime_py312，版本见requirements-master.txt。
+冻结划分：team_work/main/round2/split_spec_v2.json；Climate季节周期52。
+
+本轮四个测试任务不等于完成所有滚动折、全部深度模型对照或真实部署。来源URL和真实发布时间未核实。Climate旧门禁和评分清单的换行问题保留在独立验收记录，旧记录未覆盖。Agriculture、Climate旧训练和置换本轮没有重新运行。

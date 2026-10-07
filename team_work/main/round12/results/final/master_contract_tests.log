@@ -1,0 +1,38 @@
+test_conversion_preserves_every_loss_and_refuses_overwrite (test_round3_inputs.IntakeTests.test_conversion_preserves_every_loss_and_refuses_overwrite) ... ok
+test_rejects_failed_iteration_even_when_summary_claims_success (test_round3_inputs.IntakeTests.test_rejects_failed_iteration_even_when_summary_claims_success) ... ok
+test_rejects_missing_or_shifted_null_rows (test_round3_inputs.IntakeTests.test_rejects_missing_or_shifted_null_rows) ... ok
+test_rejects_selection_without_frozen_split_anchor (test_round3_inputs.IntakeTests.test_rejects_selection_without_frozen_split_anchor) ... ok
+test_rejects_self_reported_mse_mismatch (test_round3_inputs.IntakeTests.test_rejects_self_reported_mse_mismatch) ... ok
+test_rejects_wrong_scenario (test_round3_inputs.IntakeTests.test_rejects_wrong_scenario) ... ok
+test_seal_rejects_missing_refit_review_or_test_artifact (test_round3_inputs.IntakeTests.test_seal_rejects_missing_refit_review_or_test_artifact) ... ok
+test_seals_route_with_external_hash_and_refit_review (test_round3_inputs.IntakeTests.test_seals_route_with_external_hash_and_refit_review) ... ok
+test_snapshot_checks_bytes_rows_and_dates (test_round3_inputs.IntakeTests.test_snapshot_checks_bytes_rows_and_dates) ... ok
+test_changed_frozen_fold_rejected (test_team_eval.ContractTests.test_changed_frozen_fold_rejected) ... ok
+test_crossing_target_rejected (test_team_eval.ContractTests.test_crossing_target_rejected) ... ok
+test_duplicate_origin_rejected (test_team_eval.ContractTests.test_duplicate_origin_rejected) ... ok
+test_feature_hash_mismatch_rejected (test_team_eval.ContractTests.test_feature_hash_mismatch_rejected) ... ok
+test_fixed_seed_interval_replays (test_team_eval.ContractTests.test_fixed_seed_interval_replays) ... ok
+test_frozen_route_uses_only_cal_and_dec (test_team_eval.ContractTests.test_frozen_route_uses_only_cal_and_dec) ... ok
+test_future_preprocessing_rejected (test_team_eval.ContractTests.test_future_preprocessing_rejected) ... ok
+test_missing_prediction_rejected (test_team_eval.ContractTests.test_missing_prediction_rejected) ... ok
+test_null_evidence_required (test_team_eval.ContractTests.test_null_evidence_required) ... ok
+test_wrong_prediction_horizon_rejected (test_team_eval.ContractTests.test_wrong_prediction_horizon_rejected) ... ok
+test_aligned_bundle_and_prediction_grid (test_v2_bridge.V2BridgeTests.test_aligned_bundle_and_prediction_grid) ... ok
+test_bundle_byte_tamper_rejected (test_v2_bridge.V2BridgeTests.test_bundle_byte_tamper_rejected) ... ok
+test_duplicate_step_rejected (test_v2_bridge.V2BridgeTests.test_duplicate_step_rejected) ... ok
+test_equal_count_but_shifted_origin_rejected (test_v2_bridge.V2BridgeTests.test_equal_count_but_shifted_origin_rejected) ... ok
+test_missing_step_rejected (test_v2_bridge.V2BridgeTests.test_missing_step_rejected) ... ok
+test_mixed_scale_rejected (test_v2_bridge.V2BridgeTests.test_mixed_scale_rejected) ... ok
+test_numeric_baseline_export_aligns_with_contract (test_v2_bridge.V2BridgeTests.test_numeric_baseline_export_aligns_with_contract) ... ok
+test_numeric_baselines_never_fit_test_truth (test_v2_bridge.V2BridgeTests.test_numeric_baselines_never_fit_test_truth) ... ok
+test_old_smoke_schema_rejected (test_v2_bridge.V2BridgeTests.test_old_smoke_schema_rejected) ... ok
+test_origin_array_shift_rejected (test_v2_bridge.V2BridgeTests.test_origin_array_shift_rejected) ... ok
+test_preview_spec_rejected (test_v2_bridge.V2BridgeTests.test_preview_spec_rejected) ... ok
+test_same_rows_reordered_rejected (test_v2_bridge.V2BridgeTests.test_same_rows_reordered_rejected) ... ok
+test_selection_package_is_test_free_and_freezes_route (test_v2_bridge.V2BridgeTests.test_selection_package_is_test_free_and_freezes_route) ... ok
+test_short_test_interval_is_reported_unestimable (test_v2_bridge.V2BridgeTests.test_short_test_interval_is_reported_unestimable) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 1.423s
+
+OK

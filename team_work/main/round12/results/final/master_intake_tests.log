@@ -1,0 +1,18 @@
+test_bundle_signature_rejected (__main__.IntakeTests.test_bundle_signature_rejected) ... ok
+test_frequency_rejected (__main__.IntakeTests.test_frequency_rejected) ... ok
+test_mapping_shift_rejected (__main__.IntakeTests.test_mapping_shift_rejected) ... ok
+test_spec_hash_rejected (__main__.IntakeTests.test_spec_hash_rejected) ... ok
+test_tamper_rejected (__main__.IntakeTests.test_tamper_rejected) ... ok
+test_test_history_rejected (__main__.IntakeTests.test_test_history_rejected) ... ok
+test_test_truth_rejected (__main__.IntakeTests.test_test_truth_rejected) ... ok
+test_valid_package (__main__.IntakeTests.test_valid_package) ... ok
+test_bootstrap_reproducible_and_zero (__main__.ModelTests.test_bootstrap_reproducible_and_zero) ... ok
+test_calibration_scored_before_refit_including_cal (__main__.ModelTests.test_calibration_scored_before_refit_including_cal) ... ok
+test_inference_view_has_no_targets (__main__.ModelTests.test_inference_view_has_no_targets) ... ok
+test_selection_loader_does_not_open_test_arrays (__main__.ModelTests.test_selection_loader_does_not_open_test_arrays) ... ok
+test_zero_text_and_constant_quality_equal_N (__main__.ModelTests.test_zero_text_and_constant_quality_equal_N) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.156s
+
+OK

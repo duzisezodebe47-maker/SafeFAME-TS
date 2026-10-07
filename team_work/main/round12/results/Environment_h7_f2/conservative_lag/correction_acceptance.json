@@ -1,0 +1,51 @@
+{
+  "status": "PASS_CORRECTION_WITH_UNCHANGED_TEST",
+  "task": "Environment_h7_f2",
+  "scenario": "conservative_lag",
+  "package_audit": {
+    "status": "PASS",
+    "task": "Environment_h7_f2",
+    "package_manifest_sha256": "598eeb1bf45efc5d5caaa1e5da2ce424ff0f8948d8971319b494facd42e4c6e5",
+    "files_checked": 32,
+    "source_bitwise_checked": true,
+    "counts": {
+      "train": 7927,
+      "calibration": 1592,
+      "decision": 3190,
+      "test": 1592
+    },
+    "test_truth_or_history_files": 0
+  },
+  "train_only_calibration_crosscheck": true,
+  "all_model_weights_and_alphas_unchanged": true,
+  "decision_predictions_exact_equal": true,
+  "original_route_sha256": "30b4367b61da16ac1ea8ba9f2cf6098ccc5ee41b32f7a38e415a6d4c6f6ca31c",
+  "corrected_route_sha256": "ba3618c198f81a2b0ba0986dec3188c9f86589043911944ac6c778a40a8977dd",
+  "original_test_prediction_sha256": "7864078fcc2b861963cc2c35c7149537d241818eeed128a07c85dabcfd099c32",
+  "original_test_score_sha256": "499d278886a0f48f654531512ac2dc5e5a98aff9ca7e7cbcc3ac1e5b65953532",
+  "test_audit": {
+    "status": "PASS",
+    "rows": 44576,
+    "origins": 1592,
+    "metrics_recomputed": {
+      "Last": {
+        "mse": 0.43650043379779974,
+        "mae": 0.46514705228381936
+      },
+      "SeasonalNaive": {
+        "mse": 0.4687321113384056,
+        "mae": 0.4818018415530947
+      },
+      "AR-Ridge": {
+        "mse": 0.2571688718436394,
+        "mae": 0.3912779713355673
+      },
+      "N": {
+        "mse": 0.25691663717285146,
+        "mae": 0.38982131431243805
+      }
+    }
+  },
+  "new_test_predictions_created": false,
+  "scope": "Retrospective calibration correction after original test. Original route was frozen before original test. No new blind test is claimed."
+}

@@ -1,0 +1,46 @@
+{
+  "N": {
+    "requested": "N",
+    "effective": "N",
+    "semantic_degraded": false,
+    "quality_degraded": false,
+    "alphas": {
+      "N": 1.0
+    },
+    "parameters": 72,
+    "weights_sha256": "24c0c67405f5ac4dfa9d1991f2d42a7628a768533afa50abbda2bb22f8c6961e"
+  },
+  "N+Q": {
+    "requested": "N+Q",
+    "effective": "N",
+    "semantic_degraded": false,
+    "quality_degraded": true,
+    "alphas": {
+      "N": 1.0
+    },
+    "parameters": 72,
+    "weights_sha256": "24c0c67405f5ac4dfa9d1991f2d42a7628a768533afa50abbda2bb22f8c6961e"
+  },
+  "N+S+Q": {
+    "requested": "N+S+Q",
+    "effective": "N",
+    "semantic_degraded": true,
+    "quality_degraded": true,
+    "alphas": {
+      "N": 1.0
+    },
+    "parameters": 72,
+    "weights_sha256": "24c0c67405f5ac4dfa9d1991f2d42a7628a768533afa50abbda2bb22f8c6961e"
+  },
+  "N+S+Q+SF": {
+    "requested": "N+S+Q+SF",
+    "effective": "N",
+    "semantic_degraded": true,
+    "quality_degraded": true,
+    "alphas": {
+      "N": 1.0
+    },
+    "parameters": 72,
+    "weights_sha256": "24c0c67405f5ac4dfa9d1991f2d42a7628a768533afa50abbda2bb22f8c6961e"
+  }
+}

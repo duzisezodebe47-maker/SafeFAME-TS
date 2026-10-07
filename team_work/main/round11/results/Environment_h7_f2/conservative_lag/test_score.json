@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "task": "Environment_h7_f2",
+  "scenario": "conservative_lag",
+  "selected": "N",
+  "effective": "N",
+  "n_origins": 1592,
+  "horizon": 7,
+  "route_sha256": "30b4367b61da16ac1ea8ba9f2cf6098ccc5ee41b32f7a38e415a6d4c6f6ca31c",
+  "prediction_sha256": "7864078fcc2b861963cc2c35c7149537d241818eeed128a07c85dabcfd099c32",
+  "metrics": {
+    "Last": {
+      "mse": 0.43650043379779974,
+      "mae": 0.46514705228381936,
+      "rmse": 0.660681794661999,
+      "raw_rmse": 29.46710844419348
+    },
+    "SeasonalNaive": {
+      "mse": 0.4687321113384056,
+      "mae": 0.4818018415530947,
+      "rmse": 0.6846401327255112,
+      "raw_rmse": 30.53567572054978
+    },
+    "AR-Ridge": {
+      "mse": 0.2571688718436394,
+      "mae": 0.3912779713355673,
+      "rmse": 0.5071182030292735,
+      "raw_rmse": 22.618009461473115
+    },
+    "N": {
+      "mse": 0.25691663717285146,
+      "mae": 0.38982131431243805,
+      "rmse": 0.5068694478589644,
+      "raw_rmse": 22.60691471716689
+    }
+  },
+  "comparisons": {
+    "Last": {
+      "gain_pct": 41.14172237183548,
+      "ci95_origin_delta": [
+        0.1434377111348234,
+        0.21850756389889656
+      ],
+      "origin_win_rate": 0.6457286432160804
+    },
+    "SeasonalNaive": {
+      "gain_pct": 45.18902568051967,
+      "ci95_origin_delta": [
+        0.17126907978700912,
+        0.2559998375634731
+      ],
+      "origin_win_rate": 0.7788944723618091
+    },
+    "AR-Ridge": {
+      "gain_pct": 0.09808133814162012,
+      "ci95_origin_delta": [
+        -0.000974539455061074,
+        0.00147879988980245
+      ],
+      "origin_win_rate": 0.550251256281407
+    },
+    "N": {
+      "gain_pct": 0.0,
+      "ci95_origin_delta": [
+        0.0,
+        0.0
+      ],
+      "origin_win_rate": 0.0
+    }
+  },
+  "seed": 2026,
+  "bootstrap_draws": 5000,
+  "block": 7,
+  "interpretation": "Rolling-origin test with observed history up to origin; selected route frozen before test target access. No reselection."
+}

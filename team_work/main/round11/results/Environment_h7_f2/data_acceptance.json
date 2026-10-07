@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "task": "Environment_h7_f2",
+  "package_manifest_sha256": "598eeb1bf45efc5d5caaa1e5da2ce424ff0f8948d8971319b494facd42e4c6e5",
+  "files_checked": 32,
+  "source_bitwise_checked": true,
+  "counts": {
+    "train": 7927,
+    "calibration": 1592,
+    "decision": 3190,
+    "test": 1592
+  },
+  "test_truth_or_history_files": 0
+}

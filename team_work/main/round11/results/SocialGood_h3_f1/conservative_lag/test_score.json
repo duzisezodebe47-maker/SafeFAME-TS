@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "task": "SocialGood_h3_f1",
+  "scenario": "conservative_lag",
+  "selected": "N",
+  "effective": "N",
+  "n_origins": 89,
+  "horizon": 3,
+  "route_sha256": "0b5745aee8ec57d69d284d5746dd5b93eeadbc0cfc51d44432dd383a23fbb848",
+  "prediction_sha256": "b267ceb7125fe5e4121ee241bf52c62e8139486b2a916f04e712998b9325394b",
+  "metrics": {
+    "Last": {
+      "mse": 0.09780556015229487,
+      "mae": 0.2568120602239272,
+      "rmse": 0.3127388049991476,
+      "raw_rmse": 0.4670410467238836
+    },
+    "SeasonalNaive": {
+      "mse": 0.25722660965909494,
+      "mae": 0.39901170645202144,
+      "rmse": 0.5071751272086349,
+      "raw_rmse": 0.7574103325120951
+    },
+    "AR-Ridge": {
+      "mse": 0.027828522798104185,
+      "mae": 0.12569207746046485,
+      "rmse": 0.16681883226453836,
+      "raw_rmse": 0.24912559870623768
+    },
+    "N": {
+      "mse": 0.027640614475910198,
+      "mae": 0.12660724405728913,
+      "rmse": 0.16625466753120105,
+      "raw_rmse": 0.2482830806580432
+    }
+  },
+  "comparisons": {
+    "Last": {
+      "gain_pct": 71.73921969991228,
+      "ci95_origin_delta": [
+        0.05250115722495108,
+        0.0887664923342022
+      ],
+      "origin_win_rate": 0.8764044943820225
+    },
+    "SeasonalNaive": {
+      "gain_pct": 89.25437204473418,
+      "ci95_origin_delta": [
+        0.11734353100711965,
+        0.3591046746746144
+      ],
+      "origin_win_rate": 0.898876404494382
+    },
+    "AR-Ridge": {
+      "gain_pct": 0.6752364240001585,
+      "ci95_origin_delta": [
+        -0.0012171196094781667,
+        0.0018003083820129836
+      ],
+      "origin_win_rate": 0.4157303370786517
+    },
+    "N": {
+      "gain_pct": 0.0,
+      "ci95_origin_delta": [
+        0.0,
+        0.0
+      ],
+      "origin_win_rate": 0.0
+    }
+  },
+  "seed": 2026,
+  "bootstrap_draws": 5000,
+  "block": 3,
+  "interpretation": "Rolling-origin test with observed history up to origin; selected route frozen before test target access. No reselection."
+}

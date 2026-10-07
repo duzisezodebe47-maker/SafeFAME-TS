@@ -1,0 +1,51 @@
+{
+  "status": "PASS_CORRECTION_WITH_UNCHANGED_TEST",
+  "task": "SocialGood_h3_f1",
+  "scenario": "proxy",
+  "package_audit": {
+    "status": "PASS",
+    "task": "SocialGood_h3_f1",
+    "package_manifest_sha256": "5fd6cbc39a6d89bccc8897b817f4751e7dcab3a1bdbd0d61fe118b8876dc5301",
+    "files_checked": 32,
+    "source_bitwise_checked": true,
+    "counts": {
+      "train": 340,
+      "calibration": 90,
+      "decision": 181,
+      "test": 89
+    },
+    "test_truth_or_history_files": 0
+  },
+  "train_only_calibration_crosscheck": true,
+  "all_model_weights_and_alphas_unchanged": true,
+  "decision_predictions_exact_equal": true,
+  "original_route_sha256": "416031f79bef9750e3be9a27834b713ec4b767e238f246384f8d699a3a4e5356",
+  "corrected_route_sha256": "3619a435032c24a6c305f4fa2c783fb09bb821a4e69e2c89619c85e02c4943b3",
+  "original_test_prediction_sha256": "b267ceb7125fe5e4121ee241bf52c62e8139486b2a916f04e712998b9325394b",
+  "original_test_score_sha256": "99d3c3c0528cc4aa54d0c907c3bc3885b6209ebdc5bd87003aa01965a22bd49b",
+  "test_audit": {
+    "status": "PASS",
+    "rows": 1068,
+    "origins": 89,
+    "metrics_recomputed": {
+      "Last": {
+        "mse": 0.09780556015229487,
+        "mae": 0.2568120602239272
+      },
+      "SeasonalNaive": {
+        "mse": 0.25722660965909494,
+        "mae": 0.39901170645202144
+      },
+      "AR-Ridge": {
+        "mse": 0.027828522798104185,
+        "mae": 0.12569207746046485
+      },
+      "N": {
+        "mse": 0.027640614475910198,
+        "mae": 0.12660724405728913
+      }
+    }
+  },
+  "new_test_predictions_created": false,
+  "scope": "Retrospective calibration correction after original test. Original route was frozen before original test. No new blind test is claimed."
+}

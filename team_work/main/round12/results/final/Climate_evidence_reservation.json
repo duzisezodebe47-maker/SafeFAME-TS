@@ -1,0 +1,10 @@
+{
+  "status": "MASTER_SCORE_BYTES_PASS_WITH_HISTORICAL_RESERVATION",
+  "current_original_prediction_sha256": "f2200192f4b555a3e56fb8702f59361ecf54f42d4bbc04643b8a130597d6b122",
+  "current_route_sha256": "b3bce4713ff44485c9aa0712c5774ffe449045fb8186b39ef592298e0051e36a",
+  "historical_committed_gate": "INCOMPLETE",
+  "historical_independent_gate": "COMPLETE",
+  "reservation": "Committed gate evidence has a trailing-newline manifest hash mismatch. Prediction bytes are accepted and must remain frozen; round 10 repairs evidence only.",
+  "old_gate_record_overwritten": false,
+  "scope": "Current scoring files, origin mapping, truth mapping and scores verified. Historical scoring manifest has line-ending differences and stale log; all retained in separate audit. No claim that the old manifests or auxiliary committed gate record were repaired."
+}

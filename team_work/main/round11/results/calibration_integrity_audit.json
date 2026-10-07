@@ -1,0 +1,74 @@
+{
+  "status": "ISSUE_CONFIRMED",
+  "test_truth_read": false,
+  "rows": [
+    {
+      "task": "Agriculture_h12_f1",
+      "N_cal_train_only": 0.03740101607974403,
+      "N_cal_refit_including_cal": 0.0354180880618308,
+      "correct_fallback": "AR-Ridge",
+      "legacy_fallback": "AR-Ridge",
+      "calibration_scores_train_only": {
+        "Last": 0.033599159122245106,
+        "SeasonalNaive": 0.042325886995310535,
+        "AR-Ridge": 0.017618668697762695,
+        "N": 0.03740101607974403
+      },
+      "alpha": {
+        "N": 10000.0
+      },
+      "issue": "Legacy calibration predictions include their own labels in refit. Use train-only predictions for fallback selection."
+    },
+    {
+      "task": "Climate_h4_f2",
+      "N_cal_train_only": 0.14732410739218613,
+      "N_cal_refit_including_cal": 0.14545201989222872,
+      "correct_fallback": "N",
+      "legacy_fallback": "N",
+      "calibration_scores_train_only": {
+        "Last": 0.1542410603350722,
+        "SeasonalNaive": 5.689782817143001,
+        "AR-Ridge": 0.16805618105026346,
+        "N": 0.14732410739218613
+      },
+      "alpha": {
+        "N": 10000.0
+      },
+      "issue": "Legacy calibration predictions include their own labels in refit. Use train-only predictions for fallback selection."
+    },
+    {
+      "task": "SocialGood_h3_f1",
+      "N_cal_train_only": 0.085641308779773,
+      "N_cal_refit_including_cal": 0.0701176672042859,
+      "correct_fallback": "N",
+      "legacy_fallback": "N",
+      "calibration_scores_train_only": {
+        "Last": 0.17978674743208614,
+        "SeasonalNaive": 0.8769461789738209,
+        "AR-Ridge": 0.08801387138778571,
+        "N": 0.085641308779773
+      },
+      "alpha": {
+        "N": 1.0
+      },
+      "issue": "Legacy calibration predictions include their own labels in refit. Use train-only predictions for fallback selection."
+    },
+    {
+      "task": "Environment_h7_f2",
+      "N_cal_train_only": 0.5213842343630168,
+      "N_cal_refit_including_cal": 0.5140199244877016,
+      "correct_fallback": "N",
+      "legacy_fallback": "N",
+      "calibration_scores_train_only": {
+        "Last": 0.889065193663421,
+        "SeasonalNaive": 0.9841255928689312,
+        "AR-Ridge": 0.5218130703086142,
+        "N": 0.5213842343630168
+      },
+      "alpha": {
+        "N": 100.0
+      },
+      "issue": "Legacy calibration predictions include their own labels in refit. Use train-only predictions for fallback selection."
+    }
+  ]
+}

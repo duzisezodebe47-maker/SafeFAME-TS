@@ -1,0 +1,55 @@
+{
+  "status": "frozen",
+  "task": "Environment_h7_f2",
+  "scenario": "conservative_lag",
+  "selected": "N",
+  "effective": "N",
+  "fallback": "N",
+  "calibration_mse": {
+    "Last": 0.889065193663421,
+    "SeasonalNaive": 0.9841255928689312,
+    "AR-Ridge": 0.5218130703086142,
+    "N": 0.5140199244877016
+  },
+  "decision_fallback_mse": 0.35014222381599197,
+  "candidates": {
+    "N+S+Q": {
+      "decision_mse": 0.34642521819235605,
+      "row_p": null,
+      "null_refits": 0,
+      "segment_wins": false,
+      "eligible": false,
+      "rejected_by": [
+        "not_both_halves_better"
+      ],
+      "effective": "N+S+Q"
+    },
+    "N+S+Q+SF": {
+      "decision_mse": 0.3465587902402696,
+      "row_p": null,
+      "null_refits": 0,
+      "segment_wins": false,
+      "eligible": false,
+      "rejected_by": [
+        "not_both_halves_better"
+      ],
+      "effective": "N+S+Q+SF"
+    }
+  },
+  "package_manifest_sha256": "598eeb1bf45efc5d5caaa1e5da2ce424ff0f8948d8971319b494facd42e4c6e5",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "code_sha256": {
+    "model_engine/branches.py": "ae90cbed7e86a27200a48736847608d0e0b93aaab4f20fbbf4f52e0562db1b3b",
+    "model_engine/candidates.py": "7ee9def647757f3509ed6cb51db2c159446ccbc02a3c22cbc1fc85d6d1c61166",
+    "model_engine/numeric_fallbacks.py": "63916b6dd5dcfd044ebc7bf391bb665770f1af3fe9fea8caaeba3cd7ab801070",
+    "model_engine/permutation.py": "89b1f7137775b0a268707c40e84c63ac7ef020a1da705837fee47620ce6abb84",
+    "model_engine/spectral.py": "04a6c13d5e9bc31244fff7c441bc14c6f628e8e93772639ee7f98febbee2452f",
+    "run_master.py": "b9d7fbea4ba9d65a4f4998ef2f5f98dc5c03ce671c83a14a2a054a37d25b87b3"
+  },
+  "evidence_sha256": {
+    "candidate_metrics.csv": "dde023a08694bbbe9911a845e7d48c2f5e854685bfa2570ca5dce569fe5925fd",
+    "models.json": "b68977faf983cf476a9023e6f0f0f2f6382e2892679cbcb60709a88ad44490ff",
+    "selection_predictions.csv": "a59c7fa97b0a13891050750bfa902857ecf2bc07a49ff26da6ec8294363e6cb9"
+  },
+  "protocol_note": "Fail necessary conditions => reject without null; p=null when not run; semantics unavailable => numeric-only, not multimodal. Test never used for selection."
+}

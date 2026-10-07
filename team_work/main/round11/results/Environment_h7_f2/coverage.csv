@@ -1,0 +1,9 @@
+task,scenario,segment,origins,text_available,coverage,quality_varying_columns,no_text_nonzero_semantic_rows
+Environment_h7_f2,proxy,train,7927,7927,1.0,5,0
+Environment_h7_f2,proxy,calibration,1592,1592,1.0,5,0
+Environment_h7_f2,proxy,decision,3190,3190,1.0,5,0
+Environment_h7_f2,proxy,test,1592,1592,1.0,5,0
+Environment_h7_f2,conservative_lag,train,7927,7927,1.0,5,0
+Environment_h7_f2,conservative_lag,calibration,1592,1592,1.0,5,0
+Environment_h7_f2,conservative_lag,decision,3190,3190,1.0,5,0
+Environment_h7_f2,conservative_lag,test,1592,1592,1.0,5,0

@@ -95,3 +95,7 @@ SafeFAME-TS_v2_支撑材料.zip
 SafeFAME-TS_v2_支撑材料.sha256
 paper/final/SafeFAME-TS_v2_支撑材料.zip
 paper/final/SafeFAME-TS_v2_支撑材料.sha256
+
+# Full master selection grids are reproducible local evidence, not Git payload.
+team_work/main/round11/results/*/*/selection_predictions.csv
+team_work/main/round12/results/*/*/selection_predictions.csv

@@ -1,0 +1,413 @@
+{
+  "status": "PASS_FOR_DECLARED_SCOPE",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "new_task_scenario_audits": [
+    {
+      "status": "PASS_CORRECTION_WITH_UNCHANGED_TEST",
+      "task": "SocialGood_h3_f1",
+      "scenario": "proxy",
+      "package_audit": {
+        "status": "PASS",
+        "task": "SocialGood_h3_f1",
+        "package_manifest_sha256": "5fd6cbc39a6d89bccc8897b817f4751e7dcab3a1bdbd0d61fe118b8876dc5301",
+        "files_checked": 32,
+        "source_bitwise_checked": true,
+        "counts": {
+          "train": 340,
+          "calibration": 90,
+          "decision": 181,
+          "test": 89
+        },
+        "test_truth_or_history_files": 0
+      },
+      "train_only_calibration_crosscheck": true,
+      "all_model_weights_and_alphas_unchanged": true,
+      "decision_predictions_exact_equal": true,
+      "original_route_sha256": "416031f79bef9750e3be9a27834b713ec4b767e238f246384f8d699a3a4e5356",
+      "corrected_route_sha256": "3619a435032c24a6c305f4fa2c783fb09bb821a4e69e2c89619c85e02c4943b3",
+      "original_test_prediction_sha256": "b267ceb7125fe5e4121ee241bf52c62e8139486b2a916f04e712998b9325394b",
+      "original_test_score_sha256": "99d3c3c0528cc4aa54d0c907c3bc3885b6209ebdc5bd87003aa01965a22bd49b",
+      "test_audit": {
+        "status": "PASS",
+        "rows": 1068,
+        "origins": 89,
+        "metrics_recomputed": {
+          "Last": {
+            "mse": 0.09780556015229487,
+            "mae": 0.2568120602239272
+          },
+          "SeasonalNaive": {
+            "mse": 0.25722660965909494,
+            "mae": 0.39901170645202144
+          },
+          "AR-Ridge": {
+            "mse": 0.027828522798104185,
+            "mae": 0.12569207746046485
+          },
+          "N": {
+            "mse": 0.027640614475910198,
+            "mae": 0.12660724405728913
+          }
+        }
+      },
+      "new_test_predictions_created": false,
+      "scope": "Retrospective calibration correction after original test. Original route was frozen before original test. No new blind test is claimed."
+    },
+    {
+      "status": "PASS_CORRECTION_WITH_UNCHANGED_TEST",
+      "task": "SocialGood_h3_f1",
+      "scenario": "conservative_lag",
+      "package_audit": {
+        "status": "PASS",
+        "task": "SocialGood_h3_f1",
+        "package_manifest_sha256": "5fd6cbc39a6d89bccc8897b817f4751e7dcab3a1bdbd0d61fe118b8876dc5301",
+        "files_checked": 32,
+        "source_bitwise_checked": true,
+        "counts": {
+          "train": 340,
+          "calibration": 90,
+          "decision": 181,
+          "test": 89
+        },
+        "test_truth_or_history_files": 0
+      },
+      "train_only_calibration_crosscheck": true,
+      "all_model_weights_and_alphas_unchanged": true,
+      "decision_predictions_exact_equal": true,
+      "original_route_sha256": "0b5745aee8ec57d69d284d5746dd5b93eeadbc0cfc51d44432dd383a23fbb848",
+      "corrected_route_sha256": "9f58845313264fa13a42ebbaa3102f137964bf586dff0f2368e8bf931dea2f21",
+      "original_test_prediction_sha256": "b267ceb7125fe5e4121ee241bf52c62e8139486b2a916f04e712998b9325394b",
+      "original_test_score_sha256": "ae66ed9755e35dc3cf7fb318e47b1d00e6f57e4c20245452bc8a9e16ce93a222",
+      "test_audit": {
+        "status": "PASS",
+        "rows": 1068,
+        "origins": 89,
+        "metrics_recomputed": {
+          "Last": {
+            "mse": 0.09780556015229487,
+            "mae": 0.2568120602239272
+          },
+          "SeasonalNaive": {
+            "mse": 0.25722660965909494,
+            "mae": 0.39901170645202144
+          },
+          "AR-Ridge": {
+            "mse": 0.027828522798104185,
+            "mae": 0.12569207746046485
+          },
+          "N": {
+            "mse": 0.027640614475910198,
+            "mae": 0.12660724405728913
+          }
+        }
+      },
+      "new_test_predictions_created": false,
+      "scope": "Retrospective calibration correction after original test. Original route was frozen before original test. No new blind test is claimed."
+    },
+    {
+      "status": "PASS_CORRECTION_WITH_UNCHANGED_TEST",
+      "task": "Environment_h7_f2",
+      "scenario": "proxy",
+      "package_audit": {
+        "status": "PASS",
+        "task": "Environment_h7_f2",
+        "package_manifest_sha256": "598eeb1bf45efc5d5caaa1e5da2ce424ff0f8948d8971319b494facd42e4c6e5",
+        "files_checked": 32,
+        "source_bitwise_checked": true,
+        "counts": {
+          "train": 7927,
+          "calibration": 1592,
+          "decision": 3190,
+          "test": 1592
+        },
+        "test_truth_or_history_files": 0
+      },
+      "train_only_calibration_crosscheck": true,
+      "all_model_weights_and_alphas_unchanged": true,
+      "decision_predictions_exact_equal": true,
+      "original_route_sha256": "54918ac2d4d5ef788e5ba3f68c87f6aba31c66b2c4f0cdec8b532cf3137be44d",
+      "corrected_route_sha256": "4086f840ef103cb39dc55ed28319956a3d9ab516e9023a3fc5c0629f5d229499",
+      "original_test_prediction_sha256": "7864078fcc2b861963cc2c35c7149537d241818eeed128a07c85dabcfd099c32",
+      "original_test_score_sha256": "85a567b079b838b65499cb4605cec9c773f6e8177e036e7eae5611ade18e7f7b",
+      "test_audit": {
+        "status": "PASS",
+        "rows": 44576,
+        "origins": 1592,
+        "metrics_recomputed": {
+          "Last": {
+            "mse": 0.43650043379779974,
+            "mae": 0.46514705228381936
+          },
+          "SeasonalNaive": {
+            "mse": 0.4687321113384056,
+            "mae": 0.4818018415530947
+          },
+          "AR-Ridge": {
+            "mse": 0.2571688718436394,
+            "mae": 0.3912779713355673
+          },
+          "N": {
+            "mse": 0.25691663717285146,
+            "mae": 0.38982131431243805
+          }
+        }
+      },
+      "new_test_predictions_created": false,
+      "scope": "Retrospective calibration correction after original test. Original route was frozen before original test. No new blind test is claimed."
+    },
+    {
+      "status": "PASS_CORRECTION_WITH_UNCHANGED_TEST",
+      "task": "Environment_h7_f2",
+      "scenario": "conservative_lag",
+      "package_audit": {
+        "status": "PASS",
+        "task": "Environment_h7_f2",
+        "package_manifest_sha256": "598eeb1bf45efc5d5caaa1e5da2ce424ff0f8948d8971319b494facd42e4c6e5",
+        "files_checked": 32,
+        "source_bitwise_checked": true,
+        "counts": {
+          "train": 7927,
+          "calibration": 1592,
+          "decision": 3190,
+          "test": 1592
+        },
+        "test_truth_or_history_files": 0
+      },
+      "train_only_calibration_crosscheck": true,
+      "all_model_weights_and_alphas_unchanged": true,
+      "decision_predictions_exact_equal": true,
+      "original_route_sha256": "30b4367b61da16ac1ea8ba9f2cf6098ccc5ee41b32f7a38e415a6d4c6f6ca31c",
+      "corrected_route_sha256": "ba3618c198f81a2b0ba0986dec3188c9f86589043911944ac6c778a40a8977dd",
+      "original_test_prediction_sha256": "7864078fcc2b861963cc2c35c7149537d241818eeed128a07c85dabcfd099c32",
+      "original_test_score_sha256": "499d278886a0f48f654531512ac2dc5e5a98aff9ca7e7cbcc3ac1e5b65953532",
+      "test_audit": {
+        "status": "PASS",
+        "rows": 44576,
+        "origins": 1592,
+        "metrics_recomputed": {
+          "Last": {
+            "mse": 0.43650043379779974,
+            "mae": 0.46514705228381936
+          },
+          "SeasonalNaive": {
+            "mse": 0.4687321113384056,
+            "mae": 0.4818018415530947
+          },
+          "AR-Ridge": {
+            "mse": 0.2571688718436394,
+            "mae": 0.3912779713355673
+          },
+          "N": {
+            "mse": 0.25691663717285146,
+            "mae": 0.38982131431243805
+          }
+        }
+      },
+      "new_test_predictions_created": false,
+      "scope": "Retrospective calibration correction after original test. Original route was frozen before original test. No new blind test is claimed."
+    }
+  ],
+  "historical_score_audits": [
+    {
+      "domain": "Agriculture",
+      "status": "PASS",
+      "origins": 42,
+      "bound_truth_source_exact": true,
+      "historical_byte_checks": [
+        {
+          "file": "Agriculture_half_metrics.csv",
+          "historical_sha256": "fc2af11ea82668b264745c44972bdec6c11555de843e5bf9e330df3e08327fd5",
+          "current_sha256": "fc2af11ea82668b264745c44972bdec6c11555de843e5bf9e330df3e08327fd5",
+          "status": "EXACT"
+        },
+        {
+          "file": "Agriculture_horizon_metrics.csv",
+          "historical_sha256": "09fb1d4b1f06d97a57136b50ddc1f07742c6d03408c276886d5503816e77f64d",
+          "current_sha256": "09fb1d4b1f06d97a57136b50ddc1f07742c6d03408c276886d5503816e77f64d",
+          "status": "EXACT"
+        },
+        {
+          "file": "Agriculture_paired_bootstrap.csv",
+          "historical_sha256": "53e9ce436e65bb3008116267e25d54def8d88f9bf6291cc67b077c3a639cc30e",
+          "current_sha256": "53e9ce436e65bb3008116267e25d54def8d88f9bf6291cc67b077c3a639cc30e",
+          "status": "EXACT"
+        },
+        {
+          "file": "Agriculture_test_predictions_bound.csv",
+          "historical_sha256": "91f634b05865658aeffff5e3db71c6d692df7a6944d947ab1f648c08ec63169a",
+          "current_sha256": "91f634b05865658aeffff5e3db71c6d692df7a6944d947ab1f648c08ec63169a",
+          "status": "EXACT"
+        },
+        {
+          "file": "Agriculture_test_score.json",
+          "historical_sha256": "f1448182d7d166b272a2366e661995440d076878eff8c8a5cb53633a5353e927",
+          "current_sha256": "f1448182d7d166b272a2366e661995440d076878eff8c8a5cb53633a5353e927",
+          "status": "EXACT"
+        },
+        {
+          "file": "sealed_route.json",
+          "historical_sha256": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70",
+          "current_sha256": "8b2c47db4909a755f409eb6e0ea7123b9664b17dbdc3790908ecdd2802df4d70",
+          "status": "EXACT"
+        },
+        {
+          "file": "spec.json",
+          "historical_sha256": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3",
+          "current_sha256": "83a2c4ccd26c4d031b9404759d8b62f01531f428113e4e75c0e783d0684ec6d3",
+          "status": "EXACT"
+        },
+        {
+          "file": "task.json",
+          "historical_sha256": "11a326a23d5a6379e4ca0cbe4190b9778ad4e21a79322098c3b8a6fe61576986",
+          "current_sha256": "11a326a23d5a6379e4ca0cbe4190b9778ad4e21a79322098c3b8a6fe61576986",
+          "status": "EXACT"
+        },
+        {
+          "file": "test_predictions.jsonl",
+          "historical_sha256": "37bbc98efb3dca2dedc618356a274e7d5eab89a53ebf4ff2236ad471949f0e83",
+          "current_sha256": "37bbc98efb3dca2dedc618356a274e7d5eab89a53ebf4ff2236ad471949f0e83",
+          "status": "EXACT"
+        },
+        {
+          "file": "test_samples.jsonl",
+          "historical_sha256": "38d6a65746b9ffbb5a735983cb0504d9e0bc471f7fdaa8545b653d18dd60b071",
+          "current_sha256": "38d6a65746b9ffbb5a735983cb0504d9e0bc471f7fdaa8545b653d18dd60b071",
+          "status": "EXACT"
+        }
+      ],
+      "scope": "Stored predictions and scores audited only. Historical model training and permutation runs were not rerun."
+    },
+    {
+      "domain": "Climate",
+      "status": "PASS_CURRENT_SCORE_WITH_HISTORICAL_BYTE_RESERVATIONS",
+      "origins": 124,
+      "bound_truth_source_exact": true,
+      "historical_byte_checks": [
+        {
+          "file": "Climate_half_metrics.csv",
+          "historical_sha256": "4527bb12e786f83c9e872c6909a26c81fb548b6459104b526a384952882f1d56",
+          "current_sha256": "459639242ae6b731e71626c4cbde62d2bb98153906efe67eb9612a3150dbe4d0",
+          "status": "LINE_ENDING_ONLY_DIFFERENCE"
+        },
+        {
+          "file": "Climate_horizon_metrics.csv",
+          "historical_sha256": "5aba5eb73af2b9dc157611fc3520141baad069a3ba0e923e3f1a6fbc5bb56e03",
+          "current_sha256": "ad60a25638024b5bbbb1178caa0a6788b9e9f13e2965e4a17331d60170b57b5a",
+          "status": "LINE_ENDING_ONLY_DIFFERENCE"
+        },
+        {
+          "file": "Climate_numeric_test_baselines.csv",
+          "historical_sha256": "9d7d950f54717d214dd53ba1be614d01dedf0540049c3974d59e9e2ee4fd87b9",
+          "current_sha256": "9d7d950f54717d214dd53ba1be614d01dedf0540049c3974d59e9e2ee4fd87b9",
+          "status": "EXACT"
+        },
+        {
+          "file": "Climate_origin_losses.csv",
+          "historical_sha256": "acc63e0586be758ef6ff2d71ce4de0a4a6a5ec2bb4f2cb1c59915c5f6e111aca",
+          "current_sha256": "85397a9010e6de3b227133696f7632c4123781d7bdcafd0611cf1b68c615937a",
+          "status": "LINE_ENDING_ONLY_DIFFERENCE"
+        },
+        {
+          "file": "Climate_test_predictions_bound.csv",
+          "historical_sha256": "97cc2f7ab909276558026ee05f4d39daa751f66bcbb5e55e717f211ececb7592",
+          "current_sha256": "9bc9b21d14c5ba86ab5235c5c8b54fb52f0ac47748b167335fb25cd34899896a",
+          "status": "LINE_ENDING_ONLY_DIFFERENCE"
+        },
+        {
+          "file": "Climate_test_score.json",
+          "historical_sha256": "e763ff4feede63d9bf0d4dfb7041fbc4e0a107dca30c1f0d27e5506305614aa2",
+          "current_sha256": "711b49e089dbc5db7594dcc06c5c8897d471debab781c5a15f683c4fe106f678",
+          "status": "LINE_ENDING_ONLY_DIFFERENCE"
+        },
+        {
+          "file": "score_climate_test.log",
+          "historical_sha256": "9c568dcfbd154e55d30b09b53bad65018027f650dd216d8e79f5ea223084899c",
+          "current_sha256": "528ee97a6bc59e7cee3e3dc4788500d0de8870ea9fc6aa4427a3a6663981e332",
+          "status": "SKIP_STALE_NON_SCORING_LOG"
+        }
+      ],
+      "scope": "Stored predictions and scores audited only. Historical model training and permutation runs were not rerun."
+    }
+  ],
+  "calibration_audit_sha256": "a93fda2faf6b31c1b27095586f4b0919cde913187ff761510ce5c195aef24248",
+  "summary": [
+    {
+      "domain": "Agriculture",
+      "task": "Agriculture_h12_f1",
+      "scenario": "proxy",
+      "selected": "N+S+Q+SF",
+      "fallback": "AR-Ridge",
+      "test_origins": 42,
+      "horizon": 12,
+      "selected_mse": 0.18937278281768827,
+      "comparison": "AR-Ridge",
+      "comparison_mse": 0.44564054723239305,
+      "gain_pct": 57.505486429866096,
+      "delta_ci95_low": 0.22195515802974186,
+      "delta_ci95_high": 0.38498597625637615,
+      "conclusion": "Positive bootstrap delta in this fold; source-time limitation remains",
+      "source_score": "team_work/main/round8/results/Agriculture_test_score.json"
+    },
+    {
+      "domain": "Climate",
+      "task": "Climate_h4_f2",
+      "scenario": "proxy",
+      "selected": "N",
+      "fallback": "N",
+      "test_origins": 124,
+      "horizon": 4,
+      "selected_mse": 0.13402219508423302,
+      "comparison": "Last",
+      "comparison_mse": 0.14462253011129927,
+      "gain_pct": 7.329656740833124,
+      "delta_ci95_low": -0.006538141255776769,
+      "delta_ci95_high": 0.02783630305414872,
+      "conclusion": "CI crosses zero vs Last; improves vs AR-Ridge in this fold",
+      "source_score": "team_work/main/round10/results/Climate_test_score.json"
+    },
+    {
+      "domain": "SocialGood",
+      "task": "SocialGood_h3_f1",
+      "scenario": "proxy;conservative_lag",
+      "selected": "N",
+      "fallback": "N",
+      "test_origins": 89,
+      "horizon": 3,
+      "selected_mse": 0.027640614475910198,
+      "comparison": "AR-Ridge",
+      "comparison_mse": 0.027828522798104185,
+      "gain_pct": 0.6752364240001585,
+      "delta_ci95_low": -0.0012171196094781667,
+      "delta_ci95_high": 0.0018003083820129836,
+      "conclusion": "CI crosses zero; no clear gain vs AR-Ridge",
+      "source_score": "team_work/main/round11/results/SocialGood_h3_f1/proxy/test_score.json"
+    },
+    {
+      "domain": "Environment",
+      "task": "Environment_h7_f2",
+      "scenario": "proxy;conservative_lag",
+      "selected": "N",
+      "fallback": "N",
+      "test_origins": 1592,
+      "horizon": 7,
+      "selected_mse": 0.25691663717285146,
+      "comparison": "AR-Ridge",
+      "comparison_mse": 0.2571688718436394,
+      "gain_pct": 0.09808133814162012,
+      "delta_ci95_low": -0.000974539455061074,
+      "delta_ci95_high": 0.00147879988980245,
+      "conclusion": "CI crosses zero; no clear gain vs AR-Ridge",
+      "source_score": "team_work/main/round11/results/Environment_h7_f2/proxy/test_score.json"
+    }
+  ],
+  "limits": [
+    "Only four named task/fold/horizon experiments closed, not all possible folds or datasets.",
+    "Original URLs and true publication times remain unverified; lag is a sensitivity scenario.",
+    "Correction replay is retrospective and is not a new unseen holdout.",
+    "Agriculture and Climate original training and null refits were not rerun this round.",
+    "Climate auxiliary committed gate retains INCOMPLETE reservation.",
+    "Rejected SocialGood/Environment gates did not run 999 permutations; their necessary conditions already failed.",
+    "Bootstrap block equals horizon; no full block-length sensitivity study claimed."
+  ]
+}

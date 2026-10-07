@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "files_checked": 90,
+  "bytes": 6339697,
+  "git_index_exactly_matches_worktree": true,
+  "excluded_local_selection_grids": 8,
+  "scope": "Only this master delivery staged; original user paper edits and smoke files excluded."
+}
