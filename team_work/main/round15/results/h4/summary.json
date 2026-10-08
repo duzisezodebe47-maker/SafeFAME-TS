@@ -1,0 +1,40 @@
+{
+  "horizon": 4,
+  "fixed_choices": {
+    "decision_mean": "Ridge",
+    "three_block_minimax_relative_regret": "Ridge",
+    "recent_26_origins": "Last"
+  },
+  "gate_weights": {
+    "SelectedNumeric": 0,
+    "OriginalText": 0,
+    "ConstantResidual": 0,
+    "NumericStateResidual": 0,
+    "CenteredText": 1,
+    "TextAge0w": 0,
+    "TextAge1w": 0,
+    "TextAge4w": 0,
+    "TextAge8w": 0
+  },
+  "state_alpha": 100,
+  "original_numeric": "Last",
+  "online": {
+    "OnlineMatured26": {
+      "choices": {
+        "Ridge": 92,
+        "DLinear": 19,
+        "Last": 7,
+        "PatchTST": 2
+      },
+      "switches": 14
+    },
+    "OnlineMatured52": {
+      "choices": {
+        "Ridge": 107,
+        "DLinear": 13
+      },
+      "switches": 2
+    }
+  },
+  "role": "Exploratory follow-up on previously inspected round14 data; not a new blind or prospective test"
+}

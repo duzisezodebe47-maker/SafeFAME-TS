@@ -1,0 +1,23 @@
+{
+  "version": "round15_posthoc_selection_and_attribution_v1",
+  "date": "2026-10-08",
+  "role": "Exploratory follow-up on previously inspected round14 data; not a new blind or prospective test",
+  "horizons": [4, 12],
+  "numeric_candidates": ["Last", "SeasonalNaive", "Ridge", "DLinear", "PatchTST"],
+  "fixed_numeric_rules": ["decision_mean", "three_block_minimax_relative_regret", "recent_26_origins"],
+  "online_lookbacks": [26, 52],
+  "numeric_training": "Reuse sealed round14 train+calibration weights; compare selection only, without refitting",
+  "selection_boundary": "All fixed rules use decision segment ending 2024-05-14. Online rules use only complete matured targets with past origin + H <= current origin.",
+  "attribution_base": "Use the original round14 selected numeric family at each horizon, holding numeric predictions and training residual origins constant across controls",
+  "controls": ["SelectedNumeric", "OriginalText", "ConstantResidual", "NumericStateResidual", "CenteredText", "TextAge0w", "TextAge1w", "TextAge4w", "TextAge8w"],
+  "constant_correction": "Mean round14 chronological OOF training residual, applied only on the same text-available origins",
+  "numeric_state_features": ["last_value", "trend_4w", "trend_13w", "std_13w", "annual_sin", "annual_cos"],
+  "state_alphas": [0.1, 1, 10, 100],
+  "state_selection": "Fit features and correction on the same OOF residual origins. Choose alpha on calibration using round14 train-only calibration predictions; apply frozen correction to final train+cal base.",
+  "centered_text": "Original text correction minus mean OOF residual, masked on identical origins; a decomposition diagnostic, not an independently trained model",
+  "age_weeks": [0, 1, 4, 8],
+  "gate_weights": [0, 0.25, 0.5, 0.75, 1],
+  "gate_selection": "Choose eligible weight on decision MSE, requiring positive benefit in both contiguous halves for nonzero weights",
+  "bootstrap": {"seed": 2026, "draws": 2000, "block_multipliers": [1, 2]},
+  "interpretation": "Exploratory pointwise intervals without multiple-comparison correction; reused targets limit claims. Strict source eligibility remains zero. No new architecture, no guaranteed superiority."
+}

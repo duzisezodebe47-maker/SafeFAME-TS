@@ -1,0 +1,16 @@
+test_constant_bootstrap_exact (__main__.Contracts.test_constant_bootstrap_exact) ... ok
+test_future_targets_cannot_change_earlier_choices (__main__.Contracts.test_future_targets_cannot_change_earlier_choices) ... ok
+test_gapped_origin_maturity (__main__.Contracts.test_gapped_origin_maturity) ... ok
+test_gate_requires_both_halves (__main__.Contracts.test_gate_requires_both_halves) ... ok
+test_invalid_origin_order (__main__.Contracts.test_invalid_origin_order) ... ok
+test_relative_regret_not_same_as_mean (__main__.Contracts.test_relative_regret_not_same_as_mean) ... ok
+test_report_age_boundary (__main__.Contracts.test_report_age_boundary) ... ok
+test_saved_numeric_policy_inference (__main__.Contracts.test_saved_numeric_policy_inference) ... ok
+test_selection_rejects_nan_and_empty (__main__.Contracts.test_selection_rejects_nan_and_empty) ... ok
+test_state_features_only_use_given_history (__main__.Contracts.test_state_features_only_use_given_history) ... ok
+test_tie_is_lexical (__main__.Contracts.test_tie_is_lexical) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 6.716s
+
+OK

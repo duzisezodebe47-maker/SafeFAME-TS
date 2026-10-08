@@ -1,0 +1,17 @@
+horizon,control,block,text_benefit_over_control,ci_low,ci_high,approx_blocks,role
+4,SelectedNumeric,4,0.0018525380147172397,-0.011672871977373206,0.015288161166068336,30,exploratory pointwise; no multiplicity correction
+4,SelectedNumeric,8,0.0018525380147172397,-0.013168459689133776,0.01618963298233464,15,exploratory pointwise; no multiplicity correction
+4,ConstantResidual,4,-0.0030788854166448544,-0.011534796417700112,0.005975808290346695,30,exploratory pointwise; no multiplicity correction
+4,ConstantResidual,8,-0.0030788854166448544,-0.012960546653035695,0.007687131839379146,15,exploratory pointwise; no multiplicity correction
+4,NumericStateResidual,4,-0.0007484127553670848,-0.015387532413593941,0.015205169869093104,30,exploratory pointwise; no multiplicity correction
+4,NumericStateResidual,8,-0.0007484127553670848,-0.016312211917492297,0.01735353057752552,15,exploratory pointwise; no multiplicity correction
+4,CenteredText,4,0.011028710334226938,-0.007162628298538336,0.028443940894991582,30,exploratory pointwise; no multiplicity correction
+4,CenteredText,8,0.011028710334226938,-0.009011709085590833,0.03100688565288138,15,exploratory pointwise; no multiplicity correction
+4,TextAge0w,4,-0.0029205587110048017,-0.010954257423064212,0.00490373679606715,30,exploratory pointwise; no multiplicity correction
+4,TextAge0w,8,-0.0029205587110048017,-0.011849722477154564,0.005247297176755874,15,exploratory pointwise; no multiplicity correction
+4,TextAge1w,4,-0.002921667873401355,-0.008074797864423494,0.0024227977762415758,30,exploratory pointwise; no multiplicity correction
+4,TextAge1w,8,-0.002921667873401355,-0.008378459473592708,0.0021166416549010616,15,exploratory pointwise; no multiplicity correction
+4,TextAge4w,4,-0.0006222889527154966,-0.0025899332158970194,0.0006238937796322977,30,exploratory pointwise; no multiplicity correction
+4,TextAge4w,8,-0.0006222889527154966,-0.0025394315888897347,0.0006238937796322977,15,exploratory pointwise; no multiplicity correction
+4,TextAge8w,4,0.0,0.0,0.0,30,exploratory pointwise; no multiplicity correction
+4,TextAge8w,8,0.0,0.0,0.0,15,exploratory pointwise; no multiplicity correction
