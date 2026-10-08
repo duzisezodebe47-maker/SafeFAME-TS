@@ -20,6 +20,9 @@ def main():
     anchors=read(LOCAL/'models/h4/selection_seal.json')['code']
     for rel in anchors:
         copy(PROJECT/rel,dest/'关联依赖'/rel)
+    for name in ('LICENSE','README.md'):
+        p=DATA/'PatchTST_official_204c21e'/name
+        copy(p,dest/'关联依赖'/p.relative_to(PROJECT))
     old=DATA/'SafeFAME_TS_第4轮_2d530ec7/Climate_numerical.csv';copy(old,dest/'关联依赖'/old.relative_to(PROJECT))
     for name in ['01_技术结果与验收结论.txt','02_运行与复现说明.txt','模型对比.png','文本反事实诊断.png','演示验收截图.jpg']:
         copy(HERE/'results/final'/name,dest/name)
