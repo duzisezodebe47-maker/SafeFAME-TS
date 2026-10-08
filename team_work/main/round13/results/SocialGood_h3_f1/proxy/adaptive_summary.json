@@ -1,0 +1,13 @@
+{
+  "task": "SocialGood_h3_f1",
+  "scenario": "proxy",
+  "text_weight_positive_origins": 0,
+  "fallback_origins": 89,
+  "origins": 89,
+  "mean_weight": 0.0,
+  "final_weight": 0.0,
+  "strict_source_weights_all_zero": true,
+  "prediction_sha256": "5aa86a986f442bd6bbdebec2f5713e35ac1cb7b1787a206c297960148cc1ae1a",
+  "old_routes_changed": false,
+  "role": "retrospective exploratory extension; no independent blind confirmation"
+}

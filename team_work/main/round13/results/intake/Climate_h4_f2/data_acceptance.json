@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "task": "Climate_h4_f2",
+  "package_manifest_sha256": "0a6fd226361847fb281fb84b72822b9ecca992a8f0fdeeef7b742660aa3e8933",
+  "files_checked": 32,
+  "source_bitwise_checked": true,
+  "counts": {
+    "train": 581,
+    "calibration": 124,
+    "decision": 251,
+    "test": 124
+  },
+  "test_truth_or_history_files": 0
+}

@@ -1,0 +1,6 @@
+candidate,cases,better_than_Last_cases,median_gain_vs_Last_pct,minimum_gain_vs_Last_pct,note
+AR-Ridge,24,14,16.45746407335253,-260.75051504240577,"Overlapping temporal folds are descriptive diagnostics, not independent replications."
+AR-Ridge-refit,24,12,1.2828840031719357,-220.00301700291445,"Overlapping temporal folds are descriptive diagnostics, not independent replications."
+Last,24,0,0.0,0.0,"Overlapping temporal folds are descriptive diagnostics, not independent replications."
+N,24,17,10.160051512180328,-69.30647624098913,"Overlapping temporal folds are descriptive diagnostics, not independent replications."
+SeasonalNaive,24,0,-141.21883736369966,-3731.3702797613855,"Overlapping temporal folds are descriptive diagnostics, not independent replications."

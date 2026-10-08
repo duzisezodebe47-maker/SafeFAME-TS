@@ -1,0 +1,17 @@
+{
+  "version": "master_strengthening_v1",
+  "evaluation_role": "retrospective historical evaluation; previous test outcomes are already known",
+  "split_spec_sha256": "a0947a5b64d2a609e624c432ef6c6ce9faa6ae8ab86570d4c90594f70c6f0031",
+  "bundle_signature": "a69821be115445265cdec0f005686f978de7afb46700edb075dd47aaeee86d38",
+  "tasks": ["Agriculture_h12_f1", "Climate_h4_f2", "SocialGood_h3_f1", "Environment_h7_f2"],
+  "scenarios": ["proxy", "conservative_lag"],
+  "deep_models": ["DLinear", "PatchTST"],
+  "seeds": [2026, 2027, 2028],
+  "deep_training": {"max_epochs": 60, "patience": 8, "min_delta": 0.000001, "batch_size": 64, "weight_decay": 0.0001, "DLinear_learning_rate": 0.001, "PatchTST_learning_rate": 0.0003, "threads": 2},
+  "PatchTST": {"commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9", "d_model": 32, "n_heads": 4, "e_layers": 2, "d_ff": 64, "dropout": 0.1, "patch_len": "8 if input_len>=52 else 4", "stride": "patch_len/2"},
+  "numeric_rolling_folds": [[0.4, 0.5, 0.7, 0.8], [0.5, 0.6, 0.8, 0.9], [0.6, 0.7, 0.9, 1.0]],
+  "numeric_rolling_horizons": {"Agriculture": [6,12], "Climate": [4,12], "SocialGood": [3,6], "Environment": [7,14]},
+  "adaptive": {"candidate": "N+S+Q+SF", "weight_grid": [0.0,0.25,0.5,0.75,1.0], "minimum_mature_origins": 20, "lookback_mature_origins": 128, "risk_z": 1.96, "epsilon": 0.00000001, "text_required": true, "quality_guard": "finite input; candidate trained on text; strict-source scenario rejects unverifiable sources"},
+  "diagnostics": {"bootstrap_draws": 5000, "block_multipliers": [1,2,4], "text_delay_horizons": [1,2], "row_shuffle_seed": 2026},
+  "boundary": "Deep epochs chosen using train-only fits on calibration, then refit train+cal. Decision/test never enter deep early stopping. Adaptive weights use only fully matured prior decision/test origins; no current or future target access. No route changes to rounds 8-12. New gates are exploratory and do not claim family-wise error control. No new blind confirmation or guaranteed safety claim."
+}

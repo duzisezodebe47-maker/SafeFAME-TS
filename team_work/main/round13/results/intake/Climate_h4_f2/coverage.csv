@@ -1,0 +1,9 @@
+task,scenario,segment,origins,text_available,coverage,quality_varying_columns,no_text_nonzero_semantic_rows
+Climate_h4_f2,proxy,train,581,581,1.0,8,0
+Climate_h4_f2,proxy,calibration,124,124,1.0,8,0
+Climate_h4_f2,proxy,decision,251,251,1.0,8,0
+Climate_h4_f2,proxy,test,124,124,1.0,8,0
+Climate_h4_f2,conservative_lag,train,581,581,1.0,8,0
+Climate_h4_f2,conservative_lag,calibration,124,124,1.0,8,0
+Climate_h4_f2,conservative_lag,decision,251,251,1.0,8,0
+Climate_h4_f2,conservative_lag,test,124,124,1.0,8,0

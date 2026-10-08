@@ -1,0 +1,9 @@
+[
+  {
+    "origin_id": "SocialGood:h3:f1:o385",
+    "origin_index": 385,
+    "segment": "calibration",
+    "proxy": true,
+    "conservative_lag": false
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-08",
+  "browser": "Codex in-app browser",
+  "url": "http://127.0.0.1:8873/",
+  "status": "PASS_FOR_OBSERVED_DESKTOP_FLOW",
+  "observed_checks": [
+    "Initial dashboard loads actual Agriculture scores and input window",
+    "Strict-source Agriculture forecast returns 12 steps using AR-Ridge",
+    "Switch to Environment updates metrics and 56-input/7-output window",
+    "PatchTST Environment inference returns 7 finite forecasts in the visible UI",
+    "Invalid numeric text is rejected with an understandable error",
+    "Load example restores valid historical inputs",
+    "Full-page screenshot visually checked for readable plots, labels and boundaries"
+  ],
+  "screenshot": "demo_browser.jpg",
+  "limits": ["Desktop viewport inspected; mobile and external browser matrix not fully tested", "Local service only; no hosted deployment or live data feed", "Service is stopped after QA and can be restarted using Start-Demo.ps1"]
+}

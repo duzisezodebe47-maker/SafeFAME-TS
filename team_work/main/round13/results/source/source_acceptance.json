@@ -1,0 +1,52 @@
+{
+  "status": "AUDIT_COMPLETE_SOURCE_GAPS_REMAIN",
+  "lineage_sha256": "90603c6e7fd62dc0f7b8d0ad80c93edea17a4a479afd536ef3668724ff01e9d1",
+  "audited_rows": 12823,
+  "unique_text_ids": 12664,
+  "strict_source_eligible_rows": 0,
+  "primary_cases": [
+    {
+      "text_id": "3c27aa9b4f93ce10",
+      "domain": "Environment",
+      "primary_url": "https://extapps.dec.ny.gov/docs/administration_pdf/pvscandd051421.pdf",
+      "document_date": "2021-05-14",
+      "public_release_date": null,
+      "status": "RELATED_PRIMARY_DOCUMENT_CONFIRMS_EVENT; PUBLICATION_TIME_UNVERIFIED",
+      "finding": "DEC official letter supports cease-and-desist event; letter date does not establish when the corpus extraction was publicly available.",
+      "checked_at": "2026-10-07"
+    },
+    {
+      "text_id": "0d4bb1db45b579d4",
+      "domain": "SocialGood",
+      "primary_url": "https://fraser.stlouisfed.org/title/commissioners-statement-employment-situation-9634/statement-joint-economic-committee-706260/content/fulltext/jec_19940204",
+      "document_date": "1994-02-04",
+      "public_release_date": "1994-02-04",
+      "status": "RELATED_BLS_RELEASE_FOUND; EXACT_CORPUS_LINEAGE_UNVERIFIED",
+      "finding": "BLS statement reports January unemployment on February 4, later than corpus interval end January 31. Exact original extraction/8.7-million statement not fully matched; keep strict eligibility false.",
+      "checked_at": "2026-10-07"
+    },
+    {
+      "text_id": "9f276efce62fdbea",
+      "domain": "Climate",
+      "primary_url": "https://www.ncei.noaa.gov/access/monitoring/monthly-report/drought/199901",
+      "document_date": null,
+      "public_release_date": null,
+      "status": "CANDIDATE_URL_INACCESSIBLE; NOT_VERIFIED",
+      "finding": "No accessible original source retrieved; do not treat the candidate URL as verified provenance.",
+      "checked_at": "2026-10-07"
+    },
+    {
+      "text_id": "38d16528a0b7bcd2",
+      "domain": "Agriculture",
+      "primary_url": null,
+      "document_date": null,
+      "public_release_date": null,
+      "status": "ORIGINAL_REPORT_NOT_RECOVERED",
+      "finding": "USDA related poultry releases are not sufficient to identify the exact quoted market report.",
+      "checked_at": "2026-10-07"
+    }
+  ],
+  "raw_lineage_modified": false,
+  "strict_scenario": "All unverifiable original publications are disabled. Related documents do not repair corpus lineage automatically.",
+  "catalog_sha256": "52865b21bb2b188213655b57c1665d0c1010ad4bcde01fa0091ae6754e7430a7"
+}

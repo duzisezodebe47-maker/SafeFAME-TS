@@ -1,0 +1,65 @@
+SafeFAME-TS 第13轮：技术加强与历史回顾性验证
+
+一、目的与边界
+本轮回答：深度基线加入后原结论是否成立？自适应文本权重是否真正降低误差？公开时间缺失时怎样回退？
+本轮不替换第8—12轮的路线或预测；不把已知测试集标成新盲测。详细结果见results/final/主控第13轮_技术验收与结论.txt。
+
+二、统一入口
+在本目录打开PowerShell，运行：
+  .\Run-Round13.ps1 -Mode verify
+  .\Run-Round13.ps1 -Mode test
+  .\Run-Round13.ps1 -Mode report
+  .\Run-Round13.ps1 -Mode demo
+demo模式打开服务后，在浏览器访问 http://127.0.0.1:8873 ，终止时Ctrl+C。
+也可直接运行Start-Demo.ps1。启动脚本在已存在的Python3.12上运行，不向C盘安装依赖；缓存和临时目录指定D盘。
+
+三、文件与依赖
+当前项目根目录：D:\aaa2026人工智能课程报告
+主控仓库：该目录下SafeFAME-TS_主控技术工作区
+本轮大型证据：主控接收数据\主控加强_20261007
+模型：deep\任务\模型\种子\refit.pt；融合：comparison\任务\场景\models.joblib。
+原数据：主控接收数据\SafeFAME_TS_第7轮数据_02_a06dfe1\release_unpacked\inputs\formal_bundle。
+来源谱系与四领域原始数值快照位置写在common.py；路径由本脚本位置推导项目根目录。
+官方PatchTST：主控接收数据\PatchTST_official_204c21e，固定提交204c21efe0b39603ad6e2ca640ef5896646ab1a9。
+依赖清单见results/final/runtime.json。Python3.12，PyTorch2.8.0+cpu。NumPy/SciPy/scikit-learn位于runtime_py312，torch位于runtime_torch_cpu；pandas与其他基础库沿用已有Python环境。本轮没有宣称在一台空白电脑完整重装验收。
+缺失按设计不入Git的大型证据时，verify返回PARTIAL；已存在而字节不匹配时必须失败，不准手工修改校验值。
+不要加载来源不明的joblib/pickle；推理只加载本机固定清单校验过的模型。
+
+四、复现训练
+深度训练：python deep_baselines.py --phase train；完成后 --phase test。
+融合选择：python experiments.py --phase select；完成后 --phase test。
+数值滚动与文本压力：python robustness.py。
+上述训练入口拒绝覆盖已封存输出；重复验证请使用verify入口。需要重训时建立新的版本/证据目录并重新执行封存，不得修改旧哈希。训练脚本受protocol.json约束，随机种子2026/2027/2028，早停最多60轮、耐心8轮、批量64。深度模型用训练段拟合并以校准段早停，随后从相同种子重训train+cal至已选轮数。决策段与测试段不参与深度模型早停。
+本轮脚本假定round12产生的isolated输入已准备好；保留的隔离清单、切片哈希、元数据及verify_package共同验证其来自原Bundle。
+Git只保存代码与紧凑结果，训练权重及大型逐步预测保存在D盘本地证据目录。
+
+五、自适应算法的真实定义
+预测：p(o,w)=(1-w)*p_base(o)+w*p_text(o)，w属于{0,0.25,0.5,0.75,1}。
+仅当旧起点i满足i+H<=o时，环境释放其完整H步目标。记录最近128个已到期起点；至少20个且至少3个H长度块才允许启用文本。
+对每个w计算旧起点的误差收益 d_i(w)=MSE(base_i,y_i)-MSE(p(i,w),y_i)。按H个起点组成非重叠块，计算块均值的均值减1.96倍标准误；若大于1e-8，则进入候选。候选按历史平均收益最大选择，平局选择较小w；否则w=0。
+来源未核实、文本不可用或分支不可训练时w=0。当前严格来源场景所有文本均禁用。
+该下界只是启发式筛选；序列依赖、重复选择与分布变化意味着它不构成95%安全概率或未来误差保证。决策段用于因果热身，测试中只释放此前完整到期的标签。回放程序访问标签数组属于环境，策略接口只接收到期标签。
+
+六、指标与诊断
+MSE为所有测试起点、所有预测步的平方误差均值，MAE类似；raw_rmse用训练段标准差还原。相邻起点共享目标，因此不能按独立样本解释。
+三种子分别报告MSE、均值、样本标准差；三种子平均预测的MSE与三个MSE平均值不是同一个量。
+24个滚动案例只覆盖数值模型，每领域2个步长、3个有序时间折；折间可能重叠。
+文本延迟H/2H和历史错配只在冻结模型上改变推理特征，不是重新训练的置换显著性检验。
+循环移动块Bootstrap重复5000次，种子2026，块长H/2H/4H。块长>=样本量不估计区间；有效块少于5明确标记低支持。区间仅作逐项诊断，没有多重检验校正。
+
+七、模型出处（2026-10-08核验原始作者/标题页面）
+[1] Ailing Zeng, Muxi Chen, Lei Zhang, Qiang Xu. 2022. Are Transformers Effective for Time Series Forecasting? arXiv:2205.13504（此处采用已核验预印本信息，不填未经核验的会议页码）。
+原始论文：https://arxiv.org/abs/2205.13504
+PDF：https://arxiv.org/pdf/2205.13504
+DLinear复用仓库原有src/train_dlinear.py，此轮不是官方原实验的完整复现。
+[2] Yuqi Nie, Nam H. Nguyen, Phanwadee Sinthong, Jayant Kalagnanam. 2023. A Time Series is Worth 64 Words: Long-term Forecasting with Transformers. ICLR 2023（arXiv页面标注接收）。
+原始论文：https://arxiv.org/abs/2211.14730
+PDF：https://arxiv.org/pdf/2211.14730
+官方实现：https://github.com/yuqinie98/PatchTST
+本轮使用官方骨干、小型固定配置、单变量输入、3种子；不宣称复现论文排行榜。
+来源案例的机构URL、核验状态、日期和未解决项见results/source/primary_source_case_checks.csv。
+
+八、演示操作
+先切换研究任务观察MSE对照；再选择历史回放曲线；最后加载历史示例、选择数值模型并预测。历史曲线只绘制每起点第1步，完整指标使用全部H步。
+输入必须为本任务要求长度的有限数值，使用原始OT尺度；没有日期/单位自动识别。新用户输入的适用性需自行依据原始数据定义判断。
+严格来源模式显示数值回退原因；演示不接收任意文本，不声称实现实时新闻获取或自动核实公开时间。

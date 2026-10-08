@@ -1,0 +1,33 @@
+task,scenario,stress,mse,change_from_aligned_pct,text_available_origins,future_text_indices_used,scope
+Agriculture_h12_f1,proxy,text_delay_0_observations,0.21438561868025363,0.0,42,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Agriculture_h12_f1,proxy,text_delay_12_observations,0.3213453548407019,49.891283202150724,30,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Agriculture_h12_f1,proxy,text_delay_24_observations,0.4407544498133181,105.58955984388265,18,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Agriculture_h12_f1,proxy,past_mismatched_text,0.21780980655273285,1.5972096885781495,42,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test
+Agriculture_h12_f1,conservative_lag,text_delay_0_observations,0.18324199093382632,0.0,42,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Agriculture_h12_f1,conservative_lag,text_delay_12_observations,0.20579214357581774,12.306214600197674,30,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Agriculture_h12_f1,conservative_lag,text_delay_24_observations,0.22275334111519263,21.56238860973463,18,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Agriculture_h12_f1,conservative_lag,past_mismatched_text,0.19066054165186627,4.048499298787367,42,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test
+Climate_h4_f2,proxy,text_delay_0_observations,0.11267142594140035,0.0,124,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Climate_h4_f2,proxy,text_delay_4_observations,0.3077117621829333,173.10541214147062,120,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Climate_h4_f2,proxy,text_delay_8_observations,0.49812681060535613,342.10571264486214,116,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Climate_h4_f2,proxy,past_mismatched_text,0.15039852190867892,33.48417369537879,124,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test
+Climate_h4_f2,conservative_lag,text_delay_0_observations,0.12176447489024173,0.0,124,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Climate_h4_f2,conservative_lag,text_delay_4_observations,0.434608359345915,256.9254166600482,120,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Climate_h4_f2,conservative_lag,text_delay_8_observations,0.7842644178662759,544.0831109181971,116,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Climate_h4_f2,conservative_lag,past_mismatched_text,0.13252577747921404,8.837801500538255,124,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test
+SocialGood_h3_f1,proxy,text_delay_0_observations,0.027640614475910198,0.0,89,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+SocialGood_h3_f1,proxy,text_delay_3_observations,0.027640614475910198,0.0,86,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+SocialGood_h3_f1,proxy,text_delay_6_observations,0.027640614475910198,0.0,83,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+SocialGood_h3_f1,proxy,past_mismatched_text,0.027640614475910198,0.0,89,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test
+SocialGood_h3_f1,conservative_lag,text_delay_0_observations,0.027640614475910198,0.0,89,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+SocialGood_h3_f1,conservative_lag,text_delay_3_observations,0.027640614475910198,0.0,86,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+SocialGood_h3_f1,conservative_lag,text_delay_6_observations,0.027640614475910198,0.0,83,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+SocialGood_h3_f1,conservative_lag,past_mismatched_text,0.027640614475910198,0.0,89,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test
+Environment_h7_f2,proxy,text_delay_0_observations,0.25228593736474975,0.0,1592,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Environment_h7_f2,proxy,text_delay_7_observations,0.25218917087784193,-0.03835587822238473,1585,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Environment_h7_f2,proxy,text_delay_14_observations,0.2530373425786973,0.29783872291748725,1578,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Environment_h7_f2,proxy,past_mismatched_text,0.2540267829644134,0.6900287894948232,1592,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test
+Environment_h7_f2,conservative_lag,text_delay_0_observations,0.2522794926484873,0.0,1592,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Environment_h7_f2,conservative_lag,text_delay_7_observations,0.25194952808040827,-0.13079325814991938,1585,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Environment_h7_f2,conservative_lag,text_delay_14_observations,0.25284906596404694,0.22577075511771572,1578,0,"Frozen weights, inference perturbation only; no null refits or p-values"
+Environment_h7_f2,conservative_lag,past_mismatched_text,0.25405557407766094,0.7040133982068486,1592,0,Diagnostic only; samples prior text with replacement; not a valid permutation significance test

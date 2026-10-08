@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "task": "Agriculture_h12_f1",
+  "package_manifest_sha256": "f09d41cf19aec91ad5a9fcfed7317a91c4aa243fe342e0c4b45120989fc8256d",
+  "files_checked": 32,
+  "source_bitwise_checked": true,
+  "counts": {
+    "train": 177,
+    "calibration": 43,
+    "decision": 95,
+    "test": 42
+  },
+  "test_truth_or_history_files": 0
+}

@@ -1,0 +1,13 @@
+{
+  "task": "Environment_h7_f2",
+  "scenario": "conservative_lag",
+  "text_weight_positive_origins": 480,
+  "fallback_origins": 1112,
+  "origins": 1592,
+  "mean_weight": 0.2247173366834171,
+  "final_weight": 0.0,
+  "strict_source_weights_all_zero": true,
+  "prediction_sha256": "7cf97fc5e818d8c8bbe269ba158d8e9c74ceea928c959d729b3231f19a714da4",
+  "old_routes_changed": false,
+  "role": "retrospective exploratory extension; no independent blind confirmation"
+}

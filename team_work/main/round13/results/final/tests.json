@@ -1,0 +1,8 @@
+{
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "status": "PASS",
+  "subcase_scope": "24 task/model inference combinations plus 16 frozen prediction comparisons and negative inputs",
+  "test_source_sha256": "1cef3393366c1372dffbaf817c6124a5d7108e05d0725eb885af38b8f6d94dc5"
+}

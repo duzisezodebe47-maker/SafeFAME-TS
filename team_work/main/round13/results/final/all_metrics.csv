@@ -1,0 +1,121 @@
+task,scenario,candidate,origins,horizon,mse,mae,raw_rmse,kind
+Agriculture_h12_f1,proxy,DLinear,42,12,0.5175960787251952,0.6511372133852944,13.367906457256483,deep ensemble
+Agriculture_h12_f1,proxy,DLinear_s2026,42,12,0.5276772020068282,0.6572651479925428,13.49746079607495,deep individual seed
+Agriculture_h12_f1,proxy,DLinear_s2027,42,12,0.5002963074112424,0.6390060479678805,13.142608100979103,deep individual seed
+Agriculture_h12_f1,proxy,DLinear_s2028,42,12,0.52534785374806,0.6571404375727214,13.467636634133102,deep individual seed
+Agriculture_h12_f1,proxy,PatchTST,42,12,0.17870046731467862,0.34269384968848454,7.854720814930562,deep ensemble
+Agriculture_h12_f1,proxy,PatchTST_s2026,42,12,0.21173830252791304,0.3779527847729032,8.550029687547514,deep individual seed
+Agriculture_h12_f1,proxy,PatchTST_s2027,42,12,0.16985799270644605,0.3351271961416517,7.6579213721345,deep individual seed
+Agriculture_h12_f1,proxy,PatchTST_s2028,42,12,0.17569643740684046,0.34004030293888515,7.788420421730834,deep individual seed
+Agriculture_h12_f1,proxy,N,42,12,0.13773389575550937,0.2956174571487211,6.895858238638238,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,N+Q,42,12,0.3585372114675849,0.5102697833620636,11.125896802702906,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,N+S+Q,42,12,0.3579530462842123,0.5098562910110233,11.116829388147917,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,N+S+Q+SF,42,12,0.21438561868025358,0.3770114695614589,8.603313201575993,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,Last,42,12,0.1235315041602952,0.2788825588566916,6.530655486900649,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,SeasonalNaive,42,12,0.2260876442066776,0.37015181306808714,8.834995313074595,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,AR-Ridge,42,12,0.44564054723239305,0.5810904568254992,12.403957187153399,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,AR-Ridge-refit,42,12,0.3953045451694142,0.5446825079688176,11.682446829035522,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,StaticGateReplay,42,12,0.21438561868025358,0.3770114695614589,8.603313201575993,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,AdaptiveRisk,42,12,0.28369756952185443,0.4348934899452096,9.896821029768383,fixed common refit / causal adaptation
+Agriculture_h12_f1,proxy,StrictSourceFallback,42,12,0.44564054723239305,0.5810904568254992,12.403957187153399,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,N,42,12,0.13773389575550937,0.2956174571487211,6.895858238638238,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,N+Q,42,12,0.3500079078360659,0.5031216479700134,10.99276230689745,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,N+S+Q,42,12,0.34967957098757574,0.5028506349027395,10.987605029430298,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,N+S+Q+SF,42,12,0.18324199093382632,0.3403121529082524,7.953905192036303,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,Last,42,12,0.1235315041602952,0.2788825588566916,6.530655486900649,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,SeasonalNaive,42,12,0.2260876442066776,0.37015181306808714,8.834995313074595,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,AR-Ridge,42,12,0.44564054723239305,0.5810904568254992,12.403957187153399,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,AR-Ridge-refit,42,12,0.3953045451694142,0.5446825079688176,11.682446829035522,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,StaticGateReplay,42,12,0.18324199093382632,0.3403121529082524,7.953905192036303,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,AdaptiveRisk,42,12,0.3376088880375957,0.4788316941886076,10.796297538744055,fixed common refit / causal adaptation
+Agriculture_h12_f1,conservative_lag,StrictSourceFallback,42,12,0.44564054723239305,0.5810904568254992,12.403957187153399,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,DLinear,124,4,0.18067897864111881,0.33557035890173154,3.776804281653149,deep ensemble
+Climate_h4_f2,proxy,DLinear_s2026,124,4,0.19569750877463044,0.35167430395320537,3.9306404116278504,deep individual seed
+Climate_h4_f2,proxy,DLinear_s2027,124,4,0.1815913570009677,0.33770554098150424,3.786328176726715,deep individual seed
+Climate_h4_f2,proxy,DLinear_s2028,124,4,0.16949590290102712,0.3207451727000936,3.6580553182470497,deep individual seed
+Climate_h4_f2,proxy,PatchTST,124,4,0.20055882171604597,0.3396620787980576,3.979161363473156,deep ensemble
+Climate_h4_f2,proxy,PatchTST_s2026,124,4,0.19409850914365812,0.33705825424723085,3.914549292633486,deep individual seed
+Climate_h4_f2,proxy,PatchTST_s2027,124,4,0.23198821037730408,0.3659476756208366,4.27960438317829,deep individual seed
+Climate_h4_f2,proxy,PatchTST_s2028,124,4,0.1935224559170941,0.33382173008736105,3.9087360992218443,deep individual seed
+Climate_h4_f2,proxy,N,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,N+Q,124,4,0.1330799833157275,0.2763503595969431,3.241358259512322,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,N+S+Q,124,4,0.11735346485631597,0.2632075240169839,3.043817605373,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,N+S+Q+SF,124,4,0.11267142594140037,0.25283002996031334,2.9824801484858487,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,Last,124,4,0.14462253011129927,0.28713703419893016,3.379003517464647,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,SeasonalNaive,124,4,5.541024730590713,1.906056338804774,20.915377646764888,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,AR-Ridge,124,4,0.16329108836404732,0.31309433758630983,3.5904750086101473,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,AR-Ridge-refit,124,4,0.1652113688241304,0.31486520701401405,3.611525046169406,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,StaticGateReplay,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,AdaptiveRisk,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+Climate_h4_f2,proxy,StrictSourceFallback,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,N,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,N+Q,124,4,0.13308714686718434,0.27634499314527955,3.241445497741693,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,N+S+Q,124,4,0.11891708273109612,0.26155888238201325,3.0640284227904298,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,N+S+Q+SF,124,4,0.12176447489024173,0.26532479275304305,3.100494508217049,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,Last,124,4,0.14462253011129927,0.28713703419893016,3.379003517464647,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,SeasonalNaive,124,4,5.541024730590713,1.906056338804774,20.915377646764888,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,AR-Ridge,124,4,0.16329108836404732,0.31309433758630983,3.5904750086101473,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,AR-Ridge-refit,124,4,0.1652113688241304,0.31486520701401405,3.611525046169406,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,StaticGateReplay,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,AdaptiveRisk,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+Climate_h4_f2,conservative_lag,StrictSourceFallback,124,4,0.13393630721639285,0.27721492594431685,3.2517700498322464,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,DLinear,89,3,0.037500705281672084,0.15045439445545325,0.2891964759205072,deep ensemble
+SocialGood_h3_f1,proxy,DLinear_s2026,89,3,0.037036902430449735,0.1494164899068323,0.287402543527982,deep individual seed
+SocialGood_h3_f1,proxy,DLinear_s2027,89,3,0.03777902797598596,0.15116415219904666,0.2902676710935816,deep individual seed
+SocialGood_h3_f1,proxy,DLinear_s2028,89,3,0.037714363293136564,0.15081238091229165,0.29001914556563174,deep individual seed
+SocialGood_h3_f1,proxy,PatchTST,89,3,0.028154235810009316,0.1274123260235128,0.250579276243059,deep ensemble
+SocialGood_h3_f1,proxy,PatchTST_s2026,89,3,0.029748990262085252,0.13090232404974406,0.2575783716615113,deep individual seed
+SocialGood_h3_f1,proxy,PatchTST_s2027,89,3,0.029300495998973157,0.1301753998102711,0.25562937882482456,deep individual seed
+SocialGood_h3_f1,proxy,PatchTST_s2028,89,3,0.027796642790046105,0.12691654759190613,0.2489828602278825,deep individual seed
+SocialGood_h3_f1,proxy,N,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,N+Q,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,N+S+Q,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,N+S+Q+SF,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,Last,89,3,0.09780556015229487,0.2568120602239272,0.4670410467238836,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,SeasonalNaive,89,3,0.257226609659095,0.39901170645202144,0.7574103325120951,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,AR-Ridge,89,3,0.027828522798104192,0.12569207746046485,0.24912559870623774,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,AR-Ridge-refit,89,3,0.02672903788323172,0.12510575415639932,0.24415461734460003,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,StaticGateReplay,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,AdaptiveRisk,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,proxy,StrictSourceFallback,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,N,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,N+Q,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,N+S+Q,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,N+S+Q+SF,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,Last,89,3,0.09780556015229487,0.2568120602239272,0.4670410467238836,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,SeasonalNaive,89,3,0.257226609659095,0.39901170645202144,0.7574103325120951,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,AR-Ridge,89,3,0.027828522798104192,0.12569207746046485,0.24912559870623774,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,AR-Ridge-refit,89,3,0.02672903788323172,0.12510575415639932,0.24415461734460003,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,StaticGateReplay,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,AdaptiveRisk,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+SocialGood_h3_f1,conservative_lag,StrictSourceFallback,89,3,0.027640614475910198,0.12660724405728913,0.2482830806580432,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,DLinear,1592,7,0.2556248069158605,0.3883263924332837,22.550006957754963,deep ensemble
+Environment_h7_f2,proxy,DLinear_s2026,1592,7,0.2599388672455705,0.3953889206150274,22.739493793716413,deep individual seed
+Environment_h7_f2,proxy,DLinear_s2027,1592,7,0.2550494218343279,0.3864083849075411,22.524613790149168,deep individual seed
+Environment_h7_f2,proxy,DLinear_s2028,1592,7,0.2542741729244616,0.3852542784299928,22.49035479851961,deep individual seed
+Environment_h7_f2,proxy,PatchTST,1592,7,0.24525869633882746,0.3594946992546431,22.08805063874792,deep ensemble
+Environment_h7_f2,proxy,PatchTST_s2026,1592,7,0.2450564104621126,0.3609817764542633,22.078939805081937,deep individual seed
+Environment_h7_f2,proxy,PatchTST_s2027,1592,7,0.24836339393581952,0.3596719156650523,22.227415839096846,deep individual seed
+Environment_h7_f2,proxy,PatchTST_s2028,1592,7,0.24638598398935466,0.3605218768305007,22.138754326372876,deep individual seed
+Environment_h7_f2,proxy,N,1592,7,0.25691663717285146,0.38982131431243805,22.60691471716689,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,N+Q,1592,7,0.2534294405168675,0.38605730564043744,22.452965754355077,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,N+S+Q,1592,7,0.25182367205273853,0.38187653216265643,22.38171997234486,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,N+S+Q+SF,1592,7,0.2522859373647498,0.3839206985126441,22.4022532862678,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,Last,1592,7,0.4365004337977998,0.46514705228381936,29.46710844419348,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,SeasonalNaive,1592,7,0.4687321113384056,0.4818018415530947,30.53567572054978,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,AR-Ridge,1592,7,0.2571688718436394,0.3912779713355673,22.618009461473115,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,AR-Ridge-refit,1592,7,0.2548235177016195,0.386853824649556,22.514636252189185,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,StaticGateReplay,1592,7,0.25691663717285146,0.38982131431243805,22.60691471716689,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,AdaptiveRisk,1592,7,0.2570212539296774,0.39014722827136133,22.611517029828626,fixed common refit / causal adaptation
+Environment_h7_f2,proxy,StrictSourceFallback,1592,7,0.25691663717285146,0.38982131431243805,22.60691471716689,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,N,1592,7,0.25691663717285146,0.38982131431243805,22.60691471716689,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,N+Q,1592,7,0.2535425044588293,0.38631181372647166,22.45797373159026,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,N+S+Q,1592,7,0.2526771317470118,0.3835168867816981,22.41961501704188,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,N+S+Q+SF,1592,7,0.2522794926484873,0.3825896544038588,22.401967148463957,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,Last,1592,7,0.4365004337977998,0.46514705228381936,29.46710844419348,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,SeasonalNaive,1592,7,0.4687321113384056,0.4818018415530947,30.53567572054978,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,AR-Ridge,1592,7,0.2571688718436394,0.3912779713355673,22.618009461473115,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,AR-Ridge-refit,1592,7,0.2548235177016195,0.386853824649556,22.514636252189185,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,StaticGateReplay,1592,7,0.25691663717285146,0.38982131431243805,22.60691471716689,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,AdaptiveRisk,1592,7,0.2570032054321733,0.38966127884781465,22.610723105071166,fixed common refit / causal adaptation
+Environment_h7_f2,conservative_lag,StrictSourceFallback,1592,7,0.25691663717285146,0.38982131431243805,22.60691471716689,fixed common refit / causal adaptation

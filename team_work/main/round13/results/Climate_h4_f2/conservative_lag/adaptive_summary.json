@@ -1,0 +1,13 @@
+{
+  "task": "Climate_h4_f2",
+  "scenario": "conservative_lag",
+  "text_weight_positive_origins": 0,
+  "fallback_origins": 124,
+  "origins": 124,
+  "mean_weight": 0.0,
+  "final_weight": 0.0,
+  "strict_source_weights_all_zero": true,
+  "prediction_sha256": "5b18017fd7489e219a2d5e78369b8397d9195f4468a742a61c1a6b74e445f5c9",
+  "old_routes_changed": false,
+  "role": "retrospective exploratory extension; no independent blind confirmation"
+}

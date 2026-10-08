@@ -1,0 +1,9 @@
+domain,source,raw_rows,unique_text_ids,original_url_rows,publication_verified_rows,empty_information_rows,year_after_interval_review_rows,strict_source_eligible_rows
+Agriculture,report,890,764,0,0,0,0,0
+Agriculture,search,1653,1653,0,0,11,19,0
+Climate,report,590,590,0,0,0,0,0
+Climate,search,2261,2261,0,0,13,9,0
+Environment,report,156,149,0,0,0,1,0
+Environment,search,2312,2312,0,0,13,51,0
+SocialGood,report,371,371,0,0,74,1,0
+SocialGood,search,4590,4564,0,0,16,111,0

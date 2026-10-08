@@ -1,0 +1,9 @@
+task,scenario,segment,origins,text_available,coverage,quality_varying_columns,no_text_nonzero_semantic_rows
+Agriculture_h12_f1,proxy,train,177,177,1.0,5,0
+Agriculture_h12_f1,proxy,calibration,43,43,1.0,5,0
+Agriculture_h12_f1,proxy,decision,95,95,1.0,5,0
+Agriculture_h12_f1,proxy,test,42,42,1.0,5,0
+Agriculture_h12_f1,conservative_lag,train,177,177,1.0,5,0
+Agriculture_h12_f1,conservative_lag,calibration,43,43,1.0,5,0
+Agriculture_h12_f1,conservative_lag,decision,95,95,1.0,5,0
+Agriculture_h12_f1,conservative_lag,test,42,42,1.0,5,0

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "task": "SocialGood_h3_f1",
+  "package_manifest_sha256": "5fd6cbc39a6d89bccc8897b817f4751e7dcab3a1bdbd0d61fe118b8876dc5301",
+  "files_checked": 32,
+  "source_bitwise_checked": true,
+  "counts": {
+    "train": 340,
+    "calibration": 90,
+    "decision": 181,
+    "test": 89
+  },
+  "test_truth_or_history_files": 0
+}

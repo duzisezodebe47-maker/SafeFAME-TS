@@ -1,0 +1,13 @@
+{
+  "task": "Environment_h7_f2",
+  "scenario": "proxy",
+  "text_weight_positive_origins": 411,
+  "fallback_origins": 1181,
+  "origins": 1592,
+  "mean_weight": 0.20131909547738694,
+  "final_weight": 0.0,
+  "strict_source_weights_all_zero": true,
+  "prediction_sha256": "237a6ca20a91480ffb95e4478cdfc045b0f34472014d8812daf9fc3d74abc5a4",
+  "old_routes_changed": false,
+  "role": "retrospective exploratory extension; no independent blind confirmation"
+}

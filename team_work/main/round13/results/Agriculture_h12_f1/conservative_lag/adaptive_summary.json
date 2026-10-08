@@ -1,0 +1,13 @@
+{
+  "task": "Agriculture_h12_f1",
+  "scenario": "conservative_lag",
+  "text_weight_positive_origins": 23,
+  "fallback_origins": 19,
+  "origins": 42,
+  "mean_weight": 0.32142857142857145,
+  "final_weight": 1.0,
+  "strict_source_weights_all_zero": true,
+  "prediction_sha256": "f57ee963cc1c44be8eb1c4d40473d30876527df3e070f2bf2751e69f7731f484",
+  "old_routes_changed": false,
+  "role": "retrospective exploratory extension; no independent blind confirmation"
+}

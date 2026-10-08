@@ -19,3 +19,4 @@ outputs/**/*.txt text eol=crlf
 # Frozen master experiment snapshots must preserve recorded bytes across checkout.
 team_work/main/round11/** -text
 team_work/main/round12/** -text
+team_work/main/round13/** -text

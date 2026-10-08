@@ -1,0 +1,9 @@
+task,model,seeds,seed_mse_mean,seed_mse_std_ddof1,seed_mse_min,seed_mse_max,ensemble_mse,note
+Agriculture_h12_f1,DLinear,3,0.5177737877220435,0.01518068523942472,0.5002963074112424,0.5276772020068282,0.5175960787251952,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
+Agriculture_h12_f1,PatchTST,3,0.1857642442137332,0.022682826942671905,0.16985799270644605,0.21173830252791304,0.17870046731467862,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
+Climate_h4_f2,DLinear,3,0.1822615895588751,0.01311365495772137,0.16949590290102712,0.19569750877463044,0.18067897864111881,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
+Climate_h4_f2,PatchTST,3,0.20653639181268546,0.022043803222553462,0.1935224559170941,0.23198821037730408,0.20055882171604597,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
+SocialGood_h3_f1,DLinear,3,0.037510097899857424,0.00041107279708461886,0.037036902430449735,0.03777902797598596,0.037500705281672084,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
+SocialGood_h3_f1,PatchTST,3,0.028948709683701505,0.0010226095890435007,0.027796642790046105,0.029748990262085252,0.028154235810009316,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
+Environment_h7_f2,DLinear,3,0.25642082066812,0.003071276853182688,0.2542741729244616,0.2599388672455705,0.2556248069158605,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
+Environment_h7_f2,PatchTST,3,0.2466019294624289,0.0016640340319081892,0.2450564104621126,0.24836339393581952,0.24525869633882746,Seed MSE mean is not ensemble MSE; 3 runs do not establish broad stability.
