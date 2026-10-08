@@ -1,0 +1,10 @@
+rule,candidate,score,selected
+decision_mean,Last,0.3794818270437154,True
+decision_mean,Ridge,0.496218572524859,False
+decision_mean,DLinear,0.5083478311347079,False
+three_block_minimax_relative_regret,Last,0.15530629194933976,True
+three_block_minimax_relative_regret,Ridge,0.7784256909353386,False
+three_block_minimax_relative_regret,DLinear,0.8341458084775561,False
+recent_26_origins,Last,0.14559552848161958,True
+recent_26_origins,Ridge,0.2632608465427516,False
+recent_26_origins,DLinear,0.2751315091181064,False

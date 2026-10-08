@@ -1,0 +1,14 @@
+{
+  "calibration_choice": "Ridge",
+  "fixed_choices": {
+    "decision_mean": "DLinear",
+    "three_block_minimax_relative_regret": "Last",
+    "recent_26_origins": "DLinear"
+  },
+  "ridge_alpha": 100,
+  "dlinear_best_epochs": [
+    13,
+    15,
+    12
+  ]
+}

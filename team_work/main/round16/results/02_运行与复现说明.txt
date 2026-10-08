@@ -1,0 +1,23 @@
+﻿第16轮运行说明
+源码：D:\aaa2026人工智能课程报告\SafeFAME-TS_主控技术工作区\team_work\main\round16
+原始数据、处理数据、权重与逐样本输出：D:\aaa2026人工智能课程报告\主控接收数据\主控第16轮_三州验证_20261008
+
+先进入源码目录，再在PowerShell执行：
+.\Run-Round16.ps1 -Entry verify16.py
+.\Run-Round16.ps1 -Entry test16.py
+.\Run-Round16.ps1 -Entry predict16.py -Arguments @('--state','CA','--horizon','4','--rule','CalChoice','--example')
+.\Run-Round16.ps1 -Entry predict16.py -Arguments @('--state','TX','--horizon','12','--rule','three_block_minimax_relative_regret','--example')
+--example使用最后一个评价历史窗口，并非当前实时观测。自定义输入请用--history-json替换--example，文件内容为52个0至500的数值组成的JSON数组。
+规则可选CalChoice、decision_mean、three_block_minimax_relative_regret、recent_26_origins；必须明确指定。
+
+从头复算阶段：collect16.py → prepare16.py → train16.py → evaluate16.py → source_audit16.py → verify16.py → test16.py → report16.py。
+既有prepare/evaluate拒绝覆盖；train只在来源和权重哈希一致时跳过已封存任务。重跑请使用独立完整项目副本，保留当前实验，勿手工改哈希。
+需要Python3.12、现有torch2.8.0+cpu及D盘运行依赖。运行脚本复用本机既有Python解释器；不新安装到C盘。
+依赖src/train_dlinear.py及其导入，以及round15/analysis15.py。source_audit16还依赖第14轮保留的351份原始XML，关联原文在交付包中保留。
+
+结果：all_metrics.csv共54条；dlinear_seed_metrics.csv共18条；aggregate.csv是按任务等权的描述性汇总。
+各任务selection.json/choice_scores.csv记录评分前选择。prepared包含选择区与单独测试特征/目标，models保存训练日志、原始及重拟合权重、选择封印。
+evaluation/fixed_commitment.json证明固定预测文件在评分流程中的保存顺序；它不是第三方时间戳认证。
+source目录给出逐篇审计和6份重复抓取比较；未找到证据不能写成已完成首次公开证明。
+交付目录包含证据、源码和关联输入，不包含完整便携Python环境。Git只推送主控分支的代码和紧凑结果。
+推送状态以交付包内实时远端核验回执为准，不使用可能过期的本地远端跟踪引用作为成功证明。

@@ -1,0 +1,24 @@
+{
+  "archived_xml_checked": 351,
+  "parsed": 339,
+  "parse_failures": 12,
+  "xml_tag_counts": {
+    "assessment": 339,
+    "entry": 339,
+    "forecastPeriod": 339,
+    "item": 339,
+    "title": 339
+  },
+  "documents_with_candidate_publication_fields": 0,
+  "modification_before_schedule": 264,
+  "repeat_files": 6,
+  "repeat_identical": 6,
+  "first_publication_verified": 0,
+  "strict_text_enabled": false,
+  "conclusion": "Inspected official XML/header fields and current repeat snapshots do not establish per-document first public contents. Absence claim limited to inspected evidence; same bytes today do not establish immutable history.",
+  "official_sources": [
+    "https://drought.unl.edu/Education/Tutorials/Usdm/Section-Six.aspx",
+    "https://droughtmonitor.unl.edu/Data/narrative/",
+    "https://droughtmonitor.unl.edu/DmData/Metadata.aspx"
+  ]
+}

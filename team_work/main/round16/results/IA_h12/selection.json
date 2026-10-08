@@ -1,0 +1,14 @@
+{
+  "calibration_choice": "Last",
+  "fixed_choices": {
+    "decision_mean": "Last",
+    "three_block_minimax_relative_regret": "Last",
+    "recent_26_origins": "Last"
+  },
+  "ridge_alpha": 0.01,
+  "dlinear_best_epochs": [
+    57,
+    46,
+    53
+  ]
+}

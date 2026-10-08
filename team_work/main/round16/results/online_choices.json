@@ -1,0 +1,121 @@
+[
+  {
+    "task": "CA_h4",
+    "candidate": "Online26",
+    "switches": 7,
+    "choices": {
+      "Ridge": 71,
+      "Last": 48,
+      "DLinear": 1
+    }
+  },
+  {
+    "task": "CA_h4",
+    "candidate": "Online52",
+    "switches": 5,
+    "choices": {
+      "Ridge": 78,
+      "Last": 42
+    }
+  },
+  {
+    "task": "CA_h12",
+    "candidate": "Online26",
+    "switches": 5,
+    "choices": {
+      "Last": 56,
+      "DLinear": 47,
+      "Ridge": 9
+    }
+  },
+  {
+    "task": "CA_h12",
+    "candidate": "Online52",
+    "switches": 4,
+    "choices": {
+      "DLinear": 62,
+      "Last": 33,
+      "Ridge": 17
+    }
+  },
+  {
+    "task": "TX_h4",
+    "candidate": "Online26",
+    "switches": 21,
+    "choices": {
+      "Ridge": 76,
+      "Last": 27,
+      "DLinear": 17
+    }
+  },
+  {
+    "task": "TX_h4",
+    "candidate": "Online52",
+    "switches": 12,
+    "choices": {
+      "Ridge": 95,
+      "DLinear": 20,
+      "Last": 5
+    }
+  },
+  {
+    "task": "TX_h12",
+    "candidate": "Online26",
+    "switches": 8,
+    "choices": {
+      "DLinear": 57,
+      "Last": 39,
+      "Ridge": 16
+    }
+  },
+  {
+    "task": "TX_h12",
+    "candidate": "Online52",
+    "switches": 5,
+    "choices": {
+      "DLinear": 91,
+      "Last": 14,
+      "Ridge": 7
+    }
+  },
+  {
+    "task": "IA_h4",
+    "candidate": "Online26",
+    "switches": 9,
+    "choices": {
+      "Ridge": 81,
+      "DLinear": 23,
+      "Last": 16
+    }
+  },
+  {
+    "task": "IA_h4",
+    "candidate": "Online52",
+    "switches": 14,
+    "choices": {
+      "Ridge": 91,
+      "DLinear": 25,
+      "Last": 4
+    }
+  },
+  {
+    "task": "IA_h12",
+    "candidate": "Online26",
+    "switches": 11,
+    "choices": {
+      "DLinear": 63,
+      "Ridge": 25,
+      "Last": 24
+    }
+  },
+  {
+    "task": "IA_h12",
+    "candidate": "Online52",
+    "switches": 6,
+    "choices": {
+      "DLinear": 67,
+      "Last": 29,
+      "Ridge": 16
+    }
+  }
+]

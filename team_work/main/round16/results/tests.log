@@ -1,0 +1,15 @@
+test_all_six_tasks_saved_inference (__main__.Tests.test_all_six_tasks_saved_inference) ... ok
+test_bad_raw_values (__main__.Tests.test_bad_raw_values) ... ok
+test_delayed_feedback_with_gaps (__main__.Tests.test_delayed_feedback_with_gaps) ... ok
+test_duplicate_and_missing_week (__main__.Tests.test_duplicate_and_missing_week) ... ok
+test_future_labels_do_not_change_prior_choices (__main__.Tests.test_future_labels_do_not_change_prior_choices) ... ok
+test_future_target_changes_not_history (__main__.Tests.test_future_target_changes_not_history) ... ok
+test_identity_rejected (__main__.Tests.test_identity_rejected) ... ok
+test_prediction_invalid_inputs (__main__.Tests.test_prediction_invalid_inputs) ... ok
+test_scaler_tamper_rejected_before_inference (__main__.Tests.test_scaler_tamper_rejected_before_inference) ... ok
+test_target_boundary_purge (__main__.Tests.test_target_boundary_purge) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.105s
+
+OK
