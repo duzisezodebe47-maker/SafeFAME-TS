@@ -1,0 +1,15 @@
+test_actual_strict_forecasts (__main__.Contracts.test_actual_strict_forecasts) ... ok
+test_clean_outlook (__main__.Contracts.test_clean_outlook) ... ok
+test_dst_schedule (__main__.Contracts.test_dst_schedule) ... ok
+test_explicit_date_conservative (__main__.Contracts.test_explicit_date_conservative) ... ok
+test_future_feedback_rejected (__main__.Contracts.test_future_feedback_rejected) ... ok
+test_future_perturbation_invariance (__main__.Contracts.test_future_perturbation_invariance) ... ok
+test_http_contract (__main__.Contracts.test_http_contract) ... ok
+test_invalid_lengths_and_fields (__main__.Contracts.test_invalid_lengths_and_fields) ... ok
+test_invalid_numbers (__main__.Contracts.test_invalid_numbers) ... ok
+test_xml_period_and_tamper (__main__.Contracts.test_xml_period_and_tamper) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.695s
+
+OK

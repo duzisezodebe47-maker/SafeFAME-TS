@@ -1,0 +1,382 @@
+{
+  "tasks": {
+    "4": {
+      "horizon": 4,
+      "selected_numeric": "Last",
+      "static_weight": 0,
+      "test_origins": 120,
+      "text_available": 119,
+      "strict_eligible": 0,
+      "adaptive_text_enabled_origins": 0,
+      "adaptive_mean_weight": 0.0,
+      "fixed_commitment_sha256": "686a1cf1a2e818053a09b6110b3408db01caf9864bf50e373733ad6e41b14604",
+      "adaptive_commitment_sha256": "dad728e0c451b40888ed65172e924d207a67e9048229cf4b1e333517c895c5b6",
+      "strict_mode": "Fallback because exact original release time unverified",
+      "role": "Temporal historical holdout with new target definition; not prospective or different-domain validation"
+    },
+    "12": {
+      "horizon": 12,
+      "selected_numeric": "PatchTST",
+      "static_weight": 0,
+      "test_origins": 112,
+      "text_available": 111,
+      "strict_eligible": 0,
+      "adaptive_text_enabled_origins": 0,
+      "adaptive_mean_weight": 0.0,
+      "fixed_commitment_sha256": "c4364b0e0cf46137dfecb5934514c9a0ec71b04448f3b93c3431e01c763e3b8c",
+      "adaptive_commitment_sha256": "cc4599494a003ee028bd923f0cdadaba36ac5bd56e830486311d9c403b49ebe3",
+      "strict_mode": "Fallback because exact original release time unverified",
+      "role": "Temporal historical holdout with new target definition; not prospective or different-domain validation"
+    }
+  },
+  "metrics": [
+    {
+      "horizon": 4,
+      "candidate": "Last",
+      "origins": 120,
+      "mse": 0.0963294932663919,
+      "mae": 0.2362441415708594,
+      "raw_rmse_dsci_points": 13.359375609161775,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 0.1709275871973771,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 4,
+      "candidate": "SeasonalNaive",
+      "origins": 120,
+      "mse": 1.0606274481908506,
+      "mae": 0.8463842048042652,
+      "raw_rmse_dsci_points": 44.32900198139663,
+      "gain_vs_selected_numeric_pct": -1001.0412410846652,
+      "worst_quarter_mse": 2.1488110214005087,
+      "origin_degradation_fraction": 0.8583333333333333
+    },
+    {
+      "horizon": 4,
+      "candidate": "Ridge",
+      "origins": 120,
+      "mse": 0.0749924110066647,
+      "mae": 0.2002152928213986,
+      "raw_rmse_dsci_points": 11.78732290538082,
+      "gain_vs_selected_numeric_pct": 22.150103292582514,
+      "worst_quarter_mse": 0.1429813347293823,
+      "origin_degradation_fraction": 0.2583333333333333
+    },
+    {
+      "horizon": 4,
+      "candidate": "DLinear",
+      "origins": 120,
+      "mse": 0.0788957080708111,
+      "mae": 0.2046199205568733,
+      "raw_rmse_dsci_points": 12.090192389890118,
+      "gain_vs_selected_numeric_pct": 18.09807630500969,
+      "worst_quarter_mse": 0.1550157646455935,
+      "origin_degradation_fraction": 0.2666666666666666
+    },
+    {
+      "horizon": 4,
+      "candidate": "PatchTST",
+      "origins": 120,
+      "mse": 0.1098206923229105,
+      "mae": 0.2573053945330717,
+      "raw_rmse_dsci_points": 14.264239144075583,
+      "gain_vs_selected_numeric_pct": -14.005263184775396,
+      "worst_quarter_mse": 0.1996769252329225,
+      "origin_degradation_fraction": 0.6416666666666667
+    },
+    {
+      "horizon": 4,
+      "candidate": "SelectedNumeric",
+      "origins": 120,
+      "mse": 0.0963294932663919,
+      "mae": 0.2362441415708594,
+      "raw_rmse_dsci_points": 13.359375609161775,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 0.1709275871973771,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 4,
+      "candidate": "DirectFusion",
+      "origins": 120,
+      "mse": 0.0944769552516747,
+      "mae": 0.2368548648408822,
+      "raw_rmse_dsci_points": 13.23029314514568,
+      "gain_vs_selected_numeric_pct": 1.9231265024867936,
+      "worst_quarter_mse": 0.1482033542484587,
+      "origin_degradation_fraction": 0.4833333333333333
+    },
+    {
+      "horizon": 4,
+      "candidate": "StaticFallback",
+      "origins": 120,
+      "mse": 0.0963294932663919,
+      "mae": 0.2362441415708594,
+      "raw_rmse_dsci_points": 13.359375609161775,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 0.1709275871973771,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 4,
+      "candidate": "StrictSourceFallback",
+      "origins": 120,
+      "mse": 0.0963294932663919,
+      "mae": 0.2362441415708594,
+      "raw_rmse_dsci_points": 13.359375609161775,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 0.1709275871973771,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 4,
+      "candidate": "ArchiveConservative",
+      "origins": 120,
+      "mse": 0.0963294932663919,
+      "mae": 0.2362441415708594,
+      "raw_rmse_dsci_points": 13.359375609161775,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 0.1709275871973771,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 4,
+      "candidate": "AdaptiveFallback",
+      "origins": 120,
+      "mse": 0.0963294932663919,
+      "mae": 0.2362441415708594,
+      "raw_rmse_dsci_points": 13.359375609161775,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 0.1709275871973771,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 4,
+      "candidate": "Delay_1w",
+      "origins": 120,
+      "mse": 0.0932931932998395,
+      "mae": 0.2339014184306064,
+      "raw_rmse_dsci_points": 13.147146489715492,
+      "gain_vs_selected_numeric_pct": 3.1519941230830684,
+      "worst_quarter_mse": 0.1426786846617135,
+      "origin_degradation_fraction": 0.4666666666666667
+    },
+    {
+      "horizon": 4,
+      "candidate": "Delay_4w",
+      "origins": 120,
+      "mse": 0.0923666973609752,
+      "mae": 0.2326753760215956,
+      "raw_rmse_dsci_points": 13.081701357172868,
+      "gain_vs_selected_numeric_pct": 4.113792952754169,
+      "worst_quarter_mse": 0.1491870851701966,
+      "origin_degradation_fraction": 0.45
+    },
+    {
+      "horizon": 4,
+      "candidate": "Missing_50pct",
+      "origins": 120,
+      "mse": 0.0925091686719668,
+      "mae": 0.2339665257837439,
+      "raw_rmse_dsci_points": 13.091786426012147,
+      "gain_vs_selected_numeric_pct": 3.965892962667461,
+      "worst_quarter_mse": 0.1491845297353236,
+      "origin_degradation_fraction": 0.2333333333333333
+    },
+    {
+      "horizon": 4,
+      "candidate": "PastMismatch",
+      "origins": 120,
+      "mse": 0.0956242566807703,
+      "mae": 0.2350474415676222,
+      "raw_rmse_dsci_points": 13.310383200526418,
+      "gain_vs_selected_numeric_pct": 0.7321086841714286,
+      "worst_quarter_mse": 0.1615130614754999,
+      "origin_degradation_fraction": 0.0916666666666666
+    },
+    {
+      "horizon": 12,
+      "candidate": "Last",
+      "origins": 112,
+      "mse": 0.366015577510048,
+      "mae": 0.470628310826837,
+      "raw_rmse_dsci_points": 26.0409190368872,
+      "gain_vs_selected_numeric_pct": 29.777102276926986,
+      "worst_quarter_mse": 0.6380548445042873,
+      "origin_degradation_fraction": 0.5089285714285714
+    },
+    {
+      "horizon": 12,
+      "candidate": "SeasonalNaive",
+      "origins": 112,
+      "mse": 1.0441555705312042,
+      "mae": 0.8309547318650146,
+      "raw_rmse_dsci_points": 43.98343336660163,
+      "gain_vs_selected_numeric_pct": -100.32926012384485,
+      "worst_quarter_mse": 2.0219749691211826,
+      "origin_degradation_fraction": 0.6339285714285714
+    },
+    {
+      "horizon": 12,
+      "candidate": "Ridge",
+      "origins": 112,
+      "mse": 0.33924372976884,
+      "mae": 0.4555190115347993,
+      "raw_rmse_dsci_points": 25.07046778002918,
+      "gain_vs_selected_numeric_pct": 34.91348674060987,
+      "worst_quarter_mse": 0.582679843016208,
+      "origin_degradation_fraction": 0.3839285714285714
+    },
+    {
+      "horizon": 12,
+      "candidate": "DLinear",
+      "origins": 112,
+      "mse": 0.3355622131314934,
+      "mae": 0.4546884384283742,
+      "raw_rmse_dsci_points": 24.93406272698548,
+      "gain_vs_selected_numeric_pct": 35.619813963207626,
+      "worst_quarter_mse": 0.5953167094378407,
+      "origin_degradation_fraction": 0.4107142857142857
+    },
+    {
+      "horizon": 12,
+      "candidate": "PatchTST",
+      "origins": 112,
+      "mse": 0.5212197009491776,
+      "mae": 0.5504857654355052,
+      "raw_rmse_dsci_points": 31.07541477542409,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 1.078530090678835,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 12,
+      "candidate": "SelectedNumeric",
+      "origins": 112,
+      "mse": 0.5212197009491776,
+      "mae": 0.5504857654355052,
+      "raw_rmse_dsci_points": 31.07541477542409,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 1.078530090678835,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 12,
+      "candidate": "DirectFusion",
+      "origins": 112,
+      "mse": 0.4764330712124274,
+      "mae": 0.571977082047099,
+      "raw_rmse_dsci_points": 29.710329799342915,
+      "gain_vs_selected_numeric_pct": 8.592658653383701,
+      "worst_quarter_mse": 0.5729264673816069,
+      "origin_degradation_fraction": 0.5
+    },
+    {
+      "horizon": 12,
+      "candidate": "StaticFallback",
+      "origins": 112,
+      "mse": 0.5212197009491776,
+      "mae": 0.5504857654355052,
+      "raw_rmse_dsci_points": 31.07541477542409,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 1.078530090678835,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 12,
+      "candidate": "StrictSourceFallback",
+      "origins": 112,
+      "mse": 0.5212197009491776,
+      "mae": 0.5504857654355052,
+      "raw_rmse_dsci_points": 31.07541477542409,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 1.078530090678835,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 12,
+      "candidate": "ArchiveConservative",
+      "origins": 112,
+      "mse": 0.5212197009491776,
+      "mae": 0.5504857654355052,
+      "raw_rmse_dsci_points": 31.07541477542409,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 1.078530090678835,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 12,
+      "candidate": "AdaptiveFallback",
+      "origins": 112,
+      "mse": 0.5212197009491776,
+      "mae": 0.5504857654355052,
+      "raw_rmse_dsci_points": 31.07541477542409,
+      "gain_vs_selected_numeric_pct": 0.0,
+      "worst_quarter_mse": 1.078530090678835,
+      "origin_degradation_fraction": 0.0
+    },
+    {
+      "horizon": 12,
+      "candidate": "Delay_1w",
+      "origins": 112,
+      "mse": 0.4664944374147513,
+      "mae": 0.5670551497076964,
+      "raw_rmse_dsci_points": 29.39881040348884,
+      "gain_vs_selected_numeric_pct": 10.49946182670527,
+      "worst_quarter_mse": 0.5426251266199443,
+      "origin_degradation_fraction": 0.5357142857142857
+    },
+    {
+      "horizon": 12,
+      "candidate": "Delay_4w",
+      "origins": 112,
+      "mse": 0.4561041678114937,
+      "mae": 0.567120647340218,
+      "raw_rmse_dsci_points": 29.069565674988027,
+      "gain_vs_selected_numeric_pct": 12.492914795642596,
+      "worst_quarter_mse": 0.5231538682704354,
+      "origin_degradation_fraction": 0.5
+    },
+    {
+      "horizon": 12,
+      "candidate": "Missing_50pct",
+      "origins": 112,
+      "mse": 0.4733321962384162,
+      "mae": 0.5459897962656907,
+      "raw_rmse_dsci_points": 29.613486803083592,
+      "gain_vs_selected_numeric_pct": 9.187585316432756,
+      "worst_quarter_mse": 0.778033350791661,
+      "origin_degradation_fraction": 0.25
+    },
+    {
+      "horizon": 12,
+      "candidate": "PastMismatch",
+      "origins": 112,
+      "mse": 0.5176668394447848,
+      "mae": 0.5547514706451443,
+      "raw_rmse_dsci_points": 30.9693218613712,
+      "gain_vs_selected_numeric_pct": 0.6816437479095327,
+      "worst_quarter_mse": 1.0033525503966805,
+      "origin_degradation_fraction": 0.1071428571428571
+    }
+  ],
+  "data": {
+    "numeric_weeks": 1395,
+    "first_week": "2000-01-04",
+    "last_week": "2026-09-22",
+    "raw_text_files": 351,
+    "parsed_text_files": 339,
+    "usable_text_files": 235,
+    "explicit_release_eligible": 0,
+    "schedule_inferred_files": 339,
+    "parse_failures": 12,
+    "protocol_sha256": "ee2aad862ba4024dd8f46404dc0ffe84edfd2d6047ecb3dea1868f2546b388d1",
+    "prepared_manifest_sha256": "6d292e5a427d6a3a0b4587536abd3d8c2fd25066b90d972da517b35f3ea1f360",
+    "limits": [
+      "Official URLs and raw bytes verified; XML map dates are not first-publication timestamps.",
+      "Numeric API is a retrieval-date archive snapshot, not authenticated vintage history.",
+      "Schedule-based replay is an assumption-sensitive experiment; exact-publication mode is separately reported."
+    ]
+  }
+}

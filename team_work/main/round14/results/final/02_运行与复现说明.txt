@@ -1,0 +1,38 @@
+﻿SafeFAME-TS 第14轮运行说明
+项目：D:\aaa2026人工智能课程报告
+源码：D:\aaa2026人工智能课程报告\SafeFAME-TS_主控技术工作区\team_work\main\round14
+独立原始数据、处理数据、模型及逐样本预测：D:\aaa2026人工智能课程报告\主控接收数据\主控第14轮_USDM_20261008
+
+一、直接查看
+先读01_技术结果与验收结论.txt。图表对应all_metrics.csv；完整逐步结果位于原始证据/evaluation。
+演示为本机服务，双击交付目录的Start-Demo.cmd，保持窗口开启，再用浏览器打开 http://127.0.0.1:8874/ 。用完关闭窗口或Ctrl+C。
+如果端口被占用，不终止其他程序，可手动指定另一端口：Run-Round14.ps1 -Entry serve14.py -Arguments @('--port','8875')。
+
+二、验证现有结果（在源码目录运行PowerShell）
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Run-Round14.ps1 -Entry verify_round14.py
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Run-Round14.ps1 -Entry test_round14.py
+verify读取原始证据、模型及预测逐项复算；test另需允许本机网络。缺少整套本地证据时verify报告PARTIAL，不能当成完整验收。已有证据的字节不符会失败。
+
+三、从头复现的阶段顺序
+collect_official.py --phase all → prepare_data.py → train_models.py → evaluate_test.py → verify_round14.py → finalize_results.py → test_round14.py → write_delivery_notes.py
+这些步骤通过Run-Round14.ps1的Entry/Arguments传入。训练、数据准备、测试评分对既有封存结果拒绝覆盖。这是防止误用的保护。
+应在另一个完整项目副本中恢复原始raw快照及protocol_registration.json，保留同样相对目录和协议，再重新生成prepared/models/evaluation。不要删除或改写当前已交付实验，不手动调整哈希。重新从网络下载可能遇到历史修订，不保证得到相同字节。
+官方PatchTST依赖位于主控接收数据/PatchTST_official_204c21e；固定commit 204c21efe0b39603ad6e2ca640ef5896646ab1a9。第14轮复用round13/deep_baselines.py及adaptive.py，源码锚定记录在selection_seal.json。
+训练流程：先校准选择、保存模型及选择封印，固定预测保存之后才读取标签评分。种子补充分析在评分后执行，仅作诊断，不用于选择。
+
+四、环境与可迁移边界
+Python3.12，当前复用已有Python解释器；torch2.8.0+cpu、numpy2.5.3、scipy1.18.1、scikit-learn1.9.1、pandas3.0.1。
+依赖增量和临时目录均在D盘主控接收数据。运行器引用现有C盘解释器，仅调用它，不在C盘新安装或下载。
+独立交付目录是代码与实验档案，不是含所有Python依赖的便携环境；Start-Demo.cmd依赖当前D盘工作区和已存在环境。迁移到其他电脑需按上述目录准备Python3.12和依赖。
+模型joblib仅可加载本项目经哈希核对的可信文件，不加载他人替换的序列化文件。
+
+五、文件解释
+protocol.json：本轮预先固定配置。
+raw/*.meta.json：原始URL、抓取时间和字节哈希。
+prepared/source_catalog.csv、parse_errors.json：正文规则与排除证据。
+models/h*/selection_details.json：候选选择、OOF折、深度训练、融合权重。
+evaluation/h*/fixed_commitment.json：评分前固定预测记录。
+evaluation/h*/adaptive_trace.csv：已到期反馈与逐起点权重。
+results/final/all_metrics.csv：全部30条测试指标。
+results/h*/block_diagnostics.csv：块Bootstrap诊断，不是显著性保证。
+MANIFEST.json：交付文件字节清单；VERSION.json：本地Git版本和推送状态。

@@ -1,0 +1,18 @@
+{
+  "numeric_weeks": 1395,
+  "first_week": "2000-01-04",
+  "last_week": "2026-09-22",
+  "raw_text_files": 351,
+  "parsed_text_files": 339,
+  "usable_text_files": 235,
+  "explicit_release_eligible": 0,
+  "schedule_inferred_files": 339,
+  "parse_failures": 12,
+  "protocol_sha256": "ee2aad862ba4024dd8f46404dc0ffe84edfd2d6047ecb3dea1868f2546b388d1",
+  "prepared_manifest_sha256": "6d292e5a427d6a3a0b4587536abd3d8c2fd25066b90d972da517b35f3ea1f360",
+  "limits": [
+    "Official URLs and raw bytes verified; XML map dates are not first-publication timestamps.",
+    "Numeric API is a retrieval-date archive snapshot, not authenticated vintage history.",
+    "Schedule-based replay is an assumption-sensitive experiment; exact-publication mode is separately reported."
+  ]
+}

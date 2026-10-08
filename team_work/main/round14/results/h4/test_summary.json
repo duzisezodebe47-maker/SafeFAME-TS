@@ -1,0 +1,14 @@
+{
+  "horizon": 4,
+  "selected_numeric": "Last",
+  "static_weight": 0,
+  "test_origins": 120,
+  "text_available": 119,
+  "strict_eligible": 0,
+  "adaptive_text_enabled_origins": 0,
+  "adaptive_mean_weight": 0.0,
+  "fixed_commitment_sha256": "686a1cf1a2e818053a09b6110b3408db01caf9864bf50e373733ad6e41b14604",
+  "adaptive_commitment_sha256": "dad728e0c451b40888ed65172e924d207a67e9048229cf4b1e333517c895c5b6",
+  "strict_mode": "Fallback because exact original release time unverified",
+  "role": "Temporal historical holdout with new target definition; not prospective or different-domain validation"
+}

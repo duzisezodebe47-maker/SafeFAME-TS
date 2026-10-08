@@ -1,0 +1,8 @@
+{
+  "matched_weeks": 1272,
+  "exact_matches_at_0_01": 0,
+  "max_abs_difference": 185.19,
+  "mean_abs_difference": 60.102319182389934,
+  "same_target_confirmed": false,
+  "conclusion": "Only exact numeric matching can establish historical target identity. Otherwise treat official DSCI as a new explicitly defined task; do not splice old values."
+}

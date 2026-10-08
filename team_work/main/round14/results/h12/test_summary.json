@@ -1,0 +1,14 @@
+{
+  "horizon": 12,
+  "selected_numeric": "PatchTST",
+  "static_weight": 0,
+  "test_origins": 112,
+  "text_available": 111,
+  "strict_eligible": 0,
+  "adaptive_text_enabled_origins": 0,
+  "adaptive_mean_weight": 0.0,
+  "fixed_commitment_sha256": "c4364b0e0cf46137dfecb5934514c9a0ec71b04448f3b93c3431e01c763e3b8c",
+  "adaptive_commitment_sha256": "cc4599494a003ee028bd923f0cdadaba36ac5bd56e830486311d9c403b49ebe3",
+  "strict_mode": "Fallback because exact original release time unverified",
+  "role": "Temporal historical holdout with new target definition; not prospective or different-domain validation"
+}

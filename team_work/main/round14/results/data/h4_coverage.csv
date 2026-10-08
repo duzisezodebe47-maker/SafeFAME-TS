@@ -1,0 +1,5 @@
+segment,origins,usable_text,strict_explicit_text,archive_conservative_text
+train,1093,99,0,13
+calibration,49,49,0,42
+decision,69,69,0,61
+test,120,119,0,105

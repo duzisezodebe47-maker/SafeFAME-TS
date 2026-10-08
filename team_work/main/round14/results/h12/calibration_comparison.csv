@@ -1,0 +1,6 @@
+candidate,calibration_mse,selected
+Last,0.14608164083278505,False
+SeasonalNaive,0.1311641119048471,False
+Ridge,0.2288177589494406,False
+DLinear,0.20877395704802762,False
+PatchTST,0.1115701372136758,True

@@ -1,0 +1,15 @@
+{
+  "status": "PASS_DESKTOP_FUNCTIONS",
+  "tested": [
+    "4-week strict inference returns four values and text weight 0",
+    "Switch to 12-week PatchTST and infer twelve values",
+    "Source week selection updates URL and publication grade",
+    "Two-value history rejected with 52-week requirement",
+    "Reload real example and predict successfully"
+  ],
+  "visual": "Desktop browser screenshot inspected; no console errors",
+  "limitations": [
+    "Full-page capture unavailable; viewport screenshot saved",
+    "No mobile or other-browser validation"
+  ]
+}
