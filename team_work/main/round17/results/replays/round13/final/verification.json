@@ -1,0 +1,26 @@
+{
+  "status": "PASS_WITH_RESEARCH_LIMITATIONS",
+  "counts": {
+    "deep_runs": 24,
+    "comparison_scenarios": 8,
+    "rolling_cases": 24
+  },
+  "historical_tracked_files_unchanged": 160,
+  "checks": [
+    "bundle and isolated package verification",
+    "24 training manifests, input/code/weight hashes, calibration metrics",
+    "4 deep prediction commitments and seed ensembles",
+    "8 static/adaptive commitments, independently recomputed test MSE",
+    "8 causal feedback replays and strict fallback equality",
+    "24 rolling source hashes, boundary checks and recomputed MSE",
+    "original lineage/catalog byte integrity",
+    "historical tracked evidence unchanged"
+  ],
+  "not_claimed": [
+    "new independent blind holdout",
+    "verified original publication timing for corpus",
+    "adaptive statistical safety guarantee",
+    "deep/text training over all 24 rolling cases"
+  ],
+  "verifier_sha256": "f766bbd5c8fe2c56fc148e2077cb420d33e3feb6135a22aa9154f5c83e80c87d"
+}

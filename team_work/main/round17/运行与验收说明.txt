@@ -1,0 +1,68 @@
+SafeFAME-TS 第17轮：统一技术入口
+
+一、作用和前提
+本轮整合已有成果，不增加模型、不重新调参、不改写原实验。
+第1至12轮：索引及已登记文件的字节核查，不宣称本轮重新验收所有旧实验。
+第13至16轮：原有验收器重新执行，预测入口按原固定规则运行。
+Python必须为3.12；PowerShell入口沿用已有Python，不安装任何组件。
+默认解释器位置延续此前运行环境；允许通过SAFEFAME_PYTHON环境变量指定已有的Python3.12。
+运行依赖位于项目旁“主控接收数据/runtime_torch_cpu”和“runtime_py312”。本交付不包含便携环境。
+缓存、临时文件及新增结果都在D盘；禁止通过该入口下载或安装到C盘。
+
+二、从仓库根目录运行
+目录：D:\aaa2026人工智能课程报告\SafeFAME-TS_主控技术工作区
+
+查看全部历史索引：
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('catalog')
+
+仅检查完整性：
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('verify')
+
+重新复算四轮：
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('verify','--replay')
+
+仅复算指定轮：
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('verify','--replay','--round','16')
+
+已有任务的实际推理示例（输入为历史测试起点前的已知数据，不是今日实时数据）：
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('example','--round','13','--task','Climate_h4_f2')
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('example','--round','14','--horizon','4')
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('example','--round','15','--horizon','12')
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('example','--round','16','--state','CA','--horizon','4','--rule','three_block_minimax_relative_regret')
+
+三、输入契约
+统一JSON对象必须且只能包含round和payload。
+第13轮payload为task、model、history；model只能为StrictSourceFallback。四个task见catalog。
+第14和15轮payload为horizon和history；52个原始DSCI数值，范围0至500，horizon为4或12。
+第16轮payload额外包含state和rule。state为CA、TX或IA；rule必须明确指定CalChoice、decision_mean、three_block_minimax_relative_regret、recent_26_origins之一。
+不接受未来标签、文本输入、外部模型路径、NaN、Infinity、布尔值和多余字段。
+每个results/examples文件的request字段是完整合法请求，将此字段单独保存为D盘JSON文件后可运行：
+& .\team_work\main\round17\Run-Round17.ps1 -Arguments @('predict','--input','D:\你的目录\request.json')
+不要把整个示例结果文件作为请求；它还包含prediction和说明字段。
+历史数值不附带日期或来源凭证，入口只能检查格式、长度和数值范围，不能验证手填序列的实际身份。
+
+四、验收状态
+PASS_INTEGRITY_ONLY：已检查已登记文件字节，本次没有重新复算。
+PASS_REPLAYED：所选轮次实际复算成功，仍继承各轮研究局限，不等于全部历史结果或未来效果有效。
+PARTIAL：按设计不随Git分发的整个证据资源缺失，未运行相关推理/复算，退出码2。
+FAIL：已存在资源内部缺文件、哈希错误、非法输入或执行异常，退出码1。
+仅通过项目入口返回的退出码0，不能忽略具体status和scope字段。
+缺失与损坏同时发生时优先FAIL。只读取旧PASS不能算本轮通过。
+原复算器的写入函数被限定到round17/results/replays；读入路径、计算过程和原源码不变。
+每轮使用独立子进程，避免相同模块名称串用模型或数据。
+
+五、输出及复现边界
+registry.json登记历史文件及本地证据身份；以基准提交为参考，保留Git检出换行转换的记录。
+results/verification_replay.json：本次复算状态、覆盖范围及每轮记录。
+results/tests.json：异常与验收逻辑测试。
+results/inference_parity.json：统一入口与原入口实际预测逐项比较。
+results/examples：14个历史起点示例，覆盖4+2+2+6个任务入口。
+整套证据未随Git上传；普通克隆应获得明确PARTIAL，而不是伪PASS。
+登记清单是完整性和复现辅助，不是外部可信时间戳或数据首次公开证明。
+不同轮次的目标、候选集合、时间段、基线不同，不能直接合并计算一个总体提升率。
+首次公开文本证据未解决；text_weight固定为0，不包装为多模态增益。
+
+六、交付位置
+第17轮交付文件夹位于D:\aaa2026人工智能课程报告\Codex交付文件下的“主控技术整合_第17轮_20261009”。
+其中保存当前代码、索引、说明、示例和本次验收结果；既有原始数据与模型仍在“主控接收数据”，不重复复制大型证据。
+源代码根目录README中已按老师课件恢复三人组队、第10周PPT分享的要求；旧DOCX尚未在本轮改写。

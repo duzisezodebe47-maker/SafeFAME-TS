@@ -1,0 +1,11 @@
+{
+  "status": "PASS_EXPLORATORY_WITH_SOURCE_LIMITATIONS",
+  "input_files_checked": 74,
+  "metrics_recomputed": 58,
+  "online_predictions_recomputed": 464,
+  "fixed_selections_checked": 6,
+  "decompositions_checked": 2,
+  "strict_source_eligible": 0,
+  "role": "Exploratory follow-up on previously inspected round14 data; not a new blind or prospective test",
+  "verifier_sha256": "1659dd407b86d2afd36895559c4e17dfa55f1838656b3eca38f25702cb04a190"
+}

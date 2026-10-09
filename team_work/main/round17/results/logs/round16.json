@@ -1,0 +1,23 @@
+{
+  "value": {
+    "record": {
+      "status": "PASS_SAME_DOMAIN_HISTORICAL_VALIDATION",
+      "raw_snapshots_checked": 12,
+      "input_origins": 7890,
+      "metrics": 54,
+      "seed_metrics": 18,
+      "online_predictions": 1392,
+      "tasks": 6,
+      "strict_text_enabled": false,
+      "limits": [
+        "Three related states, not independent domains",
+        "Current archive snapshot, not immutable vintage",
+        "Original first-publication content still unproven",
+        "18 seeded training routes, not 18 independent datasets"
+      ],
+      "verifier_sha256": "cff03f99d9c29ad870961dea1cc2a46e40bfcf9bd5fabc69f95178f4b40a4c74"
+    },
+    "output": "results/replays/round16/verification.json"
+  },
+  "log": "{\"status\": \"PASS_SAME_DOMAIN_HISTORICAL_VALIDATION\", \"raw_snapshots_checked\": 12, \"input_origins\": 7890, \"metrics\": 54, \"seed_metrics\": 18, \"online_predictions\": 1392, \"tasks\": 6, \"strict_text_enabled\": false, \"limits\": [\"Three related states, not independent domains\", \"Current archive snapshot, not immutable vintage\", \"Original first-publication content still unproven\", \"18 seeded training routes, not 18 independent datasets\"], \"verifier_sha256\": \"cff03f99d9c29ad870961dea1cc2a46e40bfcf9bd5fabc69f95178f4b40a4c74\"}\n"
+}

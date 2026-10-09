@@ -1,0 +1,13 @@
+{
+  "python": "3.12.14",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.5.3",
+  "pandas": "3.0.1",
+  "sklearn": "1.9.1",
+  "scipy": "1.18.1",
+  "paths": {
+    "runtime": "D:\\aaa2026人工智能课程报告\\主控接收数据\\runtime_torch_cpu",
+    "evidence": "D:\\aaa2026人工智能课程报告\\主控接收数据\\主控加强_20261007"
+  },
+  "PatchTST_commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9"
+}

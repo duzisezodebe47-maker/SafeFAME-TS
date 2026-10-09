@@ -1,0 +1,37 @@
+{
+  "value": {
+    "record": {
+      "status": "PASS_WITH_SOURCE_TIME_LIMITATIONS",
+      "raw_snapshot_files_verified": 354,
+      "prediction_origins_checked": 2630,
+      "main_deep_runs": 12,
+      "causal_replays": 2,
+      "test_horizons": [
+        4,
+        12
+      ],
+      "checks": [
+        "original snapshot hashes",
+        "train-only and OOF-fold-only scalers",
+        "target-contained temporal boundaries",
+        "numeric windows reconstructed from raw series",
+        "publication cutoff checks",
+        "numeric model selection and weight hashes",
+        "fixed predictions and independent MSE recalculation",
+        "model inference reproduced from saved objects",
+        "causal delayed feedback replay",
+        "strict fallback equality",
+        "previous round13 unchanged"
+      ],
+      "limitations": [
+        "Strict exact-first-publication corpus remains empty.",
+        "Official DSCI differs from the previous Climate target; this is a distinct explicitly defined task.",
+        "Data downloaded today may contain historical revisions; no immutable vintage archive established.",
+        "Later-period historical evaluation is not prospective or cross-domain validation."
+      ],
+      "verifier_sha256": "8cacd505a2cba59210800c5e2ea1d3986697d5584ab4558e01dc905e202d64b6"
+    },
+    "output": "results/replays/round14/final/verification.json"
+  },
+  "log": "{\"status\": \"PASS_WITH_SOURCE_TIME_LIMITATIONS\", \"raw_snapshot_files_verified\": 354, \"prediction_origins_checked\": 2630, \"main_deep_runs\": 12, \"causal_replays\": 2, \"test_horizons\": [4, 12], \"checks\": [\"original snapshot hashes\", \"train-only and OOF-fold-only scalers\", \"target-contained temporal boundaries\", \"numeric windows reconstructed from raw series\", \"publication cutoff checks\", \"numeric model selection and weight hashes\", \"fixed predictions and independent MSE recalculation\", \"model inference reproduced from saved objects\", \"causal delayed feedback replay\", \"strict fallback equality\", \"previous round13 unchanged\"], \"limitations\": [\"Strict exact-first-publication corpus remains empty.\", \"Official DSCI differs from the previous Climate target; this is a distinct explicitly defined task.\", \"Data downloaded today may contain historical revisions; no immutable vintage archive established.\", \"Later-period historical evaluation is not prospective or cross-domain validation.\"], \"verifier_sha256\": \"8cacd505a2cba59210800c5e2ea1d3986697d5584ab4558e01dc905e202d64b6\"}\n"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "scenario": "absent_evidence",
+      "status": "PARTIAL",
+      "exit_code": 2,
+      "replay_executed": false
+    },
+    {
+      "scenario": "missing_tracked_file",
+      "status": "FAIL",
+      "exit_code": 1,
+      "replay_executed": false
+    }
+  ],
+  "scope": "由基准Git对象构造代码副本，不复制大型证据；没有安装新环境"
+}

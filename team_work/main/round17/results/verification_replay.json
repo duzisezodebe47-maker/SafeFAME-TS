@@ -1,0 +1,152 @@
+{
+  "status": "PASS_REPLAYED",
+  "rounds": [
+    {
+      "round": 13,
+      "evidence": {
+        "status": "PASS",
+        "missing_resources": [],
+        "issues": [],
+        "checked_files": 694
+      },
+      "replay_executed": true,
+      "replay_record": {
+        "record": {
+          "status": "PASS_WITH_RESEARCH_LIMITATIONS",
+          "counts": {
+            "deep_runs": 24,
+            "comparison_scenarios": 8,
+            "rolling_cases": 24
+          },
+          "historical_tracked_files_unchanged": 160,
+          "checks": [
+            "bundle and isolated package verification",
+            "24 training manifests, input/code/weight hashes, calibration metrics",
+            "4 deep prediction commitments and seed ensembles",
+            "8 static/adaptive commitments, independently recomputed test MSE",
+            "8 causal feedback replays and strict fallback equality",
+            "24 rolling source hashes, boundary checks and recomputed MSE",
+            "original lineage/catalog byte integrity",
+            "historical tracked evidence unchanged"
+          ],
+          "not_claimed": [
+            "new independent blind holdout",
+            "verified original publication timing for corpus",
+            "adaptive statistical safety guarantee",
+            "deep/text training over all 24 rolling cases"
+          ],
+          "verifier_sha256": "f766bbd5c8fe2c56fc148e2077cb420d33e3feb6135a22aa9154f5c83e80c87d"
+        },
+        "output": "results/replays/round13/final/verification.json"
+      },
+      "status": "PASS"
+    },
+    {
+      "round": 14,
+      "evidence": {
+        "status": "PASS",
+        "missing_resources": [],
+        "issues": [],
+        "checked_files": 924
+      },
+      "replay_executed": true,
+      "replay_record": {
+        "record": {
+          "status": "PASS_WITH_SOURCE_TIME_LIMITATIONS",
+          "raw_snapshot_files_verified": 354,
+          "prediction_origins_checked": 2630,
+          "main_deep_runs": 12,
+          "causal_replays": 2,
+          "test_horizons": [
+            4,
+            12
+          ],
+          "checks": [
+            "original snapshot hashes",
+            "train-only and OOF-fold-only scalers",
+            "target-contained temporal boundaries",
+            "numeric windows reconstructed from raw series",
+            "publication cutoff checks",
+            "numeric model selection and weight hashes",
+            "fixed predictions and independent MSE recalculation",
+            "model inference reproduced from saved objects",
+            "causal delayed feedback replay",
+            "strict fallback equality",
+            "previous round13 unchanged"
+          ],
+          "limitations": [
+            "Strict exact-first-publication corpus remains empty.",
+            "Official DSCI differs from the previous Climate target; this is a distinct explicitly defined task.",
+            "Data downloaded today may contain historical revisions; no immutable vintage archive established.",
+            "Later-period historical evaluation is not prospective or cross-domain validation."
+          ],
+          "verifier_sha256": "8cacd505a2cba59210800c5e2ea1d3986697d5584ab4558e01dc905e202d64b6"
+        },
+        "output": "results/replays/round14/final/verification.json"
+      },
+      "status": "PASS"
+    },
+    {
+      "round": 15,
+      "evidence": {
+        "status": "PASS",
+        "missing_resources": [],
+        "issues": [],
+        "checked_files": 940
+      },
+      "replay_executed": true,
+      "replay_record": {
+        "record": {
+          "status": "PASS_EXPLORATORY_WITH_SOURCE_LIMITATIONS",
+          "input_files_checked": 74,
+          "metrics_recomputed": 58,
+          "online_predictions_recomputed": 464,
+          "fixed_selections_checked": 6,
+          "decompositions_checked": 2,
+          "strict_source_eligible": 0,
+          "role": "Exploratory follow-up on previously inspected round14 data; not a new blind or prospective test",
+          "verifier_sha256": "1659dd407b86d2afd36895559c4e17dfa55f1838656b3eca38f25702cb04a190"
+        },
+        "output": "results/replays/round15/verification.json"
+      },
+      "status": "PASS"
+    },
+    {
+      "round": 16,
+      "evidence": {
+        "status": "PASS",
+        "missing_resources": [],
+        "issues": [],
+        "checked_files": 195
+      },
+      "replay_executed": true,
+      "replay_record": {
+        "record": {
+          "status": "PASS_SAME_DOMAIN_HISTORICAL_VALIDATION",
+          "raw_snapshots_checked": 12,
+          "input_origins": 7890,
+          "metrics": 54,
+          "seed_metrics": 18,
+          "online_predictions": 1392,
+          "tasks": 6,
+          "strict_text_enabled": false,
+          "limits": [
+            "Three related states, not independent domains",
+            "Current archive snapshot, not immutable vintage",
+            "Original first-publication content still unproven",
+            "18 seeded training routes, not 18 independent datasets"
+          ],
+          "verifier_sha256": "cff03f99d9c29ad870961dea1cc2a46e40bfcf9bd5fabc69f95178f4b40a4c74"
+        },
+        "output": "results/replays/round16/verification.json"
+      },
+      "status": "PASS"
+    }
+  ],
+  "historical_files_checked": 483,
+  "static_issues": [],
+  "after_issues": [],
+  "scope": "仅所选第13至16轮可重放；第1至12轮只检查已登记文件。未重训，不是新实验。",
+  "registry_sha256": "7604175171cdcbb29dfa622d25251c114406b9f4239cfe6fd707bfd0c426666a",
+  "entry_sha256": "7f027df95bba8cbf997c98266eb1dc0becd7ed7adeee2313aeac3e6311eb47e8"
+}

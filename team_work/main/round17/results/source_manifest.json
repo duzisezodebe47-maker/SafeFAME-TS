@@ -1,0 +1,19 @@
+{
+  "files": {
+    "checkout_bytes.json": "257fc0246e49c26cb2953807a0c43b71e04bce1f0b678ccc6af378ef79a808fa",
+    "check_portable17.py": "8013330ab2c27c83a4331a1fc2142cabb0f9e2f6e8a10fa8e085e690052b040b",
+    "common17.py": "10f616ef19f00526401ef88566a7556af88469260bafcc73b651659a556d4f59",
+    "package17.py": "e383bafaa20cd1699cdbf6eb6cc8e1d558681e5c6d9cb8c8f36bd8f5a4f168d9",
+    "portal17.py": "7f027df95bba8cbf997c98266eb1dc0becd7ed7adeee2313aeac3e6311eb47e8",
+    "register17.py": "7981d32ec3efce5f529f3ab19d0e808b320d72f902dcc645d3898decf30e531e",
+    "register_checkout17.py": "4244f3f000958d6f534a1aabfc3ed4203fc8fde459f22698a7684f1ae506cfd9",
+    "registry.json": "7604175171cdcbb29dfa622d25251c114406b9f4239cfe6fd707bfd0c426666a",
+    "report17.py": "eba0d7056cdea50a76165bdb54a2fb81e5d26f9a8a381cb7daa5783716c32677",
+    "Run-Round17.ps1": "1b37f0c14496cfb6ef19af903748cd6ec4c2c4ec1871a68ee75c7bd61c567919",
+    "test17.py": "a60a8e84918400610a0785922afee6dd474b5014d9bb0978b4732b4b712f82a6",
+    "worker17.py": "3e0cda6662a3669843678ae4f3d8b38bb7696cb43bbd121e004a4b7b3e1d1202",
+    "技术贡献与证据边界.txt": "40ff63ed29b64ce257b6380daf39d1436d14df34d2875fa1555b07f94b37ebd0",
+    "运行与验收说明.txt": "fe0820a4845815e80fde42821deb6210ffbe7f470220760a7f2aeb256cb71c60"
+  },
+  "role": "第17轮最终源码/说明/登记清单字节"
+}

@@ -1,0 +1,382 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "round": 13,
+      "case": {
+        "task": "Agriculture_h12_f1"
+      },
+      "status": "PASS",
+      "result": {
+        "task": "Agriculture_h12_f1",
+        "requested_model": "StrictSourceFallback",
+        "effective_model": "AR-Ridge",
+        "horizon": 12,
+        "forecast": [
+          192.8900021775463,
+          191.93305149108286,
+          190.65306452505035,
+          189.73988202274555,
+          188.99622785136847,
+          188.530061831075,
+          188.01967053684535,
+          187.20967133382106,
+          186.15784684274718,
+          185.4802669404976,
+          185.746484076193,
+          186.48126175773402
+        ],
+        "scale": "原始OT数值尺度；请以数据集字段定义理解单位",
+        "text_weight": 0,
+        "source_verified": false,
+        "reason": "原始文本发布时间未核实，严格模式使用数值回退",
+        "scope": "已训练模型的本地推理演示；没有实时数据接入，也未证明外部数据泛化性能"
+      }
+    },
+    {
+      "round": 13,
+      "case": {
+        "task": "Climate_h4_f2"
+      },
+      "status": "PASS",
+      "result": {
+        "task": "Climate_h4_f2",
+        "requested_model": "StrictSourceFallback",
+        "effective_model": "N",
+        "horizon": 4,
+        "forecast": [
+          47.62599506620731,
+          47.83862031414115,
+          48.04858650818294,
+          48.25286488638665
+        ],
+        "scale": "原始OT数值尺度；请以数据集字段定义理解单位",
+        "text_weight": 0,
+        "source_verified": false,
+        "reason": "原始文本发布时间未核实，严格模式使用数值回退",
+        "scope": "已训练模型的本地推理演示；没有实时数据接入，也未证明外部数据泛化性能"
+      }
+    },
+    {
+      "round": 13,
+      "case": {
+        "task": "SocialGood_h3_f1"
+      },
+      "status": "PASS",
+      "result": {
+        "task": "SocialGood_h3_f1",
+        "requested_model": "StrictSourceFallback",
+        "effective_model": "N",
+        "horizon": 3,
+        "forecast": [
+          5.8843055590072035,
+          6.015816011547011,
+          6.148927524695142
+        ],
+        "scale": "原始OT数值尺度；请以数据集字段定义理解单位",
+        "text_weight": 0,
+        "source_verified": false,
+        "reason": "原始文本发布时间未核实，严格模式使用数值回退",
+        "scope": "已训练模型的本地推理演示；没有实时数据接入，也未证明外部数据泛化性能"
+      }
+    },
+    {
+      "round": 13,
+      "case": {
+        "task": "Environment_h7_f2"
+      },
+      "status": "PASS",
+      "result": {
+        "task": "Environment_h7_f2",
+        "requested_model": "StrictSourceFallback",
+        "effective_model": "N",
+        "horizon": 7,
+        "forecast": [
+          55.1196604936163,
+          56.12907996754568,
+          57.2769241433934,
+          55.45919619341508,
+          58.481625352753056,
+          56.564333559436236,
+          60.22809501104639
+        ],
+        "scale": "原始OT数值尺度；请以数据集字段定义理解单位",
+        "text_weight": 0,
+        "source_verified": false,
+        "reason": "原始文本发布时间未核实，严格模式使用数值回退",
+        "scope": "已训练模型的本地推理演示；没有实时数据接入，也未证明外部数据泛化性能"
+      }
+    },
+    {
+      "round": 14,
+      "case": {
+        "horizon": 4
+      },
+      "status": "PASS",
+      "result": {
+        "horizon": 4,
+        "model": "Last",
+        "forecast_dsci": [
+          179.0,
+          179.0,
+          179.0,
+          179.0
+        ],
+        "text_weight": 0,
+        "reason": "严格模式：缺少逐篇首次公开时间证明，使用验证集选定的数值模型",
+        "out_of_range": false,
+        "note": "研究模型输出不做事后裁剪；若超出DSCI范围会明确提示，不据此作实际决策。"
+      }
+    },
+    {
+      "round": 14,
+      "case": {
+        "horizon": 12
+      },
+      "status": "PASS",
+      "result": {
+        "horizon": 12,
+        "model": "PatchTST",
+        "forecast_dsci": [
+          174.6350555419922,
+          182.49789428710938,
+          178.36190795898438,
+          179.77728271484375,
+          171.17520141601562,
+          173.308349609375,
+          176.74859619140625,
+          169.5514373779297,
+          181.1533203125,
+          180.8688201904297,
+          190.31185913085938,
+          170.556396484375
+        ],
+        "text_weight": 0,
+        "reason": "严格模式：缺少逐篇首次公开时间证明，使用验证集选定的数值模型",
+        "out_of_range": false,
+        "note": "研究模型输出不做事后裁剪；若超出DSCI范围会明确提示，不据此作实际决策。"
+      }
+    },
+    {
+      "round": 15,
+      "case": {
+        "horizon": 4
+      },
+      "status": "PASS",
+      "result": {
+        "horizon": 4,
+        "model": "Ridge",
+        "selection": "three_block_minimax_relative_regret",
+        "forecast_dsci": [
+          182.64492797606962,
+          184.90824516986487,
+          187.63978663467407,
+          187.74245920685613
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Exploratory follow-up on previously inspected round14 data; not a new blind or prospective test",
+        "source_limit": "首次公开时间证据仍不充分，严格模式不启用文本"
+      }
+    },
+    {
+      "round": 15,
+      "case": {
+        "horizon": 12
+      },
+      "status": "PASS",
+      "result": {
+        "horizon": 12,
+        "model": "Last",
+        "selection": "three_block_minimax_relative_regret",
+        "forecast_dsci": [
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0,
+          157.0
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Exploratory follow-up on previously inspected round14 data; not a new blind or prospective test",
+        "source_limit": "首次公开时间证据仍不充分，严格模式不启用文本"
+      }
+    },
+    {
+      "round": 16,
+      "case": {
+        "state": "CA",
+        "horizon": 4,
+        "rule": "three_block_minimax_relative_regret"
+      },
+      "status": "PASS",
+      "result": {
+        "state": "CA",
+        "horizon": 4,
+        "rule": "three_block_minimax_relative_regret",
+        "model": "Last",
+        "forecast_dsci": [
+          80.0,
+          80.0,
+          80.0,
+          80.0
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Predeclared same-domain multi-series historical evaluation following exploratory CONUS results; not prospective, not cross-domain, not independent states"
+      }
+    },
+    {
+      "round": 16,
+      "case": {
+        "state": "CA",
+        "horizon": 12,
+        "rule": "three_block_minimax_relative_regret"
+      },
+      "status": "PASS",
+      "result": {
+        "state": "CA",
+        "horizon": 12,
+        "rule": "three_block_minimax_relative_regret",
+        "model": "Last",
+        "forecast_dsci": [
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0,
+          65.0
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Predeclared same-domain multi-series historical evaluation following exploratory CONUS results; not prospective, not cross-domain, not independent states"
+      }
+    },
+    {
+      "round": 16,
+      "case": {
+        "state": "TX",
+        "horizon": 4,
+        "rule": "three_block_minimax_relative_regret"
+      },
+      "status": "PASS",
+      "result": {
+        "state": "TX",
+        "horizon": 4,
+        "rule": "three_block_minimax_relative_regret",
+        "model": "Ridge",
+        "forecast_dsci": [
+          201.85509185752218,
+          212.67936803650719,
+          212.6415234850736,
+          200.06582103107502
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Predeclared same-domain multi-series historical evaluation following exploratory CONUS results; not prospective, not cross-domain, not independent states"
+      }
+    },
+    {
+      "round": 16,
+      "case": {
+        "state": "TX",
+        "horizon": 12,
+        "rule": "three_block_minimax_relative_regret"
+      },
+      "status": "PASS",
+      "result": {
+        "state": "TX",
+        "horizon": 12,
+        "rule": "three_block_minimax_relative_regret",
+        "model": "Last",
+        "forecast_dsci": [
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0,
+          94.0
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Predeclared same-domain multi-series historical evaluation following exploratory CONUS results; not prospective, not cross-domain, not independent states"
+      }
+    },
+    {
+      "round": 16,
+      "case": {
+        "state": "IA",
+        "horizon": 4,
+        "rule": "three_block_minimax_relative_regret"
+      },
+      "status": "PASS",
+      "result": {
+        "state": "IA",
+        "horizon": 4,
+        "rule": "three_block_minimax_relative_regret",
+        "model": "Ridge",
+        "forecast_dsci": [
+          48.80731148094488,
+          43.01584609869765,
+          40.2299910925859,
+          38.44192966456481
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Predeclared same-domain multi-series historical evaluation following exploratory CONUS results; not prospective, not cross-domain, not independent states"
+      }
+    },
+    {
+      "round": 16,
+      "case": {
+        "state": "IA",
+        "horizon": 12,
+        "rule": "three_block_minimax_relative_regret"
+      },
+      "status": "PASS",
+      "result": {
+        "state": "IA",
+        "horizon": 12,
+        "rule": "three_block_minimax_relative_regret",
+        "model": "Last",
+        "forecast_dsci": [
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0
+        ],
+        "text_weight": 0,
+        "out_of_range": false,
+        "role": "Predeclared same-domain multi-series historical evaluation following exploratory CONUS results; not prospective, not cross-domain, not independent states"
+      }
+    }
+  ],
+  "count": 14
+}

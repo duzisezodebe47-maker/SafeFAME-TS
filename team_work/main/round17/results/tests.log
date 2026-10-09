@@ -1,0 +1,15 @@
+test_corruption_overrides_absence (__main__.Acceptance.test_corruption_overrides_absence) ... ok
+test_frozen_rounds_unchanged (__main__.Acceptance.test_frozen_rounds_unchanged) ... ok
+test_incomplete_evidence_never_predicts (__main__.Acceptance.test_incomplete_evidence_never_predicts) ... ok
+test_input_contract (__main__.Acceptance.test_input_contract) ... ok
+test_missing_member_is_failure (__main__.Acceptance.test_missing_member_is_failure) ... ok
+test_missing_root_is_partial (__main__.Acceptance.test_missing_root_is_partial) ... ok
+test_only_registered_byte_variants_allowed (__main__.Acceptance.test_only_registered_byte_variants_allowed) ... ok
+test_path_escape_rejected (__main__.Acceptance.test_path_escape_rejected) ... ok
+test_replay_exception_not_pass (__main__.Acceptance.test_replay_exception_not_pass) ... ok
+test_replay_requires_fresh_record (__main__.Acceptance.test_replay_requires_fresh_record) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 11.734s
+
+OK
